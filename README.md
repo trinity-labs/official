@@ -20,7 +20,7 @@
 <br>
 Edit [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Design#ACF_Layout) core config file `/etc/acf/acf.conf` and replace following lines for overriding core template
  
-  ```css
+  ```bash
  ...
  # Directories where the application resides
  ...
@@ -32,7 +32,7 @@ skindir=/skins/,/userskins/
 ...
   ```
   
-   ```css
+   ```bash
  ...
 # ACF is skinnable - this specifies the active skin
 #  will attempt to load skin/basename(skin).css
