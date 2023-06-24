@@ -24,9 +24,9 @@ Edit [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Desi
  ...
  # Directories where the application resides
  ...
-appdir=/usr/share/acf/www/skins/trinity/app/,/usr/share/acf/app/
-libdir=/usr/share/acf/www/skins/trinity/lib/,/usr/share/acf/lib/
-wwwdir=/usr/share/acf/www/skins/trinity/www/,/usr/share/acf/www/
+appdir=/usr/share/acf/www/skins/dashboard/app/,/usr/share/acf/app/
+libdir=/usr/share/acf/www/skins/dashboard/lib/,/usr/share/acf/lib/
+wwwdir=/usr/share/acf/www/skins/dashboard/www/,/usr/share/acf/www/
 staticdir=/skins/static/
 skindir=/skins/,/userskins/
 ...
@@ -36,7 +36,7 @@ skindir=/skins/,/userskins/
  ...
 # ACF is skinnable - this specifies the active skin
 #  will attempt to load skin/basename(skin).css
-skin=/skins/trinity
+skin=/skins/dashboard
 ...
   ```
 
