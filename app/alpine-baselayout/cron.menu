@@ -1,0 +1,4 @@
+#CAT  		GROUP/DESC	TAB		ACTION
+System		60Cron		Status		status
+System		60Cron		Jobs		listjobs
+System		60Cron		Expert		expert

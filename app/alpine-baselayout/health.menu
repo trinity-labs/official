@@ -1,0 +1,6 @@
+#CAT  		GROUP/DESC		TAB			ACTION
+System		01General_health	System			system
+System		01General_health	Hardware		proc
+System		01General_health	Storage			storage
+System		01General_health	Network			network
+System		01General_health	Network_Activity	networkstats

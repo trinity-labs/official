@@ -1,0 +1,6 @@
+USER=openssl:status,openssl:getrevoked
+EDITOR=openssl:editdefaults
+CERT_REQUESTER=openssl:read,openssl:request,openssl:viewrequest,openssl:deletemyrequest,openssl:viewcert,openssl:getcert,openssl:requestrenewcert,openssl:getcachain,openssl:managesubca
+CERT_APPROVER=openssl:readall,openssl:approve,openssl:viewrequest,openssl:deleterequest,openssl:revoke,openssl:viewcert,openssl:getcert,openssl:deletecert,openssl:renewcert,openssl:downloadcacert,openssl:getcachain,openssl:managesubca
+EXPERT=openssl:putcacert,openssl:generatecacert,openssl:editconfigfile,openssl:checkenvironment,openssl:downloadcacert,openssl:getcachain,openssl:managesubca
+ADMIN=openssl:status,openssl:getrevoked,openssl:editdefaults,openssl:read,openssl:request,openssl:viewrequest,openssl:deletemyrequest,openssl:viewcert,openssl:getcert,openssl:requestrenewcert,openssl:editdefaults,openssl:readall,openssl:approve,openssl:deleterequest,openssl:revoke,openssl:deletecert,openssl:renewcert,openssl:putcacert,openssl:generatecacert,openssl:editconfigfile,openssl:checkenvironment,openssl:downloadcacert,openssl:getcachain,openssl:managesubca

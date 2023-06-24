@@ -1,0 +1,18 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > APK
+ *----------------------------------------------------------------------------------
+ */
+ 
+.page-apk form {
+    display: block;
+    margin: 0 auto 0.5rem;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-around;
+}
+
+.apk-loaded #content table form {
+    display: inline-block;
+    margin: 0 !important;
+}

@@ -1,0 +1,4 @@
+#CAT  		GROUP/DESC		TAB		ACTION
+System		70System_Logging	Status		loginfo
+System		70System_Logging	Config		config
+System		70System_Logging	Expert		expert

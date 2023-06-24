@@ -1,0 +1,8 @@
+# Prefix and controller are already known at this point
+# Cat		Group			Tab	Action
+Applications	90Certificate_Authority	Status	status
+Applications	90Certificate_Authority	All	readall
+Applications	90Certificate_Authority	View	read
+Applications	90Certificate_Authority	Request	request
+Applications	90Certificate_Authority	Edit_Defaults	editdefaults
+Applications	90Certificate_Authority	Expert editconfigfile

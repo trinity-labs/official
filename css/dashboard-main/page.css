@@ -1,0 +1,43 @@
+/*----------------------------------------------------------------------------------
+ * BODY & PAGE
+ *----------------------------------------------------------------------------------
+ */
+
+body {
+	width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    background: #f3f3f3;
+    font-family: system-ui !important;
+    font-size: 1rem;
+    color: #444;
+}
+
+.category-title::before {
+    color: rgb(0 0 0 / 20%);
+}
+
+/*----------------------------------------------------------------------------------
+ * PAGE > MAIN
+ *----------------------------------------------------------------------------------
+ */
+ 
+.page {
+    background: #fefefe;
+    padding-top: 3rem;
+}
+
+#main {
+    width: 98%;
+    margin: 0 auto;
+}
+
+.page-header-title {
+    font-weight: 600;
+    text-transform: capitalize;
+    margin: 0.5rem auto 0.5rem;
+}
+
+.small-block {
+	width: 30%;
+}

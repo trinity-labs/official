@@ -1,0 +1,5 @@
+# Prefix and controller are already known at this point
+# Cat		Group		Tab			Action
+Networking	10Interfaces	Status			read
+Networking	10Interfaces	Create_New_interface	create
+Networking	10Interfaces	Expert			editintfile

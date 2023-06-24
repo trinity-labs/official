@@ -1,0 +1,3 @@
+USER=apk:loaded,apk:available,apk:details,apk:toplevel,apk:dependent
+EXPERT=apk:cache,apk:expert,apk:delete,apk:install,apk:upgrade,apk:updateall,apk:upgradeall
+ADMIN=apk:loaded,apk:available,apk:details,apk:toplevel,apk:dependent,apk:cache,apk:expert,apk:delete,apk:install,apk:upgrade,apk:updateall,apk:upgradeall

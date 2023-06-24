@@ -1,0 +1,431 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > WELCOME
+ *----------------------------------------------------------------------------------
+ */
+ 
+.welcome #home-link {
+    font-weight: 900;
+    text-decoration: underline !important;
+}
+
+.welcome.welcome-read #subnav {
+    display: none !important;
+}
+
+.dashboard-block {
+    padding: 1rem 1rem;
+    margin: 0.5rem;
+    background: white;
+    width: -webkit-fill-available;
+    height: auto;
+    border-radius: 4px;
+    color: grey !important;
+    box-shadow: 2px 2px 30px #00000029;
+    text-align: center !important;
+}
+
+.uptime {
+    font-size: 0.65rem;
+    color: #16597a;
+    font-weight: 900;
+}
+
+.dashboard-block-title {
+    text-align: left !important;
+    font-weight: 600 !important;
+    font-size: 0.75rem !important;
+    padding: 0rem 0 1rem !important;
+}
+
+.welcome-read #content h1 {
+    font-weight: 600;
+    text-transform: capitalize;
+    margin: 0.5rem 0 0.5rem;
+}
+
+.welcome-title-user {
+    color: #16597a;
+    font-weight: bold !important;
+    text-transform: capitalize;
+    font-size: 1.5rem !important;
+    margin: 0rem auto 1rem;
+}
+
+.welcome-title-user:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F406' !important;
+    margin: 0 0.75rem 0 0;
+    display: inline-block;
+    color: #acacac;
+    position: relative;
+    font-size: 1.5rem;
+    top: -0.2rem
+}
+
+/* ADD ROOT SPEC ICON & COLOR */
+
+.welcome-title-root:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F505' !important;
+    margin: 0 0.75rem 0 0;
+    display: inline-block;
+    color: #ff7575;
+    position: relative;
+    font-size: 1.5rem;
+    top: -0.2rem;
+}
+
+.welcome-user,
+.welcome-root {
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 80%;
+}
+
+.welcome-hostname {
+    font-size: inherit !important;
+    font-weight: bold !important;
+    color: inherit !important;
+    text-transform: lowercase !important;
+}
+
+.welcome-read hr {
+    border: none !important;
+    background: rgb(213 213 213 / 28%);
+}
+
+.link-block {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    align-items: center;
+    align-content: stretch;
+}
+
+.welcome-about {
+    text-align: right;
+}
+
+.welcome-pkg-list,
+.welcome-about {
+    font-size: 0.60rem;
+    font-weight: 500;
+}
+
+.welcome-pkg-list a,
+.welcome-about a {
+    font-weight: bold;
+    font-size: 0.55rem;
+    border-bottom: 0.1rem solid;
+}
+
+.welcome-pkg-list:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F466' !important;
+    margin: 0 0.15rem 0 0;
+    display: inline-block;
+    color: #acacac;
+    position: relative;
+    font-size: 0.75rem;
+}
+
+.welcome-about:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F059' !important;
+    margin: 0 0.15rem 0 0;
+    display: inline-block;
+    color: #acacac;
+    position: relative;
+    font-size: 0.75rem;
+}
+
+.welcome-desc {
+    text-align: justify;
+    line-height: 1.5rem !important;
+    word-spacing: -0.1rem;
+    padding: 0 0 1rem 0;
+}
+
+.check-version {
+    font-size: 0.5rem;
+	color: #cdcdcd;
+}
+
+#section-alpine-configuration-framework {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-content: stretch;
+}
+
+#content #nav,
+#content #header,
+#content #footer {
+    display: none !important;
+}
+
+.dashboard-main.main-block {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: center;
+    width: -webkit-fill-available;
+}
+
+.dashboard-system {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.legend-memory-free {
+    width: 100% !important;
+    position: relative;
+    color: #16597a;
+    font-weight: 900;
+    text-align: center !important;
+    top: -8rem;
+    font-size: 2.5rem !important;
+}
+
+.data-block.data-memory {
+    font-size: 0.55rem;
+}
+
+.dashboard-hardware p {
+    text-transform: none !important;
+}
+
+.dashboard-hardware,
+.dashboard-memory {
+    height: 25rem;
+}
+
+.welcome-block.welcome-intro {
+    color: #fbfbfb;
+    text-align: left;
+    width: 30%;
+    padding: 0.5rem;
+    align-self: flex-start;
+}
+
+.hello-world strong::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F2BD' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: inherit;
+    font-size: 1rem;
+}
+
+.corporate-blue-legend {
+    font-size: 0.55rem;
+    letter-spacing: 0.5rem;
+    position: relative;
+	font-weight: 600 !important;
+    top: -1rem;
+}
+
+.dashboard-infos {
+    font-size: 0.65rem;
+    text-transform: capitalize;
+    margin: 0;
+    text-align: left;
+    font-weight: 600;
+    width: 100% !important;
+	font-weight: bold;
+}
+
+.dashboard-infos.dash-info-temp {
+    font-size: 3rem;
+    margin: 1rem auto 0;
+    float: left;
+    border-top: 3px solid #f1f1f1;
+    color: #cdcdcd;
+    width: 33.33% !important;
+    padding: 3rem 0;
+}
+
+.data-block.data-system-up-time {
+    margin: auto 3rem;
+}
+
+/*.data-mem-total {
+    color: #086ea0;
+}
+
+.data-mem-free {
+    color: #01ab01;
+}
+
+.data-mem-used {
+    color: #b70000;
+}*/
+
+.dashboard-main.dashboard-block.main-block {
+    justify-content: flex-start;
+}
+
+.data-title {
+    font-weight: 900;
+    color: #bbbbbb;
+	font-size: 0.65rem;
+}
+
+.check-version a {
+    font-weight: normal;
+}
+
+.version-check-ok {
+    text-transform: none;
+    color: #189b00;
+    font-weight: 900;
+}
+
+.version-check-ok::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F058' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.25rem 0 0.15rem;
+    color: inherit;
+    font-size: 0.7rem;
+}
+
+.version-check-update {
+    color: #ff7800;
+    font-weight: 900;
+}
+
+.version-check-update::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F06A' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.25rem 0 0.15rem;
+    color: inherit;
+    font-size: 0.7rem;
+}
+
+.version-check-upgrade {
+    color: #ed0000;
+    font-weight: 900;
+}
+
+.version-check-upgrade::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F057' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.25rem 0 0.15rem;
+    color: inherit;
+    font-size: 0.7rem;
+}
+
+.version-ok:hover {
+    text-decoration: underline !important;
+    color: #189b00 !important;
+}
+
+.version-update:hover {
+    text-decoration: underline !important;
+    color: #ff7800 !important;
+}
+
+.version-upgrade:hover {
+    text-decoration: underline !important;
+    color: #ed0000 !important;
+}
+
+.version-link:hover {
+    text-decoration: underline !important;
+    color: #b9b9b9;
+}
+
+.welcome .data-system-up-time::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\E518' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0;
+    color: #bbbbbb;
+    font-size: 0.7rem;
+}
+
+.icon-canvas-dash {
+    width: 10%;
+    height: 2.5rem;
+    float: right;
+    position: relative;
+    background-repeat: no-repeat;
+    background-position: center;
+    top: -1.75rem;
+    background-size: contain;
+}
+
+.icon-cpu-amd {
+    background-image: url(../../img/icons/amd-inside-dash.png);
+}
+
+.icon-cpu-arm {
+    background-image: url(../../img/icons/arm-inside-dash.png);
+}
+
+.icon-cpu-intel {
+    background-image: url(../../img/icons/intel-inside-dash.png);
+}
+
+/*span.data-title.value-title.value-mem-total {
+    color: #16597a;
+}
+
+span.data-title.value-title.value-mem-free {
+    color: #00b500;
+}
+
+span.data-title.value-title.value-mem-used {
+    color: #ff2f00;
+} */ /*Ugly !*/
+
+.page-welcome .chart-bar.chart-storage b {
+    font-size: 0.65rem !important;
+}
+
+.page-welcome #content .chart-bar td {
+    padding: 0.25rem !important;
+}
+
+.page-welcome #content .chart-storage td:first-child, .page-welcome #content .chart-storage td:last-child {
+    display: none !important;
+}
+
+.page-welcome #capacity-free {
+    background: #16597A;
+}
+
+.page-welcome #capacity-used {
+    background: #cbcbcb;
+}
+
+#disk-partition-view {
+    background: #f3f3f3;
+    padding: 1rem;
+    font-size: 0.7rem;
+    margin: 0 auto 1rem;
+    border-radius: 2.5px;
+    font-weight: bold;
+    text-align: justify;
+}

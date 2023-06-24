@@ -1,0 +1,50 @@
+/* dashboard.css - Alpine ACF */
+
+/*----------------------------------------------------------------------------------
+ * INCLUDES
+ *--------------------------------------------------------------------------------*/
+
+/*----------------------------------------------------------------------------------
+ * FONTAWESOME LATEST FREE from UNPKG.COM - OPENSOURCE CDN
+ *--------------------------------------------------------------------------------*/
+@import url('https://unpkg.com/@fortawesome/fontawesome-free@latest/css/all.min.css');
+
+/*----------------------------------------------------------------------------------
+ * HIGHLIGHT.JS LATEST from UNPKG.COM - OPENSOURCE CDN
+ *--------------------------------------------------------------------------------*/
+@import url('https://unpkg.com/@highlightjs/cdn-assets@latest/styles/color-brewer.min.css');
+@import "css/dashboard-main/highlightjs.css";
+
+/*----------------------------------------------------------------------------------
+ * CHART.JS LATEST from UNPKG.COM - OPENSOURCE CDN
+ *--------------------------------------------------------------------------------*/
+@import "css/dashboard-main/chartjs.css";
+
+/*----------------------------------------------------------------------------------
+ * JQUERY TABLESORTER
+ *--------------------------------------------------------------------------------*/
+@import "../static/tablesorter/theme.ice.css";
+
+/*----------------------------------------------------------------------------------
+ * DASHBOARD MAIN DESIGN
+ *--------------------------------------------------------------------------------*/
+@import "css/dashboard-main/content.css";
+@import "css/dashboard-main/footer.css";
+@import "css/dashboard-main/header.css";
+@import "css/dashboard-main/icons.css";
+@import "css/dashboard-main/logon.css";
+@import "css/dashboard-main/mobile.css";
+@import "css/dashboard-main/nav.css";
+@import "css/dashboard-main/page.css";
+@import "css/dashboard-main/tags.css";
+
+/*----------------------------------------------------------------------------------
+ * DASHBOARD PAGES DESIGN
+ *--------------------------------------------------------------------------------*/
+@import "css/dashboard-pages/apk.css";
+@import "css/dashboard-pages/health.css";
+@import "css/dashboard-pages/interfaces.css";
+@import "css/dashboard-pages/openssl.css";
+@import "css/dashboard-pages/welcome.css";
+
+/*--------------------------------------------------------------------------------*/

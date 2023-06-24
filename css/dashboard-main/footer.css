@@ -1,0 +1,19 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > FOOTER
+ *----------------------------------------------------------------------------------
+ */
+
+#footer {
+    margin: 5em 0 2rem 0;
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    text-transform: uppercase;
+    clear: both;
+    background: #f3f3f3;
+}
+
+#footer a {
+	color: #939393 !important;
+}

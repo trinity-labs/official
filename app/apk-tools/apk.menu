@@ -1,0 +1,6 @@
+# Prefix and controller are already known at this point
+# Cat	Group		Tab		Action
+System	30Packages	Installed	loaded
+System	30Packages	Available	available
+System	30Packages	Cache		cache
+System	30Packages	Expert		expert

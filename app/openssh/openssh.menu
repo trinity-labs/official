@@ -1,0 +1,6 @@
+#CAT  		GROUP/DESC	TAB			ACTION
+Applications	10SSH		Status			welcome
+Applications	10SSH 		Config			config
+Applications	10SSH 		Authorized_Users	listusers
+Applications	10SSH 		Expert			expert
+Applications	10SSH	 	Logfile			logfile

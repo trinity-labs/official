@@ -1,0 +1,21 @@
+# This gives basic priorities to the groups in the menu
+# That way, individual menu files don't have to say "80Setup" everywhere
+# Note, however, that if ANY individual menu sets Setup to less than 80, then
+# That number will override the defaults set here.
+# (i.e. Lowest specifically set priority wins)
+
+10Networking
+# Interfaces
+# Routing
+# DHCP
+# DNS
+# Firewall
+
+40Applications
+
+60Storage
+
+80System
+# Password Manager
+# Logfiles
+# Diagnostic

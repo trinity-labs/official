@@ -1,0 +1,99 @@
+/*----------------------------------------------------------------------------------
+ * HEALTH > TEMPLATE
+ *----------------------------------------------------------------------------------
+ */
+ 
+#content .chart-bar td {
+    text-align: center;
+	color: #c7c7c7;
+    display: table-cell;
+    padding: 0.75rem 0.5rem;
+    border: 3px solid #f9f9f9;
+    vertical-align: middle;
+    font-weight: bold;
+}
+ 
+.capacity-used {
+    background: #ff6363;
+}
+
+.capacity-buffered {
+    background: #f9be1c;
+}
+
+.capacity-free {
+    background: #6fc942;
+}
+ 
+#capacity-used {
+    color: white !important;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+}
+ 
+#capacity-buffered {
+    color: white !important;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-right: none;
+}
+ 
+#capacity-free {
+    color: white !important;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-right: none;
+    border-radius: 0 8px 8px 0;
+}
+
+#legend-used {
+    padding: 0.33rem;
+    width: 5rem !important;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+}
+
+#legend-buffered {
+    padding: 0.33rem;
+    width: 5rem !important;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+}
+
+#legend-free {
+    padding: 0.33rem;
+    width: 5rem !important;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+}
+
+#legend-object {
+    text-align: left !important;
+    font-size: 0.75rem;
+    color: #a7a7a7;
+    border-radius: 4px;
+    border: 1px solid #f3f3f3 !important;
+    padding: 0.5rem 1rem !important;
+}
+
+#legend b {
+    font-weight: normal;
+    color: #585858;
+    text-decoration: underline;
+}
+
+.chart-legend {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.chart-bar {
+    font-family: monospace !important;
+    font-size: 0.75rem;
+    margin: 1.5rem 0 2.5rem !important;
+}

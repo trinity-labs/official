@@ -1,0 +1,181 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > HEADER
+ *----------------------------------------------------------------------------------
+ */
+ 
+ /*----------------------------------------------------------------------------------
+ * DEFAULT
+ *----------------------------------------------------------------------------------
+ */
+
+header p {
+    font-weight: 600;
+    float: right;
+    font-size: 10px;
+    color: white;
+}
+	
+header a {
+    text-decoration: none;
+    color: white;
+}
+
+header h1 {
+	text-indent: -999em;
+}
+
+header p.hostname {
+	color:#000;
+	position:absolute;
+	top:55px;
+	left:34px;
+	font-size:12px;
+}
+
+#system #system-title,
+#system #system-title::before {
+    color: #6300d2;
+}
+
+header {
+    height: 1.5rem;
+    padding: 1rem;
+    box-shadow: 2px 2px 30px #00000029;
+    background: white;
+    display: flex;
+    background-size: 7.5rem !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-image: url(../../img/logos/alpine-linux.png) !important;
+    background-position: 4.5rem 0.85rem !important;
+    justify-content: space-between;
+    background-repeat: no-repeat !important;
+    align-items: center;
+    z-index: 2;
+    position: fixed !important;
+    width: -webkit-fill-available;
+}
+
+#header-links {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+header #toogle i.fa-solid.fa-bars {
+    color: #d9d9d9;
+}
+
+.icon-header {
+    margin: 0 3rem 0 0;
+}
+
+.header-links {
+    display: flex;
+    padding: 0 1rem;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#logoff {
+    font-weight: 900;
+}
+
+#user-logon {
+    display: inline-block;
+    margin: 0 0.5rem 0 0;
+    border-radius: 50em;
+    width: 2.25rem;
+    height: 2.25rem;
+    padding: 0;
+    background: linear-gradient(140deg, rgb(0 43 255) 0%, rgb(0 137 255) 100%);
+    border: 2px solid #3c3c3c;
+	background-image: url(../../img/users/doe/icon/john-doe.png);
+    color: transparent;
+    border-radius: 50em;
+    background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+/* ADD USER ICON WITH BUILT-IN PERSONAL USER CLASS*/
+.user-root {
+    /* background: linear-gradient(140deg, rgb(255 129 0) 0%, rgb(255 0 0) 100%); */
+    background-image: url(../../img/users/root/icon/alpine-guard-dog.png) !important;
+    color: transparent !important;
+    border-radius: 50em !important;
+    background-size: contain !important;
+    border: none !important;
+	background-repeat: no-repeat !important;
+}
+
+#text-user-logon {
+    color: white;
+    font-size: 0.55rem;
+    font-weight: 900;
+    margin: 0 3rem 0 0;
+    padding: 0.33rem 1.5rem;
+    vertical-align: middle;
+    background: #a9a9a9;
+    border-radius: 2.5px;
+    position: relative;
+}
+
+/*----------------------------------------------------------------------------------
+ * NETWORKING HEADER & GLOBAL COLOR
+ *----------------------------------------------------------------------------------
+ */
+
+#networking #subnav ul li.selected a,
+#networking #subnav ul li a:hover {
+    color: #005179;
+}
+
+#networking #content .submit {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 0.75rem 3.5rem;
+    border: 1px solid #005179;
+    background: #005179;
+	width: 15vw;
+}
+
+#networking #networking-title,
+#networking #networking-title::before {
+    color: #005179;
+}
+
+/*----------------------------------------------------------------------------------
+ * APPLICATIONS HEADER
+ *----------------------------------------------------------------------------------
+ */
+
+#applications #subnav ul li.selected a,
+#applications #subnav ul li a:hover {
+    color: #2743a9;
+}
+
+#applications #content .submit {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 0.75rem 3.5rem;
+    border: 1px solid #2743a9;
+    background: #2743a9;
+}
+
+#applications #applications-title,
+#applications #applications-title::before {
+    color: #2743a9;
+}

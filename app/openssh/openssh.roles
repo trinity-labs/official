@@ -1,0 +1,4 @@
+USER=openssh:status,openssh:logfile,openssh:connectedpeers,openssh:welcome,openssh:startstop
+EDITOR=openssh:config,openssh:listusers,openssh:listauth,openssh:deleteauth,openssh:addauth
+EXPERT=openssh:expert
+ADMIN=openssh:status,openssh:logfile,openssh:connectedpeers,openssh:welcome,openssh:startstop,openssh:config,openssh:listusers,openssh:listauth,openssh:deleteauth,openssh:addauth,openssh:expert
