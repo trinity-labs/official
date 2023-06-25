@@ -259,6 +259,10 @@
     margin: auto 3rem;
 }
 
+.dashboard-main.main-block a:hover {
+    text-decoration: underline !important;
+}
+
 /*.data-mem-total {
     color: #086ea0;
 }
@@ -297,6 +301,7 @@
     content: '\F058' !important;
     display: inline-block;
     position: relative;
+    top: 0.025rem;
     margin: 0 0.25rem 0 0.15rem;
     color: inherit;
     font-size: 0.7rem;
@@ -313,6 +318,7 @@
     content: '\F06A' !important;
     display: inline-block;
     position: relative;
+    top: 0.025rem;
     margin: 0 0.25rem 0 0.15rem;
     color: inherit;
     font-size: 0.7rem;
@@ -329,6 +335,7 @@
     content: '\F057' !important;
     display: inline-block;
     position: relative;
+    top: 0.025rem;
     margin: 0 0.25rem 0 0.15rem;
     color: inherit;
     font-size: 0.7rem;
@@ -360,9 +367,17 @@
     content: '\F35D' !important;
     display: inline-block;
     position: relative;
-    margin: 0 0.25rem 0 0.15rem;
+    top: -0.05rem;
+    margin: 0 0.25rem 0 0.25rem;
     color: inherit;
+    font-size: 0.4rem;
+}
+
+.icon-listing {
     font-size: 0.45rem;
+    position: relative;
+    top: -0.075rem;
+    left: 0.25rem;
 }
 
 .welcome .data-system-up-time::before {

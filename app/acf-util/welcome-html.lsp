@@ -32,12 +32,12 @@ end
 	local minor_distver = string.gsub(string.match(actual_distver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
-		chkres = "<a class='version-link version-ok' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-ok'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | up to date "
+		chkres = "<a class='version-link version-ok' href='https://www.alpinelinux.org/releases/' title='🟩 Up to Date' target='_blank'><span class='version-check-ok'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | up to date "
 	else
-		chkres = "<a class='version-link version-update' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-update'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | update needed "
+		chkres = "<a class='version-link version-update' href='https://www.alpinelinux.org/releases/' title='🟧 Update Needed' target='_blank'><span class='version-check-update'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | update needed "
 	end
 	if major_sysver ~= major_distver then
-		chkres = "<a class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-upgrade'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | upgrade required "
+		chkres = "<a class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/' title='🟥 Upgrade Needed' target='_blank'><span class='version-check-upgrade'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | upgrade required "
 	end
 	
 -- GET DIST VERSION CHANGES
@@ -145,14 +145,14 @@ end
 					<span class="data-title">OS : </span>
 					<%= chkres %>
 					<span class="check-version">
-					 &nbsp; - &nbsp;<a class="version-link version-external-link" href="https://www.alpinelinux.org/posts/<%= check_verchanges %>" target="_blank">
-					Last Release : <%= actual_distver %>
-					</span></a><br>
+					 &nbsp; - &nbsp;
+					 <a class="version-link version-external-link" href="https://www.alpinelinux.org/posts/<%= check_verchanges %>" title="🔗 https://www.alpinelinux.org/posts/<%= check_verchanges %>" target="_blank">Last Release : <%= actual_distver %></a><br>
+					 </span>
 					<span class="data-title">ACF Version : </span><%= sys.value.luaver.value %> 
 					<% if sys.value.ACFlightServer.value ~= "" then %>
-					<span class="data-title"> | Serve by : </span><%= sys.value.ACFlightServer.value %>
+					<span class="data-title"> | Served by : </span><%= sys.value.ACFlightServer.value %>
 					<% else %>
-					<span class="data-title"> | Serve by : </span><%= sys.value.ACFminiServer.value %>
+					<span class="data-title"> | Served by : </span><%= sys.value.ACFminiServer.value %>
 					<% end %>
 
 				</p>
@@ -233,7 +233,7 @@ end
 			</p>
 			<p class="dashboard-infos dash-info-network-wan">
 				<span class="data-title">Wan IP : </span>
-					<span class="value-title value-net-wan"></span><%= net.value.wanIP.value %>
+					<span class="value-title value-net-wan"></span><a href="https://ifconfig.me" target="_blank" title="🔗 https://ifconfig.me"><%= net.value.wanIP.value %><i class="fa-solid fa-up-right-from-square icon-listing"></i></a>
 			</p>
 			<p class="dashboard-infos dash-info-cpu-temp">
 				<span class="data-title">CPU Temp</span>
@@ -322,7 +322,7 @@ end
 		</div>
 		
 <!-- Dashboard Main Block - MEMORY CHART.JS -->		
-<script type="application/javascript">
+<script type="application/javascript" defer>
 $(function memChart() {
 // Setup Block
 	var memFree = <%= json.encode(sys.value.memory.free) %>;
@@ -379,7 +379,7 @@ $(function memChart() {
 <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
 <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@latest/dist/chartjs-adapter-luxon.umd.min.js"></script>
 <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@latest"></script>		
-<script type="application/javascript">
+<script type="application/javascript" defer>
 	var interval = 1000;
 	var duration = 60000;
 	var lastdata = <%= json.encode(netstats) %>;

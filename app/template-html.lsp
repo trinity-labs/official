@@ -70,7 +70,7 @@ end
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin).."-ie.css") %>">
 		<![endif]-->
 		<!-- UNPKG JS CDN FOR LATEST CHART.JS -->
-		<script type="application/javascript" src="https://unpkg.com/chart.js@latest/dist/chart.umd.js" async defer></script>
+		<script type="application/javascript" src="https://unpkg.com/chart.js@latest/dist/chart.umd.js"></script>
 		<!-- UNPKG JS CDN FOR LATEST HIGHLIGHT.JS -->
 		<script type="application/javascript" src="https://unpkg.com/@highlightjs/cdn-assets@latest/highlight.min.js"></script>
 		<!-- INITIALIZE HIGHLIGHT.JS -->
@@ -138,7 +138,7 @@ end
 					local ctlr = pageinfo.script .. "/acf-util/logon/"
 
 					if session.userinfo and session.userinfo.userid then
-						print("<a href='javascript:void(0);' class='icon' id='toogle-link' onclick='toogleMenu()'><div id='toogle'><i class='fa-solid fa-bars'></i></div></a>")
+						print("<a href='javascript:void(0);' class='icon' id='toogle-link' title='Menu' onclick='toogleMenu()'><div id='toogle'><i class='fa-solid fa-bars'></i></div></a>")
 						print("<div id='header-links'><a id='logoff' class='icon-header' title='Logoff' href=\""..html.html_escape(ctlr).."logoff\"><i class='fa-solid fa-user-lock fa-2x logoff-icon'></i></a>")
 						print("<a id='home-link' class='icon-header' title='Home' href="..html.html_escape(pageinfo.wwwprefix).."/".."><i class='fa-solid fa-house fa-2x home-icon'></i></a>")
 					else
