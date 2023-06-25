@@ -32,12 +32,12 @@ end
 	local minor_distver = string.gsub(string.match(actual_distver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
-		chkres = "<a class='version-link version-ok' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-ok'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | up to date"
+		chkres = "<a class='version-link version-ok' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-ok'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | up to date "
 	else
-		chkres = "<a class='version-link version-update' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-update'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | update needed"
+		chkres = "<a class='version-link version-update' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-update'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | update needed "
 	end
 	if major_sysver ~= major_distver then
-		chkres = "<a class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-upgrade'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | upgrade required"
+		chkres = "<a class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/' target='_blank'><span class='version-check-upgrade'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | upgrade required "
 	end
 	
 -- GET DIST VERSION CHANGES
@@ -145,7 +145,7 @@ end
 					<span class="data-title">OS : </span>
 					<%= chkres %>
 					<span class="check-version">
-					- &nbsp;<!--<a class="version-link" href="https://www.alpinelinux.org/posts/Alpine-<%= actual_distver %>-released.html" target="_blank">-->
+					 &nbsp; - &nbsp;<!--<a class="version-link" href="https://www.alpinelinux.org/posts/Alpine-<%= actual_distver %>-released.html" target="_blank">-->
 					Last Release : <%= actual_distver %>
 					</span><!--</a>--><br>
 					<span class="data-title">ACF Version : </span><%= sys.value.luaver.value %> 

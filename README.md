@@ -23,6 +23,8 @@
 
 Light-weight App (Less than 2 MB) installed
 
+> ⚠️ `Serve by` field check version of both `lighttpd` and `mini_httpd`. If lighttpd is install on system, command return `lighttpd` as prefered ACF server. However, it's the best choice to switch to `lighttpd` for `ACF`
+
 Install essential packages :
 
 ```bash
