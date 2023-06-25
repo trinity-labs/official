@@ -149,7 +149,12 @@ end
 					Last Release : <%= actual_distver %>
 					</span><!--</a>--><br>
 					<span class="data-title">ACF Version : </span><%= sys.value.luaver.value %> 
-					<span class="data-title"> | ACF Server : </span><%= sys.value.ACFserver.value %>
+					<% if sys.value.ACFlightServer.value ~= "" then %>
+					<span class="data-title"> | Serve by : </span><%= sys.value.ACFlightServer.value %>
+					<% else %>
+					<span class="data-title"> | Serve by : </span><%= sys.value.ACFminiServer.value %>
+					<% end %>
+
 				</p>
 				<p class="dashboard-infos dash-info-user">
 					<span class="data-title">User | </span><%= session.userinfo.userid %> &nbsp; <span class="data-title">Host | </span><%= hostname or "unknown hostname" %>
