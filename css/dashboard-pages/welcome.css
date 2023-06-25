@@ -354,6 +354,17 @@
     color: #b9b9b9;
 }
 
+.version-external-link::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F35D' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.25rem 0 0.15rem;
+    color: inherit;
+    font-size: 0.45rem;
+}
+
 .welcome .data-system-up-time::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
