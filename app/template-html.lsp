@@ -63,7 +63,7 @@ end
 <% else %>
 		<title><%= html.html_escape(string.gsub(pageinfo.controller, "^%l", string.upper) .. " ∣ " .. string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
 <% end %>
-		<link rel="icon" href="/skins/trinity/favicon.ico" />
+		<link rel="icon" href="/skins/dashboard/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.staticdir) %>/reset.css">
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".css") %>">
 		<!--[if IE]>
@@ -219,9 +219,7 @@ end
 				<a href="https://www.alpinelinux.org/about/" target="_blank">
 				© Alpine | 2005 - <%= html.html_escape(os.date("%Y")) %>
 				</a>
-				
 			</div> <!-- footer -->
-
 		</div> <!-- page -->
 <% end --pageinfo.skinned%>
 	</body>

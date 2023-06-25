@@ -43,13 +43,14 @@ end
 -- GET DIST VERSION CHANGES
 	local check_verchanges = string.match(sys.value.alpineposts.value, "%W+("..actual_distver..")%W+")
 	
-	
 -- FORMAT UPTIME	
 	local up_time = math.floor(string.match(sys.value.uptime.value, "[%d]+"))
-	local up_days = math.floor(up_time / (3600 * 24))
-	local up_hours = math.floor((up_time % (3600 * 24)) / 3600)
-	local up_minutes = math.floor(((up_time % (3600 * 24)) % 3600) / 60)
-	local up_seconds = math.floor(((up_time % (3600 * 24)) % 3600) % 60)
+	local up_years = math.floor(up_time / (3600 * 24) / 365)
+	local up_mounths = math.floor((((up_time / (3600 * 24)) % 365) % 365) / 30)
+	local up_days = math.floor((((up_time / (3600 * 24)) % 365) % 365) % 30)
+	local up_hours = string.format("%02d", math.floor((up_time % (3600 * 24)) / 3600))
+	local up_minutes = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) / 60))
+	local up_seconds = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) % 60))
 	
 -- REPLACE O.E.M DEFAULT STRING
 	function oem_parse(str)		
@@ -146,16 +147,39 @@ end
 					<span class="check-version">
 					- &nbsp;<!--<a class="version-link" href="https://www.alpinelinux.org/posts/Alpine-<%= actual_distver %>-released.html" target="_blank"> -->
 					Last Release : <%= actual_distver %>
-					</span><!--</a>-->
+					</span><!--</a>--><br>
+					<span class="data-title">ACF Version : </span><%= sys.value.luaver.value %> 
+					<span class="data-title"> | ACF Server : </span><%= sys.value.ACFserver.value %>
 				</p>
 				<p class="dashboard-infos dash-info-user">
-						<span class="data-title">User | </span><%= session.userinfo.userid %> &nbsp; <span class="data-title">Host | </span><%= hostname or "unknown hostname" %>
+					<span class="data-title">User | </span><%= session.userinfo.userid %> &nbsp; <span class="data-title">Host | </span><%= hostname or "unknown hostname" %>
 				</p>
 		</div>
 		<div class="data-block data-system-up-time">
 			<span class="data-title">Uptime | </span>
-				<span class="uptime">
-					<%= up_days %> Days <%= up_hours %>h <%= up_minutes %>m <%= up_seconds %>s
+				<span id="uptime" class="uptime">
+				<% 
+				local uptime = up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+				
+				if up_years == 1 then
+					uptime = up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+				elseif up_years == 0 then
+					uptime = up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+				end
+					
+				if up_mounths == 1 then
+					uptime = up_mounths .. " Mounth " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+				elseif up_years == 0 and up_mounths == 0 then
+					uptime = up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+				end
+				
+				if up_days == 1 then
+					uptime = up_days .. " Day " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+				elseif up_years == 0 and up_mounths == 0 and up_days == 0 then
+					uptime = up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+				end
+				%>
+				<%= uptime %>
 		</span>
 		</div>
 	</div>

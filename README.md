@@ -19,7 +19,15 @@
 **From a Skin to an App for Linux `Alpine Configuration Framework` commonly called [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Design)**
 <br>
 
-> ⚠️ **CPU Temp bugs - Network Chart only eth0 - Disk Partition to be continued:** Please be patient!
+> ⚠️ **CPU Temp bugs - Network Chart only eth0 - Disk Partition to be continued, etc:** Please be patient!
+
+Light-weight App (Less than 2 MB) installed
+
+Install essential packages :
+
+```bash
+ $: apk add curl util-linux
+```
 
 Edit [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Design#ACF_Layout) core config file `/etc/acf/acf.conf` and replace following lines for overriding core template
  
