@@ -41,7 +41,7 @@ end
 	end
 	
 -- GET DIST VERSION CHANGES
-	local check_verchanges = string.match(sys.value.alpineposts.value, "%W+("..actual_distver..")%W+")
+	local check_verchanges = string.match(sys.value.alpineposts.value, "((("..actual_distver..").+%$)-released.html)")
 	
 -- FORMAT UPTIME	
 	local up_time = math.floor(string.match(sys.value.uptime.value, "[%d]+"))
@@ -145,7 +145,7 @@ end
 					<span class="data-title">OS : </span>
 					<%= chkres %>
 					<span class="check-version">
-					- &nbsp;<!--<a class="version-link" href="https://www.alpinelinux.org/posts/Alpine-<%= actual_distver %>-released.html" target="_blank"> -->
+					- &nbsp;<!--<a class="version-link" href="https://www.alpinelinux.org/posts/Alpine-<%= actual_distver %>-released.html" target="_blank">-->
 					Last Release : <%= actual_distver %>
 					</span><!--</a>--><br>
 					<span class="data-title">ACF Version : </span><%= sys.value.luaver.value %> 

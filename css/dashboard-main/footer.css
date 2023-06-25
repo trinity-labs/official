@@ -17,11 +17,3 @@
 #footer a {
 	color: #939393 !important;
 }
-
-.data-title.data-footer.data-version {
-    font-weight: 600;
-    float: right;
-    margin: auto 1rem;
-    font-size: 0.5rem;
-    text-transform: capitalize;
-}
