@@ -285,6 +285,10 @@
 	font-size: 0.65rem;
 }
 
+#alpine-version-link {
+    margin: 0 0.25rem 0 0;
+}
+
 .check-version a {
     font-weight: normal;
 }
@@ -302,7 +306,7 @@
     display: inline-block;
     position: relative;
     top: 0.025rem;
-    margin: 0 0.25rem 0 0.15rem;
+    margin: 0 0.25rem;
     color: inherit;
     font-size: 0.7rem;
 }
@@ -319,7 +323,7 @@
     display: inline-block;
     position: relative;
     top: 0.025rem;
-    margin: 0 0.25rem 0 0.15rem;
+    margin: 0 0.25rem;
     color: inherit;
     font-size: 0.7rem;
 }
@@ -336,7 +340,7 @@
     display: inline-block;
     position: relative;
     top: 0.025rem;
-    margin: 0 0.25rem 0 0.15rem;
+    margin: 0 0.25rem;
     color: inherit;
     font-size: 0.7rem;
 }
@@ -412,6 +416,14 @@
 
 .icon-cpu-intel {
     background-image: url(../../img/icons/intel-inside-dash.png);
+}
+
+.dashboard-infos.dash-info-bios {
+    text-transform: capitalize !important;
+}
+
+#version {
+    text-transform: lowercase !important;
 }
 
 /*span.data-title.value-title.value-mem-total {

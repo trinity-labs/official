@@ -20,7 +20,7 @@ if session.userinfo and session.userinfo.userid and viewlibrary and viewlibrary.
 end
 
 -- CHECK SYS RELEASE VERSION
-	local check_sysver = string.match(sys.value.version.value, "v%d+.%d+.%d+")
+	local check_sysver = string.match(sys.value.version.value, "%d+.%d+.%d+")
 	local major_sysver = string.match(check_sysver, "%d+") -- Parse Major for Upgrade
 	local minor_sysver = string.gsub(string.match(check_sysver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_sysver = string.gsub(string.match(check_sysver, ".[^.]*$"), "%D", "") -- Parse Patch for Update
@@ -32,12 +32,12 @@ end
 	local minor_distver = string.gsub(string.match(actual_distver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
-		chkres = "<a class='version-link version-ok' href='https://www.alpinelinux.org/releases/' title='🟩 Up to Date' target='_blank'><span class='version-check-ok'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | up to date "
+		chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/' title='🟩 Up to Date' target='_blank'><span class='version-check-ok'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a> up to date "
 	else
-		chkres = "<a class='version-link version-update' href='https://www.alpinelinux.org/releases/' title='🟧 Update Needed' target='_blank'><span class='version-check-update'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | update needed "
+		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/' title='🟧 Update Needed' target='_blank'><span class='version-check-update'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>update needed "
 	end
 	if major_sysver ~= major_distver then
-		chkres = "<a class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/' title='🟥 Upgrade Needed' target='_blank'><span class='version-check-upgrade'>Alpine Linux <span class='version-letter'>" .. check_sysver .. "</span></span></a> | upgrade required "
+		chkres = "<a id='alpine-version-link' class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/' title='🟥 Upgrade Needed' target='_blank'><span class='version-check-upgrade'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>upgrade required "
 	end
 	
 -- GET DIST VERSION CHANGES
@@ -53,11 +53,11 @@ end
 	local up_seconds = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) % 60))
 	
 -- REPLACE O.E.M DEFAULT STRING
-	function oem_parse(str)		
-		return (string.gsub(str, "To be filled by O.E.M." or "Not Specified" , "Standard PC")) 
-	end	
+	function oem_parse(str)
+		return (string.gsub(str, "To be filled by O.E.M." or "Not Specified", "Standard PC")) 
+	end		
 	function version_parse(str)
-		return (string.gsub(str, "To be filled by O.E.M." or "Not Specified" , "Unknow")) 
+		return (string.gsub(str, "To be filled by O.E.M." or "Not Specified", "Unknow")) 
 	end
 	
 		-- Table of colors
@@ -208,13 +208,23 @@ end
 				</span>
 			<p class="dashboard-infos dash-info-board">
 				<span class="data-title">Board : </span>
-					<%= oem_parse(sys.value.boardVendor.value) %> |
-						<%= oem_parse(sys.value.boardName.value) %> | 
-							<%=  version_parse(string.gsub(sys.value.boardVersion.value, "^", "ver : ")) %>
+			<%
+			-- EXEMPLE TO PARSE KNOW MOBO MODELS
+			if string.match(sys.value.boardName.value, "EMB%-H81B") then
+				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON") .. "</span>")
+				print (" | <span>" .. sys.value.boardName.value .. "</span> | ")
+				print ("<span>" .. string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev : 2.00") .. "</span>")
+			-- ELSE REWRITE ALL OTHERS
+			else
+				print ("<span>" .. oem_parse(sys.value.boardVendor.value) .. "</span>")
+				print (" | <span>" .. oem_parse(sys.value.boardName.value) .. "</span> | ")
+				print ("<span>" .. version_parse(string.gsub(sys.value.boardVersion.value, "^", "Rev : ")) .. "</span>")
+			end
+			%>
 			</p>
 			<p class="dashboard-infos dash-info-bios">
 				<span class="data-title">BIOS : </span>
-					<%= sys.value.biosVersion.value %> | 
+					<span id="version">v. </span><%= sys.value.biosVersion.value %> | 
 						<%= sys.value.biosVendor.value %> - 
 							<%= sys.value.biosDate.value %>
 			</p>

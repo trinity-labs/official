@@ -71,10 +71,13 @@ end
 		<![endif]-->
 		<!-- UNPKG JS CDN FOR LATEST CHART.JS -->
 		<script type="application/javascript" src="https://unpkg.com/chart.js@latest/dist/chart.umd.js"></script>
+		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
+		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@latest/dist/chartjs-adapter-luxon.umd.min.js"></script>
+		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@latest"></script>
 		<!-- UNPKG JS CDN FOR LATEST HIGHLIGHT.JS -->
 		<script type="application/javascript" src="https://unpkg.com/@highlightjs/cdn-assets@latest/highlight.min.js"></script>
 		<!-- INITIALIZE HIGHLIGHT.JS -->
-		<script type="application/javascript" async defer>hljs.highlightAll()</script>
+		<script type="application/javascript" defer>hljs.highlightAll()</script>
 		<!-- UNPKG JS CDN FOR LATEST JQUERY -->
 		<script type="application/javascript" src="https://unpkg.com/jquery"></script>
 		<script type="text/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
