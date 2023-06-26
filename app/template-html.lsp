@@ -25,7 +25,7 @@ end
 <!DOCTYPE html>
 <!-- 
 ==============================================================
-      🛡️ Alpine Linux Admin Dashboard | v1.0.0 - ACF 🛡️
+      🟦 Alpine Linux Admin Dashboard | v 1.0.0 - ACF
 ==============================================================
 * Product Page: ACF Dashboard Skin (https://gitlab.alpinelinux.org/trinity-labs/dashboard-skin)
 * Created by: T. Bonnin for Alpine Configuration Framework (ACF) based on N. Angelacos previous work
@@ -56,8 +56,6 @@ end
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="#16597a">
 <% if pageinfo.skinned ~= "false" then %>
-<!-- FORMAT PAGE TITLE - 20230327 -->
-<!-- REMOVE HOSTNAME FOR GUSET - 20230408 -->
 <% if session.userinfo and session.userinfo.userid and viewlibrary and viewlibrary.dispatch_component then %>
 		<title><%= html.html_escape(string.upper(hostname) .. " - " .. string.gsub(pageinfo.controller, "^%l", string.upper) .. " ∣ " .. string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
 <% else %>
@@ -112,7 +110,6 @@ end
 		</script>
 </head>
 		<% end -- pageinfo.skinned %>
-<!-- ADD BODY CLASS - 20230207 -->
 <%
 	local class
 	local tabs
@@ -122,7 +119,6 @@ end
 				if not tabs and group.controllers[pageinfo.prefix .. pageinfo.controller] then
 				tabs = group.tabs
 %>
-<!--ADD ID CAT PAGE NAME - 20230304 -->
 <body id="<%= html.html_escape(cat.name) %>" class="<%= pageinfo.controller.." "..pageinfo.controller.."-"..pageinfo.action %>">	
 <% 
 				end
@@ -143,7 +139,7 @@ end
 					if session.userinfo and session.userinfo.userid then
 						print("<a href='javascript:void(0);' class='icon' id='toogle-link' title='Menu' onclick='toogleMenu()'><div id='toogle'><i class='fa-solid fa-bars'></i></div></a>")
 						print("<div id='header-links'><a id='logoff' class='icon-header' title='Logoff' href=\""..html.html_escape(ctlr).."logoff\"><i class='fa-solid fa-user-lock fa-2x logoff-icon'></i></a>")
-						print("<a id='home-link' class='icon-header' title='Home' href="..html.html_escape(pageinfo.wwwprefix).."/".."><i class='fa-solid fa-house fa-2x home-icon'></i></a>")
+						print("<a id='home-link' class='icon-header' title='Home' href=".. html.html_escape(pageinfo.wwwprefix) ..  "/cgi-bin/acf/acf-util/welcome/read".."><i class='fa-solid fa-house fa-2x home-icon'></i></a>")
 					else
 						print("<div id='header-links'><a id='logon' class='icon-header' title='Logon' href=\""..html.html_escape(ctlr).."logon\"><i class='fa-solid fa-lock fa-2x logon-icon'></i></a>" )
 					end
@@ -185,8 +181,6 @@ end
 					end
 				%>
 </div>	<!-- nav -->
-			
-<!-- ADD PAGE TITLE AND CATEGORY - 20230702 -->
 		<div id="page-<%= pageinfo.action %>" class="page page-<%= pageinfo.controller %>">
 			<div id="main">
 				<div id="subnav">
