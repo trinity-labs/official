@@ -214,7 +214,7 @@ end
 
 			<div id="footer">
 				<a href="https://www.alpinelinux.org/about/" target="_blank">
-				© Alpine | 2005 - <%= html.html_escape(os.date("%Y")) %>
+				© Alpine | 2008 - <%= html.html_escape(os.date("%Y")) %>
 				</a>
 			</div> <!-- footer -->
 		</div> <!-- page -->
