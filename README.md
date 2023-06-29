@@ -59,4 +59,4 @@ skin=/skins/dashboard
 
 - **Dashboard**
 
-<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/9e465dad-57b6-4cf7-b9eb-3d9b1c25fb0">
+<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/9e465dad-57b6-4cf7-b9eb-3d9b1c25fb0c">
