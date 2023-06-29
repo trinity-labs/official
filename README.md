@@ -17,9 +17,9 @@
 **From a Skin to an App for Linux `Alpine Configuration Framework` commonly called [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Design)**
 <br>
 
-Lighttpd Ready - Remove Mini_httpd 
+✅ Lighttpd Ready - Remove Mini_httpd 
 
-[Lighttpd](https://gitlab.alpinelinux.org/trinity-labs/mini_httpd-lighttpd)
+[ACF on Lighttpd](https://gitlab.alpinelinux.org/trinity-labs/mini_httpd-lighttpd)
 
 > ⚠️ **CPU Temp bugs - Network Chart only eth0 - Disk Partition to be continued, etc:** Please be patient!
 
