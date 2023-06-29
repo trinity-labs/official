@@ -1,6 +1,4 @@
-<div align="right">
-<img src="https://user-images.githubusercontent.com/45216746/226208297-32a0371b-83db-4a0e-ae33-70e74ca2b2e5.png" width="1.75%" >
-</div>
+<br>
 <br>
 <div align="center">
  <img src="https://github.com/trinity-labs/trinity-skin/assets/45216746/f8b4b03a-1371-4abb-bf4a-fd9e2a1c7446" width="30%">
@@ -55,10 +53,10 @@ skin=/skins/dashboard
 
 - **Logon**
 
-<img src="https://github.com/trinity-labs/trinity-skin/assets/45216746/324a281a-36a1-46f3-aa08-968184f3c101">
+<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/bf78f68a-d45f-492c-b348-3b00cf3c5b4b">
 <br>
 <br>
 
 - **Dashboard**
 
-<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/07802d08-3a42-48ee-8cff-42568b1d8ca0">
+<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/61fc28cd-20fb-4e3b-8192-d179700dd0e2">
