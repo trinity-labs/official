@@ -207,9 +207,10 @@ end
 							<%= sys.value.biosDate.value %>
 			</p>
 			<p class="dashboard-infos dash-info-cpu">
-				<span class="data-title">CPU : 
-				</span><%= string.sub((proc.value.model.value), 14) %>
-				<!--<span class="data-title">GPU : </span><%= proc.value.gpu.value %>-->
+				<span class="data-title">CPU : </span><%= string.sub((proc.value.model.value), 14) %>
+			</p>
+			<p class="dashboard-infos dash-info-cpu">
+				<span class="data-title">GPU : </span><%= proc.value.gpu.value %>
 			</p>
 			<p class="dashboard-infos dash-info-memory">
 				<span class="data-title">Memory : </span>

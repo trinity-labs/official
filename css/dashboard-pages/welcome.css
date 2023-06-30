@@ -252,7 +252,7 @@
     border-top: 3px solid #f1f1f1;
     color: #cdcdcd;
     width: 33.33% !important;
-    padding: 3rem 0;
+    padding: 2rem 0 0;
 }
 
 .data-block.data-system-up-time {
@@ -433,18 +433,6 @@
 #version {
     text-transform: lowercase !important;
 }
-
-/*span.data-title.value-title.value-mem-total {
-    color: #16597a;
-}
-
-span.data-title.value-title.value-mem-free {
-    color: #00b500;
-}
-
-span.data-title.value-title.value-mem-used {
-    color: #ff2f00;
-} */ /*Ugly !*/
 
 .page-welcome .chart-bar.chart-storage b {
     font-size: 0.65rem !important;
