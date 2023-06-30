@@ -285,6 +285,14 @@
 	font-size: 0.65rem;
 }
 
+.data-kernel {
+    margin: auto 0 0 1rem;
+}
+
+.result-kernel {
+    text-transform: uppercase;
+}
+
 #alpine-version-link {
     margin: 0 0.25rem 0 0;
 }

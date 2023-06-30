@@ -2,7 +2,6 @@
 <% htmlviewfunctions = require("htmlviewfunctions") %>
 <% html = require("acf.html") %>
 <% json = require("json") %>
-
 <% local sys = viewlibrary.dispatch_component("alpine-baselayout/health/system", nil, true) %>
 <% local proc = viewlibrary.dispatch_component("alpine-baselayout/health/proc", nil, true) %>
 <% local disk = viewlibrary.dispatch_component("alpine-baselayout/health/storage", nil, true) %>
@@ -11,13 +10,13 @@
 
 <% 
 -- PROTECT HOSTNAME WITH SESSION
-local hostname = ""
-if session.userinfo and session.userinfo.userid and viewlibrary and viewlibrary.dispatch_component then
+	local hostname = ""
+	if session.userinfo and session.userinfo.userid and viewlibrary and viewlibrary.dispatch_component then
 	local result = viewlibrary.dispatch_component("alpine-baselayout/hostname/read", nil, true)
-	if result and result.value then
-		hostname = result.value
+		if result and result.value then
+			hostname = result.value
+		end
 	end
-end
 
 -- CHECK SYS RELEASE VERSION
 	local check_sysver = string.match(sys.value.version.value, "%d+.%d+.%d+")
@@ -59,42 +58,18 @@ end
 	function version_parse(str)
 		return (string.gsub(str, "To be filled by O.E.M." or "Not Specified", "Unknow")) 
 	end
-	
-		-- Table of colors
-	local rgb = {
-		{"rgb(0,192,128)","rgb(64,255,192)"},
-		{"rgb(128,0,192)","rgb(192,64,255)"},
-		{"rgb(0,128,192)","rgb(64,192,255)"},
-		{"rgb(192,0,128)","rgb(255,64,192)"},
-		{"rgb(128,192,0)","rgb(192,255,64)"},
-		{"rgb(192,128,0)","rgb(255,192,64)"},
-		{"rgb(0,0,0)","rgb(128,128,128)"},
-		{"rgb(128,0,0)","rgb(192,64,64)"},
-		{"rgb(0,128,0)","rgb(64,192,64)"},
-		{"rgb(0,0,128)","rgb(64,64,192)"},
-		{"rgb(128,128,0)","rgb(192,192,64)"},
-		{"rgb(0,128,128)","rgb(64,192,192)"},
-		{"rgb(128,0,128)","rgb(192,64,192)"},
-		{"rgb(192,192,192)","rgb(255,255,255)"},
-		{"rgb(192,128,128)","rgb(255,192,192)"},
-		{"rgb(128,192,128)","rgb(192,255,192)"},
-		{"rgb(128,128,192)","rgb(192,192,255)"},
-		{"rgb(192,128,192)","rgb(255,192,255)"},
-		{"rgb(128,192,192)","rgb(192,255,255)"},
-		{"rgb(192,192,128)","rgb(255,255,192)"},
-	}
 
+-- GET INTERFACES
 	local interfaces = {}
 	for intf in pairs(netstats.value) do table.insert(interfaces, intf) end
 	table.sort(interfaces)
-	
-		
+
+-- FORMAT BYTES	
 function bytesToSize(bytes)
-  kilobyte = 1000;
-  megabyte = kilobyte * 1000;
-  gigabyte = megabyte * 1000;
-  terabyte = gigabyte * 1000;
-
+	kilobyte = 1000;
+	megabyte = kilobyte * 1000;
+	gigabyte = megabyte * 1000;
+	terabyte = gigabyte * 1000;
   if((bytes >= 0) and (bytes < kilobyte)) then
     return math.floor(bytes) .. " Bytes";
   elseif((bytes >= kilobyte) and (bytes < megabyte)) then
@@ -110,27 +85,48 @@ function bytesToSize(bytes)
   end
 end
 
-function blocksToSize(bytes)
-  kilobyte = 1000;
-  megabyte = kilobyte * 1000;
-  gigabyte = megabyte * 1000;
-  terabyte = gigabyte * 1000;
-
-  if((bytes >= 0) and (bytes < kilobyte)) then
-    return math.floor(bytes) .. " Bytes";
-  elseif((bytes >= kilobyte) and (bytes < megabyte)) then
-    return math.floor( bytes / kilobyte) .. ' KB';
-  elseif((bytes >= megabyte) and (bytes < gigabyte)) then
-    return math.floor( bytes / megabyte) .. ' MB';
-  elseif((bytes >= gigabyte) and (bytes < terabyte)) then
-    return string.format("%.2f", bytes / gigabyte) .. ' GB';
-  elseif(bytes >= terabyte) then
-    return string.format("%.2f", bytes / terabyte) .. ' TB';
+-- FORMAT OCTETS
+function blocksToSize(octets)
+	kilooctet = 1000;
+	megaoctet = kilooctet * 1000;
+	gigaoctet = megaoctet * 1000;
+	teraoctet = gigaoctet * 1000;
+  if((octets >= 0) and (octets < kilooctet)) then
+    return math.floor(octets) .. " Octets";
+  elseif((octets >= kilooctet) and (octets < megaoctet)) then
+    return math.floor( octets / kilooctet) .. ' Ko';
+  elseif((octets >= megaoctet) and (octets < gigaoctet)) then
+    return math.floor( octets / megaoctet) .. ' Mo';
+  elseif((octets >= gigaoctet) and (octets < teraoctet)) then
+    return string.format("%.2f", octets / gigaoctet) .. ' Go';
+  elseif(octets >= teraoctet) then
+    return string.format("%.2f", octets / teraoctet) .. ' To';
   else
-    return math.floor(bytes) .. ' B';
+    return math.floor(octets) .. ' o';
   end
 end
-	
+
+-- FORMAT UPTIME UP TO YEARS
+	local uptime = up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	if up_years == 1 then
+		uptime = up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 then
+		uptime = up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	end	
+	if up_mounths == 1 then
+		uptime = up_mounths .. " Mounth " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 and up_mounths == 0 then
+		uptime = up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	end
+	if up_days == 1 then
+		uptime = up_days .. " Day " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 and up_mounths == 0 and up_days == 0 then
+		uptime = up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	end
+
+-- GET PHYSICAL HDD	
+	local physicalDisk = string.match(disk.value.partitions.value, "(sd%a)")
+	local physicalCapacity = string.gsub(string.match(disk.value.partitions.value, "(%d+.sd%a)"), "%D", "")
 %>
 
 <% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Dashboard"}), page_info) %>
@@ -157,33 +153,14 @@ end
 
 				</p>
 				<p class="dashboard-infos dash-info-user">
-					<span class="data-title">User | </span><%= session.userinfo.userid %> &nbsp; <span class="data-title">Host | </span><%= hostname or "unknown hostname" %>
+					<span class="data-title data-user">User | </span><%= session.userinfo.userid %> &nbsp; <span class="data-title data-host">Host | </span><%= hostname or "unknown hostname" %>
+					<span class="data-title data-kernel">Kernel | </span>
+					<span class="result-kernel"><%= sys.value.kernel.value %></span>
 				</p>
 		</div>
 		<div class="data-block data-system-up-time">
 			<span class="data-title">Uptime | </span>
 				<span id="uptime" class="uptime">
-				<% 
-				local uptime = up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-				
-				if up_years == 1 then
-					uptime = up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-				elseif up_years == 0 then
-					uptime = up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-				end
-					
-				if up_mounths == 1 then
-					uptime = up_mounths .. " Mounth " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-				elseif up_years == 0 and up_mounths == 0 then
-					uptime = up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
-				end
-				
-				if up_days == 1 then
-					uptime = up_days .. " Day " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-				elseif up_years == 0 and up_mounths == 0 and up_days == 0 then
-					uptime = up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
-				end
-				%>
 				<%= uptime %>
 		</span>
 		</div>
@@ -206,6 +183,7 @@ end
 						print ("<canvas class='icon-canvas-dash icon-cpu-arm'>''</canvas>")
 					end %>
 				</span>
+				
 			<p class="dashboard-infos dash-info-board">
 				<span class="data-title">Board : </span>
 			<%
@@ -229,7 +207,9 @@ end
 							<%= sys.value.biosDate.value %>
 			</p>
 			<p class="dashboard-infos dash-info-cpu">
-				<span class="data-title">CPU : </span><%= string.sub((proc.value.model.value), 14) %>
+				<span class="data-title">CPU : 
+				</span><%= string.sub((proc.value.model.value), 14) %>
+				<!--<span class="data-title">GPU : </span><%= proc.value.gpu.value %>-->
 			</p>
 			<p class="dashboard-infos dash-info-memory">
 				<span class="data-title">Memory : </span>
@@ -396,8 +376,8 @@ $(function memChart() {
 	var chartdata = <% -- Generate the data structure in Lua and then convert to json
 			local chartdata = {}
 			for i,intf in ipairs(interfaces) do
-				chartdata[intf.."RX"] = {label=intf.." RX", data={}, color=rgb[i][1]}
-				chartdata[intf.."TX"] = {label=intf.." TX", data={}, color=rgb[i][2]}
+				chartdata[intf.."RX"] = {label=intf.." RX", data={}}
+				chartdata[intf.."TX"] = {label=intf.." TX", data={}}
 			end
 			io.write( json.encode(chartdata) ) %>;
 	
@@ -472,7 +452,7 @@ $(function networkChart() {
 						chart.data.datasets.forEach(dataset => {
 							dataset.data.push({
 							x: Date.now(),
-							y: 0// setInterval(JSON.stringify(lastdata.value.eth0), 1000)
+							y: setInterval(JSON.stringify(lastdata.value.eth0), 1000)
 							})
 						})
 					}
@@ -506,13 +486,9 @@ $(function networkChart() {
 				<p class="dashboard-infos dash-info-keys">
 					<span class="data-title">List of Hardware Disk : </span>
 					</p>
-					<% 
-					local physicalDisk = string.match(disk.value.partitions.value, "(sd%a)")
-					local physicalCapacity = string.gsub(string.match(disk.value.partitions.value, "(%d+.sd%a)"), "%D", "")
-					%>
 						<div class="section-disk" id="disk-partition-view">
 							<div id="partition-table">
-								<%= physicalDisk %> : <%= blocksToSize(tonumber(physicalCapacity) * 1024) %>
+								<%= physicalDisk %> : <%= blocksToSize(tonumber(physicalCapacity) * 1000) %>
 							</div>
 							</div>
 							<pre>

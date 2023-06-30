@@ -64,8 +64,12 @@ header {
     align-items: center;
 }
 
-header #toogle i.fa-solid.fa-bars {
+#toogle, #toogle.active i.fa-solid.fa-bars {
     color: #d9d9d9;
+}
+
+#toogle.not_active i.fa-solid.fa-bars {
+    color: #16597a;
 }
 
 .icon-header {

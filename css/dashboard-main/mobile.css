@@ -31,6 +31,7 @@
 
 	.logon.logon-logon {
     position: relative;
+	top: -1rem;
     overflow: hidden !important;
     width: 100%;
 	}
@@ -179,6 +180,10 @@
     flex-direction: row !important;
     align-content: center !important;
     flex-wrap: wrap !important;
+	}
+	
+	.version-external-link::after {
+    display: none !important;
 	}
 	
 	.data-block.data-system-up-time {

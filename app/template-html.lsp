@@ -86,7 +86,7 @@ end
 
 			$(document).ready(function() {
 				// Login page input placeholder
-				if(window.location.href === "https://" + window.location.hostname + "<%= html.html_escape(pageinfo.wwwprefix).."/cgi-bin/acf/acf-util/logon/logon" %>"){
+				if(window.location.href.indexOf("logon/logon") > -1){
 					document.querySelector('#userid input').setAttribute('required','required');
 					document.querySelector('#password input').setAttribute('required','required');
 					document.querySelector('#userid input').setAttribute('placeholder','🔒 User ID');
@@ -102,15 +102,16 @@ end
 				content.style.width = "80%";
 			} else {
 				content.style.width = "100%";
-			
 			};
 			
 			if (updated === '') {
 				window.localStorage.setItem('nav', 'active');
 				$("#nav").toggleClass("active");
+				$("#toogle").toogleClass("active");
 			} else {
 				window.localStorage.getItem('nav', updated);
 				$("#nav").toggleClass(updated);
+				$("#toogle").toggleClass(updated);
 			}
 			});
 	
@@ -118,14 +119,18 @@ end
 			function toogleMenu() {  
 				var updated = window.localStorage.getItem('nav', updated);
 				$("#nav").toggleClass("active");
+				$("#toogle").toggleClass("active");
 			if (window.localStorage.getItem('nav') === 'active') {
 				updated = 'not_active';
 				nav.style.display = "none";
 				content.style.width = "100%";
 				$("#nav").toggleClass("not_active");
+				$("#toogle").toggleClass("not_active");
 			} else {
 				updated = 'active';
+				$("#nav").slideToggle(500);
 				$("#nav").removeClass("not_active");
+				$("#toogle").removeClass("not_active");
 				nav.style.display = "block";
 				content.style.width = "80%";
 				
