@@ -85,28 +85,53 @@ end
 			});
 
 			$(document).ready(function() {
-			document.querySelector('input[type="text"]').setAttribute('placeholder', 'test');
-			document.querySelector('#userid input').setAttribute('required','required');
-			document.querySelector('#password input').setAttribute('required','required');
-			document.querySelector('#userid input').setAttribute('placeholder','🔒 User ID');
-			document.querySelector('#password input').setAttribute('placeholder','🔑 Password');
-			document.querySelector('#userid input').setAttribute('autocomplete','username');
-			document.querySelector('#password input').setAttribute('autocomplete','current-password');
-			});
+				// Login page input placeholder
+				if(window.location.href === "https://" + window.location.hostname + "<%= html.html_escape(pageinfo.wwwprefix).."/cgi-bin/acf/acf-util/logon/logon" %>"){
+					document.querySelector('#userid input').setAttribute('required','required');
+					document.querySelector('#password input').setAttribute('required','required');
+					document.querySelector('#userid input').setAttribute('placeholder','🔒 User ID');
+					document.querySelector('#password input').setAttribute('placeholder','🔑 Password');
+					document.querySelector('#userid input').setAttribute('autocomplete','username');
+					document.querySelector('#password input').setAttribute('autocomplete','current-password');
+			};
+			// Save collapse menu state 
+				var updated = window.localStorage.getItem('nav', updated);	
+				
+			if (window.localStorage.getItem('nav') === 'active') {
+				nav.style.display = "block";
+				content.style.width = "80%";
+			} else {
+				content.style.width = "100%";
 			
-			function toogleMenu() {
-					var nav = document.getElementById("nav");
-					var content = document.getElementById("content");
-					var icon = document.getElementById("toogle-link");
-				if (nav.style.display === "block") {
-					nav.style.display = "none";
-					content.style.width = "100%";
-					icon.addClass = "active";
-				} else {
-					nav.style.display = "block";
-					content.style.width = "80%";
-				}
+			};
+			
+			if (updated === '') {
+				window.localStorage.setItem('nav', 'active');
+				$("#nav").toggleClass("active");
+			} else {
+				window.localStorage.getItem('nav', updated);
+				$("#nav").toggleClass(updated);
 			}
+			});
+	
+			// Toogle collapse menu
+			function toogleMenu() {  
+				var updated = window.localStorage.getItem('nav', updated);
+				$("#nav").toggleClass("active");
+			if (window.localStorage.getItem('nav') === 'active') {
+				updated = 'not_active';
+				nav.style.display = "none";
+				content.style.width = "100%";
+				$("#nav").toggleClass("not_active");
+			} else {
+				updated = 'active';
+				$("#nav").removeClass("not_active");
+				nav.style.display = "block";
+				content.style.width = "80%";
+				
+			}
+			window.localStorage.setItem('nav', updated);
+		};
 		</script>
 </head>
 		<% end -- pageinfo.skinned %>
@@ -155,7 +180,7 @@ end
 </header>	<!-- header -->
 			
 			
-<div id="nav" style="display: block;">
+<div id="nav" style="display: none;">
 				<%
 					local class
 					local tabs

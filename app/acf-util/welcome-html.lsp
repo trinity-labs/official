@@ -383,7 +383,7 @@ $(function memChart() {
 			<div id="chartNetwork"> </div>
 			<canvas id="networkChart" class="data-chart block-chart"></canvas>
 		</div>
-<div id="demo"></div>
+<!--<div id="demo"></div>-->
 
 <!-- Dashboard Main Block - NETWORK CHART.JS -->
 <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
@@ -472,8 +472,8 @@ $(function networkChart() {
 						chart.data.datasets.forEach(dataset => {
 							dataset.data.push({
 							x: Date.now(),
-							y: setInterval(JSON.stringify(lastdata.value.eth0), 1000)
-							});
+							y: 0// setInterval(JSON.stringify(lastdata.value.eth0), 1000)
+							})
 						})
 					}
 				}
