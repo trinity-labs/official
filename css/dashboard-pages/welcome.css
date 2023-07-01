@@ -25,9 +25,11 @@
 }
 
 .uptime {
-    font-size: 0.65rem;
+    font-size: 1rem;
     color: #16597a;
     font-weight: 900;
+	position: relative;
+	top: 0.1rem;
 }
 
 .dashboard-block-title {

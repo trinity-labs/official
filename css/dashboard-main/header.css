@@ -39,7 +39,7 @@ header p.hostname {
 
 header {
     height: 1.5rem;
-    padding: 1rem;
+    padding: 1rem 2.25rem;
     box-shadow: 2px 2px 30px #00000029;
     background: white;
     display: flex;
@@ -47,7 +47,7 @@ header {
     flex-direction: row;
     flex-wrap: nowrap;
     background-image: url(../../img/logos/alpine-linux.png) !important;
-    background-position: 4.5rem 0.85rem !important;
+    background-position: 7rem center !important;
     justify-content: space-between;
     background-repeat: no-repeat !important;
     align-items: center;

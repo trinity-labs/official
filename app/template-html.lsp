@@ -123,17 +123,16 @@ end
 			if (window.localStorage.getItem('nav') === 'active') {
 				updated = 'not_active';
 				nav.style.display = "none";
-				$("#content").animate({ width: '100%' });
+				$("#content").animate({width: '100%'});
 				$("#nav").toggleClass("not_active");
 				$("#toogle").toggleClass("not_active");
-				
 			} else {
 				updated = 'active';
 				$("#nav").slideToggle(800);
 				$("#nav").removeClass("not_active");
 				$("#toogle").removeClass("not_active");
 				nav.style.display = "block";
-					$("#content").animate({ width: '80%' });
+				$("#content").animate({width: '80%'});
 				
 			}
 			window.localStorage.setItem('nav', updated);

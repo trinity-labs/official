@@ -187,7 +187,7 @@ end
 			<p class="dashboard-infos dash-info-board">
 				<span class="data-title">Board : </span>
 			<%
-			-- EXEMPLE TO PARSE KNOW MOBO MODELS
+			-- EXEMPLE TO PARSE KNOW MOBO MODELS OR YOUR OWN ONE
 			if string.match(sys.value.boardName.value, "EMB%-H81B") then
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON") .. "</span>")
 				print (" | <span>" .. sys.value.boardName.value .. "</span> | ")
@@ -209,9 +209,9 @@ end
 			<p class="dashboard-infos dash-info-cpu">
 				<span class="data-title">CPU : </span><%= string.sub((proc.value.model.value), 14) %>
 			</p>
-			<p class="dashboard-infos dash-info-cpu">
-				<span class="data-title">GPU : </span><%= proc.value.gpu.value %>
-			</p>
+			<!--<p class="dashboard-infos dash-info-cpu"> -->
+				<!--<span class="data-title">GPU : </span><%= proc.value.gpu.value %>-->
+			<!--</p>-->
 			<p class="dashboard-infos dash-info-memory">
 				<span class="data-title">Memory : </span>
 					<%= bytesToSize(tonumber(sys.value.memory.totalData)) %> Total |
