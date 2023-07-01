@@ -152,7 +152,7 @@ mymodule.get_proc = function (self)
 	proc.memory = cfe({ value=fs.read_file("/proc/meminfo") or "", label="Memory" })
 	proc.model = cfe({ value=querycmd("sed -n 5p /proc/cpuinfo") or "", label="CPU Model" })
 	proc.temp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone2/temp") or "N/A", label="CPU Temp" })
-	proc.gpu = cfe({ value=string.match(querycmd("lspci"), "VGA compatible controller:(%s+%a+%s+%a+)") or "Unknow", label="VGA GPU" })
+	proc.gpu = cfe({ value=string.match(querycmd("lspci"), "VGA compatible controller:(%s+%w+%s+%w+%s+%w+%s+%w+)") or "Unknow", label="VGA GPU" })
 	return cfe({ type="group", value=proc, label="Hardware Information" })
 end
 
