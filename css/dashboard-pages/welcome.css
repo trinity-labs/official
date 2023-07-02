@@ -157,6 +157,23 @@
 	color: #cdcdcd;
 }
 
+.icon-kernel-ok {
+    margin: 0 0 0 0.15rem;
+    color: #189b00;
+}
+
+.icon-kernel-warn {
+    margin: 0 0 0 0.15rem;
+    color: #ff7800;
+}
+
+.icon-kernel-err {
+    margin: 0 0 0 0.15rem;
+    color: #ed0000;
+    position: relative;
+    top: 0.05rem;
+}
+
 #section-alpine-configuration-framework {
     display: flex;
     flex-direction: row;
@@ -401,7 +418,7 @@
     display: inline-block;
     position: relative;
     margin: 0;
-    color: #bbbbbb;
+    color: #006787;
     font-size: 0.7rem;
 }
 

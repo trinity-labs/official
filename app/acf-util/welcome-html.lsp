@@ -31,12 +31,15 @@
 	local minor_distver = string.gsub(string.match(actual_distver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
-		chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check-ok'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a> up to date "
+		chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check-ok'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a> Up To Date "
+		kernres = "<i class='fa-solid fa-check icon-kernel-ok'></i>"
 	else
-		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'><span class='version-check-update'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>update needed "
+		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'><span class='version-check-update'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>Update Needed "
+		kernres = "<i class='fa-solid fa-exclamation icon-kernel-warn'></i>"
 	end
 	if major_sysver ~= major_distver then
-		chkres = "<a id='alpine-version-link' class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'><span class='version-check-upgrade'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>upgrade required "
+		chkres = "<a id='alpine-version-link' class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'><span class='version-check-upgrade'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>Upgrade Required "
+		kernres = "<i class='fa-solid fa-xmark icon-kernel-err'></i>"
 	end
 	
 -- GET DIST VERSION CHANGES
@@ -52,7 +55,7 @@
 	local up_minutes = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) / 60))
 	local up_seconds = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) % 60))
 	
--- CONVERT & DISPLAY UPTIME UP TO CENTURIES
+-- CONVERT & DISPLAY UPTIME UP TO CENTURIES 😂
 	local uptime = up_centuries .. " Centuries " .. up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
 	if up_centuries == 1 then
 		uptime = up_centuries .. " Century " .. up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
@@ -160,13 +163,13 @@ end
 				<p class="dashboard-infos dash-info-user">
 					<span class="data-title data-user">User | </span><%= session.userinfo.userid %> &nbsp; <span class="data-title data-host">Host | </span><%= hostname or "unknown hostname" %>
 					<span class="data-title data-kernel">Kernel | </span>
-					<span class="result-kernel"><%= sys.value.kernel.value %></span>
+					<span class="result-kernel"><%= sys.value.kernel.value %><%= kernres %></span>
 				</p>
 		</div>
 		<div class="data-block data-system-up-time">
 			<span class="data-title">Uptime | </span>
 				<span id="uptime" class="uptime">
-				<%= uptime %>
+				<%= uptime %><br>
 <script type="application/javascript">
 	// IMPORT UPTIME FOR JS LIVE TIMER
 	let increment = <%= up_time %>;
@@ -182,7 +185,7 @@ end
 		var js_hours = Math.floor(js_uptime % (3600*24) / 3600);
 		var js_minutes = Math.floor(js_uptime % 3600 / 60);
 		var js_seconds = Math.floor(js_uptime % 60);
-	// FORMAT JS UPTIME UP TO CENTURIES
+	// FORMAT JS UPTIME UP TO CENTURIES 😂
 		var centuries_display = js_centuries > 0 ? js_centuries + (js_centuries <= 1 ? " Century " : " Centuries ") : "";
 		var years_display = js_years > 0 ? js_years + (js_years <= 1 ? " Year " : " Years ") : "";
 		var mounths_display = js_mounths > 0 ? js_mounths + (js_mounths <= 1 ? " Mounth " : " Mounths ") : "";
