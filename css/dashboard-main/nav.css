@@ -5,7 +5,7 @@
 
 #nav {
     margin: 0;
-    padding: 3rem 2rem;
+    padding: 3rem 2rem 3rem 1.5rem;
     width: 13rem;
     top: 0 !important;
     flex-direction: row;
@@ -91,7 +91,7 @@ background: #e9e9e9 !important;
 #subnav {
     margin: 2.15rem 0 0 0;
     float: right;
-    width: 80%;
+    min-width: 80%;
 }
 
 #subnav ul li {

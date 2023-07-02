@@ -100,8 +100,10 @@ end
 			if (window.localStorage.getItem('nav') === 'active') {
 				nav.style.display = "block";
 				content.style.width = "80%";
+				subnav.style.width = "80%";
 			} else {
 				content.style.width = "100%";
+				subnav.style.width = "100%";
 			};
 			
 			if (updated === '') {
@@ -124,15 +126,17 @@ end
 				updated = 'not_active';
 				nav.style.display = "none";
 				$("#content").animate({width: '100%'});
+				$("#subnav").animate({width: '100%'});
 				$("#nav").toggleClass("not_active");
 				$("#toogle").toggleClass("not_active");
 			} else {
 				updated = 'active';
-				$("#nav").slideToggle(800);
+				$("#nav").slideToggle(900);
 				$("#nav").removeClass("not_active");
 				$("#toogle").removeClass("not_active");
 				nav.style.display = "block";
 				$("#content").animate({width: '80%'});
+				$("#subnav").animate({width: '80%'});
 				
 			}
 			window.localStorage.setItem('nav', updated);

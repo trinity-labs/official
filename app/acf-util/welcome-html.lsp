@@ -44,15 +44,21 @@
 	
 -- FORMAT UPTIME	
 	local up_time = math.floor(string.match(sys.value.uptime.value, "[%d]+"))
-	local up_years = math.floor(up_time / (3600 * 24) / 365)
+	local up_centuries = math.floor((up_time / (3600*24) / 365) / 100)
+	local up_years = math.floor((up_time / (3600*24) / 365) % 100)
 	local up_mounths = math.floor((((up_time / (3600 * 24)) % 365) % 365) / 30)
 	local up_days = math.floor((((up_time / (3600 * 24)) % 365) % 365) % 30)
 	local up_hours = string.format("%02d", math.floor((up_time % (3600 * 24)) / 3600))
 	local up_minutes = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) / 60))
 	local up_seconds = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) % 60))
 	
--- CONVERT & DISPLAY UPTIME UP TO YEARS
-	local uptime = up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+-- CONVERT & DISPLAY UPTIME UP TO CENTURIES
+	local uptime = up_centuries .. " Centuries " .. up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	if up_centuries == 1 then
+		uptime = up_centuries .. " Century " .. up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_centuries == 0 then
+		uptime =  up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	end
 	if up_years == 1 then
 		uptime = up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
 	elseif up_years == 0 then
@@ -139,9 +145,8 @@ end
 			<h4 class="dashboard-block-title dashboard-title-system">System</h4>
 				<p class="dashboard-infos dash-info-version">
 					<span class="data-title">OS : </span>
-					<%= chkres %>
+					<%= chkres %> <span class="data-title">| </span>
 					<span class="check-version">
-					 &nbsp; - &nbsp;
 					 <a class="version-link version-external-link" href="https://www.alpinelinux.org/posts/<%= check_verchanges %>#content" title="🔗 https://www.alpinelinux.org/posts/<%= check_verchanges %>" target="_blank">Last Release : <%= actual_distver %></a><br>
 					 </span>
 					<span class="data-title">ACF Version : </span><%= sys.value.luaver.value %> 
@@ -170,13 +175,15 @@ end
 	increment += 1;
 	// CONVERT JS UPTIME
 		js_uptime = parseInt(increment);
-		var js_years = Math.floor(js_uptime / (3600*24) / 365);
+		var js_centuries = Math.floor((js_uptime / (3600*24) / 365) / 100);
+		var js_years = Math.floor((js_uptime / (3600*24) / 365) % 100);
 		var js_mounths = Math.floor((((js_uptime / (3600 * 24)) % 365) % 365) / 30);
-		var js_days = Math.floor(js_uptime / (3600*24));
+		var js_days = Math.floor((((js_uptime / (3600 * 24)) % 365) % 365) % 30)
 		var js_hours = Math.floor(js_uptime % (3600*24) / 3600);
 		var js_minutes = Math.floor(js_uptime % 3600 / 60);
 		var js_seconds = Math.floor(js_uptime % 60);
-	// FORMAT JS UPTIME
+	// FORMAT JS UPTIME UP TO CENTURIES
+		var centuries_display = js_centuries > 0 ? js_centuries + (js_centuries <= 1 ? " Century " : " Centuries ") : "";
 		var years_display = js_years > 0 ? js_years + (js_years <= 1 ? " Year " : " Years ") : "";
 		var mounths_display = js_mounths > 0 ? js_mounths + (js_mounths <= 1 ? " Mounth " : " Mounths ") : "";
 		var days_display = js_days > 0 ? js_days + (js_days <= 1 ? " Day " : " Days ") : "";
@@ -184,7 +191,7 @@ end
 		var minutes_display = js_minutes < 10 ? "0" + js_minutes + "m " : js_minutes + "m ";
 		var secondes_display = js_seconds < 10 ? "0" + js_seconds + "s" : js_seconds + "s";
 	// RETURN JS FORMAT TIME
-		return years_display + mounths_display + days_display + hours_display + minutes_display + secondes_display;	
+		return centuries_display + years_display + mounths_display + days_display + hours_display + minutes_display + secondes_display;	
 	};
 	// PUSH JS FORMAT TIME
 	setInterval(() => document.getElementById("uptime").innerHTML = delay(), 1000);
@@ -229,7 +236,7 @@ end
 			</p>
 			<p class="dashboard-infos dash-info-bios">
 				<span class="data-title">BIOS : </span>
-					<span id="version">v. </span><%= sys.value.biosVersion.value %> | 
+					<span id="version">ver: </span><%= sys.value.biosVersion.value %> | 
 						<%= sys.value.biosVendor.value %> - 
 							<%= sys.value.biosDate.value %>
 			</p>
