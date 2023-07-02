@@ -51,6 +51,24 @@
 	local up_minutes = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) / 60))
 	local up_seconds = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) % 60))
 	
+-- CONVERT & DISPLAY UPTIME UP TO YEARS
+	local uptime = up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	if up_years == 1 then
+		uptime = up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 then
+		uptime = up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	end	
+	if up_mounths == 1 then
+		uptime = up_mounths .. " Mounth " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 and up_mounths == 0 then
+		uptime = up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	end
+	if up_days == 1 then
+		uptime = up_days .. " Day " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 and up_mounths == 0 and up_days == 0 then
+		uptime = up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	end
+	
 -- REPLACE O.E.M DEFAULT STRING
 	function oem_parse(str)
 		return (string.gsub(str, "To be filled by O.E.M." or "Not Specified", "Standard PC")) 
@@ -106,24 +124,6 @@ function blocksToSize(octets)
   end
 end
 
--- FORMAT UPTIME UP TO YEARS
-	local uptime = up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
-	if up_years == 1 then
-		uptime = up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-	elseif up_years == 0 then
-		uptime = up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-	end	
-	if up_mounths == 1 then
-		uptime = up_mounths .. " Mounth " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-	elseif up_years == 0 and up_mounths == 0 then
-		uptime = up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
-	end
-	if up_days == 1 then
-		uptime = up_days .. " Day " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
-	elseif up_years == 0 and up_mounths == 0 and up_days == 0 then
-		uptime = up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
-	end
-
 -- GET PHYSICAL HDD	
 	local physicalDisk = string.match(disk.value.partitions.value, "(sd%a)")
 	local physicalCapacity = string.gsub(string.match(disk.value.partitions.value, "(%d+.sd%a)"), "%D", "")
@@ -162,6 +162,29 @@ end
 			<span class="data-title">Uptime | </span>
 				<span id="uptime" class="uptime">
 				<%= uptime %>
+				<script type="application/javascript">
+			let increment = <%= up_time %>;
+			let delay = () => {
+			increment += 1;
+
+			js_uptime = parseInt(increment);
+			var js_days = Math.floor(js_uptime / (3600*24));
+			var js_hours = Math.floor(js_uptime % (3600*24) / 3600);
+			var js_minutes = Math.floor(js_uptime % 3600 / 60);
+			var js_seconds = Math.floor(js_uptime % 60);
+
+			var days_display = js_days > 0 ? js_days + (js_days == 1 ? " Day " : " Days ") : "";
+			var hours_display = js_hours < 10 ? "0" + js_hours + "h " : js_hours + "h ";
+			var minutes_display = js_minutes < 10 ? "0" + js_minutes + "m " : js_minutes + "m ";
+			var secondes_display = js_seconds < 10 ? "0" + js_seconds + "s" : js_seconds + "s";
+			return days_display + hours_display + minutes_display + secondes_display;
+			
+	};
+
+	setInterval(() => document.getElementById("uptime").innerHTML = delay(), 1000);
+
+				
+				</script>
 		</span>
 		</div>
 	</div>
@@ -453,7 +476,7 @@ $(function networkChart() {
 						chart.data.datasets.forEach(dataset => {
 							dataset.data.push({
 							x: Date.now(),
-							y: setInterval(JSON.stringify(lastdata.value.eth0), 1000)
+							y: setInterval(0, 1000)
 							})
 						})
 					}
@@ -470,7 +493,6 @@ $(function networkChart() {
 		config
 	);
 });
-
 </script>
 
 		<div>

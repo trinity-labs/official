@@ -64,6 +64,11 @@ header {
     align-items: center;
 }
 
+i.fa-solid.fa-bars {
+    padding: 1rem;
+    margin: 0 0 0 -1rem;
+}
+
 #toogle, #toogle.active i.fa-solid.fa-bars {
     color: #d9d9d9;
 }
