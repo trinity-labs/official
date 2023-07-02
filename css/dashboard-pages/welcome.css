@@ -26,7 +26,7 @@
 
 .uptime {
     font-size: 0.75rem;
-    color: #16597a;
+    color: #006787;
     font-weight: 900;
     position: relative;
     top: 0.075rem;
@@ -46,7 +46,7 @@
 }
 
 .welcome-title-user {
-    color: #16597a;
+    color: #006787;
     font-weight: bold !important;
     text-transform: capitalize;
     font-size: 1.5rem !important;
@@ -190,7 +190,7 @@
 .legend-memory-free {
     width: 100% !important;
     position: relative;
-    color: #16597a;
+    color: #006787;
     font-weight: 900;
     text-align: center !important;
     top: -8rem;
@@ -449,7 +449,7 @@
 }
 
 .page-welcome #capacity-free {
-    background: #16597A;
+    background: #006787;
 }
 
 .page-welcome #capacity-used {

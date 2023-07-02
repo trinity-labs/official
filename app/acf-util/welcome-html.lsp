@@ -167,7 +167,7 @@ end
 	let increment = <%= up_time %>;
 	let delay = () => 
 	{
-		increment += 1;
+	increment += 1;
 	// CONVERT JS UPTIME
 		js_uptime = parseInt(increment);
 		var js_years = Math.floor(js_uptime / (3600*24) / 365);
@@ -365,7 +365,7 @@ $(function memChart() {
 			rotation: -135,
 			circumference: 270,
 			backgroundColor: [
-                    '#16597A',
+                    '#006787',
                     '#0075af',
                     '#cbcbcb'
 			]
