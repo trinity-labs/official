@@ -64,9 +64,8 @@ header {
     align-items: center;
 }
 
-i.fa-solid.fa-bars {
-    padding: 1rem;
-    margin: 0 0 0 -1rem;
+#toogle-link {
+    padding: 1.25rem 2rem 1.25rem 1rem;
 }
 
 #toogle, #toogle.active i.fa-solid.fa-bars {
@@ -95,7 +94,6 @@ i.fa-solid.fa-bars {
 
 #user-logon {
     display: inline-block;
-    margin: 0 0.5rem 0 0;
     border-radius: 50em;
     width: 2.25rem;
     height: 2.25rem;
