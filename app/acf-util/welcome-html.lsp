@@ -162,29 +162,33 @@ end
 			<span class="data-title">Uptime | </span>
 				<span id="uptime" class="uptime">
 				<%= uptime %>
-				<script type="application/javascript">
-			let increment = <%= up_time %>;
-			let delay = () => {
-			increment += 1;
-
-			js_uptime = parseInt(increment);
-			var js_days = Math.floor(js_uptime / (3600*24));
-			var js_hours = Math.floor(js_uptime % (3600*24) / 3600);
-			var js_minutes = Math.floor(js_uptime % 3600 / 60);
-			var js_seconds = Math.floor(js_uptime % 60);
-
-			var days_display = js_days > 0 ? js_days + (js_days == 1 ? " Day " : " Days ") : "";
-			var hours_display = js_hours < 10 ? "0" + js_hours + "h " : js_hours + "h ";
-			var minutes_display = js_minutes < 10 ? "0" + js_minutes + "m " : js_minutes + "m ";
-			var secondes_display = js_seconds < 10 ? "0" + js_seconds + "s" : js_seconds + "s";
-			return days_display + hours_display + minutes_display + secondes_display;
-			
+<script type="application/javascript">
+	// IMPORT UPTIME FOR JS LIVE TIMER
+	let increment = <%= up_time %>;
+	let delay = () => 
+	{
+		increment += 1;
+	// CONVERT JS UPTIME
+		js_uptime = parseInt(increment);
+		var js_years = Math.floor(js_uptime / (3600*24) / 365);
+		var js_mounths = Math.floor((((js_uptime / (3600 * 24)) % 365) % 365) / 30);
+		var js_days = Math.floor(js_uptime / (3600*24));
+		var js_hours = Math.floor(js_uptime % (3600*24) / 3600);
+		var js_minutes = Math.floor(js_uptime % 3600 / 60);
+		var js_seconds = Math.floor(js_uptime % 60);
+	// FORMAT JS UPTIME
+		var years_display = js_years > 0 ? js_years + (js_years <= 1 ? " Year " : " Years ") : "";
+		var mounths_display = js_mounths > 0 ? js_mounths + (js_mounths <= 1 ? " Mounth " : " Mounths ") : "";
+		var days_display = js_days > 0 ? js_days + (js_days <= 1 ? " Day " : " Days ") : "";
+		var hours_display = js_hours < 10 ? "0" + js_hours + "h " : js_hours + "h ";
+		var minutes_display = js_minutes < 10 ? "0" + js_minutes + "m " : js_minutes + "m ";
+		var secondes_display = js_seconds < 10 ? "0" + js_seconds + "s" : js_seconds + "s";
+	// RETURN JS FORMAT TIME
+		return years_display + mounths_display + days_display + hours_display + minutes_display + secondes_display;	
 	};
-
+	// PUSH JS FORMAT TIME
 	setInterval(() => document.getElementById("uptime").innerHTML = delay(), 1000);
-
-				
-				</script>
+</script>
 		</span>
 		</div>
 	</div>
