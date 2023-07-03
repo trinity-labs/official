@@ -143,7 +143,7 @@ end
 <!-- Dashboard App Block - LINE 1 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Version Block - BLOCK 1 -->
-	<div class="dashboard-system dashboard-block">
+	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/system', '_blank')" class="dashboard-system dashboard-block">
 		<div class="data-block data-system">
 			<h4 class="dashboard-block-title dashboard-title-system">System</h4>
 				<p class="dashboard-infos dash-info-version">
@@ -176,7 +176,7 @@ end
 	let delay = () => 
 	{
 	increment += 1;
-	// CONVERT JS UPTIME
+	// CONVERT JS UPTIME 😂
 		js_uptime = parseInt(increment);
 		var js_centuries = Math.floor((js_uptime / (3600*24) / 365) / 100);
 		var js_years = Math.floor((js_uptime / (3600*24) / 365) % 100);
@@ -202,13 +202,13 @@ end
 		</span>
 		</div>
 	</div>
+	
 <!-- Dashboard App Block - LINE 1 -->
 </div>
-
 <!-- Dashboard App Block - LINE 2 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
-	<div class="dashboard-hardware dashboard-block medium-block">
+	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" class="dashboard-hardware dashboard-block medium-block">
 		<div class="data-block data-system">
 			<h4 class="dashboard-block-title dashboard-title-hardware">Hardware</h4>
 				<span class="icon-cpu">
@@ -240,8 +240,7 @@ end
 			<p class="dashboard-infos dash-info-bios">
 				<span class="data-title">BIOS : </span>
 					<span id="version">ver: </span><%= sys.value.biosVersion.value %> | 
-						<%= sys.value.biosVendor.value %> - 
-							<%= sys.value.biosDate.value %>
+						<%= sys.value.biosVendor.value %> | <%= sys.value.biosDate.value %>
 			</p>
 			<p class="dashboard-infos dash-info-cpu">
 				<span class="data-title">CPU : </span><%= string.sub((proc.value.model.value), 14) %>
@@ -281,7 +280,7 @@ end
 	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
 <div class="dashboard-main main-block medium-block">
-	<div class="dashboard-memory dashboard-block">
+	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/storage', '_blank')" class="dashboard-disk dashboard-block">
 		<h4 class="dashboard-block-title dashboard-title-disk">Disk</h4>
 <!-- Dashboard Main Block - DISK CHART FROM N.ANGELACOS ACF NATIVE APP -->
 	<% displaydisk = function(disk, name)
@@ -332,7 +331,7 @@ end
 
 <!-- Dashboard Main Block - MEMORY - BLOCK 3 -->
 <div class="dashboard-main main-block small-block">
-	<div class="dashboard-memory dashboard-block">
+	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/system', '_blank')" class="dashboard-memory dashboard-block">
 		<h4 class="dashboard-block-title dashboard-title-memory">Memory</h4>
 <!-- Dashboard Main Block - CHART.JS -->
 		<div class="chart-canvas chartjs">
@@ -395,7 +394,7 @@ $(function memChart() {
 <!-- Dashboard App Block - LINE 3 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - 1 -->
-	<div class="dashboard-block large-block dashboard-network">
+	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/network', '_blank')" class="dashboard-network dashboard-block large-block">
 		<div class="data-block data-system">
 			<h4 class="dashboard-block-title dashboard-title-network-stats">Network Stats</h4>
 			<div id="chartNetwork"> </div>
@@ -517,7 +516,7 @@ $(function networkChart() {
 <!-- Dashboard App Block - LINE 4 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - DISK & PARTITION 1 -->
-	<div class="dashboard-ssh dashboard-block large-block">
+	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/storage, '_blank')'" class="dashboard-disk dashboard-block large-block">
 		<div class="data-block data-diskpart">
 			<h4 class="dashboard-block-title dashboard-title-disk-viewer">Disk | Partition Viewer</h4>
 				<p class="dashboard-infos dash-info-keys">

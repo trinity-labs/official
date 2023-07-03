@@ -83,7 +83,7 @@ end
 			$(function(){
 				$(":input:not(input[type=button],input[type=submit],button):enabled:not([readonly]):visible:first").focus();
 			});
-
+	
 			$(document).ready(function() {
 				// Login page input placeholder
 				if(window.location.href.indexOf("logon/logon") > -1){
@@ -91,8 +91,10 @@ end
 					document.querySelector('#password input').setAttribute('required','required');
 					document.querySelector('#userid input').setAttribute('placeholder','🔒 User ID');
 					document.querySelector('#password input').setAttribute('placeholder','🔑 Password');
-					document.querySelector('#userid input').setAttribute('autocomplete','username');
-					document.querySelector('#password input').setAttribute('autocomplete','current-password');
+					document.querySelector('#login').setAttribute('autocomplete','on');
+				
+					document.querySelector('#password input').setAttribute('autocomplete','off');
+					document.querySelector('.hidden').setAttribute('hidden','');
 			};
 			// Save collapse menu state 
 				var updated = window.localStorage.getItem('nav', updated);	
@@ -246,7 +248,7 @@ end
 
 			</div> <!-- main -->
 
-			<div id="footer">
+			<div id="footer" style="cursor: pointer;" onclick="window.open('https://www.alpinelinux.org/about/', '_blank')">
 				<a href="https://www.alpinelinux.org/about/" target="_blank">
 				© Alpine | 2008 - <%= html.html_escape(os.date("%Y")) %>
 				</a>

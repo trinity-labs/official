@@ -271,7 +271,11 @@ function mymodule.displayformstart(myform, page_info)
 		myform.action = page_info.script .. page_info.prefix .. page_info.controller .. "/" .. page_info.action
 	end
 	mymodule.displayinfo(myform)
+	if page_info.action == "logon" then
+	io.write('<form action="' .. html.html_escape(myform.action) .. '" id="login" ')
+	else
 	io.write('<form action="' .. html.html_escape(myform.action) .. '" id="' .. html.html_escape(myform.id or page_info.action) .. '" ')
+	end
 	if myform.enctype and myform.enctype ~= "" then
 		io.write('enctype="'..html.html_escape(myform.enctype)..'" ')
 	end

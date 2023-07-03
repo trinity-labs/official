@@ -92,7 +92,7 @@ mymodule.get_system = function (self)
 	system.boardVersion = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_version") or "Unknown", label="Board Version" })
 	system.biosVendor = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/bios_vendor") or "Unknown", label="Bios Vendor" })
 	system.biosVersion = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/bios_version") or "Unknown", label="Bios Version" })
-	system.biosDate = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/bios_date") or "Unknown", label="Bios Date" })
+	system.biosDate = cfe({ value=string.match(querycmd("cat /sys/devices/virtual/dmi/id/bios_date"), "%d%d%d%d") or "Unknown", label="Bios Date" })
 	return cfe({ type="group", value=system, label="System" })
 end
 
