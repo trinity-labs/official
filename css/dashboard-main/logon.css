@@ -77,7 +77,7 @@
 
 #login .left {
     display: none !important;
-} /*REMOVE ME ! ------------------- REMOVE LEFT CONTENT FOR PLACEHOLDER - GO TO readme.md for activate it in /usr/share/lua/5.4/html - Depend of your lua version acf install 20230407*/
+} 
 
 input#password::-webkit-input-placeholder::before {
     font-family: "Font Awesome 6 Free";
@@ -128,7 +128,7 @@ input#password::-webkit-input-placeholder::before {
 }
 
 .logon-logon .item:last-child {
-    margin: 3rem 0 0;
+    margin: 0.5rem 0 0;
 }
 
 #section_logon #error {
@@ -221,4 +221,25 @@ input#password::-webkit-input-placeholder::before {
 
 .logon .header-links {
     padding: 0;
+}
+
+button#showPass {
+    float: right;
+    cursor: pointer;
+    position: relative;
+    top: -2.5rem;
+    height: 2.5rem;
+    right: -0.25rem !important;
+    padding: 0;
+    border: none !important;
+    border-radius: 0 4px 4px 0;
+    width: 2.5rem;
+}
+
+.corporate {
+    background: #006787;
+}
+
+#showPass i.fa-regular.fa-eye {
+    color: white;
 }

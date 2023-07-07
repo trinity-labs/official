@@ -143,7 +143,7 @@ end
 <!-- Dashboard App Block - LINE 1 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Version Block - BLOCK 1 -->
-	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/system', '_blank')" class="dashboard-system dashboard-block">
+	<div class="dashboard-system dashboard-block">
 		<div class="data-block data-system">
 			<h4 class="dashboard-block-title dashboard-title-system">System</h4>
 				<p class="dashboard-infos dash-info-version">
@@ -516,7 +516,7 @@ $(function networkChart() {
 <!-- Dashboard App Block - LINE 4 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - DISK & PARTITION 1 -->
-	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/storage, '_blank')'" class="dashboard-disk dashboard-block large-block">
+	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/storage', '_blank')" class="dashboard-disk dashboard-block large-block">
 		<div class="data-block data-diskpart">
 			<h4 class="dashboard-block-title dashboard-title-disk-viewer">Disk | Partition Viewer</h4>
 				<p class="dashboard-infos dash-info-keys">
@@ -524,12 +524,58 @@ $(function networkChart() {
 					</p>
 						<div class="section-disk" id="disk-partition-view">
 							<div id="partition-table">
+								<!--<% local disklines = format.string_to_table(physicalDisk, "\n") %>-->
 								<%= physicalDisk %> : <%= blocksToSize(tonumber(physicalCapacity) * 1000) %>
+								<% displaydisk = function(disk, name)
+								io.write('<table id="legend-title" style="margin:0px;padding:0px;border:0px;margin-top:5px;">\n')
+								io.write("	<tr>\n")
+								io.write('		<td id="legend-object" width="100px"><b>'..html.html_escape(name)..'</b></td>\n')
+								io.write("	</tr>\n")
+								io.write("</table>\n")
+								io.write('<table class="chart-bar chart-storage">\n')
+								io.write("	<tr>\n")
+								io.write("		<td>0%</td>\n")
+							if tonumber(disk.used) > 0 then
+								io.write('		<td id="capacity-used" class="capacity-used" width="'..html.html_escape(disk.used)..'%" style="')
+							if tonumber(disk.used) < 100 then io.write('')
+							end
+								io.write('"><center><b>')
+							if ( tonumber(disk.used) > 0) then io.write(html.html_escape(disk.used) .. "%") end
+								io.write('</b></center></td>\n')
+							end
+							if tonumber(disk.used) < 100 then
+								io.write('		<td id="capacity-free" class="capacity-free" width="'..(100-tonumber(disk.used))..'%" style="')
+							if tonumber(disk.used) > 0 then io.write('') 
+							end
+								io.write('"><center><b>')
+							if ( 100 > tonumber(disk.used)) then io.write((100-tonumber(disk.used)) .. "%") end
+								io.write('</b></center></td>\n')
+							end
+								io.write('		<td>100%</td>\n')
+								io.write("	</tr>\n")
+								io.write("</table>\n")
+							end
+							if (disk.value.hd) then
+							for name,hd in pairs(disk.value.hd.value) do
+								displaydisk(hd, name)
+							end
+							else %>
+								<p class="error error-txt">No Hard Drive Mounted</p>
+							<% end %>
+							<% if (disk.value.ramdisk) then
+							for name,ramdisk in pairs(disk.value.ramdisk.value) do
+								displaydisk(ramdisk, name)
+							end
+							else %>
+								<p class="error error-txt">No RamDisk Mounted</p>
+							<% end %>
+								</div>
 							</div>
-							</div>
-							<pre>
-							<%= disk.value.partitions.value %>
-							</pre>
+						</div>
+					<pre>
+						<%= disk.value.partitions.value %>
+				</pre>
+			</div>		
 		</div>
 	</div>
 <!-- Dashboard App Block - LINE 4 -->

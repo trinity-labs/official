@@ -59,7 +59,7 @@ end
 <% if session.userinfo and session.userinfo.userid and viewlibrary and viewlibrary.dispatch_component then %>
 		<title><%= html.html_escape(string.upper(hostname) .. " - " .. string.gsub(pageinfo.controller, "^%l", string.upper) .. " ∣ " .. string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
 <% else %>
-		<title><%= html.html_escape(string.gsub(pageinfo.controller, "^%l", string.upper) .. " ∣ " .. string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
+		<title><%= "Dashboard | " .. html.html_escape(string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
 <% end %>
 		<link rel="icon" href="/skins/dashboard/favicon.ico" />
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.staticdir) %>/reset.css">
@@ -80,9 +80,26 @@ end
 		<script type="application/javascript" src="https://unpkg.com/jquery"></script>
 		<script type="text/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
 		<script type="text/javascript">
+		
 			$(function(){
 				$(":input:not(input[type=button],input[type=submit],button):enabled:not([readonly]):visible:first").focus();
 			});
+			
+			// Show Password on Logon page
+			function showPassword() {
+				var field = document.querySelector('#password input');
+				if (field.type === "password") {
+					field.type = "text";
+					$("#showPass .fa-eye-slash").removeClass("fa-eye-slash");
+					$("#showPass i").addClass("fa-eye");
+					$("#showPass").addClass("corporate");
+				} else {
+					field.type = "password";
+					$("#showPass").removeClass("corporate");
+					$("#showPass .fa-eye").removeClass("fa-eye");
+					$("#showPass i").addClass("fa-eye-slash");
+				}
+				};			
 	
 			$(document).ready(function() {
 				// Login page input placeholder
@@ -92,9 +109,9 @@ end
 					document.querySelector('#userid input').setAttribute('placeholder','🔒 User ID');
 					document.querySelector('#password input').setAttribute('placeholder','🔑 Password');
 					document.querySelector('#login').setAttribute('autocomplete','on');
-				
-					document.querySelector('#password input').setAttribute('autocomplete','off');
+					document.querySelector('#password input').setAttribute('autocomplete','current-password');
 					document.querySelector('.hidden').setAttribute('hidden','');
+					$("#password .right").append("<button id='showPass' type='button' onclick='showPassword()'><i class='fa-regular fa-eye-slash'></i></button>"); 
 			};
 			// Save collapse menu state 
 				var updated = window.localStorage.getItem('nav', updated);	
@@ -117,7 +134,7 @@ end
 				$("#nav").toggleClass(updated);
 				$("#toogle").toggleClass(updated);
 			}
-			});
+			});		
 	
 			// Toogle collapse menu
 			function toogleMenu() {  
