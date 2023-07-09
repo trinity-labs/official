@@ -176,7 +176,7 @@ end
 	let delay = () => 
 	{
 	increment += 1;
-	// CONVERT JS UPTIME 😂
+	// CONVERT JS UPTIME
 		js_uptime = parseInt(increment);
 		var js_centuries = Math.floor((js_uptime / (3600*24) / 365) / 100);
 		var js_years = Math.floor((js_uptime / (3600*24) / 365) % 100);
@@ -265,16 +265,26 @@ end
 			<p class="dashboard-infos dash-info-cpu-temp">
 				<span class="data-title">CPU Temp</span>
 			</p>
-			<p class="dashboard-infos dash-info-temp">
+			<p id="cpuTemp" class="dashboard-infos dash-info-temp">
 			<%
 			if (tonumber(proc.value.temp.value)) ~= nil then
 			print (math.floor(tonumber(proc.value.temp.value / 1000)) .. "°C")
 			else
-			print ("N/A")
+			print ("NaN°C")
 			end
 			%>
+			<script type="application/javascript" defer>
+			async function load() {
+			let url = '<%= html.html_escape(page_info.script .. "/alpine-baselayout/health/proc?viewtype=json") %>';
+			let obj = await (await fetch(url)).json();
+			document.getElementById("cpuTemp").innerHTML = ((obj.value.temp.value) / 1000) + "°C";
+			};
 			
+		 setInterval(load, 1000);
+			
+			</script>
 			</p>
+			
 		</div>
 	</div>
 	

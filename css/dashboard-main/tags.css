@@ -90,12 +90,12 @@ hr {
     justify-content: center;
 }
 
-#error {
+#valid {
     font-weight: bold;
     display: flex;
     clear: both;
     padding: 0.5rem 1rem;
-    margin: 0.5rem auto;
+    margin: 0.5rem auto 0 !important;
     width: 100% !important;
     border-radius: 4px;
     font-size: 12.5px;
@@ -104,9 +104,29 @@ hr {
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;
-    border: 2px solid;
-    color: #c70000;
-    background: white;
+    color: #ffffff;
+	background: rgb(116,255,91);
+	background: linear-gradient(90deg, rgba(116,255,91,1) 0%, rgba(41,219,0,1) 80%);
+    margin-bottom: 1em;
+}
+
+#error {
+    font-weight: bold;
+    display: flex;
+    clear: both;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem auto 0 !important;
+    width: 100% !important;
+    border-radius: 4px;
+    font-size: 12.5px;
+    line-height: 1.5rem;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+    color: #ffffff;
+    background: rgb(255,91,91);
+    background: linear-gradient(90deg, rgba(255,91,91,1) 0%, rgb(255 65 89) 80%);
     margin-bottom: 1em;
 }
 
