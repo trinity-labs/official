@@ -56,10 +56,10 @@ skin=/skins/dashboard
 
 - **Logon**
 
-<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/bf78f68a-d45f-492c-b348-3b00cf3c5b4b">
+<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/721a4ce0-37d6-4108-850b-a64e94b2bf8b">
 <br>
 <br>
 
 - **Dashboard**
 
-<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/688761b9-20c0-40a4-8af3-191aabacae0b">
+<img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/74beb0ac-eadf-4703-bf7e-f218edbaac72">

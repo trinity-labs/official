@@ -274,7 +274,7 @@
 #cpuTemp span {
     margin: auto !important;
     top: 0;
-    padding: 0 0 0 2rem;
+    padding: 0 0 0 0.5rem;
     font-size: 2rem;
 }
 
@@ -290,9 +290,9 @@
     border-radius: 4px !important;
     text-align: left;
     display: flex;
-    margin: 0.75rem auto;
+    margin: 1.5rem auto;
     background: #f9f9f9;
-    padding: 2rem 1.5rem;
+    padding: 1rem 1.5rem;
     border: none !important;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -316,13 +316,11 @@
     position: relative;
     right: 0.5rem;
     padding: 0.5rem 0.75rem;
-	animation: rotating 5s linear infinite;
+	animation: rotating 7s linear infinite;
 }
 
 .temp-desc {
-    width: 40%;
-    position: relative;
-    top: -0.25rem;
+    width: 33.33%;
     padding: 0.75rem 0.75rem 1rem;
     border-left: 2px solid #e1e1e1;
 }
@@ -340,30 +338,30 @@
 }
 
 .legend.temp-legend.temp-normal::before {
-	padding: 0.1rem 0.35rem;
-    content: '' !important;
+	padding: 0 0.25rem 0 0;
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F058' !important;
     display: inline-block;
-    background: #006787;
-    position: relative;
-    top: -0.1rem;
+    color: #006787;
 }
 
 .legend.temp-legend.temp-medium::before {
-	padding: 0.1rem 0.35rem;
-    content: '' !important;
+    padding: 0 0.25rem 0 0;
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F071' !important;
     display: inline-block;
-    background: #ff9a41;
-    position: relative;
-    top: -0.1rem;
+    color: #ff9a41;
 }
 
 .legend.temp-legend.temp-hot::before {
-    padding: 0.1rem 0.35rem;
-    content: '' !important;
+    padding: 0 0.25rem 0 0;
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F071' !important;
     display: inline-block;
-    background: #ff6c6c;
-    position: relative;
-    top: -0.1rem;
+    color: #ff6c6c;
 }
 
 .nan,
