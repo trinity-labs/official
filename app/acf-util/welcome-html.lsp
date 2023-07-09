@@ -267,17 +267,31 @@ end
 			</p>
 			<p id="cpuTemp" class="dashboard-infos dash-info-temp">
 			<%
-			if (tonumber(proc.value.temp.value)) ~= nil then
-			print (math.floor(tonumber(proc.value.temp.value / 1000)) .. "°C")
+			if ((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) < 50000) then
+			print ("<span class='normal'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "</span>°C")
+			elseif ((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 50000) then
+			print ("<span class='medium'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "</span>°C")
+			elseif((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 70000) then
+			print ("<span class='hot'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "</span>°C")
 			else
-			print ("NaN°C")
+			print ("<span class='nan'>NaN</span>°C")
 			end
 			%>
 			<script type="application/javascript" defer>
 			async function load() {
 			let url = '<%= html.html_escape(page_info.script .. "/alpine-baselayout/health/proc?viewtype=json") %>';
 			let obj = await (await fetch(url)).json();
-			document.getElementById("cpuTemp").innerHTML = ((obj.value.temp.value) / 1000) + "°C";
+			
+			if ((obj.value.temp.value) < 50000) {
+			document.getElementById("cpuTemp").innerHTML = ("<span class='normal'>" + (obj.value.temp.value) / 1000) + "</span>°C";
+			} else if ((obj.value.temp.value) >= 50000) {
+			document.getElementById("cpuTemp").innerHTML = ("<span class='medium'>" + (obj.value.temp.value) / 1000) + "</span>°C";
+			} else if ((obj.value.temp.value) >= 50000) {
+			document.getElementById("cpuTemp").innerHTML = ("<span class='hot'>" + (obj.value.temp.value) / 1000) + "</span>°C";
+			} else {
+			document.getElementById("cpuTemp").innerHTML = ("<span class='nan'>" + (obj.value.temp.value) / 1000) + "</span>°C";
+			};
+			
 			};
 			
 		 setInterval(load, 1000);

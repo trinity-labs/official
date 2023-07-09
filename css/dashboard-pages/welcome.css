@@ -265,13 +265,33 @@
 }
 
 .dashboard-infos.dash-info-temp {
-    font-size: 3rem;
+    font-size: 1.5rem;
     margin: 1rem auto 0;
     float: left;
     border-top: 3px solid #f1f1f1;
     color: #cdcdcd;
     width: 33.33% !important;
-    padding: 2rem 0 0;
+    font-weight: 900;
+    padding: 1rem 0 0;
+}
+
+#cpuTemp span {
+    font-size: 3rem !important;
+    position: relative;
+    top: 1rem;
+    font-weight: bold !important;
+}
+
+.normal {
+    color: #006787;
+}
+
+.medium {
+    color: #ffd18a;
+}
+
+.hot {
+    color: #ff8383;
 }
 
 .data-block.data-system-up-time {
