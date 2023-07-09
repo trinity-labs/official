@@ -32,7 +32,7 @@
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
 		chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check-ok'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a> Up To Date "
-		kernres = "<i class='fa-solid fa-check icon-kernel-ok'></i>"
+		kernres = "<i class='fa-solid fa-check-double icon-kernel-ok'></i>"
 	else
 		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'><span class='version-check-update'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>Update Needed "
 		kernres = "<i class='fa-solid fa-exclamation icon-kernel-warn'></i>"
@@ -262,19 +262,31 @@ end
 				<span class="data-title">Wan IP : </span>
 					<span class="value-title value-net-wan"></span><a href="https://ifconfig.me" target="_blank" title="🔗 https://ifconfig.me"><%= net.value.wanIP.value %><i class="fa-solid fa-up-right-from-square icon-listing"></i></a>
 			</p>
-			<p class="dashboard-infos dash-info-cpu-temp">
-				<span class="data-title">CPU Temp</span>
+			<div id="procTemp" class="temperature">
+			<div class="data-cpu-temp">
+			</div>
+			<div class="data-title temp-desc">
+			<p class="title-temp-legend">CPU Temp : </p>
+			<p class="legend temp-legend temp-normal">
+			Temp° < 50
 			</p>
-			<p id="cpuTemp" class="dashboard-infos dash-info-temp">
+			<p class="legend temp-legend temp-medium">
+			Temp° > or = 50
+			</p>
+			<p class="legend temp-legend temp-hot">
+			Temp° > or = 75
+			</p>
+			</div>
+			<div id="cpuTemp" class="dashboard-infos dash-info-temp">
 			<%
 			if ((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) < 50000) then
-			print ("<span class='normal'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "</span>°C")
+			print ("<span class='normal'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "<sup id='temp-unit'>°C</sup></span>")
 			elseif ((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 50000) then
-			print ("<span class='medium'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "</span>°C")
-			elseif((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 70000) then
-			print ("<span class='hot'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "</span>°C")
+			print ("<span class='medium'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "<sup id='temp-unit'>°C</sup></span>")
+			elseif((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 75000) then
+			print ("<span class='hot'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "<sup id='temp-unit'>°C</sup></span>")
 			else
-			print ("<span class='nan'>NaN</span>°C")
+			print ("<span class='nan'>NaN<sup id='temp-unit'>°C</sup></span>")
 			end
 			%>
 			<script type="application/javascript" defer>
@@ -283,13 +295,13 @@ end
 			let obj = await (await fetch(url)).json();
 			
 			if ((obj.value.temp.value) < 50000) {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='normal'>" + (obj.value.temp.value) / 1000) + "</span>°C";
+			document.getElementById("cpuTemp").innerHTML = ("<span class='normal'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
 			} else if ((obj.value.temp.value) >= 50000) {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='medium'>" + (obj.value.temp.value) / 1000) + "</span>°C";
-			} else if ((obj.value.temp.value) >= 50000) {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='hot'>" + (obj.value.temp.value) / 1000) + "</span>°C";
+			document.getElementById("cpuTemp").innerHTML = ("<span class='medium'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
+			} else if ((obj.value.temp.value) >= 75000) {
+			document.getElementById("cpuTemp").innerHTML = ("<span class='hot'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
 			} else {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='nan'>" + (obj.value.temp.value) / 1000) + "</span>°C";
+			document.getElementById("cpuTemp").innerHTML = ("<span class='nan'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
 			};
 			
 			};
@@ -297,8 +309,8 @@ end
 		 setInterval(load, 1000);
 			
 			</script>
-			</p>
-			
+				</div>
+			</div>
 		</div>
 	</div>
 	
