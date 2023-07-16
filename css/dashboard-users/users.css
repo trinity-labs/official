@@ -1,0 +1,20 @@
+.user-icon {
+	background: linear-gradient(140deg, rgb(0 43 255) 0%, rgb(0 137 255) 100%);
+	background-image: url(../../img/users/doe/icon/john-doe.png);
+    color: transparent;
+    border-radius: 50em;
+    background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+
+/* ADD USER ICON WITH BUILT-IN PERSONAL USER CLASS*/
+.user-root {
+    background: linear-gradient(140deg, rgb(255 129 0) 0%, rgb(255 0 0) 100%);
+    background-image: url(../../img/users/root/icon/alpine-guard-dog.png) !important;
+    color: transparent !important;
+    border-radius: 50em !important;
+    background-size: contain !important;
+	background-repeat: no-repeat !important;
+}

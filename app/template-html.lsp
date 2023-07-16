@@ -78,89 +78,8 @@ end
 		<script type="application/javascript" defer>hljs.highlightAll()</script>
 		<!-- UNPKG JS CDN FOR LATEST JQUERY -->
 		<script type="application/javascript" src="https://unpkg.com/jquery"></script>
-		<script type="text/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
-		<script type="text/javascript">
-		
-			$(function(){
-				$(":input:not(input[type=button],input[type=submit],button):enabled:not([readonly]):visible:first").focus();
-			});
-			
-			// Show Password on Logon page
-			function showPassword() {
-				var field = document.querySelector('#password input');
-				if (field.type === "password") {
-					field.type = "text";
-					$("#showPass .fa-eye-slash").removeClass("fa-eye-slash");
-					$("#showPass i").addClass("fa-eye");
-					$("#showPass").addClass("corporate");
-				} else {
-					field.type = "password";
-					$("#showPass").removeClass("corporate");
-					$("#showPass .fa-eye").removeClass("fa-eye");
-					$("#showPass i").addClass("fa-eye-slash");
-				}
-				};			
-	
-			$(document).ready(function() {
-				// Login page input placeholder
-				if(window.location.href.indexOf("logon/logon") > -1){
-					document.querySelector('#userid input').setAttribute('required','required');
-					document.querySelector('#password input').setAttribute('required','required');
-					document.querySelector('#userid input').setAttribute('placeholder','🔒 User ID');
-					document.querySelector('#password input').setAttribute('placeholder','🔑 Password');
-					document.querySelector('#login').setAttribute('autocomplete','on');
-					document.querySelector('#password input').setAttribute('autocomplete','current-password');
-					document.querySelector('.hidden').setAttribute('hidden','');
-					$("#password .right").append("<button id='showPass' type='button' onclick='showPassword()'><i class='fa-regular fa-eye-slash'></i></button>"); 
-			};
-			// Save collapse menu state 
-				var updated = window.localStorage.getItem('nav', updated);	
-				
-			if (window.localStorage.getItem('nav') === 'active') {
-				nav.style.display = "block";
-				content.style.width = "80%";
-				subnav.style.width = "80%";
-			} else {
-				content.style.width = "100%";
-				subnav.style.width = "100%";
-			};
-			
-			if (updated === '') {
-				window.localStorage.setItem('nav', 'active');
-				$("#nav").toggleClass("active");
-				$("#toogle").toogleClass("active");
-			} else {
-				window.localStorage.getItem('nav', updated);
-				$("#nav").toggleClass(updated);
-				$("#toogle").toggleClass(updated);
-			}
-			});		
-	
-			// Toogle collapse menu
-			function toogleMenu() {  
-				var updated = window.localStorage.getItem('nav', updated);
-				$("#nav").toggleClass("active");
-				$("#toogle").toggleClass("active");
-			if (window.localStorage.getItem('nav') === 'active') {
-				updated = 'not_active';
-				nav.style.display = "none";
-				$("#content").animate({width: '100%'});
-				$("#subnav").animate({width: '100%'});
-				$("#nav").toggleClass("not_active");
-				$("#toogle").toggleClass("not_active");
-			} else {
-				updated = 'active';
-				$("#nav").slideToggle(900);
-				$("#nav").removeClass("not_active");
-				$("#toogle").removeClass("not_active");
-				nav.style.display = "block";
-				$("#content").animate({width: '80%'});
-				$("#subnav").animate({width: '80%'});
-				
-			}
-			window.localStorage.setItem('nav', updated);
-		};
-		</script>
+		<!-- GLOBAL FUNCTIONS -->
+		<script type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
 </head>
 		<% end -- pageinfo.skinned %>
 <%
@@ -190,7 +109,7 @@ end
 					local ctlr = pageinfo.script .. "/acf-util/logon/"
 
 					if session.userinfo and session.userinfo.userid then
-						print("<a href='javascript:void(0);' class='icon' id='toogle-link' title='Menu' onclick='toogleMenu()'><div id='toogle'><i class='fa-solid fa-bars'></i></div></a>")
+						print("<a href='javascript:void(0);' class='icon' id='toggle-link' title='Menu' onclick='toggleMenu()'><div id='toggle'><i class='fa-solid fa-bars'></i></div></a>")
 						print("<div id='header-links'><a id='logoff' class='icon-header' title='Logoff' href=\""..html.html_escape(ctlr).."logoff\"><i class='fa-solid fa-user-lock fa-2x logoff-icon'></i></a>")
 						print("<a id='home-link' class='icon-header' title='Home' href=".. html.html_escape(pageinfo.wwwprefix) ..  "/cgi-bin/acf/acf-util/welcome/read".."><i class='fa-solid fa-house fa-2x home-icon'></i></a>")
 					else
@@ -200,8 +119,9 @@ end
 				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/dashboard-skin" target="_blank" title="About"><i class="fa-regular fa-circle-question fa-2x about-icon"></i></i></a>
 				<%
 					if session.userinfo and session.userinfo.userid then
-						print("<span id='text-user-logon' class='text-user-"..html.html_escape(session.userinfo.userid).."'>"..html.html_escape(session.userinfo.userid).." @ "..html.html_escape(hostname or "unknown hostname").."</span>")
-						print("<span id='user-logon' class='user-"..html.html_escape(session.userinfo.userid).."'></span>")
+						print("<span id='text-user-logon' class='text-user-"..(session.userinfo.userid).."' title='User @ HOST'>"..(session.userinfo.userid).." @ "..string.upper(hostname or "unknown").."</span>")
+						print ("<!-- ADMIN can change User CSS icon - Username is print in CCS class \"user-icon user-{@username]\" -->")
+						print("<span id='user-logon' class='user-icon user-"..(session.userinfo.userid).."' title='User CSS icon'></span>")
 					end
 				%>
 				</div>
@@ -267,7 +187,7 @@ end
 
 			<div id="footer" style="cursor: pointer;" onclick="window.open('https://www.alpinelinux.org/about/', '_blank')">
 				<a href="https://www.alpinelinux.org/about/" target="_blank">
-				© Alpine | 2008 - <%= html.html_escape(os.date("%Y")) %>
+				© Alpine | 2008 - <%= (os.date("%Y")) %>
 				</a>
 			</div> <!-- footer -->
 		</div> <!-- page -->

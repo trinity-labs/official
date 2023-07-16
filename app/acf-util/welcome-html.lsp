@@ -55,7 +55,7 @@
 	local up_minutes = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) / 60))
 	local up_seconds = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) % 60))
 	
--- CONVERT & DISPLAY UPTIME UP TO CENTURIES 😂
+-- CONVERT & DISPLAY UPTIME UP TO CENTURIES
 	local uptime = up_centuries .. " Centuries " .. up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
 	if up_centuries == 1 then
 		uptime = up_centuries .. " Century " .. up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
@@ -171,33 +171,8 @@ end
 				<span id="uptime" class="uptime">
 				<%= uptime %><br>
 <script type="application/javascript">
-	// IMPORT UPTIME FOR JS LIVE TIMER
+// IMPORT UPTIME FOR JS LIVE TIMER
 	let increment = <%= up_time %>;
-	let delay = () => 
-	{
-	increment += 1;
-	// CONVERT JS UPTIME
-		js_uptime = parseInt(increment);
-		var js_centuries = Math.floor((js_uptime / (3600*24) / 365) / 100);
-		var js_years = Math.floor((js_uptime / (3600*24) / 365) % 100);
-		var js_mounths = Math.floor((((js_uptime / (3600 * 24)) % 365) % 365) / 30);
-		var js_days = Math.floor((((js_uptime / (3600 * 24)) % 365) % 365) % 30)
-		var js_hours = Math.floor(js_uptime % (3600*24) / 3600);
-		var js_minutes = Math.floor(js_uptime % 3600 / 60);
-		var js_seconds = Math.floor(js_uptime % 60);
-	// FORMAT JS UPTIME UP TO CENTURIES 😂
-		var centuries_display = js_centuries > 0 ? js_centuries + (js_centuries <= 1 ? " Century " : " Centuries ") : "";
-		var years_display = js_years > 0 ? js_years + (js_years <= 1 ? " Year " : " Years ") : "";
-		var mounths_display = js_mounths > 0 ? js_mounths + (js_mounths <= 1 ? " Mounth " : " Mounths ") : "";
-		var days_display = js_days > 0 ? js_days + (js_days <= 1 ? " Day " : " Days ") : "";
-		var hours_display = js_hours < 10 ? "0" + js_hours + "h " : js_hours + "h ";
-		var minutes_display = js_minutes < 10 ? "0" + js_minutes + "m " : js_minutes + "m ";
-		var secondes_display = js_seconds < 10 ? "0" + js_seconds + "s" : js_seconds + "s";
-	// RETURN JS FORMAT TIME
-		return centuries_display + years_display + mounths_display + days_display + hours_display + minutes_display + secondes_display;	
-	};
-	// PUSH JS FORMAT TIME
-	setInterval(() => document.getElementById("uptime").innerHTML = delay(), 1000);
 </script>
 		</span>
 		</div>
@@ -208,7 +183,7 @@ end
 <!-- Dashboard App Block - LINE 2 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
-	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" class="dashboard-hardware dashboard-block medium-block">
+	<div class="dashboard-hardware dashboard-block medium-block">
 		<div class="data-block data-system">
 			<h4 class="dashboard-block-title dashboard-title-hardware">Hardware</h4>
 				<span class="icon-cpu">
@@ -221,14 +196,14 @@ end
 					end %>
 				</span>
 				
-			<p class="dashboard-infos dash-info-board">
+			<p class="dashboard-infos dash-info-board" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">Board : </span>
 			<%
 			-- EXEMPLE TO PARSE KNOW MOBO MODELS OR YOUR OWN ONE
 			if string.match(sys.value.boardName.value, "EMB%-H81B") then
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON") .. "</span>")
 				print (" | <span>" .. sys.value.boardName.value .. "</span> | ")
-				print ("<span>" .. string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev : 2.00") .. "</span>")
+				print ("<span>" .. string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
 			-- ELSE REWRITE ALL OTHERS
 			else
 				print ("<span>" .. oem_parse(sys.value.boardVendor.value) .. "</span>")
@@ -237,24 +212,24 @@ end
 			end
 			%>
 			</p>
-			<p class="dashboard-infos dash-info-bios">
+			<p class="dashboard-infos dash-info-bios" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">BIOS : </span>
 					<span id="version">ver: </span><%= sys.value.biosVersion.value %> | 
 						<%= sys.value.biosVendor.value %> | <%= sys.value.biosDate.value %>
 			</p>
-			<p class="dashboard-infos dash-info-cpu">
+			<p class="dashboard-infos dash-info-cpu" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">CPU : </span><%= string.sub((proc.value.model.value), 14) %>
 			</p>
-			<p class="dashboard-infos dash-info-cpu">
+			<p class="dashboard-infos dash-info-cpu" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">GPU : </span><%= proc.value.gpu.value %>
 			</p>
-			<p class="dashboard-infos dash-info-memory">
+			<p class="dashboard-infos dash-info-memory" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">Memory : </span>
 					<%= bytesToSize(tonumber(sys.value.memory.totalData)) %> Total |
 						<%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free | 
 							<%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used 
 			</p>
-			<p class="dashboard-infos dash-info-network-lan">
+			<p class="dashboard-infos dash-info-network-lan" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">Lan IP : </span>
 					<span class="value-title value-net-local"></span><%= netstats.value.eth0.ipaddr %> <!-- Need to review -->
 			</p>
@@ -262,20 +237,25 @@ end
 				<span class="data-title">Wan IP : </span>
 					<span class="value-title value-net-wan"></span><a href="https://ifconfig.me" target="_blank" title="🔗 https://ifconfig.me"><%= net.value.wanIP.value %><i class="fa-solid fa-up-right-from-square icon-listing"></i></a>
 			</p>
+			<!-- <label class="switch">
+				<input type="checkbox">
+					<span class="slider round"></span>
+			</label>
+				<span id="temp-conv" class="temp-convert">°C | °F</span> -->
 			<div id="procTemp" class="temperature">
-			<div class="data-cpu-temp">
-			</div>
+				<div class="data-cpu-temp">
+				</div>
 			<div class="data-title temp-desc">
-			<p class="title-temp-legend">CPU Temp : </p>
-			<p class="legend temp-legend temp-normal">
-			Temp° < 50
-			</p>
-			<p class="legend temp-legend temp-medium">
-			Temp° > or = 50
-			</p>
-			<p class="legend temp-legend temp-hot">
-			Temp° > or = 75
-			</p>
+				<p class="title-temp-legend">CPU Temp : </p>
+					<p class="legend temp-legend temp-normal">
+					Temp° < 50
+				</p>
+				<p class="legend temp-legend temp-medium">
+					Temp° > or = 50
+				</p>
+				<p class="legend temp-legend temp-hot">
+					Temp° > or = 75
+				</p>
 			</div>
 			<div id="cpuTemp" class="dashboard-infos dash-info-temp">
 			<%
@@ -286,28 +266,25 @@ end
 			elseif((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 75000) then
 			print ("<span class='hot'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "<sup id='temp-unit'>°C</sup></span>")
 			else
-			print ("<span class='nan'>NaN<sup id='temp-unit'>°C</sup></span>")
+			print ("<span class='nan'>NaN</span>")
 			end
 			%>
 			<script type="application/javascript" defer>
 			async function load() {
-			let url = '<%= html.html_escape(page_info.script .. "/alpine-baselayout/health/proc?viewtype=json") %>';
-			let obj = await (await fetch(url)).json();
+				let url = '<%= html.html_escape(page_info.script .. "/alpine-baselayout/health/proc?viewtype=json") %>';
+				let obj = await (await fetch(url)).json();
 			
-			if ((obj.value.temp.value) < 50000) {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='normal'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
-			} else if ((obj.value.temp.value) >= 50000) {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='medium'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
-			} else if ((obj.value.temp.value) >= 75000) {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='hot'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
-			} else {
-			document.getElementById("cpuTemp").innerHTML = ("<span class='nan'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
+				if ((obj.value.temp.value) < 50000) {
+					document.getElementById("cpuTemp").innerHTML = ("<span class='normal'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
+				} else if ((obj.value.temp.value) >= 50000) {
+					document.getElementById("cpuTemp").innerHTML = ("<span class='medium'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
+				} else if ((obj.value.temp.value) >= 75000) {
+					document.getElementById("cpuTemp").innerHTML = ("<span class='hot'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
+				} else {
+					document.getElementById("cpuTemp").innerHTML = ("<span class='nan'>NaN</span>");
+				};
 			};
-			
-			};
-			
-		 setInterval(load, 1000);
-			
+			setInterval(load, 1000);
 			</script>
 				</div>
 			</div>

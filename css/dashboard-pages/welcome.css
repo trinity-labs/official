@@ -271,6 +271,10 @@
     font-weight: 900;
 }
 
+.data-cpu-temp {
+	display: none;
+}
+
 #cpuTemp span {
     margin: auto !important;
     top: 0;
@@ -285,14 +289,18 @@
 	color: #bbbbbb !important;
 }
 
+.dashboard-infos.dash-info-network-wan {
+    margin: 0 auto 2rem;
+}
+
 #procTemp {
     font-size: 1.5rem;
     border-radius: 4px !important;
     text-align: left;
     display: flex;
-    margin: 1.5rem auto;
+    margin: 3.5rem auto 0 0;
     background: #f9f9f9;
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 0.5rem;
     border: none !important;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -322,7 +330,7 @@
 .temp-desc {
     width: 33.33%;
     padding: 0.75rem 0.75rem 1rem;
-    border-left: 2px solid #e1e1e1;
+    /*border-left: 2px solid #e1e1e1;*/
 }
 
 .title-temp-legend {
@@ -441,17 +449,78 @@
     text-decoration: underline !important;
 }
 
-/*.data-mem-total {
-    color: #086ea0;
+#temp-conv {
+    float: right;
+    font-size: 0.65rem;
+    margin: 0 1rem;
+    font-weight: bold;
+    position: relative;
+    top: 0.15rem;
 }
 
-.data-mem-free {
-    color: #01ab01;
+.switch {
+    position: relative;
+    display: inline-block;
+    float: right;
+    margin: 0 2rem 0 0;
 }
 
-.data-mem-used {
-    color: #b70000;
-}*/
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 12.5px;
+    width: 12.5px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #006787;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 50px;
+    height: 1rem;
+    width: 2rem;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
 
 .dashboard-main.dashboard-block.main-block {
     justify-content: flex-start;
