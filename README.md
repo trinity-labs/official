@@ -1,6 +1,6 @@
 <br>
 <div align="center">
- <img src="https://github.com/trinity-labs/trinity-skin/assets/45216746/f8b4b03a-1371-4abb-bf4a-fd9e2a1c7446" width="30%">
+ <img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/ec7868c6-33b9-4a5e-a6cd-5583c959c6f4" width="30%">
 </div>
 
 <br>
@@ -50,11 +50,14 @@ So we have a basic version checker in `Lua` that need `WAN` access and `DNS` ava
 <br>
 
 Return `Lua` ACF used version (5.4.6) and `ACF Server` version : 
-- **Lighttpd: v.1.4.71 =>** last released on May 27, 2023 **(preferred!) Light, Fast and Highly customisable | [ACF on Lighttpd](https://gitlab.alpinelinux.org/trinity-labs/mini_httpd-lighttpd)** <br>
+- **Lighttpd: v.1.4.71 =>** last released on May 27, 2023 - **Light, Fast & Highly customisable | [ACF on Lighttpd](https://gitlab.alpinelinux.org/trinity-labs/mini_httpd-lighttpd)** <br>
 - **Mini_httpd: v.1.30 =>** last released on Oct 26, 2018 <br>
 <br>
+
 ⚠️ `Lua` function, check version of both `lighttpd` and `mini_httpd`. If `lighttpd` is install on system, command return `lighttpd` as prefered ACF server.<br>
-However, it's the best choice to switch to `lighttpd` for `ACF`
+<br>
+
+**However, it's the best choice to switch to `lighttpd` for `ACF`**
 
 
  <hr>
@@ -72,7 +75,7 @@ Get **live** uptime timer in `Lua` and `JS` to parse `/proc/uptime` in major Lin
  <hr>
  <img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/9b81be2f-d91f-416b-9683-784d490887e5">
 
-Return `CPU Model` and `Manufacturer` icon. If now, return `board` and `bios` infos - (please report errors)
+Return `CPU Model` and `Manufacturer` icon. If know, return `board` and `bios` infos - (please report errors)
  <hr>
  
 > <ins>**ACF CPU Temp - ACT**</ins>
@@ -90,8 +93,8 @@ else print `NaN`
 > <ins>**ACF [Group] [Process] - [Short-Name]**</ins>
 
  <hr>
-This is the convention for ACF Dashboard Dev Core Modules naming
-When a module is in prod, it's pushed here
+This is the convention for ACF Dashboard Dev Core Modules naming.<br>
+When a module is in prod, it's pushed here!
 
  </div>
 
