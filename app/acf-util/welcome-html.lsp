@@ -413,7 +413,7 @@ $(function memChart() {
 			<div id="chartNetwork"> </div>
 			<canvas id="networkChart" class="data-chart block-chart"></canvas>
 		</div>
-<!--<div id="demo"></div>-->
+<div id="demo"></div>
 
 <!-- Dashboard Main Block - NETWORK CHART.JS -->
 <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
