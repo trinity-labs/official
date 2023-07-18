@@ -15,11 +15,13 @@
 
 **From a Skin to an App for Linux `Alpine Configuration Framework` commonly called [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Design)**
 <br>
+<br>
 
 ✅ Lighttpd Ready - Remove Mini_httpd 
 
 [ACF on Lighttpd](https://gitlab.alpinelinux.org/trinity-labs/mini_httpd-lighttpd)
-
+<br>
+<br>
 - <ins>**Features**</ins>
 
 Light-weight App (Less than 2 MB) installed
@@ -47,9 +49,12 @@ So we have a basic version checker in `Lua` that need `WAN` access and `DNS` ava
 <br>
 <br>
 
-Return `Lua` ACF used version and `ACF Server` version. <br>
+Return `Lua` ACF used version (5.4.6) and `ACF Server` version : 
+- **Lighttpd: v.1.4.71 =>** last released on May 27, 2023 **(preferred!) Light, Fast and Highly customisable | [ACF on Lighttpd](https://gitlab.alpinelinux.org/trinity-labs/mini_httpd-lighttpd)** <br>
+- **Mini_httpd: v.1.30 =>** last released on Oct 26, 2018 <br>
 <br>
-⚠️ `Served by` field, check version of both `lighttpd` and `mini_httpd`. If `lighttpd` is install on system, command return `lighttpd` as prefered ACF server. However, it's the best choice to switch to `lighttpd` for `ACF`
+⚠️ `Lua` function, check version of both `lighttpd` and `mini_httpd`. If `lighttpd` is install on system, command return `lighttpd` as prefered ACF server.<br>
+However, it's the best choice to switch to `lighttpd` for `ACF`
 
 
  <hr>
@@ -80,8 +85,18 @@ Return `CPU Model` and `Manufacturer` icon. If now, return `board` and `bios` in
  Get **live** proc temp (checked every seconds) from `/sys/class/thermal/thermal_zone2/temp` (seems target `x86_pkg_temp` on main x86 systems - please report errors)
 else print `NaN`
 
-And many other - Project in constent dev
+ <hr>
+ 
+> <ins>**ACF [Group] [Process] - [Short-Name]**</ins>
+
+ <hr>
+This is the convention for ACF Dashboard Dev Core Modules naming
+When a module is in prod, it's pushed here
+
  </div>
+
+<br>
+<br>
 
 - <ins>**Install**</ins>
 
