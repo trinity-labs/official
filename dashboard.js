@@ -39,12 +39,12 @@
 // Save collapse menu state 
 			var updated = window.localStorage.getItem('nav', updated);	
 			if (window.localStorage.getItem('nav') === 'active') {
-				nav.style.display = "block";
-				content.style.width = "80%";
-				subnav.style.width = "80%";
+				$("#nav").css({display: 'block'});
+				$("#content").css({width: '80%'});
+				$("#subnav").css({width: '80%'});
 			} else {
-				content.style.width = "100%";
-				subnav.style.width = "100%";
+				$("#content").css({width: '100%'});
+				$("#subnav").css({width: '100%'});
 			};
 			if (updated === '') {
 				window.localStorage.setItem('nav', 'active');
@@ -72,7 +72,7 @@
 				$("#toggle").toggleClass("active");
 			if (window.localStorage.getItem('nav') === 'active') {
 				updated = 'not_active';
-				nav.style.display = "none";
+				$("#nav").css({display: 'none'});
 				$("#content").animate({width: '100%'});
 				$("#subnav").animate({width: '100%'});
 				$("#nav").toggleClass("not_active");
@@ -81,10 +81,11 @@
 				updated = 'active';
 				$("#nav").slideToggle(900);
 				$("#nav").removeClass("not_active");
-				$("#toggle").removeClass("not_active");
-				nav.style.display = "block";
 				$("#content").animate({width: '80%'});
 				$("#subnav").animate({width: '80%'});
+				$("#nav").css({display: 'block'});
+				$("#toggle").removeClass("not_active");
+			
 				
 			}
 			window.localStorage.setItem('nav', updated);
@@ -131,4 +132,3 @@
 	};
 	// PUSH JS FORMAT TIME
 	setInterval(() => document.getElementById("uptime").innerHTML = delay(), 1000);
-			

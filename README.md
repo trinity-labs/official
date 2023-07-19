@@ -16,6 +16,11 @@
 **From a Skin to an App for Linux `Alpine Configuration Framework` commonly called [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Design)**
 <br>
 <br>
+> ⚠️ **Project in constent dev, please report errors!**
+
+This project cover **ONLY** Alpine Linux ACF Core Modules. Just the base framework (`acf-lib` / `acf-core` / `acf-alpine-baselayout`). Other app not covered for now eg: `acf-openssl` `acf-docker` `acf-etc...` It's part of a future project, maybe...
+
+**All other core pages should modified once all dashboard modules are in prod (finished)**
 
 ✅ Lighttpd Ready - Remove Mini_httpd 
 
@@ -34,9 +39,9 @@ Light-weight App (Less than 2 MB) installed
  <hr>
 <img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/dae56d30-7c39-433c-9138-c429f3e862f0">
 
-Fisrt check `Alpine Linux` running version<br>
-Then compare to Alpine official [Releases](https://www.alpinelinux.org/releases/#content) website<br>
-And build latest version post url from Alpine official website eg :<br>
+**Fisrt** check `Alpine Linux` running version<br>
+**Then** compare to Alpine official [Releases](https://www.alpinelinux.org/releases/#content) website<br>
+**Finaly** build latest version [post](https://www.alpinelinux.org/posts/Alpine-3.15.9-3.16.6-3.17.4-3.18.2-released.html#content) `url` from Alpine official website eg :<br>
 <img src="https://github.com/trinity-labs/dashboard-skin/assets/45216746/e0318739-c4e4-4119-83cd-88931bd188eb">
 <br>
 So we have a basic version checker in `Lua` that need `WAN` access and `DNS` avaible
@@ -93,8 +98,11 @@ else print `NaN`
 > <ins>**ACF [Group] [Process] - [Short-Name]**</ins>
 
  <hr>
-This is the convention for ACF Dashboard Dev Core Modules naming.<br>
+ 
+This is the convention for **ACF Dashboard Core Modules Naming**.<br>
 When a module is in prod, it's pushed here!
+- **ANG (ACF Network Graph)** and **ANM (ACF Network Map)** work in progress, incoming ...
+- **ADV (ACF Disk Viewer)** work in progress, incoming ...
 
  </div>
 

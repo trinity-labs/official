@@ -134,8 +134,8 @@ function blocksToSize(octets)
 end
 
 -- GET PHYSICAL HDD	
-	local physicalDisk = string.match(disk.value.partitions.value, "(sd%a)")
-	local physicalCapacity = string.gsub(string.match(disk.value.partitions.value, "(%d+.sd%a)"), "%D", "")
+	-- local physicalDisk = string.match(disk.value.partitions.value, "(sd%a)")
+	-- local physicalCapacity = string.gsub(string.match(disk.value.partitions.value, "(%d+.sd%a)"), "%D", "")
 %>
 
 <% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Dashboard"}), page_info) %>
@@ -537,8 +537,6 @@ $(function networkChart() {
 					</p>
 						<div class="section-disk" id="disk-partition-view">
 							<div id="partition-table">
-								<!--<% local disklines = format.string_to_table(physicalDisk, "\n") %>-->
-								<%= physicalDisk %> : <%= blocksToSize(tonumber(physicalCapacity) * 1000) %>
 								<% displaydisk = function(disk, name)
 								io.write('<table id="legend-title" style="margin:0px;padding:0px;border:0px;margin-top:5px;">\n')
 								io.write("	<tr>\n")
