@@ -113,10 +113,6 @@ When a module is in prod, it's pushed here!
 
 Install essential packages :
 
-```bash
- $: apk add curl util-linux lspci
-```
-
 Edit [ACF](https://wiki.alpinelinux.org/wiki/Alpine_Configuration_Framework_Design#ACF_Layout) core config file `/etc/acf/acf.conf` and replace following lines for overriding core template
  
   ```bash
