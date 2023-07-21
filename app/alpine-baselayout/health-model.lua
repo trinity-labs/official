@@ -138,8 +138,8 @@ end
 
 mymodule.get_network = function (self)
 	local network = {}
-	network.lanIP = cfe({ value=querycmd("ip route"), label="LAN IP" }) -- Dirty way to get default route local IP but problem in case of multiple default route --
-	network.wanIP = cfe({ value=querycmd("curl https://ifconfig.me"), label="WAN IP" })
+	network.lanIP = cfe({ value=querycmd("ip route"), label="LAN IP" })
+	network.wanIP = cfe({ value=querycmd("wget -qO- https://ifconfig.me ; echo"), label="WAN IP" })
 	network.interfaces = cfe({ value=querycmd("ip addr"), label="Interfaces" })
 	network.routes = cfe({ value=querycmd("ip route"), label="Routes" })
 	network.tunnel = cfe({ value=querycmd("ip tunnel"), label="Tunnels" })
