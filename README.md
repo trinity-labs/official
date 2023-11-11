@@ -25,7 +25,7 @@ This project cover **ONLY** Alpine Linux ACF Core Modules. Just the base framewo
 Up to date shell script setup Lua 5.4
 
   ```bash
-#!/bin/sh
+
 
  PATH=/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/root/bin
  
@@ -58,7 +58,8 @@ Up to date shell script setup Lua 5.4
 # Setup Dashboard 
  cp ~/dashboard-skin/acf.conf /etc/acf/
  cp -r ~/dashboard-skin /usr/share/acf/www/skins/dashboard
- rm -vf /usr/shar/acf/www/skins/acf.conf
+ rm -vf /usr/share/acf/www/skins/dashboard/acf.conf
+
 #Done
 exit
   ```
