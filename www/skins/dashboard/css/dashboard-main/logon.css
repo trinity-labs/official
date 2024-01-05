@@ -1,0 +1,256 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > logon_logon
+ *----------------------------------------------------------------------------------
+ */
+
+.logon-logon,
+.dark-theme .logon-logon {
+    background: url(../../img/backgrounds/background-trinity-logon.jpg) no-repeat !important;
+    background-size: cover !important;
+	background-position: center !important;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.logon-logon .hostname,
+.logon-logon #header h1 {
+    display: none;
+}
+
+.logon-logon #header {
+    background-size: 8rem !important;
+    background-image: url(../../img/logos/logo-trinity-full-white.png) !important;
+    position: relative !important;
+    border-radius: 10px 10px 0 0 !important;
+    background-position: 3.5rem center !important;
+    padding: 1rem 2.5rem;
+    justify-content: flex-end !important;
+    background-color: black !important;
+    width: 400px;
+    height: 3.5rem !important;
+    box-shadow: 2px 2px 30px #000000ab;
+    background-repeat: no-repeat;
+}
+
+.logon-logon #header a:first-child {
+    font-weight: 900;
+}
+
+.logon-logon #nav,
+.logon-logon #subnav {
+	display: none !important;
+}
+
+.logon-logon #main {
+    width: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: auto !important;
+    background: none !important;
+    flex-wrap: nowrap;
+    padding: 1rem 3.5rem 0;
+}
+
+.logon-logon .theme-block-toggle {
+    display: none !important;
+}
+
+.logon-logon .item {
+    display: flex;
+    margin: 1rem 0 0 0;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-evenly;
+}
+
+#page-logon {
+    background: rgb(0 0 0 / 50%) !important;
+    border-radius: 0 0 10px 10px !important;
+    width: 480px;
+    padding: 0 !important;
+    height: auto;
+    box-shadow: 2px 2px 30px #000000ab;
+}
+
+#userid {
+    margin-top: 1rem !important;
+}
+
+#login .left {
+    display: none !important;
+} 
+
+input#password::-webkit-input-placeholder::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F023';
+    margin: 0 0.33rem;
+    position: relative;
+    top: -0.05rem;
+    font-size: 0.75rem;
+}
+
+.logon-logon #header a {
+    font-size: 0.75rem;
+}
+
+.logon-logon label.left {
+    padding-left: 0 !important;
+    color: white;
+}
+
+.logon-logon #content .submit {
+    font-size: 0.8rem;
+    text-transform: capitalize;
+    color: #FFF;
+    font-weight: 900;
+    border-radius: 4px;
+    background-color: #430090;
+    width: 100%;
+    height: 2.5rem !important;
+    margin-top: 0 !important;
+}
+
+.logon-logon input {
+    padding: 0.5rem 0 0.5rem 0.5rem !important;
+    border: none !important;
+    border-radius: 2px;
+}
+
+.logon-logon .error:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F502';
+    margin: 0 0.5rem 0 0;
+    position: relative;
+    font-size: 1rem;
+    color: white;
+    top: -0.1rem;
+}
+
+.logon-logon .item:last-child {
+    margin: 0.5rem 0 0;
+}
+
+#section_logon #error {
+    width: 87.5% !important;
+    padding: 1rem 1.5rem;
+}
+
+
+.logon-logon .error {
+    font-weight: bold;
+    color: white;
+    margin-bottom: 2rem;
+    padding: 0.75rem;
+    text-align: center;
+    background: #FF3333;
+    border-radius: 2.5px;
+}
+
+.logon-logon #content dd,
+.logon-logon #content .item .right {
+    margin: auto;
+}
+
+.logon-logon #content {
+    float: none !important;
+    border: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    display: flex;
+    text-align: center;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.logon-logon #footer {
+    margin: 0;
+    padding: 1rem 0 0;
+    background: none !important;
+    border: none !important;
+	padding: 0 !important;
+}
+
+.logon-logon #footer a {
+    color: white !important;
+    top: 3rem !important;
+    position: relative;
+}
+
+.logon-logon #content h1 {
+    display: none;
+}
+
+
+.logon-logon form {
+    display: flex;
+    margin: 0;
+    width: 100% !important;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: stretch;
+    justify-content: space-evenly;
+}
+
+.logon .item {
+    margin-top: 3rem;
+}
+
+#page-logon #error {
+    width: 91% !important;
+}
+
+.logon-logon input[placeholder] {
+    filter: grayscale(1);
+}
+
+.logon .icon-header {
+    margin: 0;
+    padding: 0;
+}
+
+
+.logon i.fa-regular.fa-circle-question.fa-2x.about-icon {
+    border-left: 1px solid;
+    margin: 0 0 0 1rem;
+    padding: 0 1rem;
+}
+
+.logon i.fa-solid.fa-lock.fa-2x.logon-icon {
+    margin: auto;
+}
+
+.logon .header-links {
+    padding: 0;
+}
+
+button#showPass {
+    float: right;
+    cursor: pointer;
+    position: relative;
+    top: -2.5rem;
+    height: 2.5rem;
+    right: -0.25rem !important;
+    padding: 0;
+    border: none !important;
+    border-radius: 0 4px 4px 0;
+    width: 2.5rem;
+}
+
+.corporate {
+    background: #430090;
+}
+
+#showPass i.fa-regular.fa-eye {
+    color: white;
+}

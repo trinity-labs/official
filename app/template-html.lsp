@@ -5,19 +5,19 @@
 Status: 200 OK
 Content-Type: text/html
 <%
+-- Set session cookie
 if (session.id) then
 	io.write( html.cookie.set("sessionid", session.id) )
 else
 	io.write (html.cookie.unset("sessionid"))
 end
-%>
 
-<%
+-- Hide Hostname for no-logon users
 local hostname = ""
 if session.userinfo and session.userinfo.userid and viewlibrary and viewlibrary.dispatch_component then
 	local result = viewlibrary.dispatch_component("alpine-baselayout/hostname/read", nil, true)
 	if result and result.value then
-		hostname = result.value
+		hostname = string.gsub(result.value, "\n", "" )
 	end
 end
 %>
@@ -25,9 +25,9 @@ end
 <!DOCTYPE html>
 <!-- 
 ==============================================================
-      🟦 Alpine Linux Admin Dashboard | v 1.0.0 - ACF
+      🟪 TRIИITY Admin Dashboard | v 1.2 - ACF
 ==============================================================
-* Product Page: ACF Dashboard Skin (https://gitlab.alpinelinux.org/trinity-labs/dashboard-skin)
+* Product Page: ACF Dashboard Skin (https://gitlab.alpinelinux.org/trinity-labs/acf-skins/-/blob/master/dashboard)
 * Created by: T. Bonnin for Alpine Configuration Framework (ACF) based on N. Angelacos previous work
 * License: Licensed under the terms of GPL2
 * Copyright : (C) 2007 N. Angelacos for ACF - (C) 2023 T. Bonnin for DashBoard App
@@ -52,34 +52,32 @@ end
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="theme-color" content="#16597a">
+		<meta name="theme-color" content="#5a329f">
 		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="#16597a">
+		<meta name="apple-mobile-web-app-status-bar-style" content="#5a329f">
 <% if pageinfo.skinned ~= "false" then %>
-<% if session.userinfo and session.userinfo.userid and viewlibrary and viewlibrary.dispatch_component then %>
-		<title><%= html.html_escape(string.upper(hostname) .. " - " .. string.gsub(pageinfo.controller, "^%l", string.upper) .. " ∣ " .. string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
-<% else %>
-		<title><%= "Dashboard | " .. html.html_escape(string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
-<% end %>
-		<link rel="icon" href="/skins/dashboard/favicon.ico" />
+		<title><%= ("Dashboard - " .. string.gsub(pageinfo.controller, "^%l", string.upper) .. " ∣ " .. string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
+		<link rel="icon" href="/skins/dashboard/favicon-trinity.png" />
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.staticdir) %>/reset.css">
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".css") %>">
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin).."-ie.css") %>">
 		<![endif]-->
 		<!-- UNPKG JS CDN FOR LATEST CHART.JS -->
-		<script type="application/javascript" src="https://unpkg.com/chart.js@latest/dist/chart.umd.js"></script>
+		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
 		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@latest/dist/chartjs-adapter-luxon.umd.min.js"></script>
 		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@latest"></script>
 		<!-- UNPKG JS CDN FOR LATEST HIGHLIGHT.JS -->
-		<script type="application/javascript" src="https://unpkg.com/@highlightjs/cdn-assets@latest/highlight.min.js"></script>
+		<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"></script>
 		<!-- INITIALIZE HIGHLIGHT.JS -->
 		<script type="application/javascript" defer>hljs.highlightAll()</script>
 		<!-- UNPKG JS CDN FOR LATEST JQUERY -->
-		<script type="application/javascript" src="https://unpkg.com/jquery"></script>
+		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 		<!-- GLOBAL FUNCTIONS -->
 		<script type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
+		<!-- HIDE LOGGON PAGE FOR AUTH USERS -->
+		<script type="application/javascript">	let user = "<%= session.userinfo %>"; if ((user !== "nil") && (window.location.href.indexOf("logon/logon") > -1)) {window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/welcome/read'}</script>
 </head>
 		<% end -- pageinfo.skinned %>
 <%
@@ -91,12 +89,13 @@ end
 				if not tabs and group.controllers[pageinfo.prefix .. pageinfo.controller] then
 				tabs = group.tabs
 %>
-<body id="<%= html.html_escape(cat.name) %>" class="<%= pageinfo.controller.." "..pageinfo.controller.."-"..pageinfo.action %>">	
+<body id="<%= html.html_escape(cat.name) %>" class="<%= pageinfo.controller.." "..pageinfo.controller.."-"..pageinfo.action %>">
+<a rel="me" href="https://defcon.social/@trinity"></a>	
 <% 
 				end
 			end
 		end
-	end 
+	end
 %>
 	
 <body class="<%= pageinfo.controller.." "..pageinfo.controller.."-"..pageinfo.action %>">
@@ -104,31 +103,43 @@ end
 <% if pageinfo.skinned ~= "false" then %>
 
 <header id="header">
-
 				<%
 					local ctlr = pageinfo.script .. "/acf-util/logon/"
 
 					if session.userinfo and session.userinfo.userid then
-						print("<a href='javascript:void(0);' class='icon' id='toggle-link' title='Menu' onclick='toggleMenu()'><div id='toggle'><i class='fa-solid fa-bars'></i></div></a>")
+						print("<div id='header-left'><a href='javascript:void(0);' class='icon' id='toggle-link' title='Menu' onclick='toggleMenu()'><div id='toggle'><i class='fa-solid fa-bars'></i></div></a>")
+						print("<a class='header-logo home-logo' href=".. html.html_escape(pageinfo.wwwprefix) .. "/cgi-bin/acf/acf-util/welcome/read".."/></a></div>")
 						print("<div id='header-links'><a id='logoff' class='icon-header' title='Logoff' href=\""..html.html_escape(ctlr).."logoff\"><i class='fa-solid fa-user-lock fa-2x logoff-icon'></i></a>")
 						print("<a id='home-link' class='icon-header' title='Home' href=".. html.html_escape(pageinfo.wwwprefix) ..  "/cgi-bin/acf/acf-util/welcome/read".."><i class='fa-solid fa-house fa-2x home-icon'></i></a>")
 					else
 						print("<div id='header-links'><a id='logon' class='icon-header' title='Logon' href=\""..html.html_escape(ctlr).."logon\"><i class='fa-solid fa-lock fa-2x logon-icon'></i></a>" )
 					end
 				%>
-				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/dashboard-skin" target="_blank" title="About"><i class="fa-regular fa-circle-question fa-2x about-icon"></i></i></a>
+				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/acf-skins/-/blob/master/dashboard" target="_blank" title="About"><i class="fa-brands fa-gitlab fa-2x about-icon"></i></a>
+				<!-- Theme Toggle -->
+				<div class="theme-block-toggle">
+						<label class="switch">
+							<input onclick="toggleTheme()" id="theme-toggle" type="checkbox">
+							<span class="slider round"></span>
+						</label>
+					<span id="theme-conv" class="temp-convert"><i class="fa-solid fa-circle-half-stroke"></i></span>
+				</div>
+				
 				<%
 					if session.userinfo and session.userinfo.userid then
 						print("<span id='text-user-logon' class='text-user-"..(session.userinfo.userid).."' title='User @ HOST'>"..(session.userinfo.userid).." @ "..string.upper(hostname or "unknown").."</span>")
 						print ("<!-- ADMIN can change User CSS icon - Username is print in CCS class \"user-icon user-{@username]\" -->")
-						print("<span id='user-logon' class='user-icon user-"..(session.userinfo.userid).."' title='User CSS icon'></span>")
+						print("<span id='user-logon' class='user-icon user-"..(session.userinfo.userid).."' title='"..(session.userinfo.userid).." CSS icon'></span>")
 					end
 				%>
 				</div>
 </header>	<!-- header -->
-			
-			
+						
 <div id="nav" style="display: none;">
+			<div class="header-menu">
+			<a href='javascript:void(0);' class='icon' id='toggle-link' title='Menu' onclick='toggleMenu()'><div id='toggle'><i class='fa-solid fa-bars'></i></div></a>
+			<a class="home-logo" href="<%= html.html_escape(pageinfo.wwwprefix) %>/cgi-bin/acf/acf-util/welcome/read"/></a>
+			</div>
 				<%
 					local class
 					local tabs
@@ -187,7 +198,7 @@ end
 
 			<div id="footer" style="cursor: pointer;" onclick="window.open('https://www.alpinelinux.org/about/', '_blank')">
 				<a href="https://www.alpinelinux.org/about/" target="_blank">
-				© Alpine | 2008 - <%= (os.date("%Y")) %>
+				© TRIИITY | 2022 - <%= (os.date("%Y")) %>
 				</a>
 			</div> <!-- footer -->
 		</div> <!-- page -->

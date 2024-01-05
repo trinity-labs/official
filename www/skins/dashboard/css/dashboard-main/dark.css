@@ -1,0 +1,113 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > DARK THEME
+ *----------------------------------------------------------------------------------
+ */
+
+.dark-theme,
+.dark-theme body,
+.dark-theme #main,
+.dark-theme .page {
+    background: #171f28 !important;
+}
+
+.dark-theme .left {
+    color: #545454;
+}
+
+.dark-theme .right p {
+	color: grey;
+}
+
+.dark-theme pre,
+.dark-theme .dashboard-block {
+    background: #1a232e;
+	color: grey;
+}
+
+.dark-theme header {
+    background: #18131a;
+}
+
+.dark-theme .icon i,
+.dark-theme .icon-header i{
+    color: white !important;
+}
+
+.dark-theme tbody {
+    color: #767676;
+}
+
+.dark-theme .data-block {
+    background: inherit!important;
+}
+
+.dark-theme #nav {
+    background: #1a232e;
+}
+
+/* Scrollbar */
+ 
+.dark-theme ::-webkit-scrollbar-thumb {
+  background: #1b2530; 
+}
+
+/* Handle on hover */
+.dark-theme ::-webkit-scrollbar-thumb:hover {
+  background: #1b2530; 
+}
+
+.dark-theme #nav ul li {
+    background: #171f28;
+}
+
+.dark-theme #system .selected.item-field {
+    background: #6300d2;
+    color: white !important;
+}
+
+.dark-theme #applications .selected.item-field {
+    background: #2743a9;
+    color: white !important;
+}
+
+.dark-theme #networking .selected.item-field {
+    background: #005179;
+    color: white !important;
+}
+
+.dark-theme #nav .category-title {
+    background: #2e363e;
+}
+
+.dark-theme #text-user-logon {
+    background: #0e1116;
+}
+
+.dark-theme #content .chart-bar td {
+    border: 3px solid #1a232e;
+}
+
+.dark-theme input:checked + .slider {
+    background-color: #8d00ed;
+}
+
+.dark-theme #legend-object {
+    box-shadow: 2px 2px 30px #00000029;
+    border: 1px solid rgb(49 54 60 / 47%) !important;
+}
+
+.dark-theme .interface-name {
+    color: grey;
+}
+
+.dark-theme #footer {
+    background: #1a232e;
+}
+
+.dark-theme #footer a {
+    color: white !important;
+}
+
+.dark-theme #theme-conv {
+    color: white !important;
+}

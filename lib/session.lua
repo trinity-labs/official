@@ -119,7 +119,7 @@ mymodule.save_session = function( sessionpath, sessiontable)
 				sessiontable.id=id
 				return false
 			end
-
+			
 			file:write(content)
 			file:close()
 		end

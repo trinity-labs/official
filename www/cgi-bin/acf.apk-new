@@ -1,0 +1,21 @@
+#!/usr/bin/haserl-lua5.4 --shell=lua --upload-limit=256
+<%
+mvc = require("acf.mvc")
+
+-- create a new container
+FRAMEWORK=mvc:new()
+
+-- set the configuration parameters
+-- This loads the container with the config info
+-- but does not load the application worker/model
+FRAMEWORK:read_config("acf")
+
+-- Create an application container -
+-- loads the application controller/model code
+APP=FRAMEWORK:new("acf_www")
+
+-- Dispatch the application
+APP:dispatch()
+APP:destroy()
+FRAMEWORK:destroy()
+%>

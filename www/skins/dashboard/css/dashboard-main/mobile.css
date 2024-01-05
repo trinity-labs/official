@@ -1,0 +1,224 @@
+/*----------------------------------------------------------------------------------
+ * MEDIA QUERIES
+ *----------------------------------------------------------------------------------
+ */
+
+@media only screen and (min-device-width : 0px) and (max-device-width : 1400px) {
+
+	html, body {
+	position: relative;
+    width: 100%;
+    min-height: 100%;
+	overflow-x: hidden !important;
+	}
+	
+	html.app-logon {
+	overflow: hidden !important;
+	}
+	
+	header {
+    zoom: 63%;
+    height: 4rem;
+    padding: 0 !important;
+    position: absolute !important;
+    display: flex;
+    background: white !important;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    background-position: 2rem center !important;
+    justify-content: center;
+    width: 100%;
+	}
+	
+	#content p,
+	#content input.text,
+	#content select,
+	#content textarea,
+	#content input.password {
+    width: 100%;
+	}
+	
+	#content {
+    width: 100% !important;
+    padding: 0.75rem 0 5rem 0 !important;
+	}
+
+	.logon.logon-logon {
+    position: relative;
+	top: -1rem;
+    overflow: hidden !important;
+    width: 100%;
+	}
+	
+	#page-logon {
+    background: rgb(0 0 0 / 50%);
+    border-radius: 0 0 4px 4px !important;
+    width: 90vw;
+	}
+	
+	.page {
+	padding: 3rem 0 0 0 !important;
+	width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: stretch;
+    align-content: stretch;
+	}
+
+	#main {
+	margin: auto !important;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    align-content: stretch;
+	width: 95% !important;
+	}
+	
+	#nav {
+    padding: 3rem 2rem !important;
+    width: auto !important;
+    height: 40rem !important;
+    position: relative !important;
+    overflow: hidden !important;
+    margin: 0 0 -3.25rem !important;
+	}
+	
+	#subnav {
+	}
+	
+	#subnav ul {
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    margin: 0rem;
+    align-items: center;
+    align-content: stretch;
+	}
+	
+	#subnav ul li {
+    display: block !important;
+    float: left !important;
+    margin: 1rem auto !important;
+	}
+
+	.logon-logon #main {
+    width: auto;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding: 1rem 0 0;
+	}
+	
+	.logon-logon #content {
+    float: none !important;
+    border: none !important;
+    width: 75vw !important;
+	}
+	
+	.logon-logon #header {
+    background-image: url(../../img/logos/logo-alpine-linux-white.png) !important;
+    position: relative !important;
+    border-radius: 10px 10px 0 0 !important;
+    background-position: 1.25rem center !important;
+    padding: 0.15rem 0rem;
+    background-size: 6rem !important;
+    justify-content: flex-end !important;
+    background-color: #006787 !important;
+    width: 90vw;
+    height: 3.5rem !important;
+    background-repeat: no-repeat !important;
+	}
+
+	.dashboard-main {
+    display: block !important;
+	}
+	
+	header #toogle-link {
+    color: #d9d9d9;
+    float: left;
+	padding: 1.25rem 1.5rem 1.25rem 0.5rem !important;
+	}
+	
+	.logon button#showPass {
+    right: -0.8rem !important;
+	}
+	
+	.data-block {
+    margin: 2rem 0px;
+    height: auto !important;
+    width: -webkit-fill-available !important;
+	}
+	
+	.icon-header {
+    padding: 1.25rem 1rem;
+    margin: 0 0.5rem 0 0;
+	}
+
+	.chart-legend {
+    flex-wrap: wrap !important;
+    justify-content: space-evenly;
+    align-items: center;
+	}
+	
+	#legend-used,
+	#legend-buffered,
+	#legend-free {
+    position: relative;
+    top: 0.75rem;
+	}
+	
+	#content .chart-memory td:first-child,
+	#content .chart-memory td:last-child {
+    display: none;
+	}
+	
+	.welcome-block {
+    width: auto !important;
+    margin: 2rem auto;
+    height: 22rem !important;
+	}
+	
+	.dashboard-system {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    align-content: center !important;
+    flex-wrap: wrap !important;
+	}
+	
+	.data-block.data-system-up-time {
+    margin: 0 !important;
+	}
+	
+	.uptime {
+    font-size: 0.65rem !important;
+    top: 0 !important;
+	}
+	
+	.data-system-up-time::before {
+    display: none !important;
+	}
+	
+	.dashboard-infos.dash-info-version {
+    line-height: 1.5rem !important;
+	}
+	
+	#text-user-logon {
+    padding: 0.33rem 0.5rem !important;
+    font-size: 0.5rem;
+	margin: 0 1.5rem 0 0 !important;
+	}
+	
+	#user-logon {
+    margin: 0 0.75rem 0 0;
+	}
+	
+	#footer {
+    margin: 0 !important;
+	}
+}

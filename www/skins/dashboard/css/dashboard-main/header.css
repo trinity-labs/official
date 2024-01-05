@@ -1,0 +1,183 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > HEADER
+ *----------------------------------------------------------------------------------
+ */
+ 
+ /*----------------------------------------------------------------------------------
+ * DEFAULT
+ *----------------------------------------------------------------------------------
+ */
+
+header p {
+    font-weight: 600;
+    float: right;
+    font-size: 10px;
+    color: white;
+}
+	
+header a {
+    text-decoration: none;
+    color: white;
+}
+
+header h1 {
+	text-indent: -999em;
+}
+
+header p.hostname {
+	color:#000;
+	position:absolute;
+	top:55px;
+	left:34px;
+	font-size:12px;
+}
+
+header a:hover i,
+header i:hover,
+header #text-user-logon:hover {
+    color: #5a329f !important;
+}
+
+#system #system-title,
+#system #system-title::before {
+    background: #6300d2;
+    color: white;
+    border-radius: 2px !important;
+}
+
+header {
+    height: 1.25rem;
+    padding: 1rem 2.25rem 1rem 1rem;
+    background: transparent;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+	position: sticky;
+    width: -webkit-fill-available;
+    box-shadow: 2px 2px 30px #00000029;
+}
+
+#header-links {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#toggle-link {
+    padding: 1.25rem 0rem 1.25rem 1rem;
+}
+
+#toggle, #toggle.active i.fa-solid.fa-bars {
+    color: #474747;
+}
+
+#toggle.not_active i.fa-solid.fa-bars {
+    color: #d2d2d2;
+}
+
+.icon-header {
+    padding: 1.25rem 1.5rem;
+    margin: 0 1.5rem 0 0;
+}
+
+#header-left {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.header-links {
+    display: flex;
+    padding: 0 1rem;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+#logoff {
+    font-weight: 900;
+}
+
+#user-logon {
+	cursor: pointer;
+    display: inline-block;
+    border-radius: 50em;
+    padding: 1rem;
+}
+
+#text-user-logon {
+    color: #d2d2d2;
+    font-size: 0.7rem;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 0 1rem 0 0;
+    font-family: Arial Black;
+    padding: 0.33rem 1.5rem;
+    vertical-align: middle;
+    border-radius: 2.5px;
+}
+
+/*----------------------------------------------------------------------------------
+ * NETWORKING HEADER & GLOBAL COLOR
+ *----------------------------------------------------------------------------------
+ */
+
+#networking #subnav ul li.selected a,
+#networking #subnav ul li a:hover {
+    color: #005179;
+}
+
+#networking #content .submit {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 0.75rem 3.5rem;
+    border: 1px solid #005179;
+    background: #005179;
+	width: 15vw;
+}
+
+#networking #networking-title,
+#networking #networking-title::before {
+    background: #005179;
+    color: white;
+    border-radius: 2px !important;
+}
+
+/*----------------------------------------------------------------------------------
+ * APPLICATIONS HEADER
+ *----------------------------------------------------------------------------------
+ */
+
+#applications #subnav ul li.selected a,
+#applications #subnav ul li a:hover {
+    color: #2743a9;
+}
+
+#applications #content .submit {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #FFF;
+    font-weight: bold;
+    border-radius: 4px;
+    padding: 0.75rem 3.5rem;
+    border: 1px solid #2743a9;
+    background: #2743a9;
+}
+
+#applications #applications-title,
+#applications #applications-title::before {
+    background: #2743a9;
+    color: white;
+    border-radius: 2px !important;
+}

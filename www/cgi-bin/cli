@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "WARNING: the $0 script has be moved to $(which acf-cli)" >&2
+
+exec acf-cli "$@"

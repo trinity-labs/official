@@ -4,20 +4,24 @@ mymodule.default_action = "system"
 
 -- Public methods
 
-mymodule.system = function (self )
+mymodule.system = function (self)
 	return self.model:get_system()
 end
 
-mymodule.storage = function (self )
+mymodule.storage = function (self)
 	return self.model:get_storage()
 end
 
-mymodule.network = function (self )
+mymodule.network = function (self)
 	return self.model:get_network()
 end
 
-mymodule.proc = function (self )
+mymodule.proc = function (self)
 	return self.model:get_proc()
+end
+
+mymodule.api = function (self)
+	return self.model:get_api()
 end
 
 mymodule.networkstats = function(self)

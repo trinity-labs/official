@@ -1,0 +1,376 @@
+/*----------------------------------------------------------------------------------
+ * PAGE > ICONS
+ *----------------------------------------------------------------------------------
+ */
+ 
+.fa-2x {
+    font-size: 1rem !important;
+    color: rgb(203 203 203 / 87%) !important;
+}
+
+.logon-logon .fa-2x {
+    font-size: 1rem !important;
+    color: rgb(203 203 203 / 87%) !important;
+}
+
+.fa-regular.fa-circle-question.fa-2x.about-icon {
+    position: relative;
+    font-size: 1.15rem !important;
+    top: 0.05rem;
+}
+ 
+ /*----------------------------------------------------------------------------------
+ * PAGE > HOME > WELCOME
+ *----------------------------------------------------------------------------------
+ */
+ 
+.welcome-read #content h1::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F505' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: #e5e5e5;
+    font-size: 1.5rem;
+    top: -0.2rem;
+}
+
+ /*----------------------------------------------------------------------------------
+ * NETWORKING
+ *----------------------------------------------------------------------------------
+ */
+ 
+#networking-title.category-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0E8';
+    margin: 0 0.5rem 0 0rem;
+    position: relative;
+    font-size: 0.85rem;
+	color: #adadad
+}
+
+#networking .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0E8';
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+#section-restart-networking .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F2F1' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+#section-network .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0E8' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+#section-network-statistics .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0EC' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+.interface-name::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F6FF' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(22 89 122);
+    position: relative;
+    font-size: 1rem;
+}
+ 
+ /*----------------------------------------------------------------------------------
+ * APPLICATIONS
+ *----------------------------------------------------------------------------------
+ */
+ 
+#applications-title.category-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F1B3';
+    margin: 0 0.5rem 0 0rem;
+    position: relative;
+    font-size: 0.85rem;
+	color: #adadad
+}
+ 
+ #applications .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F1B3';
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+.openssl .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F023' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+.openssl-readall .page-header-title::before,
+.openssl-read .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F1C9' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+.openssh .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F084' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+/*----------------------------------------------------------------------------------
+ * SYSTEM
+ *----------------------------------------------------------------------------------
+ */
+ 
+#system-title.category-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: '\E163';
+    margin: 0 0.5rem 0 0rem;
+    position: relative;
+    font-size: 0.85rem;
+	color: #adadad
+}
+
+#system .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\E163';
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+#section-hardware-information .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F2DB' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+#section-storage .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0A0' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+#section-storage #legend-object b::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0A0' !important;
+    margin: 0 0.5rem 0 -0.5rem;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 0.75rem;
+}
+
+.apk .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F1B3' !important;
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+#system .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F21E';
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 32%);
+    position: relative;
+    font-size: 1rem;
+}
+
+.welcome .dashboard-title-memory::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F538' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: inherit;
+    font-size: 0.7rem;
+}
+
+.welcome .system-uptodate .dashboard-title-system::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: '\E163' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: inherit;
+    font-size: 1rem;
+    top: 0.1rem;
+    color: #7beb00;
+}
+
+.welcome .system-update .dashboard-title-system::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: '\E163' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: inherit;
+    font-size: 1rem;
+    top: 0.1rem;
+    color: #ffac00;
+}
+
+.welcome .system-upgrade .dashboard-title-system::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: '\E163' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    font-size: 1rem;
+    top: 0.1rem;
+    color: #f74b00;
+}
+
+.welcome .dashboard-title-hardware::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F2DB' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    font-size: 1rem;
+    top: 0.1rem;
+    color: #0078cf;
+}
+
+.welcome .dashboard-title-system-uptime::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\E518' !important;
+	display: inline-block;
+    margin: 0 0.5rem 0 0;
+    font-size: 1rem;
+    color: #00cbb4;
+}
+
+.welcome .dashboard-title-network-stats::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F012' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: inherit;
+    font-size: 0.7rem;
+}
+
+.welcome .dashboard-title-ssh-gpg::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F084' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: inherit;
+    font-size: 0.7rem;
+}
+
+.welcome .dashboard-title-disk::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F7C2' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: inherit;
+    font-size: 0.7rem;
+}
+
+.welcome .dashboard-block-title.dashboard-title-cpu-stats:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0C8' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: #ff69b4;
+    font-size: 0.75rem;
+    top: 0;
+}
+
+.welcome .dashboard-block-title.dashboard-title-memory-stats:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0C8' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0.5rem 0 0;
+    color: #ff7800;
+	font-size: 0.75rem;
+    top: 0;
+}
+
+/*.version-number-uptodate:after,
+.version-number-update:after,
+.version-number-upgrade:after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F35D' !important;
+    display: inline-block;
+    position: relative;
+    margin: 0 0 0 0.5rem;
+    color: inherit;
+    font-size: 0.5rem;
+    top: -0.25rem;
+	border: none !important;
+}*/

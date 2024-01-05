@@ -4,6 +4,7 @@
 <% json = require("json") %>
 <% local sys = viewlibrary.dispatch_component("alpine-baselayout/health/system", nil, true) %>
 <% local proc = viewlibrary.dispatch_component("alpine-baselayout/health/proc", nil, true) %>
+<% local api = viewlibrary.dispatch_component("alpine-baselayout/health/api", nil, true) %>
 <% local disk = viewlibrary.dispatch_component("alpine-baselayout/health/storage", nil, true) %>
 <% local net = viewlibrary.dispatch_component("alpine-baselayout/health/network", nil, true) %>
 <% local netstats = viewlibrary.dispatch_component("alpine-baselayout/health/networkstats", nil, true) %>
@@ -19,7 +20,7 @@
 	end
 
 -- CHECK SYS RELEASE VERSION
-	local check_sysver = string.match(sys.value.version.value, "%d+.%d+.%d+")
+	local check_sysver = string.match(sys.value.version.value, "%d+.%d+.%d+") -- Check Local System Version
 	local major_sysver = string.match(check_sysver, "%d+") -- Parse Major for Upgrade
 	local minor_sysver = string.gsub(string.match(check_sysver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_sysver = string.gsub(string.match(check_sysver, ".[^.]*$"), "%D", "") -- Parse Patch for Update
@@ -31,19 +32,21 @@
 	local minor_distver = string.gsub(string.match(actual_distver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
-		chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check-ok'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a> Up To Date "
-		kernres = "<i class='fa-solid fa-check-double icon-kernel-ok'></i>"
+		blockcolor = "<div class='data-block data-system system-uptodate'>"
+		chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check'>Up To Date | Alpine <span class='version-number-uptodate'>" .. check_sysver .. "</span></span></a>"
 	else
-		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'><span class='version-check-update'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>Update Needed "
+		blockcolor = "<div class='data-block data-system system-update'>"
+		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'><span class='version-check'>Update Needed | Alpine <span class='version-number-update'>" .. check_sysver .. "</span></span></a>"
 		kernres = "<i class='fa-solid fa-exclamation icon-kernel-warn'></i>"
 	end
 	if major_sysver ~= major_distver then
-		chkres = "<a id='alpine-version-link' class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'><span class='version-check-upgrade'>Alpine Linux | <span class='version-letter'>" .. check_sysver .. "</span></span></a>Upgrade Required "
+		blockcolor = "<div class='data-block data-system system-upgrade'>"
+		chkres = "<a id='alpine-version-link' class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'><span class='version-check'>Upgrade Required | Alpine <span class='version-number-upgrade'>" .. check_sysver .. "</span></span></a>"
 		kernres = "<i class='fa-solid fa-xmark icon-kernel-err'></i>"
 	end
 	
 -- GET DIST VERSION CHANGES
-	local check_verchanges = string.gsub(string.match(string.match(sys.value.alpineposts.value, "(href=\"Alpine-.+("..actual_distver.."))(.+\")"), "\".+\""), "\"", "")
+	local check_verchanges = string.gsub(string.match(string.match(sys.value.alpineposts.value, "(href=\"Alpine-.+("..actual_distver.."))(.+\")") or "", "\".+\"") or "", "\"", "")
 	
 -- FORMAT UPTIME	
 	local up_time = math.floor(string.match(sys.value.uptime.value, "[%d]+"))
@@ -142,68 +145,41 @@ end
 
 <!-- Dashboard App Block - LINE 1 -->
 <div class="dashboard-main main-block">
+
 <!-- Dashboard Version Block - BLOCK 1 -->
 	<div class="dashboard-system dashboard-block">
-		<div class="data-block data-system">
+		<%= blockcolor %>
 			<h4 class="dashboard-block-title dashboard-title-system">System</h4>
+				<span class="icon-os"></span> 
 				<p class="dashboard-infos dash-info-version">
-					<span class="data-title">OS : </span>
-					<%= chkres %> <span class="data-title">| </span>
+					<%= chkres %>
 					<span class="check-version">
 					 <a class="version-link version-external-link" href="https://www.alpinelinux.org/posts/<%= check_verchanges %>#content" title="🔗 https://www.alpinelinux.org/posts/<%= check_verchanges %>" target="_blank">Last Release : <%= actual_distver %></a><br>
 					 </span>
-					<span class="data-title">ACF Version : </span><%= sys.value.luaver.value %> 
-					<% if sys.value.ACFlightServer.value ~= "" then %>
-					<span class="data-title"> | Served by : </span><%= sys.value.ACFlightServer.value %>
-					<% else %>
-					<span class="data-title"> | Served by : </span><%= sys.value.ACFminiServer.value %>
-					<% end %>
-
-				</p>
-				<p class="dashboard-infos dash-info-user">
-					<span class="data-title data-user">User | </span><%= session.userinfo.userid %> &nbsp; <span class="data-title data-host">Host | </span><%= hostname or "unknown hostname" %>
-					<span class="data-title data-kernel">Kernel | </span>
-					<span class="result-kernel"><%= sys.value.kernel.value %><%= kernres %></span>
+					<span class="kernel-ver">Kernel @ <%= sys.value.kernel.value %> | ACF - <%= sys.value.luaver.value %></span>
 				</p>
 		</div>
-		<div class="data-block data-system-up-time">
-			<span class="data-title">Uptime | </span>
-				<span id="uptime" class="uptime">
-				<%= uptime %><br>
-<script type="application/javascript">
-// IMPORT UPTIME FOR JS LIVE TIMER
-	let increment = <%= up_time %>;
-</script>
-		</span>
-		</div>
-	</div>
-	
-<!-- Dashboard App Block - LINE 1 -->
-</div>
-<!-- Dashboard App Block - LINE 2 -->
-<div class="dashboard-main main-block">
-<!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
-	<div class="dashboard-hardware dashboard-block medium-block">
-		<div class="data-block data-system">
+		
+<!-- Dashboard Hardware Block - 2 -->
+		<div class="data-block data-hardware">
 			<h4 class="dashboard-block-title dashboard-title-hardware">Hardware</h4>
-				<span class="icon-cpu">
+			<span class="icon-cpu">
 					<% if string.find((proc.value.model.value), "Intel") then
-						print ("<canvas class='icon-canvas-dash icon-cpu-intel'>''</canvas>")
+						print ("<canvas class='icon-canvas-dash icon-intel'>''</canvas>")
 					elseif string.find((proc.value.model.value), "AMD") then
-						print ("<canvas class='icon-canvas-dash icon-cpu-amd'>''</canvas>")
+						print ("<canvas class='icon-canvas-dash icon-amd'>''</canvas>")
 					else
-						print ("<canvas class='icon-canvas-dash icon-cpu-arm'>''</canvas>")
+						print ("<canvas class='icon-canvas-dash icon-arm'>''</canvas>")
 					end %>
 				</span>
-				
-			<p class="dashboard-infos dash-info-board" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
-				<span class="data-title">Board : </span>
+			<p class="dashboard-infos">
+			<span class="data-title">Board</span>
 			<%
 			-- EXEMPLE TO PARSE KNOW MOBO MODELS OR YOUR OWN ONE
 			if string.match(sys.value.boardName.value, "EMB%-H81B") then
-				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON") .. "</span>")
-				print (" | <span>" .. sys.value.boardName.value .. "</span> | ")
-				print ("<span>" .. string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
+				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON"))
+				print (" | " .. sys.value.boardName.value .. " | ")
+				print (string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
 			-- ELSE REWRITE ALL OTHERS
 			else
 				print ("<span>" .. oem_parse(sys.value.boardVendor.value) .. "</span>")
@@ -212,88 +188,111 @@ end
 			end
 			%>
 			</p>
-			<p class="dashboard-infos dash-info-bios" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
-				<span class="data-title">BIOS : </span>
-					<span id="version">ver: </span><%= sys.value.biosVersion.value %> | 
-						<%= sys.value.biosVendor.value %> | <%= sys.value.biosDate.value %>
-			</p>
 			<p class="dashboard-infos dash-info-cpu" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
-				<span class="data-title">CPU : </span><%= string.sub((proc.value.model.value), 14) %>
-			</p>
-			<p class="dashboard-infos dash-info-cpu" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
-				<span class="data-title">GPU : </span><%= proc.value.gpu.value %>
+				<span class="data-title">CPU</span><%= string.sub((proc.value.model.value), 14) %>
 			</p>
 			<p class="dashboard-infos dash-info-memory" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
-				<span class="data-title">Memory : </span>
+				<span class="data-title">Memory</span>
 					<%= bytesToSize(tonumber(sys.value.memory.totalData)) %> Total |
 						<%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free | 
 							<%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used 
-			</p>
-			<p class="dashboard-infos dash-info-network-lan" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
-				<span class="data-title">Lan IP : </span>
-					<span class="value-title value-net-local"></span><%= netstats.value.eth0.ipaddr %> <!-- Need to review -->
-			</p>
-			<p class="dashboard-infos dash-info-network-wan">
-				<span class="data-title">Wan IP : </span>
-					<span class="value-title value-net-wan"></span><a href="https://ifconfig.me" target="_blank" title="🔗 https://ifconfig.me"><%= net.value.wanIP.value %><i class="fa-solid fa-up-right-from-square icon-listing"></i></a>
-			</p>
-			<!-- <label class="switch">
-				<input type="checkbox">
-					<span class="slider round"></span>
-			</label>
-				<span id="temp-conv" class="temp-convert">°C | °F</span> -->
-			<div id="procTemp" class="temperature">
-				<div class="data-cpu-temp">
-				</div>
-			<div class="data-title temp-desc">
-				<p class="title-temp-legend">CPU Temp : </p>
-					<p class="legend temp-legend temp-normal">
-					Temp° < 50
-				</p>
-				<p class="legend temp-legend temp-medium">
-					Temp° > or = 50
-				</p>
-				<p class="legend temp-legend temp-hot">
-					Temp° > or = 75
-				</p>
-			</div>
-			<div id="cpuTemp" class="dashboard-infos dash-info-temp">
-			<%
-			if ((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) < 50000) then
-			print ("<span class='normal'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "<sup id='temp-unit'>°C</sup></span>")
-			elseif ((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 50000) then
-			print ("<span class='medium'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "<sup id='temp-unit'>°C</sup></span>")
-			elseif((tonumber(proc.value.temp.value)) ~= nil) and ((tonumber(proc.value.temp.value)) >= 75000) then
-			print ("<span class='hot'>" .. math.floor(tonumber(proc.value.temp.value / 1000)) .. "<sup id='temp-unit'>°C</sup></span>")
+			</p>	
+		</div>
+		
+<!-- Dashboard Monitoring Block - 3 -->
+		<div class="data-block data-monitoring">
+			<h4 class="dashboard-block-title dashboard-title-system-uptime">Monitoring</h4>
+			<span class="icon-trinity"></span>
+			<p class="dashboard-infos">
+			<span class="data-title">Uptime</span>
+				<span id="uptime" class="uptime">
+				 <%= uptime %><br>
+<script type="application/javascript">
+// IMPORT UPTIME FOR JS LIVE TIMER
+	if(window.location.href.indexOf("welcome/read") > -1){
+	let increment = <%= up_time or "unknow"%>;
+	let delay = () => 
+	{
+	increment += 1;
+	// CONVERT JS UPTIME
+		var js_uptime = parseInt(increment);
+		var js_centuries = Math.floor((js_uptime / (3600*24) / 365) / 100);
+		var js_years = Math.floor((js_uptime / (3600*24) / 365) % 100);
+		var js_mounths = Math.floor((((js_uptime / (3600 * 24)) % 365) % 365) / 30);
+		var js_days = Math.floor((((js_uptime / (3600 * 24)) % 365) % 365) % 30)
+		var js_hours = Math.floor(js_uptime % (3600*24) / 3600);
+		var js_minutes = Math.floor(js_uptime % 3600 / 60);
+		var js_seconds = Math.floor(js_uptime % 60);
+	// FORMAT JS UPTIME UP TO CENTURIES
+		var centuries_display = js_centuries > 0 ? js_centuries + (js_centuries <= 1 ? " Century " : " Centuries ") : "";
+		var years_display = js_years > 0 ? js_years + (js_years <= 1 ? " Year " : " Years ") : "";
+		var mounths_display = js_mounths > 0 ? js_mounths + (js_mounths <= 1 ? " Mounth " : " Mounths ") : "";
+		var days_display = js_days > 0 ? js_days + (js_days <= 1 ? " Day " : " Days ") : "";
+		var hours_display = js_hours < 10 ? "0" + js_hours + "h " : js_hours + "h ";
+		var minutes_display = js_minutes < 10 ? "0" + js_minutes + "m " : js_minutes + "m ";
+		var secondes_display = js_seconds < 10 ? "0" + js_seconds + "s" : js_seconds + "s";
+	// RETURN JS FORMATED TIME
+		return centuries_display + years_display + mounths_display + days_display + hours_display + minutes_display + secondes_display;	
+	};
+	// JS FORMATED TIME LIVE COUNT
+		setInterval(() => document.getElementById("uptime").innerHTML = delay(), 1000);
+	};
+</script>
+		</span>
+		</p>
+		
+		<p class="dashboard-infos">
+			<span class="data-title">System Temp</span>
+				<span id="cpuTemp" class="dash-monitoring-temp">			
+				<%
+			if ((tonumber(api.value.cpuTemp.value)) ~= nil) and ((tonumber(api.value.cpuTemp.value)) < 50000) then
+			print (tonumber(api.value.boardTemp.value / 1000)  .. " °C  &nbsp; | " .. "<span class='normal'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
+			elseif ((tonumber(api.value.cpuTemp.value)) ~= nil) and ((tonumber(api.value.cpuTemp.value)) >= 50000) then
+			print (tonumber(api.value.boardTemp.value / 1000)  .. " °C  &nbsp; | " .. "<span class='medium'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
+			elseif((tonumber(api.value.cpuTemp.value)) ~= nil) and ((tonumber(api.value.cpuTemp.value)) >= 75000) then
+			print (tonumber(api.value.boardTemp.value / 1000)  .. " °C  &nbsp; | " .. "<span class='hot'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
 			else
-			print ("<span class='nan'>NaN</span>")
+			print ("<span class='nan'>N/A<span>")
 			end
 			%>
-			<script type="application/javascript" defer>
-			async function load() {
-				let url = '<%= html.html_escape(page_info.script .. "/alpine-baselayout/health/proc?viewtype=json") %>';
-				let obj = await (await fetch(url)).json();
-			
-				if ((obj.value.temp.value) < 50000) {
-					document.getElementById("cpuTemp").innerHTML = ("<span class='normal'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
-				} else if ((obj.value.temp.value) >= 50000) {
-					document.getElementById("cpuTemp").innerHTML = ("<span class='medium'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
-				} else if ((obj.value.temp.value) >= 75000) {
-					document.getElementById("cpuTemp").innerHTML = ("<span class='hot'>" + (obj.value.temp.value) / 1000) + "<sup id='temp-unit'>°C</sup></span>";
-				} else {
-					document.getElementById("cpuTemp").innerHTML = ("<span class='nan'>NaN</span>");
-				};
-			};
-			setInterval(load, 1000);
-			</script>
-				</div>
-			</div>
+				</span>
+		</p>
+		
+		<p class="dashboard-infos">
+			<span class="data-title">IP</span>
+				<span class="value-title value-net-local"><%= net.value.wanIP.value %>  &nbsp; via &nbsp; <%= netstats.value.eth0.ipaddr %></span>
 		</div>
 	</div>
+<!-- Dashboard App Block - LINE 1 -->
+</div>
+
+<!-- Dashboard App Block - LINE 2 -->
+<div class="dashboard-main main-block">
+
+<!-- Dashboard CPU Block - 1 -->
+		<div class="data-block data-cpu">
+			<h4 class="dashboard-block-title dashboard-title-cpu-stats">CPU Temp</h4>
+			<!-- Dashboard Main Block - NETWORK CHART.JS -->	
+			<canvas id="chartCpuTemp" class="data-chart block-chart"></canvas>
+		</div>
+		
+<!-- Dashboard Memory Block - 2 -->		
+		<div class="data-block data-memory">
+			<h4 class="dashboard-block-title dashboard-title-memory-stats">Memory Usage</h4>
+			<!-- Dashboard Main Block - NETWORK CHART.JS -->	
+			<canvas id="chartMemUsed" class="data-chart block-chart"></canvas>
+		</div>
+<!-- Dashboard App Block - LINE 2 -->
+</div>
+
+<!-- Dashboard App Block - LINE 3 -->
+<div class="dashboard-main main-block">
+<!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
+
 	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
 <div class="dashboard-main main-block medium-block">
-	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/storage', '_blank')" class="dashboard-disk dashboard-block">
+	<div class="dashboard-disk dashboard-block">
 		<h4 class="dashboard-block-title dashboard-title-disk">Disk</h4>
 <!-- Dashboard Main Block - DISK CHART FROM N.ANGELACOS ACF NATIVE APP -->
 	<% displaydisk = function(disk, name)
@@ -344,7 +343,7 @@ end
 
 <!-- Dashboard Main Block - MEMORY - BLOCK 3 -->
 <div class="dashboard-main main-block small-block">
-	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/system', '_blank')" class="dashboard-memory dashboard-block">
+	<div class="dashboard-memory dashboard-block">
 		<h4 class="dashboard-block-title dashboard-title-memory">Memory</h4>
 <!-- Dashboard Main Block - CHART.JS -->
 		<div class="chart-canvas chartjs">
@@ -359,173 +358,13 @@ end
 						<span class="data-mem-free"><%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free</span> | 
 							<span class="data-mem-used"><%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used</span>
 			</p>
-		</div>
-		
+		</div>	
 <!-- Dashboard Main Block - MEMORY CHART.JS -->		
-<script type="application/javascript" defer>
-$(function memChart() {
-// Setup Block
-	var memFree = <%= json.encode(sys.value.memory.free) %>;
-	var memBuff = <%= json.encode(sys.value.memory.buffers) %>;
-	var memUsed = <%= json.encode(sys.value.memory.used) %>;
-	const data = {
-		labels: ['Free', 'Buffured', 'Used'],
-		datasets: [{
-			label: 'Memory Status',
-			borderWidth: 4,
-			data: [memFree, memBuff, memUsed]
-		}]
-	};
-// Config Block
-	const config = {
-		type: 'doughnut',
-		data,
-		options: {
-			borderColor: '#fbfbfb',
-			responsive: true,
-			maintainAspectRatio: false,
-			rotation: -135,
-			circumference: 270,
-			backgroundColor: [
-                    '#006787',
-                    '#0075af',
-                    '#cbcbcb'
-			]
-		}
-    };
-// Render Block
-	const memoryChart = new Chart(
-		document.getElementById('memoryChart'),
-		config
-	)
-});
-	</script>	
 		</div>
 	</div>
-<!-- Dashboard App Block - LINE 2 -->
-</div>
-<!-- Dashboard App Block - LINE 3 -->
-<div class="dashboard-main main-block">
-<!-- Dashboard Main Block - 1 -->
-	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/network', '_blank')" class="dashboard-network dashboard-block large-block">
-		<div class="data-block data-system">
-			<h4 class="dashboard-block-title dashboard-title-network-stats">Network Stats</h4>
-			<div id="chartNetwork"> </div>
-			<canvas id="networkChart" class="data-chart block-chart"></canvas>
-		</div>
-<div id="demo"></div>
-
-<!-- Dashboard Main Block - NETWORK CHART.JS -->
-<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
-<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@latest/dist/chartjs-adapter-luxon.umd.min.js"></script>
-<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@latest"></script>		
-<script type="application/javascript" defer>
-	var interval = 1000;
-	var duration = 60000;
-	var lastdata = <%= json.encode(netstats) %>;
-	var chartdata = <% -- Generate the data structure in Lua and then convert to json
-			local chartdata = {}
-			for i,intf in ipairs(interfaces) do
-				chartdata[intf.."RX"] = {label=intf.." RX", data={}}
-				chartdata[intf.."TX"] = {label=intf.." TX", data={}}
-			end
-			io.write( json.encode(chartdata) ) %>;
-	
-   function displayStats() {
-   $.ajaxSetup({cache:false});
-   $.getJSON(
-     '<%= html.html_escape(page_info.script .. "/alpine-baselayout/health/networkstats") %>', {viewtype:'json'}, 
-	function(data) {
-				if (lastdata != null){
-					if (data.timestamp <= lastdata.timestamp) return false;
-					var timestamp = data.timestamp * 1000;
-					var multiplier = 1 / (data.timestamp - lastdata.timestamp);
-					var shiftcount = null;
-					$.each(lastdata.value, function(key,val){
-						chartdata[key+"RX"].data.push([timestamp, (data.value[key].RX.bytes - lastdata.value[key].RX.bytes)*multiplier]);
-						chartdata[key+"TX"].data.push([timestamp, (data.value[key].TX.bytes - lastdata.value[key].TX.bytes)*multiplier]);
-						if (shiftcount == null) {
-							shiftcount = 0;
-							$.each(chartdata[key+"RX"].data, function(key,val){
-								if (val[0] < timestamp-duration)
-									shiftcount += 1;
-								else
-									return false;
-							});
-						}
-						for (i=0; i<shiftcount; i++){
-							chartdata[key+"RX"].data.shift();
-							chartdata[key+"TX"].data.shift();
-						}
-					});
-				}
-				lastdata = data;
-				document.getElementById("demo").innerHTML = JSON.stringify(lastdata.value.eth0);
-			});
-};
-	setInterval(displayStats, 1000);
-$(function networkChart() {
-// Setup Block
-	const data = {
-      labels: [],
-      datasets: [{
-        label: 'RX eth0',
-        data: [],
-        tension: 0.25,
-		fill: true,
-		pointRadius: 0
-      },
-	  {
-        label: 'TX eth0',
-        data: [],
-        tension: 0.25,
-		fill: true,
-		pointRadius: 0
-      }],
-    };
-// Config Block
-	const config = {
-		type: 'line',
-		data,
-		options: {
-			streaming: {
-				frameRate: 30  // chart is drawn 5 times every second
-      },
-		  scales: {
-			x: {
-				type: 'realtime',
-				realtime: {
-				    duration: 40000,
-					refresh: 1000,
-					delay: 500,
-					onRefresh: chart => {
-						chart.data.datasets.forEach(dataset => {
-							dataset.data.push({
-							x: Date.now(),
-							y: setInterval(0, 1000)
-							})
-						})
-					}
-				}
-			},
-			y: {
-			}
-		  }
-		}
-	  };
-// Render Block
-	const networkChart = new Chart(
-		document.getElementById('networkChart'),
-		config
-	);
-});
-</script>
-
-		<div>
-	</div>
-</div>
 <!-- Dashboard App Block - LINE 3 -->
 </div>
+
 <!-- Dashboard App Block - LINE 4 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - DISK & PARTITION 1 -->
@@ -586,11 +425,195 @@ $(function networkChart() {
 					<pre>
 						<%= disk.value.partitions.value %>
 				</pre>
+				
+				<pre>
+						<%= net.value.PhysicalIfaces.value %>
+				</pre>
 			</div>		
 		</div>
 	</div>
 <!-- Dashboard App Block - LINE 4 -->
 </div>
+<script type="application/javascript" defer>
+// TRIИITY API					
+			async function api() {
+				let url = document.location.hostname + '/alpine-baselayout/health/api?viewtype=json';
+				let obj = await (await fetch(url)).json();
+				if ((obj.value.cpuTemp.value) < 50000) {
+					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='normal'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
+				} else if ((obj.value.cpuTemp.value) >= 50000) {
+					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='medium'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
+				} else if ((obj.value.cpuTemp.value) >= 75000) {
+					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='hot'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
+				} else {
+					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='nan'>N/A</span>");
+				};
+				window.localStorage.removeItem('CTemp');
+				window.localStorage.setItem('CTemp', (Math.floor((obj.value.cpuTemp.value)) / 1000));
+				window.localStorage.removeItem('MemoryUse');
+				window.localStorage.setItem('MemoryUse', (obj.value.memUsed));
+				window.localStorage.removeItem('MemoryTotal');
+				window.localStorage.setItem('MemoryTotal', (obj.value.memTotal));
+			};
+			// Build CPU TEMP Chart	
+			$(function chartCpuTemp() {
+			// Setup Block
+				const data = {
+				  labels: [],
+				  datasets: [{
+					label: 'CPU Temp',
+					borderColor : 'rgba(255, 105, 180)',
+					backgroundColor: 'rgba(255, 105, 180, 0.5)',
+					color: 'rgba(0, 179, 162)',
+					data: [],
+					tension: 0.25,
+					fill: true,
+					pointRadius: 0
+				  }],
+				};
+			// Config Block
+				const config = {
+					type: 'line',
+					data,
+					options: {
+						streaming: {
+							frameRate: 1
+				  },
+					  scales: {
+						x: {
+							type: 'realtime',
+							realtime: {
+								duration: 30000,
+								refresh: 1000,
+								delay: 0,
+								onRefresh: chart => {
+									chart.data.datasets.forEach(dataset => {
+										dataset.data.push({
+										x: Date.now(),
+										y: localStorage.getItem("CTemp")
+										})
+									})
+								}
+							}
+						},
+						y: {
+							suggestedMin: (Number(localStorage.getItem("CTemp")) - 1),
+							suggestedMax: (Number(localStorage.getItem("CTemp")) + 1),
+						ticks: {
+							stepSize: 1,
+							stepValue: 10
+						}}
+					  },
+					   plugins: {
+							legend: false
+						}
+					}
+				  };
+			// Render Block
+				const chartCpuTemp = new Chart(
+					document.getElementById('chartCpuTemp'),
+					config
+				);
+			});
+			// Build MEMORY Chart				
+			$(function chartMemUsed() {
+			// Setup Block
+				const data = {
+				  labels: [],
+				  datasets: [{
+					label: 'Memory Usage',
+					borderColor : 'rgba(255, 120, 0)',
+					backgroundColor: 'rgba(255, 120, 0, 0.5)',
+					color: 'rgba(0, 179, 162)',
+					data: [],
+					tension: 0.25,
+					fill: true,
+					pointRadius: 0
+				  }],
+				};
+			// Config Block
+				const config = {
+					type: 'line',
+					data,
+					options: {
+						streaming: {
+							frameRate: 1
+				  },
+					  scales: {
+						x: {
+							type: 'realtime',
+							realtime: {
+								duration: 30000,
+								refresh: 1000,
+								delay: 0,
+								onRefresh: chart => {
+									chart.data.datasets.forEach(dataset => {
+										dataset.data.push({
+										x: Date.now(),
+										y: localStorage.getItem("MemoryUse")
+										})
+									})
+								}
+							}
+						},
+						y: {
+							suggestedMin: 0,
+							suggestedMax: 16,
+						ticks: {
+							stepSize: 4,
+							stepValue: 10
+						}}
+					  },
+					 plugins: {
+							legend: false
+						}
+					}
+				  };
+			// Render Block
+				const  chartMemUsed = new Chart(
+					document.getElementById('chartMemUsed'),
+					config
+				);
+			});
+			setInterval(api, 1000);
+			
+			$(function memChart() {
+// Setup Block
+	var memFree = <%= json.encode(sys.value.memory.free) %>;
+	var memBuff = <%= json.encode(sys.value.memory.buffers) %>;
+	var memUsed = <%= json.encode(sys.value.memory.used) %>;
+	const data = {
+		labels: ['Free', 'Buffured', 'Used'],
+		datasets: [{
+			label: 'Memory Status',
+			borderWidth: 4,
+			data: [memFree, memBuff, memUsed]
+		}]
+	};
+// Config Block
+	const config = {
+		type: 'doughnut',
+		data,
+		options: {
+			borderColor: '#fbfbfb',
+			responsive: true,
+			maintainAspectRatio: false,
+			rotation: -135,
+			circumference: 270,
+			backgroundColor: [
+                    '#006787',
+                    '#0075af',
+                    '#cbcbcb'
+			]
+		}
+    };
+// Render Block
+	const memoryChart = new Chart(
+		document.getElementById('memoryChart'),
+		config
+	)
+});
+</script>
 <% --[[
 	io.write(htmlviewfunctions.cfe_unpack(view))
 	io.write(htmlviewfunctions.cfe_unpack(FORM))
