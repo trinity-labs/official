@@ -32,8 +32,8 @@
 	local minor_distver = string.gsub(string.match(actual_distver, "%p%d+"), "%D", "") -- Parse Minor for Update
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
-		blockcolor = "<div class='data-block data-system system-uptodate'>"
-		chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check'>Up To Date | Alpine <span class='version-number-uptodate'>" .. check_sysver .. "</span></span></a>"
+	   blockcolor = "<div class='data-block data-system system-uptodate'>"
+	   chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check'>Up To Date | Alpine <span class='version-number-uptodate'>" .. check_sysver .. "</span></span></a>"
 	else
 		blockcolor = "<div class='data-block data-system system-update'>"
 		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'><span class='version-check'>Update Needed | Alpine <span class='version-number-update'>" .. check_sysver .. "</span></span></a>"
@@ -46,7 +46,7 @@
 	end
 	
 -- GET DIST VERSION CHANGES
-	local check_verchanges = string.gsub(string.match(string.match(sys.value.alpineposts.value, "(href=\"Alpine-.+("..actual_distver.."))(.+\")") or "", "\".+\"") or "", "\"", "")
+	local get_verchanges = string.match(sys.value.alpineposts.value, "[%p?%d?.%d?.%d?]+%p?".. actual_distver .."[%p?%d?.%d?.%d?]+")
 	
 -- FORMAT UPTIME	
 	local up_time = math.floor(string.match(sys.value.uptime.value, "[%d]+"))
@@ -94,6 +94,7 @@
 	for intf in pairs(netstats.value) do table.insert(interfaces, intf) end
 	table.sort(interfaces)
 
+
 -- FORMAT BYTES	
 function bytesToSize(bytes)
 	kilobyte = 1000;
@@ -136,9 +137,11 @@ function blocksToSize(octets)
   end
 end
 
--- GET PHYSICAL HDD	
-	-- local physicalDisk = string.match(disk.value.partitions.value, "(sd%a)")
-	-- local physicalCapacity = string.gsub(string.match(disk.value.partitions.value, "(%d+.sd%a)"), "%D", "")
+-- GET DISKS & PARTITIONS
+
+	
+
+
 %>
 
 <% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Dashboard"}), page_info) %>
@@ -154,7 +157,7 @@ end
 				<p class="dashboard-infos dash-info-version">
 					<%= chkres %>
 					<span class="check-version">
-					 <a class="version-link version-external-link" href="https://www.alpinelinux.org/posts/<%= check_verchanges %>#content" title="🔗 https://www.alpinelinux.org/posts/<%= check_verchanges %>" target="_blank">Last Release : <%= actual_distver %></a><br>
+					 <a class="version-link version-external-link" href="https://www.alpinelinux.org/posts/Alpine<%= get_verchanges %>released.html#content" title="🔗 https://www.alpinelinux.org/posts/Alpine<%= get_verchanges %>released.html#content" target="_blank">Last Release : <%= actual_distver %></a><br>
 					 </span>
 					<span class="kernel-ver">Kernel @ <%= sys.value.kernel.value %> | ACF - <%= sys.value.luaver.value %></span>
 				</p>
@@ -176,15 +179,19 @@ end
 			<span class="data-title">Board</span>
 			<%
 			-- EXEMPLE TO PARSE KNOW MOBO MODELS OR YOUR OWN ONE
-			if string.match(sys.value.boardName.value, "EMB%-H81B") then
+			if string.match(sys.value.boardVendor.value, "ASUSTeK COMPUTER INC.") then
+				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "ASUSTeK COMPUTER INC.", "ASUS"))
+				print (" | " .. sys.value.boardName.value .. " | ")
+				print (version_parse(string.gsub(sys.value.boardVersion.value, "^", "")))
+			elseif string.match(sys.value.boardName.value, "EMB%-H81B") then
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON"))
 				print (" | " .. sys.value.boardName.value .. " | ")
 				print (string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
 			-- ELSE REWRITE ALL OTHERS
 			else
-				print ("<span>" .. oem_parse(sys.value.boardVendor.value) .. "</span>")
-				print (" | <span>" .. oem_parse(sys.value.boardName.value) .. "</span> | ")
-				print ("<span>" .. version_parse(string.gsub(sys.value.boardVersion.value, "^", "Rev : ")) .. "</span>")
+				print ("<span>" .. oem_parse(sys.value.boardVendor.value))
+				print (" | " .. oem_parse(sys.value.boardName.value) .. " | ")
+				print (version_parse(string.gsub(sys.value.boardVersion.value, "^", "Rev : ")))
 			end
 			%>
 			</p>
@@ -193,9 +200,9 @@ end
 			</p>
 			<p class="dashboard-infos dash-info-memory" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">Memory</span>
-					<%= bytesToSize(tonumber(sys.value.memory.totalData)) %> Total |
-						<%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free | 
-							<%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used 
+					<%= string.gsub(bytesToSize(tonumber(sys.value.memory.totalData)), ".%d+%w+", "") %> Total |
+					<%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free | 
+					<%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used 
 			</p>	
 		</div>
 		
@@ -243,24 +250,38 @@ end
 		
 		<p class="dashboard-infos">
 			<span class="data-title">System Temp</span>
+			<a href='javascript:void(0);' id='toggle-degree' title='Celsius to Fahrenheit' onclick='toggleDegree()'>
 				<span id="cpuTemp" class="dash-monitoring-temp">			
 				<%
 			if ((tonumber(api.value.cpuTemp.value)) ~= nil) and ((tonumber(api.value.cpuTemp.value)) < 50000) then
-			print (tonumber(api.value.boardTemp.value / 1000)  .. " °C  &nbsp; | " .. "<span class='normal'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
+			print (math.ceil(tonumber(api.value.boardTemp.value / 1000))  .. " °C  &nbsp; | " .. "<span class='normal'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
 			elseif ((tonumber(api.value.cpuTemp.value)) ~= nil) and ((tonumber(api.value.cpuTemp.value)) >= 50000) then
-			print (tonumber(api.value.boardTemp.value / 1000)  .. " °C  &nbsp; | " .. "<span class='medium'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
+			print (math.ceil(tonumber(api.value.boardTemp.value / 1000))  .. " °C  &nbsp; | " .. "<span class='medium'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
 			elseif((tonumber(api.value.cpuTemp.value)) ~= nil) and ((tonumber(api.value.cpuTemp.value)) >= 75000) then
-			print (tonumber(api.value.boardTemp.value / 1000)  .. " °C  &nbsp; | " .. "<span class='hot'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
+			print (math.ceil(tonumber(api.value.boardTemp.value / 1000))  .. " °C  &nbsp; | " .. "<span class='hot'>" .. math.floor(tonumber(api.value.cpuTemp.value / 1000)) .. " °C</span>")
 			else
 			print ("<span class='nan'>N/A<span>")
 			end
 			%>
+			
+			<script type="application/javascript" defer>
+			// CONVERT TEMP TO FAHRENHEIT
+			if (((<%= tonumber(api.value.cpuTemp.value) %>) < 50000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
+					document.getElementById("cpuTemp").innerHTML = ((Math.ceil(((<%= tonumber(api.value.boardTemp.value) %>) / 1000) * 9 / 5) + 32) + " °F  &nbsp; | <span class='normal'>" + (Math.floor(((<%= tonumber(api.value.cpuTemp.value) %>) / 1000) * 9 / 5) + 32)) + " °F</span>";
+				} else if (((<%= tonumber(api.value.cpuTemp.value) %>) >= 50000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
+					document.getElementById("cpuTemp").innerHTML = ((Math.ceil(((<%= tonumber(api.value.boardTemp.value) %>) / 1000) * 9 / 5) + 32) + " °F  &nbsp; | <span class='medium'>" + (Math.floor(((<%= tonumber(api.value.cpuTemp.value) %>) / 1000) * 9 / 5) + 32)) + " °F</span>";
+				} else if (((<%= tonumber(api.value.cpuTemp.value) %>) >= 75000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
+					document.getElementById("cpuTemp").innerHTML = ((Math.ceil(((<%= tonumber(api.value.boardTemp.value) %>) / 1000) * 9 / 5) + 32) + " °F  &nbsp; | <span class='hot'>" + (Math.floor(((<%= tonumber(api.value.cpuTemp.value) %>) / 1000) * 9 / 5) + 32)) + " °F</span>";
+				}
+			</script>
+			
 				</span>
+				</a>
 		</p>
 		
 		<p class="dashboard-infos">
 			<span class="data-title">IP</span>
-				<span class="value-title value-net-local"><%= net.value.wanIP.value %>  &nbsp; via &nbsp; <%= netstats.value.eth0.ipaddr %></span>
+				<span class="value-title value-net-local"><%= net.value.wanIP.value %>  &nbsp; via &nbsp; <%= netstats.value.br0.ipaddr %></span>
 		</div>
 	</div>
 <!-- Dashboard App Block - LINE 1 -->
@@ -288,336 +309,145 @@ end
 <!-- Dashboard App Block - LINE 3 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
+	<div class="disk-list">
+		<%
+				local fdisk_output = sys.value.drivelist.value
+-- Function to parse fdisk output and detect disks
+function detect_disks(fdisk_output)
+    local disks = {}
+    for disk_name in fdisk_output:gmatch("Disk /dev/(sd%a):") do
+        table.insert(disks, "/dev/" .. disk_name)
+    end
+    return disks
+end
 
+-- Function to parse fdisk output
+function parse_fdisk_output(output)
+    local disk_info = {}
+
+    -- Initialize variables to store disk geometry and partitions
+    local geometry = {}
+    local partitions = {}
+
+    -- Flags to track when to start capturing geometry and partitions
+    local capture_geometry = false
+    local capture_partitions = false
+
+    -- Split the output into lines
+    for line in output:gmatch("[^\r\n]+") do
+        -- Start capturing geometry when 'Disk /dev/' is encountered
+        if line:match("^Disk%s/dev/(sd%a):") then
+            capture_geometry = true
+        end
+
+        -- Start capturing partitions when 'Device' is encountered
+        if line:match("^Device") then
+            capture_partitions = true
+        end
+
+        -- Capture disk geometry
+        if capture_geometry then
+            local disk_size = line:match("Disk /dev/sd%a: (%S+ %a+)")
+            if disk_size then
+                geometry.disk_size = ("<span class='disk-size'>" .. disk_size .. "</span>")
+            end
+
+            local sector_size = line:match("Sector size %(logical/physical%): (%d+)/(%d+)")
+            if sector_size then
+                geometry.logical_sector_size = tonumber(sector_size)
+            end
+
+            local total_sectors = line:match("total (%d+) sectors")
+            if total_sectors then
+                geometry.total_sectors = tonumber(total_sectors)
+            end
+			
+			local disk_model = line:match("Disk model: (.+)")
+            if disk_model then
+                geometry.disk_model = disk_model
+            end
+
+            local heads_cylinders_sectors = line:match("(%d+) heads, (%d+) sectors/track, (%d+) cylinders")
+            if heads_cylinders_sectors then
+                geometry.heads = tonumber(heads_cylinders_sectors:match("(%d+)"))
+                geometry.sectors_per_track = tonumber(heads_cylinders_sectors:match(", (%d+)"))
+                geometry.cylinders = tonumber(heads_cylinders_sectors:match(", (%d+)$"))
+            end
+        end
+
+-- Capture partition information
+if capture_partitions then
+    -- Extracting information from each line
+    local partition_device, start_sector, end_sector, sectors, size, partition_type, name = line:match("^%s*([^%s]+)%s+(%d+)%s+(%d+)%s+(%d+)%s+([%d%.]+%s*[A-Za-z]+)%s+(%w+)%s+(.*)$")
+
+    if partition_device then
+        local partition = {
+            device = partition_device,
+            start_sector = tonumber(start_sector),
+            end_sector = tonumber(end_sector),
+            size = size,
+            type = partition_type,
+            name = name
+        }
+        
+        table.insert(partitions, partition)
+    else
+        -- Print unmatched lines for debugging
+        print()
+    end
+end
+end
+
+    -- Store geometry and partitions in disk_info table
+    disk_info.geometry = geometry
+    disk_info.partitions = partitions
+
+    return disk_info
+end
+-- Detect disks
+local disks = detect_disks(fdisk_output)
+
+-- Iterate over each disk
+for _, disk in ipairs(disks) do
+    print("<div class='disk-block disk-" .. disk:gsub("/dev/", "") .. "-block'>")
+    print("Parsing disk:", disk)
+    print("--------------------")
+	 
+    -- Execute fdisk command for the disk and store the output in a variable
+    local fdisk_output_disk = io.popen("fdisk -l " .. disk):read("*a")
+	
+    -- Parse fdisk output for the disk
+    local disk_info = parse_fdisk_output(fdisk_output_disk)
+    
+    -- Print disk geometry
+    --print("Disk Geometry:")
+    for key, value in pairs(disk_info.geometry) do
+        print(key .. ":", value)
+		--print("disk Size":", disk_info.geometry.disk_size)
+    end
+    print()
+    
+    -- Print parsed partitions for the disk
+    print("Partitions:")
+    for _, partition in ipairs(disk_info.partitions) do
+        print("Partition Device:", partition.device)
+        --print("Start Sector:", partition.start_sector)
+        --print("End Sector:", partition.end_sector)
+        print("Size:", partition.size)
+        --print("Type:", partition.type)
+        print("Name:", partition.name)
+        print()
+    end
+    
+    print("--------------------")
+    print()
+	print(disk_info.geometry.disk_size)
+    print("</div>")
+end
+		%>
+				</div>
 	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
-<div class="dashboard-main main-block medium-block">
-	<div class="dashboard-disk dashboard-block">
-		<h4 class="dashboard-block-title dashboard-title-disk">Disk</h4>
-<!-- Dashboard Main Block - DISK CHART FROM N.ANGELACOS ACF NATIVE APP -->
-	<% displaydisk = function(disk, name)
-		io.write('<table id="legend-title" style="margin:0px;padding:0px;border:0px;margin-top:5px;">\n')
-		io.write("	<tr>\n")
-		io.write('		<td id="legend-object" width="100px"><b>'..html.html_escape(name)..'</b></td>\n')
-		io.write("	</tr>\n")
-		io.write("</table>\n")
-		io.write('<table class="chart-bar chart-storage">\n')
-		io.write("	<tr>\n")
-		io.write("		<td>0%</td>\n")
-	if tonumber(disk.used) > 0 then
-		io.write('		<td id="capacity-used" class="capacity-used" width="'..html.html_escape(disk.used)..'%" style="')
-	if tonumber(disk.used) < 100 then io.write('')
-	end
-		io.write('"><center><b>')
-	if ( tonumber(disk.used) > 0) then io.write(html.html_escape(disk.used) .. "%") end
-		io.write('</b></center></td>\n')
-	end
-	if tonumber(disk.used) < 100 then
-		io.write('		<td id="capacity-free" class="capacity-free" width="'..(100-tonumber(disk.used))..'%" style="')
-	if tonumber(disk.used) > 0 then io.write('') 
-		end
-		io.write('"><center><b>')
-	if ( 100 > tonumber(disk.used)) then io.write((100-tonumber(disk.used)) .. "%") end
-		io.write('</b></center></td>\n')
-	end
-		io.write('		<td>100%</td>\n')
-		io.write("	</tr>\n")
-		io.write("</table>\n")
-	end
-	if (disk.value.hd) then
-			for name,hd in pairs(disk.value.hd.value) do
-				displaydisk(hd, name)
-	end
-	else %>
-<p class="error error-txt">No Hard Drive Mounted</p>
-<% end %>
-<% if (disk.value.ramdisk) then
-			for name,ramdisk in pairs(disk.value.ramdisk.value) do
-				displaydisk(ramdisk, name)
-	end
-	else %>
-<p class="error error-txt">No RamDisk Mounted</p>
-<% end %>
-	</div>
 </div>
-
-<!-- Dashboard Main Block - MEMORY - BLOCK 3 -->
-<div class="dashboard-main main-block small-block">
-	<div class="dashboard-memory dashboard-block">
-		<h4 class="dashboard-block-title dashboard-title-memory">Memory</h4>
-<!-- Dashboard Main Block - CHART.JS -->
-		<div class="chart-canvas chartjs">
-				<canvas id="memoryChart" class="data-chart block-chart"></canvas>
-		</div>
-			<p class="legend-memory-free"><span class="corporate-blue"><%= sys.value.memory.free %><sup>%</sup></span>
-			</p>
-		<div class="data-block data-memory">
-			<p class="data">
-				<span class="data-title">Memory : </span>
-					<span class="data-mem-total"><%= bytesToSize(tonumber(sys.value.memory.totalData)) %> Total</span> |
-						<span class="data-mem-free"><%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free</span> | 
-							<span class="data-mem-used"><%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used</span>
-			</p>
-		</div>	
-<!-- Dashboard Main Block - MEMORY CHART.JS -->		
-		</div>
-	</div>
-<!-- Dashboard App Block - LINE 3 -->
-</div>
-
-<!-- Dashboard App Block - LINE 4 -->
-<div class="dashboard-main main-block">
-<!-- Dashboard Main Block - DISK & PARTITION 1 -->
-	<div style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/storage', '_blank')" class="dashboard-disk dashboard-block large-block">
-		<div class="data-block data-diskpart">
-			<h4 class="dashboard-block-title dashboard-title-disk-viewer">Disk | Partition Viewer</h4>
-				<p class="dashboard-infos dash-info-keys">
-					<span class="data-title">List of Hardware Disk : </span>
-					</p>
-						<div class="section-disk" id="disk-partition-view">
-							<div id="partition-table">
-								<% displaydisk = function(disk, name)
-								io.write('<table id="legend-title" style="margin:0px;padding:0px;border:0px;margin-top:5px;">\n')
-								io.write("	<tr>\n")
-								io.write('		<td id="legend-object" width="100px"><b>'..html.html_escape(name)..'</b></td>\n')
-								io.write("	</tr>\n")
-								io.write("</table>\n")
-								io.write('<table class="chart-bar chart-storage">\n')
-								io.write("	<tr>\n")
-								io.write("		<td>0%</td>\n")
-							if tonumber(disk.used) > 0 then
-								io.write('		<td id="capacity-used" class="capacity-used" width="'..html.html_escape(disk.used)..'%" style="')
-							if tonumber(disk.used) < 100 then io.write('')
-							end
-								io.write('"><center><b>')
-							if ( tonumber(disk.used) > 0) then io.write(html.html_escape(disk.used) .. "%") end
-								io.write('</b></center></td>\n')
-							end
-							if tonumber(disk.used) < 100 then
-								io.write('		<td id="capacity-free" class="capacity-free" width="'..(100-tonumber(disk.used))..'%" style="')
-							if tonumber(disk.used) > 0 then io.write('') 
-							end
-								io.write('"><center><b>')
-							if ( 100 > tonumber(disk.used)) then io.write((100-tonumber(disk.used)) .. "%") end
-								io.write('</b></center></td>\n')
-							end
-								io.write('		<td>100%</td>\n')
-								io.write("	</tr>\n")
-								io.write("</table>\n")
-							end
-							if (disk.value.hd) then
-							for name,hd in pairs(disk.value.hd.value) do
-								displaydisk(hd, name)
-							end
-							else %>
-								<p class="error error-txt">No Hard Drive Mounted</p>
-							<% end %>
-							<% if (disk.value.ramdisk) then
-							for name,ramdisk in pairs(disk.value.ramdisk.value) do
-								displaydisk(ramdisk, name)
-							end
-							else %>
-								<p class="error error-txt">No RamDisk Mounted</p>
-							<% end %>
-								</div>
-							</div>
-						</div>
-					<pre>
-						<%= disk.value.partitions.value %>
-				</pre>
-				
-				<pre>
-						<%= net.value.PhysicalIfaces.value %>
-				</pre>
-			</div>		
-		</div>
-	</div>
-<!-- Dashboard App Block - LINE 4 -->
-</div>
-<script type="application/javascript" defer>
-// TRIИITY API					
-			async function api() {
-				let url = document.location.hostname + '/alpine-baselayout/health/api?viewtype=json';
-				let obj = await (await fetch(url)).json();
-				if ((obj.value.cpuTemp.value) < 50000) {
-					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='normal'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
-				} else if ((obj.value.cpuTemp.value) >= 50000) {
-					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='medium'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
-				} else if ((obj.value.cpuTemp.value) >= 75000) {
-					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='hot'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
-				} else {
-					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='nan'>N/A</span>");
-				};
-				window.localStorage.removeItem('CTemp');
-				window.localStorage.setItem('CTemp', (Math.floor((obj.value.cpuTemp.value)) / 1000));
-				window.localStorage.removeItem('MemoryUse');
-				window.localStorage.setItem('MemoryUse', (obj.value.memUsed));
-				window.localStorage.removeItem('MemoryTotal');
-				window.localStorage.setItem('MemoryTotal', (obj.value.memTotal));
-			};
-			// Build CPU TEMP Chart	
-			$(function chartCpuTemp() {
-			// Setup Block
-				const data = {
-				  labels: [],
-				  datasets: [{
-					label: 'CPU Temp',
-					borderColor : 'rgba(255, 105, 180)',
-					backgroundColor: 'rgba(255, 105, 180, 0.5)',
-					color: 'rgba(0, 179, 162)',
-					data: [],
-					tension: 0.25,
-					fill: true,
-					pointRadius: 0
-				  }],
-				};
-			// Config Block
-				const config = {
-					type: 'line',
-					data,
-					options: {
-						streaming: {
-							frameRate: 1
-				  },
-					  scales: {
-						x: {
-							type: 'realtime',
-							realtime: {
-								duration: 30000,
-								refresh: 1000,
-								delay: 0,
-								onRefresh: chart => {
-									chart.data.datasets.forEach(dataset => {
-										dataset.data.push({
-										x: Date.now(),
-										y: localStorage.getItem("CTemp")
-										})
-									})
-								}
-							}
-						},
-						y: {
-							suggestedMin: (Number(localStorage.getItem("CTemp")) - 1),
-							suggestedMax: (Number(localStorage.getItem("CTemp")) + 1),
-						ticks: {
-							stepSize: 1,
-							stepValue: 10
-						}}
-					  },
-					   plugins: {
-							legend: false
-						}
-					}
-				  };
-			// Render Block
-				const chartCpuTemp = new Chart(
-					document.getElementById('chartCpuTemp'),
-					config
-				);
-			});
-			// Build MEMORY Chart				
-			$(function chartMemUsed() {
-			// Setup Block
-				const data = {
-				  labels: [],
-				  datasets: [{
-					label: 'Memory Usage',
-					borderColor : 'rgba(255, 120, 0)',
-					backgroundColor: 'rgba(255, 120, 0, 0.5)',
-					color: 'rgba(0, 179, 162)',
-					data: [],
-					tension: 0.25,
-					fill: true,
-					pointRadius: 0
-				  }],
-				};
-			// Config Block
-				const config = {
-					type: 'line',
-					data,
-					options: {
-						streaming: {
-							frameRate: 1
-				  },
-					  scales: {
-						x: {
-							type: 'realtime',
-							realtime: {
-								duration: 30000,
-								refresh: 1000,
-								delay: 0,
-								onRefresh: chart => {
-									chart.data.datasets.forEach(dataset => {
-										dataset.data.push({
-										x: Date.now(),
-										y: localStorage.getItem("MemoryUse")
-										})
-									})
-								}
-							}
-						},
-						y: {
-							suggestedMin: 0,
-							suggestedMax: 16,
-						ticks: {
-							stepSize: 4,
-							stepValue: 10
-						}}
-					  },
-					 plugins: {
-							legend: false
-						}
-					}
-				  };
-			// Render Block
-				const  chartMemUsed = new Chart(
-					document.getElementById('chartMemUsed'),
-					config
-				);
-			});
-			setInterval(api, 1000);
-			
-			$(function memChart() {
-// Setup Block
-	var memFree = <%= json.encode(sys.value.memory.free) %>;
-	var memBuff = <%= json.encode(sys.value.memory.buffers) %>;
-	var memUsed = <%= json.encode(sys.value.memory.used) %>;
-	const data = {
-		labels: ['Free', 'Buffured', 'Used'],
-		datasets: [{
-			label: 'Memory Status',
-			borderWidth: 4,
-			data: [memFree, memBuff, memUsed]
-		}]
-	};
-// Config Block
-	const config = {
-		type: 'doughnut',
-		data,
-		options: {
-			borderColor: '#fbfbfb',
-			responsive: true,
-			maintainAspectRatio: false,
-			rotation: -135,
-			circumference: 270,
-			backgroundColor: [
-                    '#006787',
-                    '#0075af',
-                    '#cbcbcb'
-			]
-		}
-    };
-// Render Block
-	const memoryChart = new Chart(
-		document.getElementById('memoryChart'),
-		config
-	)
-});
-</script>
-<% --[[
-	io.write(htmlviewfunctions.cfe_unpack(view))
-	io.write(htmlviewfunctions.cfe_unpack(FORM))
-	io.write(htmlviewfunctions.cfe_unpack(ENV))
---]] %>
 
 <% htmlviewfunctions.displaysectionend(header_level) %>
