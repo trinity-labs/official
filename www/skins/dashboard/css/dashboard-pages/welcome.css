@@ -50,7 +50,7 @@ span.dashboard-infos {
 
 .uptime {
     position: relative;
-    color: #00cbb4;
+    color: #00bac9;
     font-size: 0.65rem;
     font-weight: 900;
 }
@@ -429,7 +429,7 @@ span.dashboard-infos {
 #cpuTemp.dash-monitoring-temp .hot {
     font-size: 0.65rem !important;
     font-weight: 900;
-    color: #00cbb4;
+    color: #00bac9;
 	margin: auto !important;
 }
 
@@ -443,7 +443,7 @@ span.dashboard-infos {
     margin: auto !important;
     padding: 0.15rem !important;
     font-size: 0.45rem !important;
-	color:#00cbb4 !important;
+	color:#00bac9 !important;
 }
 
 .normal {
@@ -772,6 +772,7 @@ input:checked + .slider:before {
 .dashboard-infos.dash-info-cpu {
     color: #0078cf;
     font-weight: 900;
+    font-size: 0.55rem;
 }
 
 .dashboard-infos.dash-info-bios {
@@ -866,7 +867,7 @@ input:checked + .slider:before {
 
 .data-block.data-monitoring {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #00cbb4;
+    border-left: 33px solid #00bac9;
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;
@@ -897,4 +898,9 @@ input:checked + .slider:before {
 
 .value-title.value-net-local {
     text-transform: lowercase;
+}
+
+.disk-list {
+    white-space: pre;
+    display: block;
 }

@@ -39,6 +39,14 @@ local function diskfree ( media )
 	return cmd_result
 end
 
+local function disklist ( media )
+	local cmd_result = modelfunctions.run_executable({"fdisk", "-l"})
+	if not cmd_result or cmd_result == "" then
+		cmd_result = "unknown"
+	end
+	return cmd
+end
+
 local function memusage ( )
 	local mult = { kB=1024, MB=1048576, GB=1073741824 }
 	local fd = io.open("/proc/meminfo")
@@ -67,12 +75,13 @@ end
 mymodule.get_system = function (self)
 	local system = {}
 	local meminfo = memusage()
+	local diskinfo = disklist()
 	local indexver = indexversion()
 	system.uptime = cfe({ value=querycmd("cat /proc/uptime"), label="Uptime" })
 	system.date = cfe({ value=querycmd("date"), label="Date" })
 	system.alpinever = cfe({ value=querycmd("curl https://www.alpinelinux.org/releases.json") or "Unknown", label="Check Alpine Version" })
-	system.alpineposts = cfe({ value=querycmd("curl https://www.alpinelinux.org/posts/"), label="Check Version Changes" })
-	system.version = cfe({ value=indexver or fs.read_file("/etc/alpine-release") or "Unknown", label="Version" })
+	system.alpineposts = cfe({ value=querycmd("curl https://www.alpinelinux.org/posts/"), label="Get Version Changes" })
+	system.version = cfe({ value=querycmd("cat /etc/alpine-release") or "Unknown", label="Version" })
 	system.alpineluaver = cfe({ value=string.match(querycmd("cat /usr/share/acf/www/cgi-bin/acf") or "Unknown", "lua%d.%d") or "Unknown", label="Alpine Lua Version" })
 	system.luaver = cfe({ value=string.match(querycmd((system.alpineluaver.value) .. " -v") or "Unknown", "Lua%s%d.%d.%d") or "Unknown", label="Lua Version" })
 	system.ACFnginxServer = cfe({ value=querycmd("nginx -V") or "", label="ACF Nginx Server" })
@@ -88,6 +97,7 @@ mymodule.get_system = function (self)
 	system.memory.free = math.floor(100 * meminfo["MemFree"] / meminfo["MemTotal"])
 	system.memory.buffers = math.floor(100 * (meminfo["Buffers"] + meminfo["Cached"]) / meminfo["MemTotal"])
 	system.memory.used = 100 - math.floor(100 * (meminfo["MemFree"] - meminfo["Buffers"] + meminfo["Cached"]) / meminfo["MemTotal"])
+	system.drivelist = cfe({ value=querycmd("fdisk -l") or "Unknown", label="Board Name" })
 	system.boardName = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_name") or "Unknown", label="Board Name" })
 	system.boardVendor = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_vendor") or "Unknown", label="Board Vendor" })
 	system.boardVersion = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_version") or "Unknown", label="Board Version" })
@@ -161,11 +171,12 @@ mymodule.get_api = function (self)
 	local api = {}
 	local meminfo = memusage()
 	api.cpuTemp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone2/temp") or "N/A", label="CPU Temp" })
-	api.boardTemp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone0/temp") or "N/A", label="Board Temp" })
+	api.boardTemp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone1/temp") or "N/A", label="Board Temp" })
 	api.memory = cfe({ value=querycmd("free"), label="Memory usage" })
 	api.memTotal = string.format("%.2f", (meminfo["MemTotal"]) / 1000000000)
 	api.memFree = string.format("%.2f", (meminfo["MemFree"]) / 1000000000)
 	api.memUsed = string.format("%.2f", (meminfo["Buffers"] + meminfo["Cached"]) / 1000000000)
+	api.disk = cfe({ value=querycmd("fdisk -l"), label="Disk List" })
 	return cfe({ type="group", value=api, label="Hardware API" })
 end
 

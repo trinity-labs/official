@@ -144,16 +144,25 @@
 			}
 			window.localStorage.setItem('html', themeUpdated);
 			};
-			// ChartJS API					
+			// ChartJS API		
+if(window.location.href.indexOf("/acf/acf-util/welcome/read") > -1){			
 			async function api() {
 				let url = document.location.hostname + '/alpine-baselayout/health/api?viewtype=json';
-				let obj = await (await fetch(url)).json();
-				if ((obj.value.cpuTemp.value) < 50000) {
-					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='normal'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
-				} else if ((obj.value.cpuTemp.value) >= 50000) {
-					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='medium'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
-				} else if ((obj.value.cpuTemp.value) >= 75000) {
-					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='hot'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
+				let obj = await (await fetch(url)).json();				
+			// FORMATED TEMP JS LIVE TIMER
+				if (((obj.value.cpuTemp.value) < 50000) && (window.localStorage.getItem('toggle-degree') === 'celsius')) {
+					document.getElementById("cpuTemp").innerHTML = (Math.ceil((obj.value.boardTemp.value) / 1000)) + (" °C  &nbsp; | <span class='normal'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
+				} else if (((obj.value.cpuTemp.value) >= 50000) && (window.localStorage.getItem('toggle-degree') === 'celsius')) {
+					document.getElementById("cpuTemp").innerHTML = (Math.ceil((obj.value.boardTemp.value) / 1000)) + (" °C  &nbsp; | <span class='medium'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
+				} else if (((obj.value.cpuTemp.value) >= 75000) && (window.localStorage.getItem('toggle-degree') === 'celsius')) {
+					document.getElementById("cpuTemp").innerHTML = (Math.ceil((obj.value.boardTemp.value) / 1000)) + (" °C  &nbsp; | <span class='hot'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
+			// FORMATED TEMP TO FAHRENHEIT
+				} else if (((obj.value.cpuTemp.value) < 50000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
+					document.getElementById("cpuTemp").innerHTML = (Math.ceil((((obj.value.boardTemp.value) / 1000) * 9 / 5) + 32)) + (" °F  &nbsp; | <span class='normal'>" + (Math.floor(((obj.value.cpuTemp.value) / 1000) * 9 / 5) + 32)) + " °F</span>";
+				} else if (((obj.value.cpuTemp.value) >= 50000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
+					document.getElementById("cpuTemp").innerHTML = (Math.ceil((((obj.value.boardTemp.value) / 1000) * 9 / 5) + 32)) + (" °F  &nbsp; | <span class='medium'>" + (Math.floor(((obj.value.cpuTemp.value) / 1000) * 9 / 5) + 32)) + " °F</span>";
+				} else if (((obj.value.cpuTemp.value) >= 75000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
+					document.getElementById("cpuTemp").innerHTML = (Math.ceil((((obj.value.boardTemp.value) / 1000) * 9 / 5) + 32)) + (" °F  &nbsp; | <span class='hot'>" + (Math.floor(((obj.value.cpuTemp.value) / 1000) * 9 / 5) + 32)) + " °F</span>";					
 				} else {
 					document.getElementById("cpuTemp").innerHTML = ((obj.value.boardTemp.value) / 1000) + (" °C  &nbsp; | <span class='nan'>N/A</span>");
 				};
@@ -163,7 +172,6 @@
 				window.localStorage.setItem('MemoryUse', (obj.value.memUsed));
 				window.localStorage.removeItem('MemoryTotal');
 				window.localStorage.setItem('MemoryTotal', (obj.value.memTotal));
-				end;
 			};
 			// Build Chart	
 			$(function chartCpuTemp() {
@@ -268,7 +276,7 @@
 						},
 						y: {
 							suggestedMin: 0,
-							suggestedMax: 16,
+							suggestedMax: Math.floor(Number(localStorage.getItem("MemoryTotal"))),
 						ticks: {
 							stepSize: 4,
 							stepValue: 10
@@ -285,4 +293,4 @@
 					config
 				);
 			});
-			setInterval(api, 1000);
+setInterval(api, 1000)};

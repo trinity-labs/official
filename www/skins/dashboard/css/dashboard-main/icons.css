@@ -3,12 +3,19 @@
  *----------------------------------------------------------------------------------
  */
  
+#toggle-degree {
+    text-decoration: none !important;
+    font-weight: 900;
+    color: #cbcbcb;
+}
+ 
 .fa-2x {
     font-size: 1rem !important;
     color: rgb(203 203 203 / 87%) !important;
 }
 
 .logon-logon .fa-2x {
+    padding: 0 1rem;
     font-size: 1rem !important;
     color: rgb(203 203 203 / 87%) !important;
 }
@@ -17,6 +24,10 @@
     position: relative;
     font-size: 1.15rem !important;
     top: 0.05rem;
+}
+
+.logon-logon i.fa-brands.fa-gitlab.fa-2x.about-icon {
+    border-left: 2px solid #383838;
 }
  
  /*----------------------------------------------------------------------------------

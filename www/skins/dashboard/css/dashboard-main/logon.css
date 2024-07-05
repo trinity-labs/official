@@ -5,7 +5,7 @@
 
 .logon-logon,
 .dark-theme .logon-logon {
-    background: url(../../img/backgrounds/background-trinity-logon.jpg) no-repeat !important;
+    background: url(../../img/backgrounds/background-desert.jpg) no-repeat !important;
     background-size: cover !important;
 	background-position: center !important;
     display: flex;
@@ -20,8 +20,13 @@
     display: none;
 }
 
+.logon-logon input.submit:hover {
+    background: #40404087 !important;
+    border-color: #40404087 !important;
+}
+
 .logon-logon #header {
-    background-size: 8rem !important;
+    background-size: 6rem !important;
     background-image: url(../../img/logos/logo-trinity-full-white.png) !important;
     position: relative !important;
     border-radius: 10px 10px 0 0 !important;
