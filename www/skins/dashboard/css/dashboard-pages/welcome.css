@@ -290,7 +290,6 @@ span.dashboard-infos {
 
 .dashboard-infos {
     font-size: 0.65rem;
-    text-transform: capitalize;
     margin: 0;
     width: 100% !important;
 	font-weight: bold;
