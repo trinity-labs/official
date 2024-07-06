@@ -183,8 +183,14 @@ end
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "ASUSTeK COMPUTER INC.", "ASUS"))
 				print (" | " .. sys.value.boardName.value .. " | ")
 				print (version_parse(string.gsub(sys.value.boardVersion.value, "^", "")))
+			-- AAEON EMB-H81B
 			elseif string.match(sys.value.boardName.value, "EMB%-H81B") then
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON"))
+				print (" | " .. sys.value.boardName.value .. " | ")
+				print (string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
+			-- AAEON EMB-Q87A
+			elseif string.match(sys.value.boardName.value, "EMB%-Q87A") then
+				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "AAEON"))
 				print (" | " .. sys.value.boardName.value .. " | ")
 				print (string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
 			-- ELSE REWRITE ALL OTHERS
