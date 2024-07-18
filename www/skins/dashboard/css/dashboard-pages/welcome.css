@@ -873,6 +873,11 @@ input:checked + .slider:before {
     color: #cbcbcb !important;
 }
 
+.corpo-hardware-text {
+    color: #0078cf;
+    font-weight: 900;
+}
+
 .kernel-ver, .acf-ver {
     font-size: 0.65rem;
     position: relative;

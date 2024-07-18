@@ -179,24 +179,25 @@ end
 			<span class="data-title">Board</span>
 			<%
 			-- EXEMPLE TO PARSE KNOW MOBO MODELS OR YOUR OWN ONE
+			-- REWRITE ASUS BRAND NAME
 			if string.match(sys.value.boardVendor.value, "ASUSTeK COMPUTER INC.") then
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "ASUSTeK COMPUTER INC.", "ASUS"))
-				print (" | " .. sys.value.boardName.value .. " | ")
+				print (" | <span class='board-model corpo-hardware-text'>" .. sys.value.boardName.value .. "</span> | ")
 				print (version_parse(string.gsub(sys.value.boardVersion.value, "^", "")))
 			-- AAEON EMB-H81B
 			elseif string.match(sys.value.boardName.value, "EMB%-H81B") then
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified", "AAEON"))
-				print (" | " .. sys.value.boardName.value .. " | ")
+				print (" | <span class='board-model corpo-hardware-text'>" .. sys.value.boardName.value .. "</span> | ")
 				print (string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
 			-- AAEON EMB-Q87A
 			elseif string.match(sys.value.boardName.value, "EMB%-Q87A") then
 				print ("<span>" .. string.gsub(sys.value.boardVendor.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "AAEON"))
-				print (" | " .. sys.value.boardName.value .. " | ")
+				print (" | <span class='board-model corpo-hardware-text'>" .. sys.value.boardName.value .. "</span> | ")
 				print (string.gsub(sys.value.boardVersion.value, "To be filled by O.E.M." or "Not Specified" or "Unknow", "Rev: 2.00") .. "</span>")
 			-- ELSE REWRITE ALL OTHERS
 			else
 				print ("<span>" .. oem_parse(sys.value.boardVendor.value))
-				print (" | " .. oem_parse(sys.value.boardName.value) .. " | ")
+				print (" | <span class='board-model corpo-hardware-text'>" .. oem_parse(sys.value.boardName.value) .. "</span> | ")
 				print (version_parse(string.gsub(sys.value.boardVersion.value, "^", "Rev : ")))
 			end
 			%>
@@ -206,9 +207,12 @@ end
 			</p>
 			<p class="dashboard-infos dash-info-memory" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">Memory</span>
+				<span>
 					<%= string.gsub(bytesToSize(tonumber(sys.value.memory.totalData)), ".%d+%w+", "") %> Total |
 					<%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free | 
-					<%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used 
+					<span class='mem-used corpo-hardware-text'>
+					<%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used </span>
+					</span>
 			</p>	
 		</div>
 		
@@ -316,141 +320,7 @@ end
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
 	<div class="disk-list">
-		<%
-				local fdisk_output = sys.value.drivelist.value
--- Function to parse fdisk output and detect disks
-function detect_disks(fdisk_output)
-    local disks = {}
-    for disk_name in fdisk_output:gmatch("Disk /dev/(sd%a):") do
-        table.insert(disks, "/dev/" .. disk_name)
-    end
-    return disks
-end
 
--- Function to parse fdisk output
-function parse_fdisk_output(output)
-    local disk_info = {}
-
-    -- Initialize variables to store disk geometry and partitions
-    local geometry = {}
-    local partitions = {}
-
-    -- Flags to track when to start capturing geometry and partitions
-    local capture_geometry = false
-    local capture_partitions = false
-
-    -- Split the output into lines
-    for line in output:gmatch("[^\r\n]+") do
-        -- Start capturing geometry when 'Disk /dev/' is encountered
-        if line:match("^Disk%s/dev/(sd%a):") then
-            capture_geometry = true
-        end
-
-        -- Start capturing partitions when 'Device' is encountered
-        if line:match("^Device") then
-            capture_partitions = true
-        end
-
-        -- Capture disk geometry
-        if capture_geometry then
-            local disk_size = line:match("Disk /dev/sd%a: (%S+ %a+)")
-            if disk_size then
-                geometry.disk_size = ("<span class='disk-size'>" .. disk_size .. "</span>")
-            end
-
-            local sector_size = line:match("Sector size %(logical/physical%): (%d+)/(%d+)")
-            if sector_size then
-                geometry.logical_sector_size = tonumber(sector_size)
-            end
-
-            local total_sectors = line:match("total (%d+) sectors")
-            if total_sectors then
-                geometry.total_sectors = tonumber(total_sectors)
-            end
-			
-			local disk_model = line:match("Disk model: (.+)")
-            if disk_model then
-                geometry.disk_model = disk_model
-            end
-
-            local heads_cylinders_sectors = line:match("(%d+) heads, (%d+) sectors/track, (%d+) cylinders")
-            if heads_cylinders_sectors then
-                geometry.heads = tonumber(heads_cylinders_sectors:match("(%d+)"))
-                geometry.sectors_per_track = tonumber(heads_cylinders_sectors:match(", (%d+)"))
-                geometry.cylinders = tonumber(heads_cylinders_sectors:match(", (%d+)$"))
-            end
-        end
-
--- Capture partition information
-if capture_partitions then
-    -- Extracting information from each line
-    local partition_device, start_sector, end_sector, sectors, size, partition_type, name = line:match("^%s*([^%s]+)%s+(%d+)%s+(%d+)%s+(%d+)%s+([%d%.]+%s*[A-Za-z]+)%s+(%w+)%s+(.*)$")
-
-    if partition_device then
-        local partition = {
-            device = partition_device,
-            start_sector = tonumber(start_sector),
-            end_sector = tonumber(end_sector),
-            size = size,
-            type = partition_type,
-            name = name
-        }
-        
-        table.insert(partitions, partition)
-    else
-        -- Print unmatched lines for debugging
-        print()
-    end
-end
-end
-
-    -- Store geometry and partitions in disk_info table
-    disk_info.geometry = geometry
-    disk_info.partitions = partitions
-
-    return disk_info
-end
--- Detect disks
-local disks = detect_disks(fdisk_output)
-
--- Iterate over each disk
-for _, disk in ipairs(disks) do
-    print("<div class='disk-block disk-" .. disk:gsub("/dev/", "") .. "-block'>")
-    print("Parsing disk:", disk)
-    print("--------------------")
-	 
-    -- Execute fdisk command for the disk and store the output in a variable
-    local fdisk_output_disk = io.popen("fdisk -l " .. disk):read("*a")
-	
-    -- Parse fdisk output for the disk
-    local disk_info = parse_fdisk_output(fdisk_output_disk)
-    
-    -- Print disk geometry
-    --print("Disk Geometry:")
-    for key, value in pairs(disk_info.geometry) do
-        print(key .. ":", value)
-		--print("disk Size":", disk_info.geometry.disk_size)
-    end
-    print()
-    
-    -- Print parsed partitions for the disk
-    print("Partitions:")
-    for _, partition in ipairs(disk_info.partitions) do
-        print("Partition Device:", partition.device)
-        --print("Start Sector:", partition.start_sector)
-        --print("End Sector:", partition.end_sector)
-        print("Size:", partition.size)
-        --print("Type:", partition.type)
-        print("Name:", partition.name)
-        print()
-    end
-    
-    print("--------------------")
-    print()
-	print(disk_info.geometry.disk_size)
-    print("</div>")
-end
-		%>
 				</div>
 	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
