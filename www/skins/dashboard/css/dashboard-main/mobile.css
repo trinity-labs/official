@@ -120,16 +120,16 @@
 	}
 	
 	.logon-logon #header {
-    background-image: url(../../img/logos/logo-alpine-linux-white.png) !important;
+    background-image: url(../../img/logos/logo-trinity-full-acf-white.png) !important;
     position: relative !important;
     border-radius: 10px 10px 0 0 !important;
     background-position: 1.25rem center !important;
     padding: 0.15rem 0rem;
-    background-size: 6rem !important;
+    background-size: 8rem !important;
     justify-content: flex-end !important;
-    background-color: #006787 !important;
-    width: 90vw;
-    height: 3.5rem !important;
+    background-color: rgb(0 0 0 / 80%) !important;
+    width: 142vw;
+    height: 5.5rem !important;
     background-repeat: no-repeat !important;
 	}
 
