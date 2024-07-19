@@ -132,7 +132,34 @@
     height: 5.5rem !important;
     background-repeat: no-repeat !important;
 	}
+	
+	#userid {
+    margin-top: 0rem !important;
+	}
 
+	.logon-logon input {
+    padding: 0.25rem 0 0.25rem 0.5rem !important;
+	}
+	
+	.logon .item {
+    margin-top: 2rem;
+	}
+	
+	.logon-logon #content .submit {
+    width: 103%;
+	}
+	
+	.logon-logon .item:last-child {
+    margin: 0;
+	}
+	
+	button#showPass {
+    top: -2rem;
+    height: 2rem;
+    right: -0.65rem !important;
+    width: 2rem;
+	}
+	
 	.dashboard-main {
     display: block !important;
 	}
@@ -141,10 +168,6 @@
     color: #d9d9d9;
     float: left;
 	padding: 1.25rem 1.5rem 1.25rem 0.5rem !important;
-	}
-	
-	.logon button#showPass {
-    right: -0.8rem !important;
 	}
 	
 	.data-block {

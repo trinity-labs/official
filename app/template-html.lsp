@@ -115,7 +115,7 @@ end
 						print("<div id='header-links'><a id='logon' class='icon-header' title='Logon' href=\""..html.html_escape(ctlr).."logon\"><i class='fa-solid fa-lock fa-2x logon-icon'></i></a>" )
 					end
 				%>
-				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/acf-skins/-/blob/master/dashboard" target="_blank" title="About"><i class="fa-brands fa-gitlab fa-2x about-icon"></i></a>
+				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/trinity" target="_blank" title="About"><i class="fa-brands fa-gitlab fa-2x about-icon"></i></a>
 				<!-- Theme Toggle -->
 				<div class="theme-block-toggle">
 						<label class="switch">
