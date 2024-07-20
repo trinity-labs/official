@@ -76,6 +76,7 @@
 }
 
 #page-logon {
+    flex: 0 !important;
     background: rgb(0 0 0 / 50%) !important;
     border-radius: 0 0 10px 10px !important;
     width: 480px;

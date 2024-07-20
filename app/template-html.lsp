@@ -195,13 +195,12 @@ end
 				</div>	<!-- content -->
 
 			</div> <!-- main -->
-
-			<div id="footer" style="cursor: pointer;" onclick="window.open('https://www.alpinelinux.org/about/', '_blank')">
+		</div> <!-- page -->
+<% end --pageinfo.skinned%>
+		<footer id="footer" style="cursor: pointer;" onclick="window.open('https://www.alpinelinux.org/about/', '_blank')">
 				<a href="https://www.alpinelinux.org/about/" target="_blank">
 				© TRIИITY | 2022 - <%= (os.date("%Y")) %>
 				</a>
-			</div> <!-- footer -->
-		</div> <!-- page -->
-<% end --pageinfo.skinned%>
+		</footer> <!-- footer -->
 	</body>
 </html>

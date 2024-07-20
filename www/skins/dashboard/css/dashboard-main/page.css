@@ -4,12 +4,17 @@
  */
 
 body {
-	width: 100vw;
+    width: 100vw;
+    min-height: -webkit-fill-available;
     height: 100vh;
     max-width: 100%;
+    display: flex;
     font-family: sans-serif !important;
     font-size: 1rem;
     color: #444;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
 .category-title::before {
@@ -23,6 +28,7 @@ body {
  
 .page {
     background: #fefefe;
+    flex: 1;
     padding: 0.5rem 0 0 1rem;
 }
 
