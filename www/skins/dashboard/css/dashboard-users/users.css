@@ -1,6 +1,6 @@
 .user-icon {
 	background: linear-gradient(140deg, rgb(0 43 255) 0%, rgb(0 137 255) 100%);
-	background-image: url(../../img/users/doe/icon/john-doe.png);
+    background-image: url(../../img/logosd/root/icon/stopyz.jpg) !important; /*MY FACE 😅*/
     color: transparent;
     border-radius: 50em;
     background-size: cover;
@@ -9,13 +9,13 @@
 }
 
 
-/* ADD USER ICON WITH BUILT-IN PERSONAL USER CLASS*/
+/* ADD USER ICON WITH BUILT-IN PERSONAL CLASS USER NAME*/
 .user-root {
     background: linear-gradient(140deg, rgb(255 129 0) 0%, rgb(255 0 0) 100%);
-    background-image: url(../../img/users/root/icon/stopyz.jpg) !important; /*MY FACE 😅*/
+    background-image: url(../../img/logos/trinity-user.png) !important;
     color: transparent !important;
-    /* border-radius: 0 !important; */
-    background-size: contain !important;
+    background-size: 160% !important;
+    background-position: center;
     background-repeat: no-repeat !important;
     border-radius: 25px !important;
 }
