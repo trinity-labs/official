@@ -830,7 +830,7 @@ input:checked + .slider:before {
 
 .data-block.data-system.system-uptodate {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #7beb00;
+    border-left: 33px solid #68c700;
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;
