@@ -111,3 +111,7 @@
 .dark-theme #theme-conv {
     color: white !important;
 }
+
+.dark-theme .fa-solid.fa-circle-half-stroke {
+    color: rgb(99 0 210) !important;
+}

@@ -8,7 +8,7 @@
     background: url(../../img/backgrounds/background-desert.jpg) no-repeat !important;
     background-size: cover !important;
 	background-position: center !important;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
@@ -16,7 +16,8 @@
 }
 
 .logon-logon .hostname,
-.logon-logon #header h1 {
+.logon-logon #header h1,
+.logon-logon .fa-solid.fa-circle-half-stroke {
     display: none;
 }
 

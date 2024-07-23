@@ -3,6 +3,10 @@
  *----------------------------------------------------------------------------------
  */
  
+.fa-solid.fa-circle-half-stroke {
+    color: rgb(203 203 203 / 87%);
+}
+ 
 #toggle-degree {
     text-decoration: none !important;
     font-weight: 900;

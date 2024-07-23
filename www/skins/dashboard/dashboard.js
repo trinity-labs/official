@@ -26,8 +26,10 @@
 			if(window.location.href.indexOf("logon/logon") > -1){
 				document.querySelector('#userid input').setAttribute('required','required');
 				document.querySelector('#password input').setAttribute('required','required');
-				document.querySelector('#userid input').setAttribute('placeholder','🔒 User ID');
-				document.querySelector('#password input').setAttribute('placeholder','🔑 Password');
+				document.querySelector('#userid input').setAttribute('style',"font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600");
+				document.querySelector('#userid input').setAttribute('placeholder','    User ID');
+				document.querySelector('#password input').setAttribute('style',"font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600");
+				document.querySelector('#password input').setAttribute('placeholder','   Password');
 				document.querySelector('#login').setAttribute('autocomplete','on');
 				document.querySelector('#password input').setAttribute('autocomplete','current-password');
 				document.querySelector('.hidden').setAttribute('hidden','');

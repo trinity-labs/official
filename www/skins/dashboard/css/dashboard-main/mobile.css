@@ -12,23 +12,27 @@
 	overflow-x: hidden !important;
 	}
 	
+	body {
+	display: block !important;
+	}
+	
 	html.app-logon {
 	overflow: hidden !important;
 	}
 	
-	header {
-    zoom: 63%;
-    height: 4rem;
-    padding: 0 !important;
-    position: absolute !important;
-    display: flex;
-    background: white !important;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    background-position: 2rem center !important;
-    justify-content: center;
-    width: 100%;
-	}
+    header {
+        zoom: 65%;
+        height: 5rem;
+        padding: 0 !important;
+        position: absolute !important;
+        display: flex;
+        background: white !important;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        background-position: 2rem center !important;
+        justify-content: space-between;
+        width: 100%;
+    }
 	
 	#content p,
 	#content input.text,
@@ -79,7 +83,7 @@
 	#nav {
     padding: 3rem 2rem !important;
     width: auto !important;
-    height: 40rem !important;
+    height: auto !important;
     position: relative !important;
     overflow: hidden !important;
     margin: 0 0 -3.25rem !important;
@@ -105,7 +109,7 @@
 	.logon-logon #main {
     width: auto;
     margin: 0 auto;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
@@ -128,7 +132,7 @@
     background-size: 8rem !important;
     justify-content: flex-end !important;
     background-color: rgb(0 0 0 / 80%) !important;
-    width: 142vw;
+    width: 138.5vw;
     height: 5.5rem !important;
     background-repeat: no-repeat !important;
 	}
@@ -232,10 +236,10 @@
 	}
 	
 	#text-user-logon {
-    padding: 0.33rem 0.5rem !important;
-    font-size: 0.5rem;
-	margin: 0 1.5rem 0 0 !important;
-	}
+        padding: 0.33rem 1.5rem !important;
+        font-size: 0.65rem;
+        margin: 0 !important;
+    }
 	
 	#user-logon {
     margin: 0 0.75rem 0 0;

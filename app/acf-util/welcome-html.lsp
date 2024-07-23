@@ -138,10 +138,6 @@ function blocksToSize(octets)
 end
 
 -- GET DISKS & PARTITIONS
-
-	
-
-
 %>
 
 <% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Dashboard"}), page_info) %>
@@ -149,6 +145,7 @@ end
 <!-- Dashboard App Block - LINE 1 -->
 <div class="dashboard-main main-block">
 
+<!-- Dashboard Notification -->
 <!-- Dashboard Version Block - BLOCK 1 -->
 	<div class="dashboard-system dashboard-block">
 		<%= blockcolor %>

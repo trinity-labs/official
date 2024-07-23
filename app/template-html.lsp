@@ -25,7 +25,7 @@ end
 <!DOCTYPE html>
 <!-- 
 ==============================================================
-      🟪 TRIИITY Admin Dashboard | v 1.2 - ACF
+      🟪 TRIИITY Admin Dashboard | v 1.0.1 - ACF
 ==============================================================
 * Product Page: ACF Dashboard Skin (https://gitlab.alpinelinux.org/trinity-labs/acf-skins/-/blob/master/dashboard)
 * Created by: T. Bonnin for Alpine Configuration Framework (ACF) based on N. Angelacos previous work
@@ -117,14 +117,7 @@ end
 				%>
 				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/trinity" target="_blank" title="About"><i class="fa-brands fa-gitlab fa-2x about-icon"></i></a>
 				<!-- Theme Toggle -->
-				<div class="theme-block-toggle">
-						<label class="switch">
-							<input onclick="toggleTheme()" id="theme-toggle" type="checkbox">
-							<span class="slider round"></span>
-						</label>
-					<span id="theme-conv" class="temp-convert"><i class="fa-solid fa-circle-half-stroke"></i></span>
-				</div>
-				
+				<a href='javascript:void(0);' id='theme-toggle' title='Dark Mode' onclick='toggleTheme()'><i class="fa-solid fa-circle-half-stroke"></i></a>	
 				<%
 					if session.userinfo and session.userinfo.userid then
 						print("<span id='text-user-logon' class='text-user-"..(session.userinfo.userid).."' title='User @ HOST'>"..(session.userinfo.userid).." @ "..string.upper(hostname or "unknown").."</span>")
