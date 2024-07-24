@@ -34,6 +34,11 @@
         width: 100%;
     }
 	
+	.header-logo {
+	width: 8rem !important;
+    height: 3rem !important;
+	}
+	
 	#content p,
 	#content input.text,
 	#content select,
@@ -81,7 +86,7 @@
 	}
 	
 	#nav {
-    padding: 3rem 2rem !important;
+    padding: 1rem !important;
     width: auto !important;
     height: auto !important;
     position: relative !important;
@@ -243,6 +248,7 @@
 	
 	#user-logon {
     margin: 0 0.75rem 0 0;
+	padding: 1.25rem;
 	}
 	
 	#footer {
