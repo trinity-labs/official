@@ -38,7 +38,7 @@
     width: 400px;
     height: 3.5rem !important;
     box-shadow: 2px 2px 30px #000000ab;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat !important;
 }
 
 .logon-logon #header a:first-child {
