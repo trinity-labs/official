@@ -3,6 +3,10 @@
  *----------------------------------------------------------------------------------
  */
 
+html.app-logon.dark-theme {
+    background: inherit !important;
+}
+
 .dark-theme,
 .dark-theme body,
 .dark-theme #main,
@@ -18,14 +22,16 @@
 	color: grey;
 }
 
-.dark-theme pre,
-.dark-theme .dashboard-block {
-    background: #1a232e;
-	color: grey;
+.dark-theme pre, .dark-theme .dashboard-block {
+    background: #171f28;
 }
 
 .dark-theme header {
-    background: #18131a;
+    background: #18131a !important;
+}
+
+.dark-theme .header-logo {
+	background-image: url(../../img/logos/logo-trinity-full-acf-white.png) no-repeat !important;
 }
 
 .dark-theme .icon i,
@@ -41,8 +47,8 @@
     background: inherit!important;
 }
 
-.dark-theme #nav {
-    background: #1a232e;
+.dark-theme .data-block {
+    background: #1f262e !important;
 }
 
 /* Scrollbar */
