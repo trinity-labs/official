@@ -77,7 +77,9 @@ end
 		<!-- GLOBAL FUNCTIONS -->
 		<script type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
 		<!-- HIDE LOGGON PAGE FOR AUTH USERS -->
-		<script type="application/javascript"> let user = "<%= session.userinfo %>"; if ((user !== "nil") && (window.location.href.indexOf("logon/logon") > -1)) {window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/welcome/read'}</script>
+		<script type="application/javascript"> let user = "<%= session.userinfo %>"; if ((user !== "nil") && (window.location.href.indexOf("logon/logon") > -1)) {window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/welcome/read'; window.onload = function() {inactivityTime();}}</script>
+		<!-- SECURITY INACTIVITY LOGOFF -->
+		<script type="application/javascript"> if (user !== "nil") {window.onload = function() {inactivityTime();}}</script>
 </head>
 		<% end -- pageinfo.skinned %>
 <%
