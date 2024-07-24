@@ -33,15 +33,15 @@
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
 	   blockcolor = "<div class='data-block data-system system-uptodate'>"
-	   chkres = "<a id='alpine-version-link' class='version-link version-ok' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'><span class='version-check'>Up To Date | Alpine <span class='version-number-uptodate'>" .. check_sysver .. "</span></span></a>"
+	   chkres = "<span id='alpine-version-link' class='version-link version-ok'><span class='version-check'>Up To Date | Alpine <a class='version-number-uptodate' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'>" .. check_sysver .. "</a></span></span>"
 	else
 		blockcolor = "<div class='data-block data-system system-update'>"
-		chkres = "<a id='alpine-version-link' class='version-link version-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'><span class='version-check'>Update Needed | Alpine <span class='version-number-update'>" .. check_sysver .. "</span></span></a>"
+		chkres = "<span id='alpine-version-link' class='version-link version-update'><span class='version-check'>Update Needed | Alpine <a class='version-number-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'>" .. check_sysver .. "</a></span></span>"
 		kernres = "<i class='fa-solid fa-exclamation icon-kernel-warn'></i>"
 	end
 	if major_sysver ~= major_distver then
 		blockcolor = "<div class='data-block data-system system-upgrade'>"
-		chkres = "<a id='alpine-version-link' class='version-link version-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'><span class='version-check'>Upgrade Required | Alpine <span class='version-number-upgrade'>" .. check_sysver .. "</span></span></a>"
+		chkres = "<span id='alpine-version-link' class='version-link version-upgrade'><span class='version-check'>Upgrade Required | Alpine <a class='version-number-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'>" .. check_sysver .. "</a></span></span>"
 		kernres = "<i class='fa-solid fa-xmark icon-kernel-err'></i>"
 	end
 	
