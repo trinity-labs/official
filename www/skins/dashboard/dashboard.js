@@ -20,6 +20,27 @@
 		};			
 // Wait page loading
 		$(document).ready(function() {
+// Security Inactivity Logoff (5 minutes)
+		inactivityTime = function () {
+		let time;
+		window.onload = resetTimer;
+		// DOM Events
+		document.onload = resetTimer;
+		document.onmousemove = resetTimer;
+		document.onmousedown = resetTimer;
+		document.ontouchstart = resetTimer;
+		document.onclick = resetTimer;
+		document.onkeydown = resetTimer;   // deprecated
+		document.addEventListener('scroll', resetTimer, true);
+		function logout() {
+		location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/logon/logoff'
+		}
+		function resetTimer() {
+		clearTimeout(time);
+		time = setTimeout(logout, 300000)
+		// 300 000 milliseconds = 5 minutes
+		}
+		};
 // Add tablesorter-ice class to .tablesorter objects
 			$(".tablesorter").addClass("tablesorter-ice");
 // Login page input placeholder
@@ -29,7 +50,7 @@
 				document.querySelector('#userid input').setAttribute('style',"font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600");
 				document.querySelector('#userid input').setAttribute('placeholder','    User ID');
 				document.querySelector('#password input').setAttribute('style',"font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600");
-				document.querySelector('#password input').setAttribute('placeholder','   Password');
+				document.querySelector('#password input').setAttribute('placeholder','    Password');
 				document.querySelector('#login').setAttribute('autocomplete','on');
 				document.querySelector('#password input').setAttribute('autocomplete','current-password');
 				document.querySelector('.hidden').setAttribute('hidden','');
@@ -145,20 +166,20 @@
 				$("html").removeClass("dark-theme");
 			}
 			window.localStorage.setItem('html', themeUpdated);
-			};
-			// ChartJS API		
-if(window.location.href.indexOf("/acf/acf-util/welcome/read") > -1){			
+			};	
+// ChartJS API		
+			if(window.location.href.indexOf("/acf/acf-util/welcome/read") > -1){			
 			async function api() {
 				let url = document.location.hostname + '/alpine-baselayout/health/api?viewtype=json';
 				let obj = await (await fetch(url)).json();				
-			// FORMATED TEMP JS LIVE TIMER
+// FORMATED TEMP JS LIVE TIMER
 				if (((obj.value.cpuTemp.value) < 50000) && (window.localStorage.getItem('toggle-degree') === 'celsius')) {
 					document.getElementById("cpuTemp").innerHTML = (Math.ceil((obj.value.boardTemp.value) / 1000)) + (" °C  &nbsp; | <span class='normal'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
 				} else if (((obj.value.cpuTemp.value) >= 50000) && (window.localStorage.getItem('toggle-degree') === 'celsius')) {
 					document.getElementById("cpuTemp").innerHTML = (Math.ceil((obj.value.boardTemp.value) / 1000)) + (" °C  &nbsp; | <span class='medium'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
 				} else if (((obj.value.cpuTemp.value) >= 75000) && (window.localStorage.getItem('toggle-degree') === 'celsius')) {
 					document.getElementById("cpuTemp").innerHTML = (Math.ceil((obj.value.boardTemp.value) / 1000)) + (" °C  &nbsp; | <span class='hot'>" + (obj.value.cpuTemp.value) / 1000) + " °C</span>";
-			// FORMATED TEMP TO FAHRENHEIT
+// FORMATED TEMP TO FAHRENHEIT
 				} else if (((obj.value.cpuTemp.value) < 50000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
 					document.getElementById("cpuTemp").innerHTML = (Math.ceil((((obj.value.boardTemp.value) / 1000) * 9 / 5) + 32)) + (" °F  &nbsp; | <span class='normal'>" + (Math.floor(((obj.value.cpuTemp.value) / 1000) * 9 / 5) + 32)) + " °F</span>";
 				} else if (((obj.value.cpuTemp.value) >= 50000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
@@ -295,4 +316,6 @@ if(window.location.href.indexOf("/acf/acf-util/welcome/read") > -1){
 					config
 				);
 			});
-setInterval(api, 1000)};
+refresh = setInterval(api, 1000);
+//setTimeout(function() { clearInterval(refresh); }, 300000);
+};
