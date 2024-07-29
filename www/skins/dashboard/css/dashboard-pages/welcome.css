@@ -70,6 +70,7 @@ span.dashboard-infos {
 }
 
 .welcome-read #content h1 {
+    background: none !important;
     font-weight: 600;
     text-transform: capitalize;
     margin: 0.5rem 0 0.5rem;
