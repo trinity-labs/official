@@ -74,6 +74,11 @@
     align-items: stretch;
     align-content: stretch;
 	}
+	
+	.page-header-title {
+    margin: 0 auto 2.5rem !important;
+    width: 96% !important;
+	}
 
 	#main {
 	margin: auto !important;
@@ -95,6 +100,7 @@
 	}
 	
 	#subnav {
+	width: 100% !important;
 	}
 	
 	#subnav ul {
@@ -171,6 +177,10 @@
 	
 	.dashboard-main {
     display: block !important;
+	}
+	
+	.section-2 {
+    width: 100% !important;
 	}
 	
 	header #toogle-link {
