@@ -8,7 +8,7 @@ io.write("	<tr>\n")
 io.write('		<td id="legend-object" width="100px"><b>'..html.html_escape(name)..'</b></td>\n')
 io.write("	</tr>\n")
 io.write("</table>\n")
-io.write("<pre>"..html.html_escape(disk.value).."</pre>\n")
+io.write("<pre><code>"..html.html_escape(disk.value).."</code></pre>\n")
 io.write('<table class="chart-bar chart-storage">\n')
 io.write("	<tr>\n")
 io.write("		<td>0%</td>\n")
@@ -68,7 +68,7 @@ else %>
 
 <% if view.value.partitions then %>
 <% htmlviewfunctions.displaysectionstart(cfe({label="Disk partitions"}), page_info, header_level2) %>
-<pre><%= html.html_escape(view.value.partitions.value) %></pre>
+<pre><code><%= html.html_escape(view.value.partitions.value) %></code></pre>
 <% htmlviewfunctions.displaysectionend(header_level2) %>
 <% end %>
 
