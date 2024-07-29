@@ -89,7 +89,7 @@ li.selected.item-field {
     display: block;
     background-repeat: no-repeat;
     background-position: center left;
-    width: 6rem;
+    width: 7rem;
     background-size: contain;
     margin: 0 0 0 1.5rem;
 }
@@ -100,8 +100,8 @@ li.selected.item-field {
     background-repeat: no-repeat;
     background-position: left;
     background-size: contain;
-    width: 6rem;
-	height: 2.5rem;
+    width: 7rem;
+	height: 3rem;
     margin: 0 0 0 1.5rem;
 }
 
