@@ -39,8 +39,24 @@ body {
 
 .page-header-title {
     font-weight: 600;
+    margin: 0 1rem 2.5rem 0;
     text-transform: capitalize;
-    margin: 0.5rem auto 0.5rem;
+    width: 33%;
+    color: white;
+    padding: 0.25rem 0 1rem 1.25rem;
+    border-radius: 2px;
+}
+
+#networking .page-header-title {
+	background: #005179;
+}
+
+#applications .page-header-title {
+	background: #2743a9;
+}
+
+#system .page-header-title {
+	background: #6300d2;
 }
 
 .small-block {
