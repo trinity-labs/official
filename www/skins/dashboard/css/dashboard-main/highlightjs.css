@@ -5,3 +5,7 @@
 .hljs {
     background: #f3f3f3 !important;
 }
+
+.hljs-comment, .hljs-quote {
+    color: #9f9f9f;
+}
