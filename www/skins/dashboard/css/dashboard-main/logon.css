@@ -22,7 +22,6 @@
 }
 
 .logon-logon input.submit:hover {
-    color: #b2b3b4 !important;
     background: #40404087 !important;
     border-color: #40404087 !important;
 }
@@ -39,15 +38,11 @@
     width: 400px;
     height: 3.5rem !important;
     box-shadow: 2px 2px 30px #000000ab;
-    background-repeat: no-repeat;
+    background-repeat: no-repeat !important;
 }
 
 .logon-logon #header a:first-child {
     font-weight: 900;
-}
-
-.logon-logon .icon-header:hover i {
-    color: #4c4c4c !important;
 }
 
 .logon-logon #nav,
@@ -121,7 +116,7 @@ input#password::-webkit-input-placeholder::before {
 .logon-logon #content .submit {
     font-size: 0.8rem;
     text-transform: capitalize;
-    color: #e5e5e5;
+    color: #FFF;
     font-weight: 900;
     border-radius: 4px;
     background-color: #430090;
