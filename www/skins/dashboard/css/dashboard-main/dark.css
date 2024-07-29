@@ -76,21 +76,17 @@ html.app-logon.dark-theme {
     color: white !important;
 }
 
-.dark-theme #networking .selected.item-field {
-    background: #005179;
-    color: white !important;
-}
-
-.dark-theme #nav .category-title {
-    background: #2e363e;
-}
-
-.dark-theme #text-user-logon {
-    background: #0e1116;
-}
-
 .dark-theme #content .chart-bar td {
     border: 3px solid #1a232e;
+}
+
+.dark-theme #content h1 {
+    color: #c5c5c5 !important;
+    background: #404040 !important;
+}
+
+#content h1::before {
+    color: rgb(0 0 0 / 20%) !important;
 }
 
 .dark-theme input:checked + .slider {
