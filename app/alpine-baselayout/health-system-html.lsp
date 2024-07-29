@@ -2,19 +2,52 @@
 <% htmlviewfunctions = require("htmlviewfunctions") %>
 <% html = require("acf.html") %>
 <% json = require("json") %>
-
+<% 
+-- FORMAT UPTIME	
+	local up_time = math.floor(string.match(view.value.uptime.value, "[%d]+"))
+	local up_centuries = math.floor((up_time / (3600*24) / 365) / 100)
+	local up_years = math.floor((up_time / (3600*24) / 365) % 100)
+	local up_mounths = math.floor((((up_time / (3600 * 24)) % 365) % 365) / 30)
+	local up_days = math.floor((((up_time / (3600 * 24)) % 365) % 365) % 30)
+	local up_hours = string.format("%02d", math.floor((up_time % (3600 * 24)) / 3600))
+	local up_minutes = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) / 60))
+	local up_seconds = string.format("%02d", math.floor(((up_time % (3600 * 24)) % 3600) % 60))
+	
+-- CONVERT & DISPLAY UPTIME UP TO CENTURIES
+	local uptime = up_centuries .. " Centuries " .. up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	if up_centuries == 1 then
+		uptime = up_centuries .. " Century " .. up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_centuries == 0 then
+		uptime =  up_years .. " Years " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	end
+	if up_years == 1 then
+		uptime = up_years .. " Year " .. up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 then
+		uptime = up_mounths .. " Mounths " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	end	
+	if up_mounths == 1 then
+		uptime = up_mounths .. " Mounth " .. up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 and up_mounths == 0 then
+		uptime = up_days .. " Days " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	end
+	if up_days == 1 then
+		uptime = up_days .. " Day " .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
+	elseif up_years == 0 and up_mounths == 0 and up_days == 0 then
+		uptime = up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"	
+	end
+%>
 <%
 local header_level = htmlviewfunctions.displaysectionstart(view, page_info)
 local header_level2 = htmlviewfunctions.incrementheader(header_level)
 %>
 
 <% htmlviewfunctions.displaysectionstart(cfe({label="Versions and names"}), page_info, header_level2) %>
-<pre><%= html.html_escape(view.value.version.value) %></pre>
-<pre><code><%= html.html_escape(view.value.uname.value) %></code></pre>
+<pre><code class="css">Alpine Linux - <%= html.html_escape(view.value.version.value) %>
+<%= html.html_escape(view.value.uname.value) %></code></pre>
 <% htmlviewfunctions.displaysectionend(header_level2) %>
 
 <% htmlviewfunctions.displaysectionstart(cfe({label="Memory"}), page_info, header_level2) %>
-<pre><%= html.html_escape(view.value.memory.value) %></pre>
+<pre><code><%= html.html_escape(view.value.memory.value) %></code></pre>
 
 <%
 local function print_percent(val)
@@ -51,16 +84,12 @@ end
 </div>
 
 <% htmlviewfunctions.displaysectionstart(cfe({label="Uptime"}), page_info, header_level2) %>
-<pre><%= html.html_escape(view.value.uptime.value) %></pre>
+<pre><code class="js"><%= uptime %></code></pre>
 <% htmlviewfunctions.displaysectionend(header_level2) %>
 
 <% htmlviewfunctions.displaysectionstart(cfe({label="Time/TimeZone"}), page_info, header_level2) %>
-<pre><%= html.html_escape(view.value.date.value) %></pre>
-<!---<pre><%= html.html_escape(view.value.timezone.value) %></pre>--->
-<% htmlviewfunctions.displaysectionend(header_level2) %>
-
-
-
+<pre><code><%= html.html_escape(view.value.date.value) %></code></pre>
+<!---<pre><code><%= html.html_escape(view.value.timezone.value) %></code></pre>--->
 <% htmlviewfunctions.displaysectionend(header_level2) %>
 
 <% htmlviewfunctions.displaysectionend(header_level) %>
