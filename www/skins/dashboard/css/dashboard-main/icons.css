@@ -70,40 +70,44 @@
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F0E8';
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 #section-restart-networking .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F2F1' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 #section-network .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F0E8' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 #section-network-statistics .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F0EC' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 .interface-name::before {
@@ -135,20 +139,22 @@
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F1B3';
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 .openssl .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F023' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 .openssl-readall .page-header-title::before,
@@ -156,20 +162,22 @@
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F1C9' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 .openssh .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F084' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 /*----------------------------------------------------------------------------------
@@ -191,30 +199,33 @@
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\E163';
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 #section-hardware-information .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F2DB' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 #section-storage .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F0A0' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 #section-storage #legend-object b::before {
@@ -231,20 +242,55 @@
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F1B3' !important;
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
+}
+
+.roles .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\E595' !important;
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
+    position: relative;
+    font-size: 2rem;
+    top: 0.4rem;
+}
+
+.rc .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F479' !important;
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
+    position: relative;
+    font-size: 2rem;
+    top: 0.4rem;
+}
+
+.modules .page-header-title::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\E4E2' !important;
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
+    position: relative;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 #system .page-header-title::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F21E';
-    margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 32%);
+	margin: 0 1rem 0 0;
+    color: rgb(0 0 0 / 20%);
     position: relative;
-    font-size: 1rem;
+    font-size: 2rem;
+    top: 0.4rem;
 }
 
 .welcome .dashboard-title-memory::before {
