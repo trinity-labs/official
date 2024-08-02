@@ -97,10 +97,10 @@
 
 -- FORMAT BYTES	
 function bytesToSize(bytes)
-	kilobyte = 1000;
-	megabyte = kilobyte * 1000;
-	gigabyte = megabyte * 1000;
-	terabyte = gigabyte * 1000;
+	kilobyte = 1024;
+	megabyte = kilobyte * 1024;
+	gigabyte = megabyte * 1024;
+	terabyte = gigabyte * 1024;
   if((bytes >= 0) and (bytes < kilobyte)) then
     return math.floor(bytes) .. " Bytes";
   elseif((bytes >= kilobyte) and (bytes < megabyte)) then
@@ -205,7 +205,7 @@ end
 			<p class="dashboard-infos dash-info-memory" style="cursor: pointer;" onclick="window.open('/cgi-bin/acf/alpine-baselayout/health/proc', '_blank')" >
 				<span class="data-title">Memory</span>
 				<span>
-					<%= string.gsub(bytesToSize(tonumber(sys.value.memory.totalData)), ".%d+%w+", "") %> Total |
+					<%= bytesToSize(tonumber(sys.value.memory.totalData)) %> Total |
 					<%= bytesToSize(tonumber(sys.value.memory.freeData)) %> Free | 
 					<span class='mem-used corpo-hardware-text'>
 					<%= bytesToSize(tonumber(sys.value.memory.usedData)) %> Used </span>
