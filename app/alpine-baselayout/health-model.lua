@@ -44,7 +44,7 @@ local function disklist ( media )
 	if not cmd_result or cmd_result == "" then
 		cmd_result = "unknown"
 	end
-	return cmd
+	return cmd_result
 end
 
 local function memusage ( )
@@ -67,6 +67,37 @@ local function memusage ( )
 	return res
 end
 
+local function findThermalPkg()
+    local cmd = io.popen('cat /sys/class/thermal/thermal_zone*/type')
+    local search = "x86_pkg_temp"
+    local pkgPosition = nil
+    local i = -1
+    for line in cmd:lines() do
+        i = i + 1
+        if line == search then
+            pkgPosition = i
+            break
+        end
+    end
+    cmd:close()
+    return pkgPosition
+end
+
+local function findThermalBoard()
+    local cmd = io.popen('cat /sys/class/thermal/thermal_zone*/type')
+    local search = "acpitz"
+    local boardPosition = nil
+    local i = -1
+    for line in cmd:lines() do
+        i = i + 1
+        if line == search then
+            boardPosition = i
+            break
+        end
+    end
+    cmd:close()
+    return boardPosition
+end
 
 -- ###############################################################
 -- Public functions
@@ -94,9 +125,9 @@ mymodule.get_system = function (self)
 	system.memory.totalData = string.format("%.2f", (meminfo["MemTotal"]))
 	system.memory.freeData = string.format("%.2f", (meminfo["MemAvailable"]))
 	system.memory.usedData = string.format("%.2f", (meminfo["MemTotal"] - meminfo["MemAvailable"]))
-	system.memory.free = math.floor(100 * (meminfo["MemAvailable"]) / meminfo["MemTotal"])
-	system.memory.buffers = math.floor(100 * (meminfo["Buffers"] + meminfo["Cached"]) / meminfo["MemTotal"])
-	system.memory.used = math.floor(100 * (meminfo["MemTotal"] - meminfo["MemAvailable"]) / meminfo["MemTotal"])
+	system.memory.free = (100 * (meminfo["MemAvailable"]) / meminfo["MemTotal"])
+	system.memory.buffers = (100 * (meminfo["Buffers"] + meminfo["Cached"]) / meminfo["MemTotal"])
+	system.memory.used = (100 * (meminfo["MemTotal"] - meminfo["MemAvailable"]) / meminfo["MemTotal"])
 	system.drivelist = cfe({ value=querycmd("fdisk -l") or "Unknown", label="Board Name" })
 	system.boardName = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_name") or "Unknown", label="Board Name" })
 	system.boardVendor = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_vendor") or "Unknown", label="Board Vendor" })
@@ -170,8 +201,10 @@ end
 mymodule.get_api = function (self)
 	local api = {}
 	local meminfo = memusage()
-	api.cpuTemp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone2/temp") or "N/A", label="CPU Temp" })
-	api.boardTemp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone1/temp") or "N/A", label="Board Temp" })
+	local pkgPosition = findThermalPkg()
+	local boardPosition = findThermalBoard()
+	api.cpuTemp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone"..pkgPosition.."/temp") or "N/A", label="CPU Temp" })
+	api.boardTemp = cfe({ value=querycmd("cat /sys/class/thermal/thermal_zone"..boardPosition.."/temp") or "N/A", label="Board Temp" })
 	api.memory = cfe({ value=querycmd("free"), label="Memory usage" })
 	api.memTotal = string.format("%.2f", (meminfo["MemTotal"]) / 1000000000)
 	api.memFree = string.format("%.2f", (meminfo["MemAvailable"]) / 1000000000)
