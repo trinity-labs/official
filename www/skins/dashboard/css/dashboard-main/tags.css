@@ -200,11 +200,13 @@ input.submit:hover {
     top: -0.35rem;
 }
 
-.tablesorter-ice th, .tablesorter-ice td {
+.tablesorter-ice th,
+.tablesorter-ice td {
     border: #fff 3px solid !important;
 }
 
-.tablesorter-ice th, .tablesorter-ice thead td {
+.tablesorter-ice th,
+.tablesorter-ice thead td {
     font: 12px/18px Arial, Sans-serif;
     color: #818181;
     background-color: #f6f8f9;
@@ -214,11 +216,17 @@ input.submit:hover {
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
-.tablesorter-ice .header, .tablesorter-ice .tablesorter-header {
+.tablesorter-ice .header,
+.tablesorter-ice .tablesorter-header {
     background-color: #f6f8f9;
     background-image: none !important;
     padding: 4px 20px 4px 4px;
     white-space: normal;
+    cursor: pointer;
+}
+
+#toplevelpager select,
+#toplevelpager img {
     cursor: pointer;
 }
 

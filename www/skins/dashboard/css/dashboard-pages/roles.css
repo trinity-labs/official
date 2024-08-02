@@ -3,8 +3,74 @@
  *----------------------------------------------------------------------------------
  */
 
+/*----------------------------------------------------------------------------------
+ * PAGE > ROLES
+ *----------------------------------------------------------------------------------
+ */
+
 .roles .section-1 .section-2:nth-child(2) {
     background: #e6ffc4;
     padding: 1rem;
     border-radius: 2px;
+}
+
+#section-root-is-valid-in-these-roles h2 {
+    text-transform: capitalize;
+    margin-bottom: 1rem;
+	margin-top: 0.5rem !important;
+}
+
+#section-root-is-valid-in-these-roles h2:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F505';
+    margin: 0 0.5rem 0 0;
+    color: rgb(0 0 0 / 30%);
+    position: relative;
+    font-size: 1.25rem;
+    top: 0;
+}
+
+#section-root-is-valid-in-these-roles p {
+    font-size: 0.75rem;
+    font-weight: bold;
+	color: #585858;
+}
+
+#section-root-is-valid-in-these-roles p:before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0C8';
+    margin: 0 0.5rem 0 0.5rem;
+    color: rgb(7 217 73 / 50%);
+    position: relative;
+    font-size: 0.5rem;
+    top: -0.10rem;
+}
+
+#section-root-is-valid-in-these-roles p:nth-child(3):before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
+    content: '\F0C8';
+    margin: 0 0.5rem 0 0.5rem;
+    color: rgb(255 191 0 / 60%);
+    position: relative;
+    font-size: 0.5rem;
+    top: -0.10rem;
+}
+
+#section-root\'s-full-permissions-are h2 {
+    font-weight: bold;
+    background: #f3f3f3;
+    color: grey;
+    margin: 01rem 0 1em 0;
+    padding: 1rem;
+    text-transform: capitalize;
+    border-radius: 4px;
+    display: flex;
+    font-size: 0.75rem;
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
 }
