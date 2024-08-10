@@ -21,7 +21,7 @@
 // Wait page loading
 		$(document).ready(function() {
 // Security Inactivity Logoff (5 minutes)
-		inactivityTime = function () {
+		function inactivity() {
 		let time;
 		window.onload = resetTimer;
 		// DOM Events
@@ -33,14 +33,27 @@
 		document.onkeydown = resetTimer;   // deprecated
 		document.addEventListener('scroll', resetTimer, true);
 		function logout() {
-		location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/logon/logoff'
+		const toast = document.createElement('div');
+		toast.innerHTML = " &nbsp;&nbsp;After 5 minutes of inactivity, you are logged out!";
+		toast.style.position = "fixed";
+		toast.style.fontFamily = "system-ui, 'Font Awesome 6 Free'";
+		toast.style.fontWeight = "600";
+		toast.style.fontSize = "0.75rem";			
+		toast.style.top = "4rem";
+		toast.style.left = "50%";
+		toast.style.padding = "0.75rem";
+		toast.style.backgroundColor = "rgb(0 0 0 / 86%)";
+		toast.style.color = "white";
+		toast.style.borderRadius = "4px";
+		document.body.appendChild(toast);
 		}
 		function resetTimer() {
 		clearTimeout(time);
-		time = setTimeout(logout, 300000)
-		// 300 000 milliseconds = 5 minutes
+		time = setTimeout(logout, 200000)
+
 		}
 		};
+		inactivity();
 // Add tablesorter-ice class to .tablesorter objects
 			$(".tablesorter").addClass("tablesorter-ice");
 // Login page input placeholder
@@ -317,5 +330,4 @@
 				);
 			});
 refresh = setInterval(api, 1000);
-//setTimeout(function() { clearInterval(refresh); }, 300000);
 };
