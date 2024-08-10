@@ -78,7 +78,7 @@ end
 		<p id="legend-used" class="capacity-used" width="20px"></p>
 		<p width="70px"><b>= Used</b></p>
 		<p id="legend-buffered" class="capacity-buffered"></p>
-		<p width="70px"><b>= Buffers/Cached</b><p>
+		<p width="70px"><b>= Buffers/Cached</b></p>
 		<p id="legend-free" class="capacity-free"></p>
 		<p width="70px"><b>= Free</b></p>
 </div>
