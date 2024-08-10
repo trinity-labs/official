@@ -522,8 +522,8 @@ span.dashboard-infos {
     margin: auto 3rem;
 }
 
-.dashboard-main.main-block a:hover {
-    text-decoration: underline !important;
+.dashboard-main .version-check a:hover {
+    border-bottom: 2px solid #68c700;
 }
 
 .version-link.version-external-link {
