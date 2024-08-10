@@ -322,7 +322,6 @@ end
 	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
 
-<%= api.value.disk.value %>
 
 </div>
 
