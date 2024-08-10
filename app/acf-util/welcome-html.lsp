@@ -321,6 +321,9 @@ end
 				</div>
 	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
+
+<%= api.value.disk.value %>
+
 </div>
 
 <% htmlviewfunctions.displaysectionend(header_level) %>
