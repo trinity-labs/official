@@ -315,6 +315,14 @@ span.dashboard-infos {
 	font-family: sans-serif;
 }
 
+/*.medium {
+    color: #ffb26d !important;
+}*/
+
+.hot {
+    color: #ff6e6e !important;
+}
+
 #temp-unit {
     margin: auto !important;
     padding: 0.15rem !important;
