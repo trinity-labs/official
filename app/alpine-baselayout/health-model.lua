@@ -52,7 +52,6 @@ local function memusage ( )
 	local fd = io.open("/proc/meminfo")
 	local res = {}
 	local field, value, unit
-
 	for line in fd:lines() do
 		field, value, unit = string.match(line, "([^: ]*):%s*(%d+)%s(%a+)")
 		if field ~= nil and value ~= nil then
@@ -63,7 +62,6 @@ local function memusage ( )
 		end
 	end
 	fd:close()
-
 	return res
 end
 
@@ -110,8 +108,8 @@ mymodule.get_system = function (self)
 	local indexver = indexversion()
 	system.uptime = cfe({ value=querycmd("cat /proc/uptime"), label="Uptime" })
 	system.date = cfe({ value=querycmd("date"), label="Date" })
-	system.alpinever = cfe({ value=querycmd("curl https://www.alpinelinux.org/releases.json") or "Unknown", label="Check Alpine Version" })
-	system.alpineposts = cfe({ value=querycmd("curl https://www.alpinelinux.org/posts/"), label="Get Version Changes" })
+	system.alpinever = cfe({ value=querycmd("wget -qO- https://www.alpinelinux.org/releases.json ; echo") or "Unknown", label="Check Alpine Version" })
+	system.alpineposts = cfe({ value=querycmd("wget -qO- https://www.alpinelinux.org/posts/ ; echo"), label="Get Version Changes" })
 	system.version = cfe({ value=querycmd("cat /etc/alpine-release") or "Unknown", label="Version" })
 	system.alpineluaver = cfe({ value=string.match(querycmd("cat /usr/share/acf/www/cgi-bin/acf") or "Unknown", "lua%d.%d") or "Unknown", label="Alpine Lua Version" })
 	system.luaver = cfe({ value=string.match(querycmd((system.alpineluaver.value) .. " -v") or "Unknown", "Lua%s%d.%d.%d") or "Unknown", label="Lua Version" })
@@ -125,9 +123,9 @@ mymodule.get_system = function (self)
 	system.memory.totalData = string.format("%.2f", (meminfo["MemTotal"]))
 	system.memory.freeData = string.format("%.2f", (meminfo["MemAvailable"]))
 	system.memory.usedData = string.format("%.2f", (meminfo["MemTotal"] - meminfo["MemAvailable"]))
-	system.memory.free = (100 * (meminfo["MemAvailable"]) / meminfo["MemTotal"])
-	system.memory.buffers = (100 * (meminfo["Buffers"] + meminfo["Cached"]) / meminfo["MemTotal"])
-	system.memory.used = (100 * (meminfo["MemTotal"] - meminfo["MemAvailable"]) / meminfo["MemTotal"])
+	system.memory.free = math.floor(100 * (meminfo["MemFree"]) / meminfo["MemTotal"])
+	system.memory.buffers = math.floor(100 * (meminfo["Buffers"] + meminfo["Cached"]) / meminfo["MemTotal"])
+	system.memory.used = 100 - math.floor(100 * (meminfo["MemFree"] + meminfo["Buffers"] + meminfo["Cached"]) / meminfo["MemTotal"])
 	system.drivelist = cfe({ value=querycmd("fdisk -l") or "Unknown", label="Board Name" })
 	system.boardName = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_name") or "Unknown", label="Board Name" })
 	system.boardVendor = cfe({ value=querycmd("cat /sys/devices/virtual/dmi/id/board_vendor") or "Unknown", label="Board Vendor" })
