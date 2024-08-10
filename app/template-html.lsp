@@ -96,11 +96,8 @@ end
 		end
 	end
 %>
-	
 <body class="<%= pageinfo.controller.." "..pageinfo.controller.."-"..pageinfo.action %>">
-	
 <% if pageinfo.skinned ~= "false" then %>
-
 <header id="header">
 				<%
 					local ctlr = pageinfo.script .. "/acf-util/logon/"
