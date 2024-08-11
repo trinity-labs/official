@@ -72,6 +72,8 @@ mymodule.logon = function (self, logon)
 		else
 			-- We have a bad logon, log the event
 			session.record_event(self.conf.sessiondir, logon.value.userid.value, self.conf.clientip)
+			-- And print 403 Header
+			io.write ("Status: 403 Forbidden\n")
 		end
 	end
 	return logon
