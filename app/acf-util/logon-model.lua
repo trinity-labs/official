@@ -48,6 +48,7 @@ mymodule.logon = function (self, logon)
 	local countevent = session.count_events(self.conf.sessiondir, logon.value.userid.value, self.conf.clientip, self.conf.lockouttime, self.conf.lockouteventlimit)
 	if countevent then
 		session.record_event(self.conf.sessiondir, logon.value.userid.value, self.conf.clientip)
+		io.write ("Status: 403 Forbidden\n")
 	end
 
 	if false == countevent then
