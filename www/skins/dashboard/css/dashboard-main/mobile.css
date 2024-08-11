@@ -116,6 +116,12 @@
     float: left !important;
     margin: 1rem auto !important;
 	}
+	
+	#page-logon #error {
+    top: 1.5rem;
+    width: 78vw !important;
+    left: 6%;
+	}
 
 	.logon-logon #main {
     width: auto;

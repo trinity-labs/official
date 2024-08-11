@@ -80,11 +80,12 @@ hr {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\f071';
-    margin: 0 1rem 0 0;
+    margin: 0 0.75rem 0 0;
     position: relative;
-    font-size: 1.75rem;
+    font-size: 1.1rem;
     display: flex;
     flex-direction: row;
+    color: rgb(247 79 79);
     flex-wrap: nowrap;
     align-items: center;
     justify-content: center;
@@ -126,7 +127,6 @@ hr {
     align-items: stretch;
     color: #ffffff;
     background: rgb(255,91,91);
-    background: linear-gradient(90deg, rgba(255,91,91,1) 0%, rgb(255 65 89) 80%);
     margin-bottom: 1em;
 }
 

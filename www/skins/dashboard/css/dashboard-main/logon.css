@@ -214,7 +214,15 @@ input#password::-webkit-input-placeholder::before {
 }
 
 #page-logon #error {
-    width: 91% !important;
+    position: absolute;
+    color: white;
+    top: 0.5rem;
+    width: 50% !important;
+    padding: 0.15rem 1.25rem !important;
+    left: 25%;
+    border: 2px solid rgb(255 43 43);
+    text-align: center !important;
+    background: none;
 }
 
 .logon-logon input[placeholder] {
