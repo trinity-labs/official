@@ -21,39 +21,57 @@
 // Wait page loading
 		$(document).ready(function() {
 // Security Inactivity Logoff (5 minutes)
-		function inactivity() {
-		let time;
-		window.onload = resetTimer;
-		// DOM Events
-		document.onload = resetTimer;
-		document.onmousemove = resetTimer;
-		document.onmousedown = resetTimer;
-		document.ontouchstart = resetTimer;
-		document.onclick = resetTimer;
-		document.onkeydown = resetTimer;   // deprecated
-		document.addEventListener('scroll', resetTimer, true);
-		function logout() {
-		const toast = document.createElement('div');
-		toast.innerHTML = " &nbsp;&nbsp;After 5 minutes of inactivity, you are logged out!";
-		toast.style.position = "fixed";
-		toast.style.fontFamily = "system-ui, 'Font Awesome 6 Free'";
-		toast.style.fontWeight = "600";
-		toast.style.fontSize = "0.75rem";			
-		toast.style.top = "4rem";
-		toast.style.left = "50%";
-		toast.style.padding = "0.75rem";
-		toast.style.backgroundColor = "rgb(0 0 0 / 86%)";
-		toast.style.color = "white";
-		toast.style.borderRadius = "4px";
-		document.body.appendChild(toast);
-		}
-		function resetTimer() {
-		clearTimeout(time);
-		time = setTimeout(logout, 200000)
+    if (window.location.href.indexOf("logon") === -1) {  // Check if user is not logon page
+        function inactivity() {
+            let time;
+            let warningTimer;
+			let warningToast;
 
-		}
-		};
-		inactivity();
+            // Events list
+            const events = [
+                'load', 'mousemove', 'mousedown', 'touchstart', 
+                'click', 'keydown', 'scroll'
+            ];
+
+            events.forEach(event => document.addEventListener(event, resetTimer, true));
+
+            // Back to logon
+            function logout() {
+                window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/logon/logoff';
+            }
+
+            // Show warn
+            function showWarning() {
+                warningToast = document.createElement('div');
+                warningToast.innerHTML = "⚠️ &nbsp;&nbsp;Log out in 5 minutes due to your inactivity!";
+                warningToast.style.position = "fixed";
+                warningToast.style.fontFamily = "system-ui, 'Font Awesome 6 Free'";
+                warningToast.style.fontWeight = "600";
+                warningToast.style.fontSize = "1rem";            
+                warningToast.style.top = "4rem";
+                warningToast.style.left = "50%";
+                warningToast.style.padding = "0.75rem 2rem";
+                warningToast.style.backgroundColor = "rgb(255 165 0 / 86%)";
+                warningToast.style.color = "black";
+                warningToast.style.borderRadius = "4px";
+                warningToast.style.transform = "translateX(-50%)"; // Centrer horizontalement
+                document.body.appendChild(warningToast);
+            }
+			// Reset
+            function resetTimer() {
+                clearTimeout(time);
+                clearTimeout(warningTimer);
+				if (warningToast) {
+                    warningToast.remove();
+                    warningToast = null;  // Reset Toast
+                }
+                warningTimer = setTimeout(showWarning, 300000); // 5 minutes = 300 000 millisecondes
+                time = setTimeout(logout, 600000);  // 10 minutes = 600 000 millisecondes
+            }
+            resetTimer();
+        }
+        inactivity();
+    }
 // Add tablesorter-ice class to .tablesorter objects
 			$(".tablesorter").addClass("tablesorter-ice");
 // Login page input placeholder
