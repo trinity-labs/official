@@ -111,7 +111,7 @@ mymodule.save_session = function( sessionpath, sessiontable)
 		output[#output+1] = "return s"
 		local content = table.concat(output, "\n") .. "\n"
 
-		-- want to avoid writing unless changed, becuase opening for write
+		-- want to avoid writing unless changed, because opening for write
 		-- prevents simultaneous opening for read
 		if content ~= cached_content then
 			local file = io.open(sessionpath .. "/session." .. id , "w")
