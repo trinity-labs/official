@@ -30,7 +30,7 @@ end
 * Product Page: ACF Dashboard Skin (https://gitlab.alpinelinux.org/trinity-labs/acf-skins/-/blob/master/dashboard)
 * Created by: T. Bonnin for Alpine Configuration Framework (ACF) based on N. Angelacos previous work
 * License: Licensed under the terms of GPL2
-* Copyright : (C) 2007 N. Angelacos for ACF - (C) 2023 T. Bonnin for DashBoard App
+* Copyright : (C) 2007 N. Angelacos for ACF - (C) 2023 T. Bonnin for Dashboard App
 * Exclusive Features :
 	+ Can run on memory only (stock in Alpine)
 	+ No Database
@@ -75,7 +75,7 @@ end
 		<!-- UNPKG JS CDN FOR LATEST JQUERY -->
 		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 		<!-- GLOBAL FUNCTIONS -->
-		<script type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
+		<script type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>" defer></script>
 		<!-- HIDE LOGGON PAGE FOR AUTH USERS -->
 		<script type="application/javascript"> let user = "<%= session.userinfo %>"; if ((user !== "nil") && (window.location.href.indexOf("logon/logon") > -1)) {window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/welcome/read'}</script>
 </head>
