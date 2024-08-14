@@ -2,7 +2,7 @@
 		$(function(){
 				$(":input:not(input[type=button],input[type=submit],button):enabled:not([readonly]):visible:first").focus();
 			
-			});
+
 // Show Password on Logon page
 		function showPassword() {
 			var field = document.querySelector('#password input');
@@ -348,4 +348,4 @@
 				);
 			});
 refresh = setInterval(api, 1000);
-};
+};			});
