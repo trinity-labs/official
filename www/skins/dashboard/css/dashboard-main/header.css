@@ -67,11 +67,11 @@ header {
     align-items: center;
 }
 
-#toggle-link {
+#toggle-menu {
     padding: 1.25rem 0rem 1.25rem 1rem;
 }
 
-#toggle, #toggle.active i.fa-solid.fa-bars {
+#toggle-menu, #toggle-menu.active i.fa-solid.fa-bars {
     color: #474747;
 }
 

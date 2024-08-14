@@ -71,11 +71,11 @@ end
 		<!-- UNPKG JS CDN FOR LATEST HIGHLIGHT.JS -->
 		<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"></script>
 		<!-- INITIALIZE HIGHLIGHT.JS -->
-		<script type="application/javascript" defer>hljs.highlightAll()</script>
+		<script defer type="application/javascript">hljs.highlightAll()</script>
 		<!-- UNPKG JS CDN FOR LATEST JQUERY -->
 		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 		<!-- GLOBAL FUNCTIONS -->
-		<script type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>" defer></script>
+		<script defer type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
 		<!-- HIDE LOGGON PAGE FOR AUTH USERS -->
 		<script type="application/javascript"> let user = "<%= session.userinfo %>"; if ((user !== "nil") && (window.location.href.indexOf("logon/logon") > -1)) {window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/welcome/read'}</script>
 </head>
@@ -103,7 +103,7 @@ end
 					local ctlr = pageinfo.script .. "/acf-util/logon/"
 
 					if session.userinfo and session.userinfo.userid then
-						print("<div id='header-left'><a href='javascript:void(0);' class='icon' id='toggle-link' title='Menu' onclick='toggleMenu()'><div id='toggle'><i class='fa-solid fa-bars'></i></div></a>")
+						print("<div id='header-left'><a href='javascript:void(0);' class='icon' id='toggle-menu' title='Menu' onclick='toggleMenu()'><i class='fa-solid fa-bars'></i></a>")
 						print("<a class='header-logo home-logo' href=".. html.html_escape(pageinfo.wwwprefix) .. "/cgi-bin/acf/acf-util/welcome/read".."/></a></div>")
 						print("<div id='header-links'><a id='logoff' class='icon-header' title='Logoff' href=\""..html.html_escape(ctlr).."logoff\"><i class='fa-solid fa-user-lock fa-2x logoff-icon'></i></a>")
 						print("<a id='home-link' class='icon-header' title='Home' href=".. html.html_escape(pageinfo.wwwprefix) ..  "/cgi-bin/acf/acf-util/welcome/read".."><i class='fa-solid fa-house fa-2x home-icon'></i></a>")
@@ -113,7 +113,7 @@ end
 				%>
 				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/trinity" target="_blank" title="About"><i class="fa-brands fa-gitlab fa-2x about-icon"></i></a>
 				<!-- Theme Toggle -->
-				<a href='javascript:void(0);' id='theme-toggle' title='Dark Mode' onclick='toggleTheme()'><i class="fa-solid fa-circle-half-stroke"></i></a>	
+				<a href='javascript:void(0);' id='toggle-theme' title='Dark Mode' onclick='toggleTheme()'><i class="fa-solid fa-circle-half-stroke"></i></a>	
 				<%
 					if session.userinfo and session.userinfo.userid then
 						print("<span id='text-user-logon' class='text-user-"..(session.userinfo.userid).."' title='User @ HOST'>"..(session.userinfo.userid).." @ "..string.upper(hostname or "unknown").."</span>")
@@ -126,7 +126,7 @@ end
 						
 <div id="nav" style="display: none;">
 			<div class="header-menu">
-			<a href='javascript:void(0);' class='icon' id='toggle-link' title='Menu' onclick='toggleMenu()'><div id='toggle'><i class='fa-solid fa-bars'></i></div></a>
+			<a href='javascript:void(0);' class='icon' id='toggle-menu' title='Menu' onclick='toggleMenu()'><i class='fa-solid fa-bars'></i></a>
 			<a class="home-logo" href="<%= html.html_escape(pageinfo.wwwprefix) %>/cgi-bin/acf/acf-util/welcome/read"/></a>
 			</div>
 				<%
