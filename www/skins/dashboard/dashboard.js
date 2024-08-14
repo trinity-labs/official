@@ -194,7 +194,6 @@ $(function() {
     1, // Suggested Max delta
     1  // Step Size
   );
-
 // Create Memory Usage Chart
   createChart(
     'chartMemUsed',
