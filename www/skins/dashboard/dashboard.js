@@ -29,27 +29,29 @@ function toggleTheme() {
     window.localStorage.setItem('html', isLightTheme ? 'light-theme' : 'dark-theme');
 }
 // Show Password Toggle Functionality
-			if (location.href.includes("logon/logon")) {
-				const setAttrs = (el, ph) => el.attr({
-				required: true,
-				placeholder: ph,
-				style: "font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600"
-				});
-				setAttrs($('#userid input'), '\uf007    User ID');
-				setAttrs($('#password input'), '\uf023    Password').attr('autocomplete', 'current-password');
-				$('#login').attr('autocomplete', 'on');
-				$('.hidden').attr('hidden', true);
-				$("#password .right").append("<button id='showPass' type='button'><i class='fa-regular fa-eye-slash'></i></button>");
-				$("#showPass").on('click', function() {
-				const field = $('#password input');
-				const isPassword = field.attr('type') === 'password';
-				field.attr('type', isPassword ? 'text' : 'password');
-				$(this).toggleClass('corporate');
-				$("#showPass i").toggleClass('fa-eye fa-eye-slash');
-			})};		
+	if (location.href.includes("logon/logon")) {
+		const setAttrs = (el, ph) => el.attr({
+		required: true,
+		placeholder: ph,
+		style: "font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600"
+		});
+		setAttrs($('#userid input'), '\uf007    User ID');
+		setAttrs($('#password input'), '\uf023    Password').attr('autocomplete', 'current-password');
+		$('#login').attr('autocomplete', 'on');
+		$('.hidden').attr('hidden', true);
+		$("#password .right").append("<button id='showPass' type='button'><i class='fa-regular fa-eye-slash'></i></button>");
+		$("#showPass").on('click', function() {
+		const field = $('#password input');
+		const isPassword = field.attr('type') === 'password';
+		field.attr('type', isPassword ? 'text' : 'password');
+		$(this).toggleClass('corporate');
+		$("#showPass i").toggleClass('fa-eye fa-eye-slash');
+	})};		
 //Wait DOM
-		$(document).ready(function() {				
+		$(document).ready(function() {
+			
 // Inactivity Logoff & Warning
+$(function() {
     if (!window.location.href.includes("logon")) {
         let logoutTimer, warningTimer;
         const events = 'load mousemove mousedown touchstart click keydown scroll';
@@ -74,11 +76,12 @@ function toggleTheme() {
         $(document).on(events, resetTimer);
         resetTimer();
     }
+});
 // Assign Toggles
 $(function() {
     function setClassAndProp(selector, className, prop, value) {
-        $(selector).toggleClass(className);
-        if (prop !== null) $(selector).prop(prop, value);
+		$(selector).toggleClass(className);
+		if (prop !== null) $(selector).prop(prop, value);
     }
     let menuState = window.localStorage.getItem('nav') || 'active';
     setClassAndProp("#nav", menuState, null, null);
@@ -109,43 +112,40 @@ $(function() {
 });
 // ChartJS API		
 	if(window.location.href.indexOf("/acf/acf-util/welcome/read") > -1){			
-		$(function() {async function api() {
-			const url = `${document.location.hostname}/alpine-baselayout/health/api?viewtype=json`;
-			const obj = await (await fetch(url)).json();
-			const $cpuTemp = $("#cpuTemp");
-			const toggleDegree = localStorage.getItem('toggle-degree');
-			const boardTempC = Math.ceil(obj.value.boardTemp.value / 1000);
-			const cpuTempC = Math.floor(obj.value.cpuTemp.value / 1000);
-			const tempClass = cpuTempC < 50 ? 'normal' : cpuTempC >= 75 ? 'hot' : 'medium';
-			const boardTemp = toggleDegree === 'fahrenheit' ? Math.ceil(boardTempC * 9 / 5 + 32) : boardTempC;
-			const cpuTemp = toggleDegree === 'fahrenheit' ? Math.floor(cpuTempC * 9 / 5 + 32) : cpuTempC;
-			const unit = toggleDegree === 'fahrenheit' ? '°F' : '°C';
-			$cpuTemp.html(`${boardTemp} ${unit}  &nbsp; | <span class='${tempClass}'>${cpuTemp} ${unit}</span>`);
-			localStorage.setItem('CTemp', cpuTempC);
-			localStorage.setItem('MemoryUse', obj.value.memUsed);
-			localStorage.setItem('MemoryTotal', obj.value.memTotal);
-		}
+	$(function() {async function api() {
+		const url = `${document.location.hostname}/alpine-baselayout/health/api?viewtype=json`;
+		const obj = await (await fetch(url)).json();
+		const $cpuTemp = $("#cpuTemp");
+		const toggleDegree = localStorage.getItem('toggle-degree');
+		const boardTempC = Math.ceil(obj.value.boardTemp.value / 1000);
+		const cpuTempC = Math.floor(obj.value.cpuTemp.value / 1000);
+		const tempClass = cpuTempC < 50 ? 'normal' : cpuTempC >= 75 ? 'hot' : 'medium';
+		const boardTemp = toggleDegree === 'fahrenheit' ? Math.ceil(boardTempC * 9 / 5 + 32) : boardTempC;
+		const cpuTemp = toggleDegree === 'fahrenheit' ? Math.floor(cpuTempC * 9 / 5 + 32) : cpuTempC;
+		const unit = toggleDegree === 'fahrenheit' ? '°F' : '°C';
+		$cpuTemp.html(`${boardTemp} ${unit}  &nbsp; | <span class='${tempClass}'>${cpuTemp} ${unit}</span>`);
+		localStorage.setItem('CTemp', cpuTempC);
+		localStorage.setItem('MemoryUse', obj.value.memUsed);
+		localStorage.setItem('MemoryTotal', obj.value.memTotal);
+	}
 // Common chart setup
-  function createChart(elementId, label, borderColor, backgroundColor, dataKey, ySuggestedMin, ySuggestedMax, yStepSize) {
+  function createChart(elementId, label, borderColor, backgroundColor, dataKey, yMinDelta, yMax, yStepSize) {
     const data = {
-      labels: [],
-      datasets: [{
-        label: label,
-        borderColor: borderColor,
-        backgroundColor: backgroundColor,
-        data: [],
-        tension: 0.25,
-        fill: true,
-        pointRadius: 0
+    labels: [],
+    datasets: [{
+	label: label,
+	borderColor: borderColor,
+	backgroundColor: backgroundColor,
+	data: [],
+	tension: 0.25,
+	fill: true,
+	pointRadius: 0
       }],
     };
     const config = {
       type: 'line',
       data,
       options: {
-        streaming: {
-          frameRate: 1
-        },
         scales: {
           x: {
             type: 'realtime',
@@ -161,16 +161,19 @@ $(function() {
                     y: newValue
                   });
                 });
-                chart.options.scales.y.suggestedMin = newValue - ySuggestedMin;
-                chart.options.scales.y.suggestedMax = newValue + ySuggestedMax;
+                // For CPU, adjust suggested min/max based on current value
+                if (dataKey === 'CTemp') {
+                  chart.options.scales.y.suggestedMin = newValue - yMinDelta;
+                  chart.options.scales.y.suggestedMax = newValue + yMinDelta;
+                }
               }
             }
           },
           y: {
-            suggestedMin: ySuggestedMin,
-            suggestedMax: ySuggestedMax,
+            suggestedMin: 0,
+            suggestedMax: yMax, // Correctly setting suggested max for memory
             ticks: {
-              stepSize: yStepSize
+              stepSize: yStepSize // Ensure this is set appropriately
             }
           }
         },
@@ -183,28 +186,32 @@ $(function() {
     };
     new Chart(document.getElementById(elementId), config);
   }
-// Create CPU Temperature Chart
+  // Create CPU Temperature Chart
   createChart(
     'chartCpuTemp',
     'CPU Temp',
     'rgba(255, 105, 180)',
     'rgba(255, 105, 180, 0.5)',
     'CTemp',
-    1, // Suggested Min delta
-    1, // Suggested Max delta
-    1  // Step Size
+    1,  // Min delta for CPU temperature
+    null, // CPU chart does not use a fixed max
+    1   // Step Size
   );
-// Create Memory Usage Chart
+
+  // Create Memory Usage Chart
+  const memoryTotal = Math.floor(Number(localStorage.getItem('MemoryTotal')));
+  const memoryStepSize = Math.max(1, Math.floor(memoryTotal / 4)); // Ensure at least 1 and is an integer
   createChart(
     'chartMemUsed',
     'Memory Usage',
     'rgba(255, 120, 0)',
     'rgba(255, 120, 0, 0.5)',
     'MemoryUse',
-    0, // Suggested Min
-    Math.floor(Number(localStorage.getItem("MemoryTotal"))), // Suggested Max
-    4  // Step Size
+    0,  // Min delta (not used for memory)
+    memoryTotal, // Use memory total from localStorage
+    memoryStepSize // Integer Step Size
   );
 refresh = setInterval(api, 1000);
+		});
+	};
 });
-};});
