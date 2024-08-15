@@ -48,8 +48,7 @@ function toggleTheme() {
 		$("#showPass i").toggleClass('fa-eye fa-eye-slash');
 	})};		
 //Wait DOM
-		$(document).ready(function() {
-			
+$(document).ready(function() {	
 // Inactivity Logoff & Warning
 $(function() {
     if (!window.location.href.includes("logon")) {
@@ -66,12 +65,7 @@ $(function() {
             window.location.href = `//${window.location.hostname}/cgi-bin/acf/acf-util/logon/logoff`;
         }
         function showWarning() {
-            $('body').append(
-                `<div id="warningToast" style="position: fixed; top: 4rem; left: 50%; padding: 0.75rem 2rem; 
-                background-color: rgba(255, 165, 0, 0.86); color: black; border-radius: 4px; transform: translateX(-50%);
-                font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600; font-size: 1rem;">
-                ⚠️ &nbsp;&nbsp;Log out in 5 minutes due to your inactivity!</div>`
-            );
+            $('body').append(`<div id="warningToast">⚠️ &nbsp;&nbsp;Log out in 5 minutes due to your inactivity!</div>`);
         }
         $(document).on(events, resetTimer);
         resetTimer();
