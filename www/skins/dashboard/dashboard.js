@@ -194,7 +194,7 @@ $(function() {
 
   // Create Memory Usage Chart
   const memoryTotal = Math.floor(Number(localStorage.getItem('MemoryTotal')));
-  const memoryStepSize = Math.max(1, Math.floor(memoryTotal / 4)); // Ensure at least 1 and is an integer
+  const memoryStepSize = Math.max(1, Math.ceil(memoryTotal / 4)); // Ensure at least 1 and is an integer
   createChart(
     'chartMemUsed',
     'Memory Usage',

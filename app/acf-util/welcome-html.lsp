@@ -118,10 +118,10 @@ end
 
 -- FORMAT OCTETS
 function blocksToSize(octets)
-	kilooctet = 1000;
-	megaoctet = kilooctet * 1000;
-	gigaoctet = megaoctet * 1000;
-	teraoctet = gigaoctet * 1000;
+	kilooctet = 1024;
+	megaoctet = kilooctet * 1024;
+	gigaoctet = megaoctet * 1024;
+	teraoctet = gigaoctet * 1024;
   if((octets >= 0) and (octets < kilooctet)) then
     return math.floor(octets) .. " Octets";
   elseif((octets >= kilooctet) and (octets < megaoctet)) then
