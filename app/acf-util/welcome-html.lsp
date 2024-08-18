@@ -78,7 +78,7 @@
 	table.sort(interfaces)
 -- FORMAT BYTES	
 	local function bytesToSize(bytes)
-		local units = {"Bytes", "KB", "MB", "GB", "TB"}
+		local units = {"Bytes", "KiB", "MiB", "GiB", "TiB"}
 		local thresholds = {1024, 1024^2, 1024^3, 1024^4}   
 		for i = #thresholds, 1, -1 do
 			if bytes >= thresholds[i] then
@@ -89,7 +89,7 @@
 	end
 -- FORMAT OCTETS
 	local function blocksToSize(octets)
-		local units = {"Octets", "Ko", "Mo", "Go", "To"}
+		local units = {"Octets", "Kio", "Mio", "Gio", "Tio"}
 		local thresholds = {1024, 1024^2, 1024^3, 1024^4}   
 		for i = #thresholds, 1, -1 do
 			if octets >= thresholds[i] then

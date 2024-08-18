@@ -38,27 +38,52 @@ body {
 }
 
 .page-header-title {
-    font-weight: 600;
-    margin: 0 1rem 2.5rem 0;
-    text-transform: capitalize;
-    width: 33%;
-    color: white;
-    padding: 0.25rem 0 1rem 1.25rem;
-    border-radius: 2px;
+    margin: 0 1rem 4rem 5.25rem;
+    text-transform: uppercase;
+    width: fit-content;
+    padding: 0.25rem 0 0.25rem;
+    font-family: "Arial Black", sans-serif;
+    font-weight: 900 !important;
+    font-size: 0.9rem;
+    letter-spacing: -0.1rem;
+	border-top: 3px solid;
+    border-bottom: 3px solid;
 }
 
 #networking .page-header-title {
-	background: #005179;
+	color: #005179;
 }
 
 #applications .page-header-title {
-	background: #2743a9;
+	color: #2743a9;
 }
 
 #system .page-header-title {
-	background: #5a329f;
+    color: #5a329f;
 }
 
 .small-block {
 	width: 30%;
+}
+
+/*----------------------------------------------------------------------------------
+ * PAGE > ERROR
+ *----------------------------------------------------------------------------------
+ */
+ 
+.dispatcherror .page-header-title {
+    color: #ff5454;
+}
+
+.dispatcherror p {
+    color: #ff5454 !important;
+    font-weight: bold;
+}
+
+.errordetail.error {
+    color: #727272 !important;
+}
+
+.errordetail.error a:hover {
+    text-decoration: underline !important;
 }

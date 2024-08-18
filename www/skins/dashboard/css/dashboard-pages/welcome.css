@@ -72,10 +72,14 @@ span.dashboard-infos {
 .welcome-read #content h1 {
     background: none !important;
     font-weight: 600;
-    text-transform: capitalize;
-    margin: 0.5rem 0 0.5rem;
+    text-transform: uppercase;
+    margin: 0.5rem 0 1.75rem;
     font-family: Arial Black;
+    box-shadow: 2px 2px 30px #4e4e4e20;
     color: #b7b7b7;
+    border: 2px solid #f7f7f7;
+    font-size: 0.8rem;
+    letter-spacing: -0.05rem;
 }
 
 .welcome-title-user {

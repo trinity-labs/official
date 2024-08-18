@@ -85,7 +85,7 @@ html.app-logon.dark-theme {
     background: #404040 !important;
 }
 
-#content h1::before {
+.dark-theme #content h1::before {
     color: rgb(0 0 0 / 20%) !important;
 }
 

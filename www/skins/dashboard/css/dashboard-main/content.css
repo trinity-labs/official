@@ -52,6 +52,22 @@
     justify-content: flex-start;
 }
 
+#networking #content h1::before {
+ 	color: #005179 !important;
+}
+
+#applications #content h1::before {
+ 	color: #2743a9 !important;
+}
+
+#system #content h1::before {
+ 	color: #5a329f !important;
+}
+
+.dispatcherror #content h1::before {
+    color: #ff5454 !important;
+}
+
 #content h1::before {
     font-family: "Font Awesome 6 Free";
     font-weight: bold;

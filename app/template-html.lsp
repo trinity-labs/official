@@ -113,7 +113,7 @@ end
 				%>
 				<a id="about-link" class="icon-header" href="https://gitlab.alpinelinux.org/trinity-labs/trinity" target="_blank" title="About"><i class="fa-brands fa-gitlab fa-2x about-icon"></i></a>
 				<!-- Theme Toggle -->
-				<a href='javascript:void(0);' id='toggle-theme' title='Dark Mode' onclick='toggleTheme()'><i class="fa-solid fa-circle-half-stroke"></i></a>	
+				<a class='icon-header' id='toggle-theme' title='Dark Mode' onclick='toggleTheme()' href='javascript:void(0);'><i class="fa-solid fa-circle-half-stroke"></i></a>	
 				<%
 					if session.userinfo and session.userinfo.userid then
 						print("<span id='text-user-logon' class='text-user-"..(session.userinfo.userid).."' title='User @ HOST'>"..(session.userinfo.userid).." @ "..string.upper(hostname or "unknown").."</span>")

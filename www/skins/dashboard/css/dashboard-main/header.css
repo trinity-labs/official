@@ -81,7 +81,6 @@ header {
 
 .icon-header {
     padding: 1.25rem 1.5rem;
-    margin: 0 1.5rem 0 0;
 }
 
 #header-left {
@@ -116,7 +115,7 @@ header {
     font-size: 0.7rem;
     font-weight: bold;
     cursor: pointer;
-    margin: 0 1rem 0 0;
+    margin: 0 1.75rem 0 0;
     font-family: Arial Black;
     padding: 0.33rem 1.5rem;
     vertical-align: middle;

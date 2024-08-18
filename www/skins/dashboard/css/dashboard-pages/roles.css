@@ -11,7 +11,7 @@
 .roles .section-1 .section-2:nth-child(2) {
     background: #e6ffc4;
     padding: 1rem;
-    border-radius: 2px;
+    border-radius: 6px;
 }
 
 #section-root-is-valid-in-these-roles h2 {
@@ -25,7 +25,7 @@
     font-weight: bold;
     content: '\F505';
     margin: 0 0.5rem 0 0;
-    color: rgb(0 0 0 / 30%);
+    color: rgb(173 219 0);
     position: relative;
     font-size: 1.25rem;
     top: 0;
