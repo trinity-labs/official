@@ -51,6 +51,13 @@
     width: 100% !important;
     padding: 0.75rem 0 5rem 0 !important;
 	}
+	
+	#warningToast {
+    left: 50%;
+    font-size: 0.65rem;
+    width: 70%;
+    text-align: center;
+	}
 
 	.logon.logon-logon {
     position: relative;

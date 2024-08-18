@@ -181,7 +181,7 @@
 .health-networkstats #subnav::before {
     top: 1.6rem !important;
     font-size: 1.6rem !important;
-    padding: 1.41rem 1.5rem !important;
+    padding: 1.35rem 1.5rem !important;
 }
 
 #section-hardware-information #subnav::before {
@@ -216,6 +216,7 @@
 }
 
 .password #subnav::before {
+    padding: 1.33rem 1.5rem !important;
     content: '\F13E' !important;
 }
 

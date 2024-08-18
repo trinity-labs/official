@@ -80,6 +80,11 @@ html.app-logon.dark-theme {
     border: 3px solid #1a232e;
 }
 
+.dark-theme .welcome #content h1 {
+    border: none !important;
+    color: #c5c5c5 !important;
+}
+
 .dark-theme #content h1 {
     color: #c5c5c5 !important;
     background: #404040 !important;

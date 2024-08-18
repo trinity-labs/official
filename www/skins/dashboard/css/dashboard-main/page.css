@@ -87,3 +87,18 @@ body {
 .errordetail.error a:hover {
     text-decoration: underline !important;
 }
+
+.dispatcherror #content h1::before {
+    color: #ff5454 !important;
+}
+
+.right #error {
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #ff5454;
+    background: white !important;
+}
+
+.right #error::before {
+    display: none !important;
+}
