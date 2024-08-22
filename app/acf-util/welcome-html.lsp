@@ -260,5 +260,6 @@
 	<div class="disk-list">
 	</div>	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
+<% api %>
 </div>
 <% htmlviewfunctions.displaysectionend(header_level) %>

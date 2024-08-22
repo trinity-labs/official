@@ -160,7 +160,7 @@
 	color: #adadad
 }
 
-#system #subnav::before {
+.health #subnav::before {
     font-family: "Font Awesome 6 Free";
     content: '\F21E';
     font-weight: bold;
@@ -239,7 +239,8 @@
     content: '\F043' !important;
 }
 
-.dispatcherror #subnav::before {
+.dispatcherror #subnav::before,
+.exception #subnav::before {
     font-family: "Font Awesome 6 Free";
     content: '\E55D' !important;
     font-weight: bold;

@@ -37,6 +37,7 @@
 }
 
 #content h1 {
+    width: -webkit-fill-available;
     font-weight: bold;
     background: #f3f3f3;
     color: grey;

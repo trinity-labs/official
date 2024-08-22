@@ -71,7 +71,8 @@ body {
  *----------------------------------------------------------------------------------
  */
  
-.dispatcherror .page-header-title {
+.dispatcherror .page-header-title,
+.exception .page-header-title {
     color: #ff5454;
 }
 
@@ -88,12 +89,20 @@ body {
     text-decoration: underline !important;
 }
 
+<<<<<<< HEAD
 .dispatcherror #content h1::before {
+=======
+.dispatcherror #content h1::before,
+.exception #content h1::before {
+>>>>>>> 5a6b168 (Change Error Template)
     color: #ff5454 !important;
 }
 
 .right #error {
+<<<<<<< HEAD
     margin: 0 !important;
+=======
+>>>>>>> 5a6b168 (Change Error Template)
     padding: 0 !important;
     color: #ff5454;
     background: white !important;
