@@ -29,7 +29,7 @@
 	});
 </script>
 
-<% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Alpine Configuration Framework"}), page_info) %>
+<% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="ACF Dispatch Error"}), page_info) %>
 <p class="errordetail">Dispatch error occured</p>
-<p class="hiddendetail">'<%= html.html_escape(view.controller) %>' does not have a '<%= html.html_escape(view.action) %>' action.</p>
+<p class="hiddendetail showdetail"><code> <%= html.html_escape(view.controller) %> </code> does not have a <code> <%= html.html_escape(view.action) %> </code> action.</p>
 <% htmlviewfunctions.displaysectionend(header_level) %>
