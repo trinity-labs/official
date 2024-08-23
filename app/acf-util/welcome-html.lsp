@@ -5,7 +5,7 @@
 <% local sys = viewlibrary.dispatch_component("alpine-baselayout/health/system", nil, true) %>
 <% local proc = viewlibrary.dispatch_component("alpine-baselayout/health/proc", nil, true) %>
 <% local api = viewlibrary.dispatch_component("alpine-baselayout/health/api", nil, true) %>
-<% local disk = viewlibrary.dispatch_component("alpine-baselayout/health/storage", nil, true) %>
+<% local volume = viewlibrary.dispatch_component("alpine-baselayout/health/storage", nil, true) %>
 <% local net = viewlibrary.dispatch_component("alpine-baselayout/health/network", nil, true) %>
 <% local netstats = viewlibrary.dispatch_component("alpine-baselayout/health/networkstats", nil, true) %>
 <% 
@@ -257,8 +257,58 @@
 <!-- Dashboard App Block - LINE 3 -->
 <div class="dashboard-main main-block">
 <!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
-	<div class="disk-list">
-	</div>	
+<div class="disk-list">
+<p class="dashboard-title"><i class="fa-solid fa-square"></i> Disk List</p>
+<%
+local function get_random_number(limit)
+    return math.floor(math.random() * limit)
+end
+
+local function get_random_color()
+    local h = get_random_number(360)
+    local color = string.format("hsl(%d, 70%%, 55%%)", h)
+    return color
+end
+%>
+<% displaydisk = function(disk, name)
+    local used_color = get_random_color()
+    io.write('<table id="legend-title" style="margin:0px;padding:0px;border:0px;margin-top:5px;">\n')
+    io.write("    <tr>\n")
+    io.write('        <td id="legend-object" width="100px"><b><span class="linux-name"><i class="fa-solid fa-database icon-disk">')
+	io.write('</i> Disk '..html.html_escape(name)..'</span> - <span class="brand-name" style="color:'..used_color..'">'..html.html_escape(disk.model)..'</span>')
+	io.write('<span class="disk-right-inf"><span class="mount-point"><i class="fa-solid fa-folder-closed icon-disk icon-disk-right"></i> '..html.html_escape(disk.mount_point)..'</span>')
+    io.write('<i class="fa-solid fa-chart-simple icon-disk icon-disk-right"></i> Used <span class="disk-used" style="background-color:'..used_color..'">'..html.html_escape(disk.used) .. "%" .. '</span></span></b></td>\n')
+	io.write("    </tr>\n")
+    io.write("</table>\n")
+    io.write('<table class="chart-bar chart-storage">\n')
+    io.write("    <tr>\n")
+    io.write("        <td>0%</td>\n")
+    if tonumber(disk.used) > 0 and tonumber(disk.used) <= 5 then
+        io.write('        <td id="capacity-used" class="capacity-used" width="5%" style="margin:0; border:none; background-color:'..used_color..'">')
+        io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></td>\n')
+	elseif tonumber(disk.used) > 10 then
+        io.write('        <td id="capacity-used" class="capacity-used" width="'..html.html_escape(disk.used)..'%" style="margin:0; border:none; background-color:'..used_color..'">')
+        io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></td>\n')
+    end
+    if tonumber(disk.used) < 100 then
+        io.write('        <td id="capacity-free" class="capacity-free" width="'..(100-tonumber(disk.used))..'%" style="margin:0; border:none;">')
+        io.write('<center><b>'.. bytesToSize(tonumber(disk.available) * 1024) ..'</b></center></td>\n')
+    end
+	io.write('        <td>100%</td>\n')
+	io.write("    </tr>\n")
+	io.write("</table>\n")
+end
+%>
+<%
+if (volume.value.hd) then
+    for name,hd in pairs(volume.value.hd.value) do
+        displaydisk(hd, name)
+    end
+else
+    io.write('<p class="error error-txt">No Hard Drive Mounted</p>\n')
+end
+%>
+</div>	
 <!-- Dashboard Main Block - DISK - BLOCK 2 -->	
 </div>
 <% htmlviewfunctions.displaysectionend(header_level) %>

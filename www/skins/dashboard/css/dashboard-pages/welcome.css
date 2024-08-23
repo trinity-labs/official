@@ -59,7 +59,7 @@ span.dashboard-infos {
     text-align: left !important;
     font-weight: 900 !important;
     font-size: 0.8rem !important;
-    letter-spacing: 0.1rem;
+    letter-spacing: -0.05rem;
     color: #b1b1b1;
     padding: 0rem 0 1rem !important;
 }
@@ -527,7 +527,7 @@ span.dashboard-infos {
 }
 
 .dashboard-main .version-check a:hover {
-    border-bottom: 2px solid #68c700;
+    border-bottom: 2px solid #3cdd4f;
 }
 
 .version-link.version-external-link {
@@ -799,17 +799,14 @@ input:checked + .slider:before {
     font-size: 0.65rem !important;
 }
 
-.page-welcome #content .chart-bar td {
-    padding: 0.25rem !important;
-}
-
 .page-welcome #content .chart-storage td:first-child,
 .page-welcome #content .chart-storage td:last-child {
     display: none !important;
 }
 
 .page-welcome #capacity-free {
-    background: #006787;
+    background: #f3f3f3;
+    margin: 0 !important;
 }
 
 .page-welcome #capacity-used {
@@ -843,7 +840,7 @@ input:checked + .slider:before {
 
 .data-block.data-system.system-uptodate {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #68c700;
+    border-left: 33px solid #3cdd4f;
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;
@@ -920,4 +917,72 @@ input:checked + .slider:before {
 .disk-list {
     white-space: pre;
     display: block;
+	width: -moz-available !important;
+    width: -webkit-fill-available !important;
+    width: fill-available !important;
+}
+
+#content .chart-storage {
+    width: 100%;
+    border: none !important;
+    font-size: 0.75rem;
+}
+
+.welcome #content .chart-storage {
+    width: 100%;
+    height: 10rem;
+    border: none !important;
+    font-size: 0.75rem;
+    margin: -1.25rem auto 2rem !important;
+}
+
+.welcome #capacity-used {
+    color: white !important;
+    font-family: "Arial Black", sans-serif;
+    font-size: 0.75rem;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+}
+
+.welcome #capacity-free {
+    color: grey !important;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-right: none;
+    border-radius: 0 8px 8px 0;
+}
+
+.welcome .disk-right-inf {
+    float: right;
+}
+
+.welcome .disk-used {
+    color: white;
+    font-weight: 600 !important;
+    font-size: 0.65rem;
+    position: relative;
+    margin: 0 0 0 0.25rem;
+    padding: 0.25rem 0.55rem;
+    border-radius: 2px;
+    top: -0.1rem;
+}
+
+.welcome .icon-disk-right {
+    opacity: 0.2;
+    margin: 0 0.25rem 0 3rem;
+}
+
+.welcome .brand-name {
+    font-weight: 900;
+}
+
+.welcome .dashboard-title {
+    font-family: Arial Black;
+    margin: 3rem auto 0;
+    border-top: 1px solid #ebebeb;
+    font-weight: bold;
+    color: #b1b1b1;
+    letter-spacing: -0.05rem;
+    text-transform: capitalize;
+    font-size: 0.85rem;
 }

@@ -182,6 +182,9 @@
 #content textarea, 
 #content input.password {
 	width:98.5%;
+	width: -moz-available !important;
+    width: -webkit-fill-available !important;
+    width: fill-available !important;
 }
 
 #content input.short {

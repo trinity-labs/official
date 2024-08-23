@@ -89,20 +89,34 @@ body {
     text-decoration: underline !important;
 }
 
-<<<<<<< HEAD
-.dispatcherror #content h1::before {
-=======
 .dispatcherror #content h1::before,
 .exception #content h1::before {
->>>>>>> 5a6b168 (Change Error Template)
     color: #ff5454 !important;
 }
 
+.dispatcherror #content p,
+.exception #content p {
+    white-space: pre !important;
+}
+
+.dispatcherror code,
+.exception code {
+    font-size: inherit;
+    font-family: monospace;
+    color: #838383;
+    font-weight: normal !important;
+    background: #f3f3f3 !important;
+}
+
+.exception .showdetail {
+    background: #f3f3f3;
+    margin-top: 1rem;
+    padding: 1rem;
+    width: -webkit-fill-available;
+    border-radius: 2px;
+}
+
 .right #error {
-<<<<<<< HEAD
-    margin: 0 !important;
-=======
->>>>>>> 5a6b168 (Change Error Template)
     padding: 0 !important;
     color: #ff5454;
     background: white !important;

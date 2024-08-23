@@ -221,6 +221,14 @@
     top: 0.75rem;
 	}
 	
+	.mount-point {
+    display: none;
+	}
+	
+	.welcome .icon-disk-right {
+    margin: 0 0.25rem 0 0rem !important;
+	}
+	
 	#content .chart-memory td:first-child,
 	#content .chart-memory td:last-child {
     display: none;

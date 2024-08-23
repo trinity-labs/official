@@ -240,8 +240,8 @@ input.submit:hover {
 
 .version-number-uptodate {
     font-size: 1rem;
-    color: #68c700 !important;
-	font-family: sans-serif;
+    color: #3cdd4f !important;
+    font-family: sans-serif;
 }
 
 .version-number-update {

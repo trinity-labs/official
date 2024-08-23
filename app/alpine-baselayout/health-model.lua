@@ -25,21 +25,21 @@ local function querycmdextended ( cmdline )
 	return cmd_result
 end
 
-local function indexversion ( )
+local function indexversion ()
 	local cmd_result = modelfunctions.run_executable({"apk", "version", "--index"})
 	if cmd_result == "" then cmd_result = nil end
 	return cmd_result
 end
 
 local function diskfree ( media )
-	local cmd_result = modelfunctions.run_executable({"df", "-h", media})
+	local cmd_result = modelfunctions.run_executable({"df", media})
 	if not cmd_result or cmd_result == "" then
 		cmd_result = "unknown"
 	end
 	return cmd_result
 end
 
-local function disklist ( media )
+local function disklist ()
 	local cmd_result = modelfunctions.run_executable({"fdisk", "-l"})
 	if not cmd_result or cmd_result == "" then
 		cmd_result = "unknown"
@@ -47,7 +47,7 @@ local function disklist ( media )
 	return cmd_result
 end
 
-local function memusage ( )
+local function memusage ()
 	local mult = { kB=1024, MB=1048576, GB=1073741824 }
 	local fd = io.open("/proc/meminfo")
 	local res = {}
@@ -97,6 +97,23 @@ local function findThermalBoard()
     return boardPosition
 end
 
+local function parse_disk_models(output)
+    local disks = {}
+    for disk_output in output:gmatch("Disk%s+/dev/%S+:%s+.-\n\n") do
+        local disk_path = disk_output:match("Disk%s+(/dev/%S+):")
+        local disk_size = disk_output:match("Disk%s+/dev/%S+:%s+([^,]+)")
+        local disk_model = disk_output:match("Disk model:%s+([^\n]+)")
+        if disk_path and disk_size and disk_model then
+            table.insert(disks, {
+                path = disk_path,
+                size = disk_size,
+                model = disk_model
+            })
+        end
+    end
+    return disks
+end
+
 -- ###############################################################
 -- Public functions
 -- ###############################################################
@@ -136,44 +153,61 @@ mymodule.get_system = function (self)
 	return cfe({ type="group", value=system, label="System" })
 end
 
-mymodule.get_storage = function (self)
-	local storage = {}
-	local disk = diskfree() .. "\n"
-	local other = {}
-	local lines = format.string_to_table(disk, "\n")
-	local i = 1 -- skip the first line
-	while i < #lines do
-		i = i+1
-		line = lines[i] or ""
-		if lines[i+1] and string.match(lines[i+1], "^%s") then
-			i = i+1
-			line = line .. "\n" .. lines[i]
-		end
-		if string.match(line, "^/dev/fd%d+") then
-			if not storage.floppy then
-				storage.floppy = cfe({ type="group", value={}, label="Floppy drives" })
-			end
-			local name = string.match(line, "^(/dev/fd%d+)")
-			storage.floppy.value[name] = cfe({ value=string.match(disk, "[^\n]*\n")..line, label="Floppy Capacity" })
-			storage.floppy.value[name].used = string.match(line, name.."%s*%S*%s*%S*%s*%S*%s*(%S*)%%")
-		elseif string.match(line, "^/dev/none") or string.match(line, "^tmpfs") then
-			if not storage.ramdisk then
-				storage.ramdisk = cfe({ type="group", value={}, label="RAM disks" })
-			end
-			local name = string.match(line, "^(%S+)")
-			storage.ramdisk.value[name] = cfe({ value=string.match(disk, "[^\n]*\n")..line, label="RAM Disk Capacity" })
-			storage.ramdisk.value[name].used = string.match(line, name.."%s*%S*%s*%S*%s*%S*%s*(%S*)%%")
-		elseif string.match(line, "^/dev/") and not string.match(line, "^/dev/cdrom") and not string.match(line, "^/dev/loop") then
-			if not storage.hd then
-				storage.hd = cfe({ type="group", value={}, label="Hard drives" })
-			end
-			local name = string.match(line, "^(%S+)")
-			storage.hd.value[name] = cfe({ value=string.match(disk, "[^\n]*\n")..line, label="Hard Drive Capacity" })
-			storage.hd.value[name].used = string.match(line, name.."%s*%S*%s*%S*%s*%S*%s*(%S*)%%")
-		end
-	end
-			storage.partitions = cfe({ value=fs.read_file("/proc/partitions") or "", label="Partitions" })
-			return cfe({ type="group", value=storage, label="Storage" })
+mymodule.get_storage = function(self)
+    local storage = {}
+    local disk = diskfree() .. "\n"
+    local fdisk_output = disklist()
+    local disks = parse_disk_models(fdisk_output)
+    local other = {}
+    local lines = format.string_to_table(disk, "\n")
+    local i = 1  -- skip the first line
+
+    while i < #lines do
+        i = i + 1
+        line = lines[i] or ""
+        if lines[i + 1] and string.match(lines[i + 1], "^%s") then
+            i = i + 1
+            line = line .. "\n" .. lines[i]
+        end
+        if string.match(line, "^/dev/fd%d+") then
+            if not storage.floppy then
+                storage.floppy = cfe({ type = "group", value = {}, label = "Floppy drives" })
+            end
+            local name = string.match(line, "^(/dev/fd%d+)")
+            storage.floppy.value[name] = cfe({ value = string.match(disk, "[^\n]*\n") .. line, label = "Floppy Capacity" })
+            storage.floppy.value[name].used = string.match(line, name .. "%s*%S*%s*%S*%s*%S*%s*(%S*)%%")
+        elseif string.match(line, "^/dev/none") or string.match(line, "^tmpfs") then
+            if not storage.ramdisk then
+                storage.ramdisk = cfe({ type = "group", value = {}, label = "RAM disks" })
+            end
+            local name = string.match(line, "^(%S+)")
+            storage.ramdisk.value[name] = cfe({ value = string.match(disk, "[^\n]*\n") .. line, label = "RAM Disk Capacity" })
+            storage.ramdisk.value[name].used = string.match(line, name .. "%s*%S*%s*%S*%s*%S*%s*(%S*)%%")
+        elseif string.match(line, "^/dev/") and not string.match(line, "^/dev/cdrom") and not string.match(line, "^/dev/loop") then
+            if not storage.hd then
+                storage.hd = cfe({ type = "group", value = {}, label = "Hard drives" })
+            end
+            local name = string.match(line, "^(%S+)")
+            local hd_entry = cfe({ value = string.match(disk, "[^\n]*\n") .. line, label = "Hard Drive Capacity" })
+			hd_entry.size = string.match(line, name .. "%s+(%S+)")
+			hd_entry.use = string.match(line, name .. "%s+%S+%s+(%S+)")
+			hd_entry.available = string.match(line, name .. "%s+%S+%s+%S+%s+(%S+)")
+			hd_entry.used = string.match(line, name .. "%s+%S+%s+%S+%s+%S+%s+(%d+)%%")
+			hd_entry.mount_point = string.match(line, name .. "%s+%S+%s+%S+%s+%S+%s+%S+%s+(%S+)$")
+            -- Match with the fdisk parsed data to add the model information
+            for _, disk_info in ipairs(disks) do
+                if name:match(disk_info.path) then
+                    hd_entry.model = disk_info.model
+                    break
+                end
+            end
+            storage.hd.value[name] = hd_entry
+        end
+    end
+    -- Add partitions info from /proc/partitions
+    storage.partitions = cfe({ value = fs.read_file("/proc/partitions") or "", label = "Partitions" })
+
+    return cfe({ type = "group", value = storage, label = "Storage" })
 end
 
 mymodule.get_network = function (self)
