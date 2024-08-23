@@ -283,7 +283,7 @@ end
     io.write('<table class="chart-bar chart-storage">\n')
     io.write("    <tr>\n")
     io.write("        <td>0%</td>\n")
-    if tonumber(disk.used) > 0 and tonumber(disk.used) <= 5 then
+    if tonumber(disk.used) >= 0 and tonumber(disk.used) <= 5 then
         io.write('        <td id="capacity-used" class="capacity-used" width="5%" style="margin:0; border:none; background-color:'..used_color..'">')
         io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></td>\n')
 	elseif tonumber(disk.used) > 10 then
