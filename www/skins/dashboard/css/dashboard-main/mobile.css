@@ -249,6 +249,20 @@
     flex-wrap: wrap !important;
 	}
 	
+	.welcome .disk-right-inf {
+    float: right;
+    position: relative;
+    top: -0.75rem;
+	}
+	
+	#legend-object {
+    padding: 0rem 0.1rem !important;
+	}
+	
+	#disk-listing {
+    height: 9rem !important;
+	}
+	
 	.data-block.data-system-up-time {
     margin: 0 !important;
 	}

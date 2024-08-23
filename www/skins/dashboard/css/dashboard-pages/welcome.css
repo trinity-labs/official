@@ -805,8 +805,12 @@ input:checked + .slider:before {
 }
 
 .page-welcome #capacity-free {
-    background: #f3f3f3;
-    margin: 0 !important;
+    color: grey !important;
+    font-family: monospace;
+    font-size: 0.75rem;
+    border-right: none;
+    border-radius: 0 8px 8px 0;
+	background: #f1f1f1;
 }
 
 .page-welcome #capacity-used {
@@ -930,26 +934,20 @@ input:checked + .slider:before {
 
 .welcome #content .chart-storage {
     width: 100%;
-    height: 10rem;
+    height: 5rem;
     border: none !important;
     font-size: 0.75rem;
-    margin: -1.25rem auto 2rem !important;
+    margin: -1.25rem auto 1.5rem !important;
+	transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .welcome #capacity-used {
     color: white !important;
-    font-family: "Arial Black", sans-serif;
     font-size: 0.75rem;
+	width: 0;
     border-right: none;
     border-radius: 8px 0 0 8px;
-}
-
-.welcome #capacity-free {
-    color: grey !important;
-    font-family: monospace;
-    font-size: 0.75rem;
-    border-right: none;
-    border-radius: 0 8px 8px 0;
+	transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 
 .welcome .disk-right-inf {
@@ -957,23 +955,24 @@ input:checked + .slider:before {
 }
 
 .welcome .disk-used {
-    color: white;
+    color: grey;
+    font-family: monospace;
     font-weight: 600 !important;
-    font-size: 0.65rem;
-    position: relative;
     margin: 0 0 0 0.25rem;
-    padding: 0.25rem 0.55rem;
+    padding: 0.25rem 0 0.55rem;
     border-radius: 2px;
-    top: -0.1rem;
+    font-weight: 900 !important;
 }
 
 .welcome .icon-disk-right {
-    opacity: 0.2;
+    opacity: 0.45;
     margin: 0 0.25rem 0 3rem;
 }
 
 .welcome .brand-name {
-    font-weight: 900;
+    font-weight: bold;
+    font-size: 0.7rem;
+    letter-spacing: -0.05rem;
 }
 
 .welcome .dashboard-title {
@@ -985,4 +984,21 @@ input:checked + .slider:before {
     letter-spacing: -0.05rem;
     text-transform: capitalize;
     font-size: 0.85rem;
+}
+
+.free-chart-disk {
+    opacity: 0.55;
+}
+
+#disk-listing {
+    box-shadow: 2px 2px 30px #00000020;
+    margin: 0.5rem auto;
+    background: #fbfbfb;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+}
+
+.welcome center {
+    position: relative;
+    top: -0.5rem;
 }

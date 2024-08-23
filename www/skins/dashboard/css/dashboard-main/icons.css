@@ -46,7 +46,7 @@
     display: inline-block;
     position: relative;
     margin: 0 0.5rem 0 0;
-    color: #e5e5e5 !important;;
+    color: #e5e5e5 !important;
     font-size: 1.5rem;
     top: -0.2rem;
 }
@@ -160,6 +160,20 @@
 	color: #adadad
 }
 
+#system #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    content: '\F21E';
+    font-weight: bold;
+    margin: 0 1rem 0 0;
+    color: white;
+    position: relative;
+    font-size: 1.5rem;
+    top: 1.5rem;
+    background: #5a329f;
+    padding: 1.5rem;
+    border-radius: 8rem;
+}
+
 .health #subnav::before {
     font-family: "Font Awesome 6 Free";
     content: '\F21E';
@@ -185,10 +199,14 @@
 }
 
 #section-hardware-information #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     content: '\F2DB' !important;
 }
 
 #section-storage #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     content: '\F0A0' !important;
 }
 
@@ -201,44 +219,62 @@
 }
 
 .apk #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     padding: 1.5rem 1.4rem !important;
     content: '\F49E' !important;
 }
 
 .cron #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     padding: 1.4rem 1.5rem !important;
     content: '\F1DA' !important;
 }
 
 .syslog #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     content: '\F06E' !important;
 }
 
 .logfiles #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     padding: 1.2rem 1.5rem !important;
     content: '\F15C' !important;
 }
 
 .password #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     padding: 1.33rem 1.5rem !important;
     content: '\F13E' !important;
 }
 
 .roles #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
 	padding: 1.5rem 1.35rem !important;
     content: '\E595' !important;
 }
 
 .rc #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     padding: 1.4rem 1.5rem !important;
     content: '\F469' !important;
 }
 
 .modules #subnav::before {
+    font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     content: '\F1B3' !important;
 }
 
 .skins #subnav::before {
+	font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     padding: 1.2rem 1.5rem !important;
     content: '\F043' !important;
 }
@@ -259,6 +295,8 @@
 }
 
 .welcome .dashboard-title-memory::before {
+	font-family: "Font Awesome 6 Free";
+    font-weight: bold;
     content: '\F538' !important;
 }
 
@@ -379,7 +417,7 @@
 
 .icon-disk {
     margin: 0 0.25rem 0 0;
-    opacity: 0.6;
+    opacity: 0.45;
 }
 
 .welcome .dashboard-title .fa-solid.fa-square {

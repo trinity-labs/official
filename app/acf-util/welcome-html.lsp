@@ -260,43 +260,64 @@
 <div class="disk-list">
 <p class="dashboard-title"><i class="fa-solid fa-square"></i> Disk List</p>
 <%
-local function get_random_number(limit)
-    return math.floor(math.random() * limit)
+-- Random Colors in Range Function without Duplicate Colors 
+local used_colors = {}
+local function get_random_number(min, max)
+    return math.floor(math.random() * (max - min + 1)) + min
 end
-
+local function table_size(tbl)
+    local count = 0
+    for _ in pairs(tbl) do count = count + 1 end
+    return count
+end
 local function get_random_color()
-    local h = get_random_number(360)
-    local color = string.format("hsl(%d, 70%%, 55%%)", h)
+    local hue_ranges = {
+        {min = 100, max = 160},  -- Green
+        {min = 50, max = 80},    -- Yellow
+        {min = 210, max = 260}   -- Blue
+    }
+    if table_size(used_colors) >= 25 then
+        used_colors = {}
+    end
+    local color
+    repeat
+        local range = hue_ranges[get_random_number(1, #hue_ranges)]
+        local h = get_random_number(range.min, range.max)
+        color = string.format("hsl(%d, 60%%, 60%%)", h)
+    until not used_colors[color]
+    used_colors[color] = true
     return color
 end
 %>
 <% displaydisk = function(disk, name)
     local used_color = get_random_color()
-    io.write('<table id="legend-title" style="margin:0px;padding:0px;border:0px;margin-top:5px;">\n')
+	io.write('<div id="disk-listing">\n')
+    io.write('<table id="legend-title">\n')
     io.write("    <tr>\n")
-    io.write('        <td id="legend-object" width="100px"><b><span class="linux-name"><i class="fa-solid fa-database icon-disk">')
-	io.write('</i> Disk '..html.html_escape(name)..'</span> - <span class="brand-name" style="color:'..used_color..'">'..html.html_escape(disk.model)..'</span>')
+    io.write('        <td id="legend-object" width="100px"><b><span class="linux-name"><i class="fa-solid fa-database icon-disk">\n')
+	io.write('</i> Disk '..html.html_escape(name)..'</span> | <span class="brand-name" style="color:'..used_color..'">'..html.html_escape(disk.model)..'</span>\n')
 	io.write('<span class="disk-right-inf"><span class="mount-point"><i class="fa-solid fa-folder-closed icon-disk icon-disk-right"></i> '..html.html_escape(disk.mount_point)..'</span>')
-    io.write('<i class="fa-solid fa-chart-simple icon-disk icon-disk-right"></i> Used <span class="disk-used" style="background-color:'..used_color..'">'..html.html_escape(disk.used) .. "%" .. '</span></span></b></td>\n')
+    io.write('<i class="fa-solid fa-chart-simple icon-disk icon-disk-right"></i> Used <span class="disk-used" style="color:'..used_color..'">'..html.html_escape(disk.used) .. "%" .. '</span></span></b></td>\n')
 	io.write("    </tr>\n")
     io.write("</table>\n")
     io.write('<table class="chart-bar chart-storage">\n')
     io.write("    <tr>\n")
     io.write("        <td>0%</td>\n")
     if tonumber(disk.used) >= 0 and tonumber(disk.used) <= 5 then
-        io.write('        <td id="capacity-used" class="capacity-used" width="5%" style="margin:0; border:none; background-color:'..used_color..'">')
+        io.write('        <td id="capacity-used" class="capacity-used" width="5%" style="margin:0; border:none; background-color:'..used_color..'">\n')
         io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></td>\n')
 	elseif tonumber(disk.used) > 10 then
-        io.write('        <td id="capacity-used" class="capacity-used" width="'..html.html_escape(disk.used)..'%" style="margin:0; border:none; background-color:'..used_color..'">')
+        io.write('        <td id="capacity-used" class="capacity-used" width="'..html.html_escape(disk.used)..'%" style="margin:0; border:none; background-color:'..used_color..'; transition: width 0.5s ease-in-out;">\n')
         io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></td>\n')
     end
     if tonumber(disk.used) < 100 then
-        io.write('        <td id="capacity-free" class="capacity-free" width="'..(100-tonumber(disk.used))..'%" style="margin:0; border:none;">')
-        io.write('<center><b>'.. bytesToSize(tonumber(disk.available) * 1024) ..'</b></center></td>\n')
+        io.write('        <td id="capacity-free" class="capacity-free" width="'..(100-tonumber(disk.used))..'%" style="margin:0; border:none;">\n')
+        io.write('<center><b>'.. bytesToSize(tonumber(disk.available) * 1024) ..' <span class="free-chart-disk">(Free)</span></b></center></td>\n')
     end
 	io.write('        <td>100%</td>\n')
 	io.write("    </tr>\n")
 	io.write("</table>\n")
+	io.write("</div>\n")
 end
 %>
 <%
