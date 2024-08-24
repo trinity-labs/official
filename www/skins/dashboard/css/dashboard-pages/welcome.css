@@ -947,6 +947,7 @@ input:checked + .slider:before {
 	width: 0;
     border-right: none;
     border-radius: 8px 0 0 8px;
+	-webkit-animation: slide-right 2.3s ease-out;
 	transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
 }
 

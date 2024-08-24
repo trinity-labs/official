@@ -100,7 +100,7 @@ html.app-logon.dark-theme {
 
 .dark-theme #legend-object {
     box-shadow: 2px 2px 30px #00000029;
-    border: 1px solid rgb(49 54 60 / 47%) !important;
+    border: 1px solid rgb(49 54 60 / 0%) !important;
 }
 
 .dark-theme .interface-name {
@@ -134,4 +134,20 @@ html.app-logon.dark-theme {
 
 .dark-theme .welcome .dashboard-title {
     border-top: 1px solid #505050 !important;
+}
+
+.dark-theme .right #error {
+    background: inherit !important;
+}
+
+.dark-theme code {
+    background: #404040 !important;
+}
+
+.dark-theme #section-root\'s-full-permissions-are h2 {
+    background: #404040 !important;
+}
+
+.dark-theme .hljs {
+    color: #c3c3c3;
 }
