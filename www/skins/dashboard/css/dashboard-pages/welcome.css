@@ -59,9 +59,8 @@ span.dashboard-infos {
     text-align: left !important;
     font-weight: 900 !important;
     font-size: 0.8rem !important;
-    letter-spacing: -0.05rem;
     color: #b1b1b1;
-    padding: 0rem 0 1rem !important;
+    padding: 0rem 0 0rem !important;
 }
 
 .welcome .dashboard-block-title.dashboard-title-cpu-stats,
@@ -648,7 +647,7 @@ input:checked + .slider:before {
 }
 
 .version-check {
-    font-weight: 900;
+    font-weight: 700;
     color: #d7d7d7;
     text-decoration: none !important;
     border-radius: 2px;
@@ -713,7 +712,7 @@ input:checked + .slider:before {
     position: relative;
     background-repeat: no-repeat;
     background-position: right;
-    top: -2.15rem;
+    top: -1.1rem;
     background-size: contain;
 }
 
@@ -726,7 +725,7 @@ input:checked + .slider:before {
     position: relative;
     background-repeat: no-repeat;
     background-position: right;
-    top: -2.25rem;
+    top: -1.2rem;
     background-size: contain;
 }
 
@@ -739,7 +738,7 @@ input:checked + .slider:before {
     position: relative;
     background-repeat: no-repeat;
     background-position: right;
-    top: -2.15rem;
+    top: -1.1rem;
     background-size: contain;
 }
 
@@ -752,7 +751,7 @@ input:checked + .slider:before {
     position: relative;
     background-repeat: no-repeat;
     background-position: right;
-    top: -2.15rem;
+    top: -1.1rem;
     background-size: contain;
 }
 
@@ -765,7 +764,7 @@ input:checked + .slider:before {
     position: relative;
     background-repeat: no-repeat;
     background-position: right;
-    top: -2.15rem;
+    top: -1.1rem;
     background-size: contain;
 }
 
@@ -805,12 +804,8 @@ input:checked + .slider:before {
 }
 
 .page-welcome #capacity-free {
-    color: grey !important;
-    font-family: monospace;
-    font-size: 0.75rem;
-    border-right: none;
-    border-radius: 0 8px 8px 0;
-	background: #f1f1f1;
+    background: #f3f3f3;
+    margin: 0 !important;
 }
 
 .page-welcome #capacity-used {
@@ -937,32 +932,43 @@ input:checked + .slider:before {
     height: 5rem;
     border: none !important;
     font-size: 0.75rem;
-    margin: -1.25rem auto 1.5rem !important;
-	transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+    margin: -1.25rem auto 0 !important;
 }
 
 .welcome #capacity-used {
     color: white !important;
+    font-family: system-ui;
     font-size: 0.75rem;
-	width: 0;
     border-right: none;
     border-radius: 8px 0 0 8px;
-	-webkit-animation: slide-right 2.3s ease-out;
-	transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+.welcome #capacity-free {
+    color: grey !important;
+    font-family: system-ui;
+    font-size: 0.75rem;
+    border-right: none;
+    border-radius: 0 8px 8px 0;
+}
+
+.welcome #capacity-used center,
+.welcome #capacity-free center {
+    position: relative;
+    top: -0.5rem;
 }
 
 .welcome .disk-right-inf {
     float: right;
+    position: relative;
+    top: -0.75rem;
 }
 
 .welcome .disk-used {
-    color: grey;
-    font-family: monospace;
+    color: white;
     font-weight: 600 !important;
-    margin: 0 0 0 0.25rem;
-    padding: 0.25rem 0 0.55rem;
+    position: relative;
+    padding: 0.25rem 0 0 0.25rem;
     border-radius: 2px;
-    font-weight: 900 !important;
 }
 
 .welcome .icon-disk-right {
@@ -970,36 +976,16 @@ input:checked + .slider:before {
     margin: 0 0.25rem 0 3rem;
 }
 
-.welcome .brand-name {
-    font-weight: bold;
-    font-size: 0.7rem;
-    letter-spacing: -0.05rem;
-}
-
 .welcome .dashboard-title {
-    font-family: Arial Black;
     margin: 3rem auto 0;
     border-top: 1px solid #ebebeb;
     font-weight: bold;
     color: #b1b1b1;
-    letter-spacing: -0.05rem;
     text-transform: capitalize;
     font-size: 0.85rem;
 }
 
-.free-chart-disk {
-    opacity: 0.55;
-}
-
-#disk-listing {
-    box-shadow: 2px 2px 30px #00000020;
-    margin: 0.5rem auto;
-    background: #fbfbfb;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-}
-
-.welcome center {
+.welcome #legend-object {
     position: relative;
-    top: -0.5rem;
+    top: 0.75rem;
 }

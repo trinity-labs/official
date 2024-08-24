@@ -280,6 +280,11 @@
     line-height: 1.5rem !important;
 	}
 	
+	.welcome #legend-title {
+    position: relative;
+    top: -0.5rem;
+	}
+	
 	#text-user-logon {
 	padding: 0.33rem 1rem !important;
 	font-size: 0.65rem;

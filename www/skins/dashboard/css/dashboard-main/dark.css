@@ -27,7 +27,8 @@ html.app-logon.dark-theme {
 }
 
 .dark-theme header {
-    background: #18131a !important;
+    background: #0a000e !important;
+    box-shadow: none !important;
 }
 
 .dark-theme .header-logo {
@@ -44,22 +45,19 @@ html.app-logon.dark-theme {
 }
 
 .dark-theme .data-block {
-    background: inherit!important;
-}
-
-.dark-theme .data-block {
+    padding: 0.25rem 1.5rem 1rem;
     background: #1f262e !important;
+	border-radius: 4px;
 }
-
 /* Scrollbar */
  
 .dark-theme ::-webkit-scrollbar-thumb {
-  background: #1b2530; 
+    background: #0b000e !important;
 }
 
 /* Handle on hover */
 .dark-theme ::-webkit-scrollbar-thumb:hover {
-  background: #1b2530; 
+  background: #0b000e !important;
 }
 
 .dark-theme #nav ul li {
@@ -99,7 +97,6 @@ html.app-logon.dark-theme {
 }
 
 .dark-theme #legend-object {
-    box-shadow: 2px 2px 30px #00000029;
     border: 1px solid rgb(49 54 60 / 0%) !important;
 }
 
@@ -136,7 +133,7 @@ html.app-logon.dark-theme {
     border-top: 1px solid #505050 !important;
 }
 
-.dark-theme .right #error {
+.dark-theme .item .right #error {
     background: inherit !important;
 }
 

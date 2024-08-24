@@ -181,10 +181,9 @@
 #content select, 
 #content textarea, 
 #content input.password {
-	width:98.5%;
-	width: -moz-available !important;
-    width: -webkit-fill-available !important;
-    width: fill-available !important;
+	width: -moz-available;
+    width: -webkit-fill-available;
+    width: fill-available;
 }
 
 #content input.short {
@@ -225,7 +224,6 @@
 #content table td {
     display: table-cell;
     padding: 0.75rem 0.5rem;
-    border: 3px solid white;
     vertical-align: middle;
 }
 
@@ -276,4 +274,14 @@ form#editconfigfile {
 
 #content table td:first-child {
     text-align: center;
+}
+
+.item .right #error {
+    padding: 0 !important;
+    font-family: monospace;
+    color: #ff5454;
+    font-weight: 600;
+    font-size: 0.65rem;
+    position: relative;
+    top: -0.1rem;
 }

@@ -9,7 +9,7 @@ body {
     height: 100vh;
     max-width: 100%;
     display: flex;
-    font-family: sans-serif !important;
+    font-family: system-ui !important;
     font-size: 1rem;
     color: #444;
     flex-wrap: nowrap;
