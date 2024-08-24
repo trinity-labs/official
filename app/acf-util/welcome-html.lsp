@@ -177,7 +177,7 @@
 						<span class="data-title">Uptime</span>
 							<span id="uptime" class="uptime">
 								<%= uptime %><br>
-								<script nonce="NONCE_PLACEHOLDER" type="application/javascript">
+								<script type="application/javascript">
 									// IMPORT UPTIME FOR JS LIVE TIMER
 									if (location.href.includes("welcome/read")) {
 										let increment = "<%= up_time or 'unknown' %>";
@@ -217,7 +217,7 @@
 										print ("<span class='nan'>N/A<span>")
 										end
 										%>			
-										<script nonce="NONCE_PLACEHOLDER" type="application/javascript" defer>
+										<script type="application/javascript" defer>
 										// CONVERT TEMP TO FAHRENHEIT
 										if (((<%= tonumber(api.value.cpuTemp.value) %>) < 50000) && (window.localStorage.getItem('toggle-degree') === 'fahrenheit')) {
 												document.getElementById("cpuTemp").innerHTML = ((Math.ceil(((<%= tonumber(api.value.boardTemp.value) %>) / 1000) * 9 / 5) + 32) + " °F  &nbsp; | <span class='normal'>" + (Math.floor(((<%= tonumber(api.value.cpuTemp.value) %>) / 1000) * 9 / 5) + 32)) + " °F</span>";
