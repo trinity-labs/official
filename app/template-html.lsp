@@ -64,20 +64,20 @@ end
 		<link rel="stylesheet" type="text/css" href="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin).."-ie.css") %>">
 		<![endif]-->
 		<!-- UNPKG JS CDN FOR LATEST CHART.JS -->
-		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
-		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@latest/dist/chartjs-adapter-luxon.umd.min.js"></script>
-		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@latest"></script>
+		<script nonce="NONCE_PLACEHOLDER" type="application/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+		<script nonce="NONCE_PLACEHOLDER" type="application/javascript" src="https://cdn.jsdelivr.net/npm/luxon@latest"></script>
+		<script nonce="NONCE_PLACEHOLDER" type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@latest/dist/chartjs-adapter-luxon.umd.min.js"></script>
+		<script nonce="NONCE_PLACEHOLDER" type="application/javascript" src="https://cdn.jsdelivr.net/npm/chartjs-plugin-streaming@latest"></script>
 		<!-- UNPKG JS CDN FOR LATEST HIGHLIGHT.JS -->
-		<script type="application/javascript" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"></script>
+		<script nonce="NONCE_PLACEHOLDER" type="application/javascript" src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@latest/build/highlight.min.js"></script>
 		<!-- INITIALIZE HIGHLIGHT.JS -->
-		<script defer type="application/javascript">hljs.highlightAll()</script>
+		<script nonce="NONCE_PLACEHOLDER" defer type="application/javascript">hljs.highlightAll()</script>
 		<!-- UNPKG JS CDN FOR LATEST JQUERY -->
-		<script type="application/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+		<script nonce="NONCE_PLACEHOLDER" type="application/javascript" src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
 		<!-- GLOBAL FUNCTIONS -->
-		<script defer type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
+		<script nonce="NONCE_PLACEHOLDER" defer type="application/javascript" src="<%= html.html_escape(pageinfo.wwwprefix..pageinfo.skin.."/"..posix.basename(pageinfo.skin)..".js") %>"></script>
 		<!-- HIDE LOGGON PAGE FOR AUTH USERS -->
-		<script type="application/javascript"> let user = "<%= session.userinfo %>"; if ((user !== "nil") && (window.location.href.indexOf("logon/logon") > -1)) {window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/welcome/read'}</script>
+		<script nonce="NONCE_PLACEHOLDER" type="application/javascript"> let user = "<%= session.userinfo %>"; if ((user !== "nil") && (window.location.href.indexOf("logon/logon") > -1)) {window.location.href = '//' + window.location.hostname + '/cgi-bin/acf/acf-util/welcome/read'}</script>
 </head>
 		<% end -- pageinfo.skinned %>
 <%

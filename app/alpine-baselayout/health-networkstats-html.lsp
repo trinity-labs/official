@@ -37,26 +37,26 @@
 		width: auto;
 	}
 </style>
-<!--[if IE]><script type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/excanvas.js"></script><![endif]-->
-<script type="text/javascript">
+<!--[if IE]><script nonce="NONCE_PLACEHOLDER" type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/excanvas.js"></script><![endif]-->
+<script nonce="NONCE_PLACEHOLDER" type="text/javascript">
 	if (typeof jQuery == 'undefined') {
-		document.write('<script type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/jquery-latest.js"><\/script>');
+		document.write('<script nonce="NONCE_PLACEHOLDER" type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/jquery-latest.js"><\/script>');
 	}
 </script>
 
-<script type="text/javascript">
+<script nonce="NONCE_PLACEHOLDER" type="text/javascript">
         if (typeof $.plot == 'undefined') {
-                document.write('<script type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/jquery.flot.js"><\/script>');
+                document.write('<script nonce="NONCE_PLACEHOLDER" type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/jquery.flot.js"><\/script>');
         }
 </script>
 
-<script type="text/javascript">
+<script nonce="NONCE_PLACEHOLDER" type="text/javascript">
         if (typeof $.plot.formatDate == 'undefined') {
-                document.write('<script type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/jquery.flot.time.js"><\/script>');
+                document.write('<script nonce="NONCE_PLACEHOLDER" type="text/javascript" src="<%= html.html_escape(page_info.wwwprefix) %>/js/jquery.flot.time.js"><\/script>');
         }
 </script>
 
-<script type="text/javascript">
+<script nonce="NONCE_PLACEHOLDER" type="text/javascript">
 	var interval = 1000;
 	var duration = 60000;
 	var lastdata = <%= json.encode(view) %>;
@@ -124,7 +124,7 @@
 			val.data = [];
 		});
 		Update();
-		ID = window.setInterval("Update()", interval);
+		ID = window.setInterval(Update, interval);
 		$("#Start").attr("disabled","disabled");
 		$("#Stop").removeAttr("disabled");
 	}
