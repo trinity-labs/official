@@ -25,8 +25,8 @@ function toggleDegree() {
     window.localStorage.setItem('toggle-degree', isCelsius ? 'fahrenheit' : 'celsius');
 }
 function toggleTheme() {
-    const isLightTheme = $("html").toggleClass("light-theme dark-theme").hasClass("light-theme");
-    window.localStorage.setItem('html', isLightTheme ? 'light-theme' : 'dark-theme');
+    const isDarkTheme = $("html").toggleClass("dark-theme light-theme").hasClass("dark-theme");
+    window.localStorage.setItem('html', isDarkTheme ? 'dark-theme' : 'light-theme');
 }
 // Show Password Toggle Functionality
 	if (location.href.includes("logon/logon")) {
@@ -83,10 +83,10 @@ $(function() {
     const menuWidth = menuState === 'active' ? '80%' : '100%';
     $("#nav").css('display', menuState === 'active' ? 'block' : 'none');
     $("#content, #subnav").css('width', menuWidth);
-    let themeState = window.localStorage.getItem('html') || 'light-theme';
+    let themeState = window.localStorage.getItem('html') || 'dark-theme';
     $("html").toggleClass(themeState);
-    const isLightTheme = themeState === 'light-theme';
-    $("#toggle-theme").prop("checked", !isLightTheme);
+    const isDarkTheme = themeState === 'light-theme';
+    $("#toggle-theme").prop("checked", !isDarkTheme);
     let degreeState = window.localStorage.getItem('toggle-degree') || 'celsius';
     const isCelsius = degreeState === 'celsius';
     $("#toggle-degree").prop("checked", !isCelsius);
