@@ -62,7 +62,6 @@
 	uptime = uptime .. formatTime(up_years, "Year", "Years")
 	uptime = uptime .. formatTime(up_months, "Mounth", "Mounths")
 	uptime = uptime .. formatTime(up_days, "Day", "Days")
-	uptime = uptime .. formatTime(tonumber(up_hours), "Hour", "Hours")
 	uptime = uptime .. up_hours .. "h " .. up_minutes .. "m " .. up_seconds .. "s"
 	uptime = uptime:match("^%s*(.-)%s*$")	
 -- REPLACE O.E.M DEFAULT STRING
