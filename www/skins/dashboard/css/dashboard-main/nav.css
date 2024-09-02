@@ -12,7 +12,7 @@
     flex-wrap: nowrap;
     height: 100vh;
     position: fixed;
-    background: linear-gradient(45deg, #0b0012, #0a000a) !important;
+    background: #1a1a1a !important;
     z-index: 1;
     overflow-y: auto;
     overflow-x: hidden;
@@ -23,6 +23,7 @@
 }
 
 #nav ul li {
+	background: #282828;
     padding: 0;
     list-style-type: none;
 }

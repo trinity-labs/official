@@ -2,17 +2,23 @@
  * PAGE > logon_logon
  *----------------------------------------------------------------------------------
  */
-
-.logon-logon,
-.dark-theme .logon-logon {
+ 
+html.app-logon {
     background: url(../../img/backgrounds/background-desert.jpg) no-repeat !important;
-    background-size: cover !important;
-	background-position: center !important;
+    background-position: left !important;
+    overflow: hidden !important;
+}
+
+.logon-logon {
+    float: right;
+    background: white !important;
     display: flex !important;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
+    width: 37.5%;
+    box-shadow: -2px -4px 7px 3px #0000004a;
 }
 
 .logon-logon .hostname,
@@ -27,22 +33,25 @@
 }
 
 .logon-logon #header {
-    background-size: 7rem !important;
-    background-image: url(../../img/logos/logo-trinity-full-white.png) !important;
+    background-size: 9rem !important;
+    background-image: url(../../img/logos/logo-trinity-full-acf.png) !important;
     position: relative !important;
     border-radius: 10px 10px 0 0 !important;
     background-position: 3.5rem center !important;
     padding: 1rem 2.5rem;
     justify-content: flex-end !important;
-    background-color: black !important;
     width: 400px;
     height: 3.5rem !important;
-    box-shadow: 2px 2px 30px #000000ab;
+    box-shadow: none !important;
     background-repeat: no-repeat !important;
 }
 
 .logon-logon #header a:first-child {
     font-weight: 900;
+}
+
+.logon-logon i.fa-brands.fa-gitlab.fa-2x.about-icon {
+    border-left: 2px solid #f5f5f5 !important;
 }
 
 .logon-logon #nav,
@@ -78,16 +87,15 @@
 
 #page-logon {
     flex: 0 !important;
-    background: rgb(0 0 0 / 50%) !important;
     border-radius: 0 0 10px 10px !important;
     width: 480px;
     padding: 0 !important;
     height: auto;
-    box-shadow: 2px 2px 30px #000000ab;
+    background: #ffffff00 !important;
 }
 
 #userid {
-    margin-top: 1rem !important;
+    margin-top: 0rem !important;
 }
 
 #login .left {
@@ -119,16 +127,21 @@ input#password::-webkit-input-placeholder::before {
     color: #FFF;
     font-weight: 900;
     border-radius: 4px;
-    background-color: #430090;
+    background-color: #5a329f;
     width: 100%;
-    height: 2.5rem !important;
+    height: 2rem !important;
     margin-top: 0 !important;
 }
 
 .logon-logon input {
-    padding: 0.5rem 0 0.5rem 0.5rem !important;
+	padding: 0.15rem 0 0.15rem 0.5rem !important;
     border: none !important;
     border-radius: 2px;
+}
+
+.logon #password {
+    margin-top: 0.75rem;
+    border-radius: 2px 6px 6px 2px !important;
 }
 
 .logon-logon .error:before {
@@ -189,7 +202,6 @@ input#password::-webkit-input-placeholder::before {
 }
 
 .logon-logon #footer a {
-    color: white !important;
     top: 3rem !important;
     position: relative;
 }
@@ -217,16 +229,12 @@ input#password::-webkit-input-placeholder::before {
     position: absolute;
     color: white;
     top: 0.5rem;
-    width: 50% !important;
+    width: 21% !important;
     padding: 0.15rem 1.25rem !important;
-    left: 25%;
+    left: 7.5%;
     border: 2px solid rgb(255 43 43);
     text-align: center !important;
     background: none;
-}
-
-.logon-logon input[placeholder] {
-    filter: grayscale(1);
 }
 
 .logon .icon-header {
@@ -241,8 +249,9 @@ input#password::-webkit-input-placeholder::before {
     padding: 0 1rem;
 }
 
-.logon i.fa-solid.fa-lock.fa-2x.logon-icon {
+.logon . {
     margin: auto;
+    color: grey !important;
 }
 
 .logon .header-links {
@@ -253,19 +262,36 @@ button#showPass {
     float: right;
     cursor: pointer;
     position: relative;
-    top: -2.5rem;
-    height: 2.5rem;
-    right: -0.25rem !important;
+    top: -1.8rem;
+    height: 1.8rem;
+    right: -0.15rem !important;
     padding: 0;
     border: none !important;
     border-radius: 0 4px 4px 0;
-    width: 2.5rem;
+    width: 1.8rem;
+}
+
+#showPass i.fa-regular.fa-eye-slash {
+    font-size: 0.7rem;
 }
 
 .corporate {
-    background: #430090;
+    background: #5a329f;
 }
 
 #showPass i.fa-regular.fa-eye {
     color: white;
+}
+
+.logon .icon-header .fa-2x:hover {
+    color: #5a329f !important;
+}
+
+.logon button#showPass:hover {
+	color: white;
+    background: #5a329f !important;
+}
+
+.logon-logon i.fa-solid.fa-lock.fa-2x.logon-icon {
+    color: #5a329f !important;
 }

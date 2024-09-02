@@ -117,7 +117,7 @@ $(function() {
 		const boardTemp = toggleDegree === 'fahrenheit' ? Math.ceil(boardTempC * 9 / 5 + 32) : boardTempC;
 		const cpuTemp = toggleDegree === 'fahrenheit' ? Math.floor(cpuTempC * 9 / 5 + 32) : cpuTempC;
 		const unit = toggleDegree === 'fahrenheit' ? '°F' : '°C';
-		$cpuTemp.html(`${boardTemp} ${unit}  &nbsp; | <span class='${tempClass}'>${cpuTemp} ${unit}</span>`);
+		$cpuTemp.html(`${boardTemp} ${unit}  &nbsp; <span class='hdivider'>|</span> <span class='${tempClass}'>${cpuTemp} ${unit}</span>`);
 		localStorage.setItem('CTemp', cpuTempC);
 		localStorage.setItem('MemoryUse', obj.value.memUsed);
 		localStorage.setItem('MemoryTotal', obj.value.memTotal);

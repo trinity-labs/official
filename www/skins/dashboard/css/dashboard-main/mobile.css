@@ -17,7 +17,8 @@
 	}
 	
 	html.app-logon {
-	overflow: hidden !important;
+    overflow: hidden !important;
+    background-position: left center !important;
 	}
 	
     header {
@@ -61,13 +62,15 @@
 
 	.logon.logon-logon {
     position: relative;
-	top: -1rem;
+    top: -1rem;
     overflow: hidden !important;
     width: 100%;
+    background: transparent !important;
+    box-shadow: none !important;
 	}
 	
 	#page-logon {
-    background: rgb(0 0 0 / 50%);
+    background: rgb(70 70 70 / 50%) !important;
     border-radius: 0 0 4px 4px !important;
     width: 90vw;
 	}

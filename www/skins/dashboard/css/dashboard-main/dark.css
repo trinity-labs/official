@@ -3,17 +3,18 @@
  *----------------------------------------------------------------------------------
  */
 
-html.app-logon.dark-theme {
-    background: inherit !important;
-}
-
 .dark-theme,
 .dark-theme body,
 .dark-theme #main,
-.dark-theme .page {
-    background: #171f28 !important;
+.dark-theme .page,
+.dark-theme pre,
+.dark-theme .dashboard-block {
+    background: #222222 !important;
 }
 
+.dark-theme .logon-logon {
+    box-shadow: 0px 0px 8px 2.5px #ffffff14 !important;
+}
 .dark-theme .left {
     color: #545454;
 }
@@ -22,22 +23,13 @@ html.app-logon.dark-theme {
 	color: grey;
 }
 
-.dark-theme pre, .dark-theme .dashboard-block {
-    background: #171f28;
-}
-
 .dark-theme header {
-    background: #0a000e !important;
+    background: linear-gradient(90deg, #1a1a1a, #1a1a1a, #0a000a) !important;
     box-shadow: none !important;
 }
 
 .dark-theme .header-logo {
 	background-image: url(../../img/logos/logo-trinity-full-acf-white.png) no-repeat !important;
-}
-
-.dark-theme .icon i,
-.dark-theme .icon-header i{
-    color: white !important;
 }
 
 .dark-theme tbody {
@@ -46,27 +38,28 @@ html.app-logon.dark-theme {
 
 .dark-theme .data-block {
     padding: 0.25rem 1.5rem 1rem;
-    background: #1f262e !important;
+    background: #282828 !important;
 	border-radius: 4px;
 }
+
 /* Scrollbar */
  
 .dark-theme ::-webkit-scrollbar-thumb {
-    background: #0b000e !important;
+    background: #1a1a1a !important;
 }
 
 /* Handle on hover */
 .dark-theme ::-webkit-scrollbar-thumb:hover {
-  background: #0b000e !important;
-}
-
-.dark-theme #nav ul li {
-    background: #171f28;
+  background: #1a1a1a !important;
 }
 
 .dark-theme #system .selected.item-field {
     background: #6300d2;
     color: white !important;
+}
+
+.dark-theme #text-user-logon {
+    background: #1a1a1a;
 }
 
 .dark-theme #applications .selected.item-field {
@@ -108,10 +101,6 @@ html.app-logon.dark-theme {
     background: #1a232e;
 }
 
-.dark-theme #footer a {
-    color: white !important;
-}
-
 .dark-theme #theme-conv {
     color: white !important;
 }
@@ -147,4 +136,83 @@ html.app-logon.dark-theme {
 
 .dark-theme .hljs {
     color: #c3c3c3;
+}
+
+.dark-theme .tablesorter-ice .header,
+.dark-theme .tablesorter-ice .tablesorter-header {
+    background-color: #525252 !important;
+    background-image: none !important;
+    padding: 4px 20px 4px 4px;
+    white-space: normal;
+    cursor: pointer;
+    text-shadow: none !important;
+    color: white;
+    font-weight: bold;
+    border-color: #171f28 !important;
+}
+
+.dark-theme .tablesorter-ice tr.odd > td {
+    background-color: #727272;
+    border-color: #171f28 !important;
+	color: white !important;
+}
+
+.dark-theme .tablesorter-ice tr.even > td {
+    background-color: #464646;
+    border-color: #171f28 !important;
+    color: white !important;
+}
+
+.dark-theme #content table {
+    border-radius: 4px;
+    width: 100%;
+    border: none !important;
+    font-size: 0.75rem;
+    background: #171f28 !important;
+    padding: 0.25rem 0;
+}
+
+.dark-theme .tablesorter-ice tbody > tr.hover > td,
+.dark-theme .tablesorter-ice tbody > tr:hover > td,
+.dark-theme .tablesorter-ice tbody > tr.even:hover > td,
+.dark-theme .tablesorter-ice tbody > tr.odd:hover > td {
+    background-color: #adadad;
+    border-color: #171f28 !important;
+}
+
+.dark-theme .tablesorter-ice .tablesorter-filter-row td {
+    background-color: #858585;
+    border-color: #171f28 !important;
+    line-height: normal;
+    text-align: center;
+    -webkit-transition: line-height 0.1s ease;
+    -moz-transition: line-height 0.1s ease;
+    -o-transition: line-height 0.1s ease;
+    transition: line-height 0.1s ease;
+}
+
+.dark-theme #content select {
+    border-radius: 4px;
+    padding: 0 0.25rem;
+    background: #3e3e3e;
+    width: 100%;
+    height: 2.25rem;
+    border-color: #171f28;
+    color: white;
+    margin: 0.5rem auto;
+}
+
+.dark-theme a,
+.dark-theme a:visited {
+    text-decoration: none !important;
+    color: #cdcdcd;
+    cursor: pointer !important;
+}
+
+.dark-theme .tablesorter-ice .tablesorter-filter-row {
+    background-color: #171f28;
+}
+
+.dark-theme .logon-logon i.fa-brands.fa-gitlab.fa-2x.about-icon {
+    border-left: 2px solid #383838 !important;
 }

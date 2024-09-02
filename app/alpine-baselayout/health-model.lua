@@ -183,7 +183,7 @@ mymodule.get_storage = function(self)
             local name = string.match(line, "^(%S+)")
             storage.ramdisk.value[name] = cfe({ value = string.match(disk, "[^\n]*\n") .. line, label = "RAM Disk Capacity" })
             storage.ramdisk.value[name].used = string.match(line, name .. "%s*%S*%s*%S*%s*%S*%s*(%S*)%%")
-        elseif string.match(line, "^/dev/") and not string.match(line, "^/dev/cdrom") and not string.match(line, "^/dev/loop") then
+        elseif (string.match(line, "^/dev/") or string.match(line, ":")) and not string.match(line, "^/dev/cdrom") and not string.match(line, "^/dev/loop") then -- Find rclone mount point
             if not storage.hd then
                 storage.hd = cfe({ type = "group", value = {}, label = "Hard drives" })
             end

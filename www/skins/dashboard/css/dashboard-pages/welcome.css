@@ -783,7 +783,6 @@ input:checked + .slider:before {
 .dashboard-infos.dash-info-cpu {
     color: #0078cf;
     font-weight: 900;
-    font-size: 0.55rem;
 }
 
 .dashboard-infos.dash-info-bios {
@@ -988,4 +987,28 @@ input:checked + .slider:before {
 .welcome #legend-object {
     position: relative;
     top: 0.75rem;
+}
+
+.brand-name, .disk-used {
+    font-weight: 900;
+    font-size: 0.65rem;
+}
+
+.hdivider {
+    position: relative;
+    top: -0.05rem;
+    opacity: 0.2;
+}
+
+#cpuTemp .hdivider {
+    font-size: 0.75rem !important;
+}
+
+.board-model.corpo-hardware-text {
+    padding: 0 0.25rem 0;
+}
+
+.disk-size {
+    font-size: 0.65rem;
+    padding: 0 0 0 1rem;
 }
