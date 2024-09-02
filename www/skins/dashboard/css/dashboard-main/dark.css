@@ -28,7 +28,8 @@
     box-shadow: none !important;
 }
 
-.dark-theme .header-logo {
+.dark-theme .header-logo,
+.dark-theme .logon-logon #header {
 	background-image: url(../../img/logos/logo-trinity-dashboard.png) !important;
 }
 
