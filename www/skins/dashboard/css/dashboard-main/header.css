@@ -68,7 +68,9 @@ header {
 }
 
 #toggle-menu {
-    padding: 1.25rem 0rem 1.25rem 1rem;
+    position: relative;
+    padding: 1rem 0rem 1.25rem 1rem;
+    top: 0.1rem;
 }
 
 #toggle-menu, #toggle-menu.active i.fa-solid.fa-bars {

@@ -305,11 +305,11 @@ end
     io.write("    <tr>\n")
     io.write('        <td id="legend-object" width="100px"><b><span class="linux-name"><i class="fa-solid fa-database icon-disk">\n')
 	if (disk.model ~= nil) then
-	io.write('</i> Disk '..html.html_escape(name)..'</span> <span class="hdivider">|</span> <span class="brand-name" style="color:'..used_color..'">'..html.html_escape(disk.model)..'</span>')
-	io.write('<span class="disk-size">'.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
+	io.write('</i> Disk '..html.html_escape(name)..'</span> <span class="hdivider">   |   </span> <span class="brand-name" style="color:'..used_color..'">'..html.html_escape(disk.model)..'</span>')
+	io.write('<span class="disk-size"><span class="hdivider">|</span>   '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
 	else
 	io.write('</i> Disk '..html.html_escape(name)..'</span>')
-	io.write('<span class="disk-size">'.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
+	io.write('<span class="disk-size"><span class="hdivider">|</span>   '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
 	end
 	io.write('<span class="disk-right-inf"><span class="mount-point"><i class="fa-solid fa-folder-closed icon-disk icon-disk-right"></i> '..html.html_escape(disk.mount_point)..'</span>')
     io.write('<i class="fa-solid fa-chart-simple icon-disk icon-disk-right"></i> Used <span class="disk-used" style="color:'..used_color..'">'..html.html_escape(disk.used) .. "%" .. '</span></span></b></td>\n')

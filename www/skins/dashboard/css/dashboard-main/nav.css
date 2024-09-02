@@ -86,22 +86,22 @@ li.selected.item-field {
 }
 
 .home-logo {
-    background-image: url(../../img/logos/logo-trinity-full-acf-white.png);
+    background-image: url(../../img/logos/logo-trinity-dashboard.png);
     display: block;
     background-repeat: no-repeat;
     background-position: center left;
-    width: 7rem;
+    width: 6rem;
     background-size: contain;
     margin: 0 0 0 1.5rem;
 }
 
 .header-logo {
-    background-image: url(../../img/logos/logo-trinity-full-acf.png);
+    background-image: url(../../img/logos/logo-trinity-dashboard.png);
     display: block;
     background-repeat: no-repeat;
     background-position: left;
     background-size: contain;
-    width: 7rem;
+    width: 6rem;
 	height: 3rem;
     margin: 0 0 0 1.5rem;
 }
