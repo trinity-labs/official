@@ -33,9 +33,13 @@ header p.hostname {
 }
 
 header a:hover i,
-header i:hover,
-header #text-user-logon:hover {
+header i:hover {
     color: #5a329f !important;
+}
+
+header #text-user-logon:hover {
+    background: #5a329f !important;
+    color: white !important;
 }
 
 #system #system-title,
