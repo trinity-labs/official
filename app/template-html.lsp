@@ -53,7 +53,7 @@ end
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="theme-color" content="#5a329f">
-		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="#5a329f">
 <% if pageinfo.skinned ~= "false" then %>
 		<title><%= ("Dashboard - " .. string.gsub(pageinfo.controller, "^%l", string.upper) .. " ∣ " .. string.gsub(pageinfo.action, "^%l", string.upper)) %></title>
@@ -116,9 +116,9 @@ end
 				<a class='icon-header' id='toggle-theme' title='Dark Mode' onclick='toggleTheme()' href='javascript:void(0);'><i class="fa-solid fa-circle-half-stroke"></i></a>	
 				<%
 					if session.userinfo and session.userinfo.userid then
-						print("<span id='text-user-logon' class='text-user-"..(session.userinfo.userid).."' title='User @ HOST'>"..(session.userinfo.userid).." @ "..string.upper(hostname or "unknown").."</span>")
+						print("<a href=".. html.html_escape(pageinfo.wwwprefix) .. "/cgi-bin/acf/acf-util/roles/read".."><span id='text-user-logon' class='text-user-"..(session.userinfo.userid).."' title='User @ HOST'>"..(session.userinfo.userid).." @ "..string.upper(hostname or "unknown").."</span></a>")
 						print ("<!-- ADMIN can change User CSS icon - Username is print in CCS class \"user-icon user-{@username]\" -->")
-						print("<span id='user-logon' class='user-icon user-"..(session.userinfo.userid).."' title='"..(session.userinfo.userid).." CSS icon'></span>")
+						print("<a href=".. html.html_escape(pageinfo.wwwprefix) .. "/cgi-bin/acf/acf-util/roles/read".."><span id='user-logon' class='user-icon user-"..(session.userinfo.userid).."' title='"..(session.userinfo.userid).." CSS icon'></span></a>")
 					end
 				%>
 				</div>

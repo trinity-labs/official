@@ -24,11 +24,16 @@
     font-family: "Font Awesome 6 Free";
     font-weight: bold;
     content: '\F505';
-    margin: 0 0.5rem 0 0;
-    color: rgb(173 219 0);
+    margin: 0 0 0 -0.35rem;
     position: relative;
-    font-size: 1.25rem;
-    top: 0;
+    font-size: 1.75rem;
+    top: 0.35rem;
+    background-image: url(../../img/logos/trinity-user.png) !important;
+    color: transparent;
+    border-radius: 50em;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 #section-root-is-valid-in-these-roles p {
