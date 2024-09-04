@@ -239,19 +239,19 @@ input.submit:hover {
 }
 
 .version-number-uptodate {
-    font-size: 1rem;
+    font-weight: 900;
     color: #3cdd4f !important;
     font-family: sans-serif;
 }
 
 .version-number-update {
-    font-size: 1rem;
+    font-weight: 900;
     color: #ffac00 !important;
 	font-family: sans-serif;
 }
 
 .version-number-upgrade {
-    font-size: 1rem;
+    font-weight: 900;
     color: #f74b00 !important;
 	font-family: sans-serif;
 }

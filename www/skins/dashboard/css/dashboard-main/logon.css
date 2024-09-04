@@ -28,8 +28,8 @@ html.app-logon {
 }
 
 .logon-logon input.submit:hover {
-    background: #40404087 !important;
-    border-color: #40404087 !important;
+	background-color: #5a329f !important;
+    opacity: 0.5 !important;
 }
 
 .logon-logon #header {
@@ -285,6 +285,7 @@ button#showPass {
 
 .logon .icon-header .fa-2x:hover {
     color: #5a329f !important;
+    opacity: 0.5;
 }
 
 .logon button#showPass:hover {

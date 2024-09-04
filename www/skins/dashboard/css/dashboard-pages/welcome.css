@@ -2,7 +2,7 @@
  * PAGE > WELCOME
  *----------------------------------------------------------------------------------
  */
- 
+
  .dashboard-system .fa-docker {
     font-size: 0.75rem;
     margin: 0 0.25rem 0 0;
@@ -74,10 +74,9 @@ span.dashboard-infos {
     text-transform: uppercase;
     margin: 0.5rem 0 1.75rem;
     font-family: Arial Black;
-    box-shadow: 2px 2px 30px #4e4e4e20;
     color: #b7b7b7;
     border: 2px solid #f7f7f7;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     letter-spacing: -0.05rem;
 }
 
@@ -526,7 +525,7 @@ span.dashboard-infos {
 }
 
 .dashboard-main .version-check a:hover {
-    border-bottom: 2px solid #3cdd4f;
+    border-bottom: 2px solid;
 }
 
 .version-link.version-external-link {
@@ -652,8 +651,8 @@ input:checked + .slider:before {
     text-decoration: none !important;
     border-radius: 2px;
     position: relative;
-    font-size: 1.15rem;
-    top: 0.75rem;
+    font-size: 0.75rem;
+    top: 1rem;
 }
 
 .dashboard-infos.dash-info-version {
@@ -822,7 +821,7 @@ input:checked + .slider:before {
 }
 
 .data-block {
-    min-width: 25%;
+    min-width: 30%;
     height: 8rem;
 }
 
@@ -838,7 +837,7 @@ input:checked + .slider:before {
 
 .data-block.data-system.system-uptodate {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #3cdd4f;
+    /*border-left: 33px solid #3cdd4f;*/
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;
@@ -847,7 +846,7 @@ input:checked + .slider:before {
 
 .data-block.data-system.system-update {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #ffac00;
+    /*border-left: 33px solid #ffac00;*/
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;
@@ -856,7 +855,7 @@ input:checked + .slider:before {
 
 .data-block.data-system.system-upgrade {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #f74b00;
+    /*border-left: 33px solid #f74b00;*/
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;
@@ -865,7 +864,7 @@ input:checked + .slider:before {
 
 .data-block.data-hardware {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #0078cf;
+    /*border-left: 33px solid #0078cf;*/
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;
@@ -874,7 +873,7 @@ input:checked + .slider:before {
 
 .data-block.data-monitoring {
     box-shadow: 2px 2px 30px #00000020;
-    border-left: 33px solid #00bac9;
+    /*border-left: 33px solid #00bac9;*/
     background: #ffffff;
     padding: 1.5rem 0.75rem;
     border-radius: 4px;

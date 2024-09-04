@@ -13,7 +13,7 @@ function toggleMenu() {
         $("#content, #subnav").css("width", "100%");
     } else {
         $("#nav").slideDown(900);
-        $("#content, #subnav").css("width", "80%");
+        $("#content, #subnav").css("width", "85%");
     }
     window.localStorage.setItem('nav', isActive ? 'not_active' : 'active');
 }
@@ -80,7 +80,7 @@ $(function() {
     let menuState = window.localStorage.getItem('nav') || 'active';
     setClassAndProp("#nav", menuState, null, null);
     setClassAndProp("#toggle-menu", menuState, null, null);
-    const menuWidth = menuState === 'active' ? '80%' : '100%';
+    const menuWidth = menuState === 'active' ? '85%' : '100%';
     $("#nav").css('display', menuState === 'active' ? 'block' : 'none');
     $("#content, #subnav").css('width', menuWidth);
     let themeState = window.localStorage.getItem('html') || 'dark-theme';

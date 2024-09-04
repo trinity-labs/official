@@ -30,15 +30,15 @@
 	local patch_distver = string.gsub(string.match(actual_distver, ".[^.]*$"), "%D", "") -- Parse Patch for Fix
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
 	   blockcolor = "<div class='data-block data-system system-uptodate'>"
-	   chkres = "<span id='alpine-version-link' class='version-link version-ok'><span class='version-check'>Up To Date <span class='version-number-uptodate'>●</span> Alpine <a class='version-number-uptodate' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'>" .. check_sysver .. "</a></span></span>"
+	   chkres = "<span id='alpine-version-link' class='version-link version-ok'><span class='version-check'>Up To Date <span class='version-number-uptodate'> ● </span> Alpine <a class='version-number-uptodate' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'>" .. check_sysver .. "</a></span></span>"
 	else
 		blockcolor = "<div class='data-block data-system system-update'>"
-		chkres = "<span id='alpine-version-link' class='version-link version-update'><span class='version-check'>Update Needed <span class='version-number-update'>●</span> Alpine <a class='version-number-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'>" .. check_sysver .. "</a></span></span>"
+		chkres = "<span id='alpine-version-link' class='version-link version-update'><span class='version-check'>Update Needed <span class='version-number-update'> ● </span> Alpine <a class='version-number-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'>" .. check_sysver .. "</a></span></span>"
 		kernres = "<i class='fa-solid fa-exclamation icon-kernel-warn'></i>"
 	end
 	if major_sysver ~= major_distver then
 		blockcolor = "<div class='data-block data-system system-upgrade'>"
-		chkres = "<span id='alpine-version-link' class='version-link version-upgrade'><span class='version-check'>Upgrade Required <span class='version-number-upgrade'>●</span> Alpine <a class='version-number-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'>" .. check_sysver .. "</a></span></span>"
+		chkres = "<span id='alpine-version-link' class='version-link version-upgrade'><span class='version-check'>Upgrade Required <span class='version-number-upgrade'> ● </span> Alpine <a class='version-number-upgrade' href='https://www.alpinelinux.org/releases/#content' title='🟥 Upgrade Needed' target='_blank'>" .. check_sysver .. "</a></span></span>"
 		kernres = "<i class='fa-solid fa-xmark icon-kernel-err'></i>"
 	end	
 -- GET DIST VERSION CHANGES
@@ -306,10 +306,10 @@ end
     io.write('        <td id="legend-object" width="100px"><b><span class="linux-name"><i class="fa-solid fa-database icon-disk">\n')
 	if (disk.model ~= nil) then
 	io.write('</i> Disk '..html.html_escape(name)..'</span> <span class="hdivider">   |   </span> <span class="brand-name" style="color:'..used_color..'">'..html.html_escape(disk.model)..'</span>')
-	io.write('<span class="disk-size"><span class="hdivider">|</span>   '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
+	io.write('<span class="disk-size"><span class="hdivider">|</span>    '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
 	else
 	io.write('</i> Disk '..html.html_escape(name)..'</span>')
-	io.write('<span class="disk-size"><span class="hdivider">|</span>   '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
+	io.write('<span class="disk-size"><span class="hdivider">|</span>    '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
 	end
 	io.write('<span class="disk-right-inf"><span class="mount-point"><i class="fa-solid fa-folder-closed icon-disk icon-disk-right"></i> '..html.html_escape(disk.mount_point)..'</span>')
     io.write('<i class="fa-solid fa-chart-simple icon-disk icon-disk-right"></i> Used <span class="disk-used" style="color:'..used_color..'">'..html.html_escape(disk.used) .. "%" .. '</span></span></b></td>\n')

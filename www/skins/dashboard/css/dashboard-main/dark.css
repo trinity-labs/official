@@ -37,6 +37,10 @@
     color: #767676;
 }
 
+.dark-theme .version-link.version-external-link {
+    color: #626262 !important;
+}
+
 .dark-theme .data-block {
     padding: 0.25rem 1.5rem 1rem;
     background: #282828 !important;

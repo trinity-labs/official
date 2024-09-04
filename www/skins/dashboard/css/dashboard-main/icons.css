@@ -14,7 +14,7 @@
 }
  
 .fa-2x {
-    font-size: 1rem !important;
+    font-size: 0.75rem !important;
     color: rgb(203 203 203 / 87%) !important;
 }
 
@@ -47,7 +47,7 @@
     position: relative;
     margin: 0 0.5rem 0 0;
     color: #e5e5e5 !important;
-    font-size: 1.5rem;
+    font-size: 1rem;
     top: -0.2rem;
 }
 

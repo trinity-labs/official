@@ -5,8 +5,8 @@
 
 #nav {
     margin: 0;
-    padding: 0rem 3rem 3rem 1rem;
-    width: 13rem;
+    padding: 0rem 1rem 3rem;
+    width: 10rem;
     top: 0 !important;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -47,7 +47,7 @@
     padding: 1em 1em 1em 2em;
     color: #aaa;
     text-transform: capitalize;
-    font-size: 0.66rem;
+    font-size: 0.6rem;
     list-style-type: none;
 }
 

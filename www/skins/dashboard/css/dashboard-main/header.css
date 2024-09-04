@@ -113,17 +113,17 @@ header {
 	cursor: pointer;
     display: inline-block;
     border-radius: 50em;
-    padding: 1rem;
+    padding: 0.85rem;
 }
 
 #text-user-logon {
     color: #d2d2d2;
-    font-size: 0.7rem;
-    font-weight: bold;
+    font-size: 0.6rem;
+    font-weight: 900;
     cursor: pointer;
     margin: 0 1.75rem 0 0;
     font-family: Arial Black;
-    padding: 0.33rem 1.5rem;
+    padding: 0.25rem 1rem;
     vertical-align: middle;
     border-radius: 2.5px;
 }

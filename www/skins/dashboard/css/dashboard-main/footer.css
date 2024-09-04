@@ -16,3 +16,7 @@
 #footer a {
 	color: #939393 !important;
 }
+
+#footer a:hover {
+    opacity: 0.4;
+}
