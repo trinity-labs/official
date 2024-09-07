@@ -95,6 +95,10 @@ li.selected.item-field {
     margin: 0 0 0 1.5rem;
 }
 
+.home-logo:hover {
+    opacity: 0.4;
+}
+
 .header-logo {
     background-image: url(../../img/logos/logo-trinity-full-acf.png);
     display: block;
@@ -113,7 +117,7 @@ li.selected.item-field {
 }
 
 .header-menu i:hover {
-    color: white;
+    color: #6300d2;
 }
 
 /*----------------------------------------------------------------------------------

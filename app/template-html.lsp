@@ -101,11 +101,39 @@ end
 <header id="header">
 				<%
 					local ctlr = pageinfo.script .. "/acf-util/logon/"
-
+					local function read_last_logon()
+						local file = io.open("../../www/skins/dashboard/logs/logon/logons.txt", "r")
+						local last_logon = nil
+						if file then
+							for line in file:lines() do
+								last_logon = line
+							end
+							file:close()
+						else
+							error("Unable to read logon file.")
+						end
+						return last_logon
+					end
+					local last_logon = read_last_logon()
+					local username, ip, time = nil, nil, nil
+						if last_logon then
+						-- Adjust the pattern based on the format of the log lines
+							username, ip, time = last_logon:match("User: (%S+) | IP: (%S+) | Time: (.+)")
+						end
 					if session.userinfo and session.userinfo.userid then
 						print("<div id='header-left'><a href='javascript:void(0);' class='icon' id='toggle-menu' title='Menu' onclick='toggleMenu()'><i class='fa-solid fa-bars'></i></a>")
 						print("<a class='header-logo home-logo' href=".. html.html_escape(pageinfo.wwwprefix) .. "/cgi-bin/acf/acf-util/welcome/read".."/></a></div>")
-						print("<div id='header-links'><a id='logoff' class='icon-header' title='Logoff' href=\""..html.html_escape(ctlr).."logoff\"><i class='fa-solid fa-user-lock fa-2x logoff-icon'></i></a>")
+						print("<div id='header-links'>")
+						print("<span class='last-logon'><i class='fa-solid fa-key'></i> &nbsp; Last Logon <span class='hdivider'>|</span> ")
+						if username and ip and time then
+							print("<span class='logon-data'><span class='username'>".. username .."</span> <span class='hdivider'>@</span> ")
+							print("<span class='ip'>".. ip .."</span> <span class='hdivider'>|</span> ") 
+							print("<span class='time'>".. time .."</span>")
+						else
+						print("<span>No logon found</span>")
+						end
+						print("</span></span>")
+						print("<a id='logoff' class='icon-header' title='Logoff' href=\""..html.html_escape(ctlr).."logoff\"><i class='fa-solid fa-user-lock fa-2x logoff-icon'></i></a>")
 						print("<a id='home-link' class='icon-header' title='Home' href=".. html.html_escape(pageinfo.wwwprefix) ..  "/cgi-bin/acf/acf-util/welcome/read".."><i class='fa-solid fa-house fa-2x home-icon'></i></a>")
 					else
 						print("<div id='header-links'><a id='logon' class='icon-header' title='Logon' href=\""..html.html_escape(ctlr).."logon\"><i class='fa-solid fa-lock fa-2x logon-icon'></i></a>" )

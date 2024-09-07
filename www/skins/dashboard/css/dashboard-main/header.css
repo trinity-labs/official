@@ -34,11 +34,11 @@ header p.hostname {
 
 header a:hover i,
 header i:hover {
-    color: #5a329f !important;
+    color: #6300d2 !important;
 }
 
 header #text-user-logon:hover {
-    background: #5a329f !important;
+    background: #6300d2 !important;
     color: white !important;
 }
 
@@ -86,7 +86,7 @@ header {
 }
 
 .icon-header {
-    padding: 1.25rem 1.5rem;
+    padding: 1rem 1.5rem 1.25rem;
 }
 
 #header-left {
@@ -116,13 +116,19 @@ header {
     padding: 0.85rem;
 }
 
+#user-logon:hover {
+    opacity: 0.4;
+}
+
 #text-user-logon {
     color: #d2d2d2;
+    position: relative;
     font-size: 0.6rem;
     font-weight: 900;
     cursor: pointer;
     margin: 0 1.75rem 0 0;
     font-family: Arial Black;
+    top: -0.15rem;
     padding: 0.25rem 1rem;
     vertical-align: middle;
     border-radius: 2.5px;

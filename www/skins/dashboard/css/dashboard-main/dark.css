@@ -221,3 +221,16 @@
 .dark-theme .logon-logon i.fa-brands.fa-gitlab.fa-2x.about-icon {
     border-left: 2px solid #383838 !important;
 }
+
+.dark-theme #infoToast {
+    background: #424242;
+}
+
+.dark-theme .last-logon {
+    color: #b3b3b3;
+}
+
+.last-logon i,
+.last-logon .time {
+    color: #545454;
+}

@@ -68,6 +68,13 @@ span.dashboard-infos {
     padding: 1rem 0 1rem 0.5rem !important;
 }
 
+.welcome-read #content {
+    position: relative;
+    float: right;
+    padding: 0 !important;
+    margin-top: -1rem;
+}
+
 .welcome-read #content h1 {
     background: none !important;
     font-weight: 600;
@@ -75,7 +82,6 @@ span.dashboard-infos {
     margin: 0.5rem 0 1.75rem;
     font-family: Arial Black;
     color: #b7b7b7;
-    border: 2px solid #f7f7f7;
     font-size: 0.75rem;
     letter-spacing: -0.05rem;
 }
@@ -192,22 +198,24 @@ span.dashboard-infos {
     color: white !important;
     height: 1rem;
     display: block;
-    margin: 0.25rem 0;
+    margin: 0 0 0.5rem;
 }
 
 .icon-kernel-ok {
     margin: 0 0 0 0.15rem;
     color: #189b00;
+	font-weight: 900;
 }
 
 .icon-kernel-warn {
     margin: 0 0 0 0.15rem;
-    color: #ff7800;
+    color: #ffac00;
+	font-weight: 900;
 }
 
 .icon-kernel-err {
     margin: 0 0 0 0.15rem;
-    color: #ed0000;
+    color: #f74b00;
     position: relative;
     top: 0.05rem;
 }
@@ -1010,4 +1018,80 @@ input:checked + .slider:before {
 .disk-size {
     font-size: 0.65rem;
     padding: 0 0 0 1rem;
+}
+
+.last-logon {
+    position: relative;
+    text-align: right;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #e5e5e5;
+    top: 0.05rem;
+    padding: 0 1rem 0 0;
+}
+
+.last-logon .logon-data {
+    color: #b3b3b3;
+}
+
+.last-logon .username {
+    font-weight: bold;
+}
+
+.last-logon .ip {
+    font-weight: bold;
+}
+
+
+#uptime-calendar {
+    margin: -1.5rem auto 1.5rem;
+    width: 100%;
+}
+
+.months-list {
+    position: relative;
+    top: -2rem;
+    font-size: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.dashboard-title.uptime-heatmap-title {
+    margin: 0 auto 3rem;
+}
+
+#legend-uptime-0reboot {
+    padding: 0.55rem 0.01rem;
+    width: 5rem !important;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+	color: green;
+	background: #00EF5C;
+}
+
+#legend-uptime-1reboot {
+    padding: 0.55rem 0.01rem;
+    width: 5rem !important;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+	background: #d4e600;
+}
+
+#legend-uptime-2reboot {
+    padding: 0.55rem 0.01rem;
+    width: 5rem !important;
+    margin: 0 0.5rem;
+    border-radius: 2px;
+    background: #ffcc00;
+}
+
+.chart-bar.chart-legend.chart-heatmap {
+    margin: 0 0 3rem !important;
+}
+
+.month:hover {
+    color: #b1b1b1;
+    cursor: pointer;
+    font-weight: 400;
 }

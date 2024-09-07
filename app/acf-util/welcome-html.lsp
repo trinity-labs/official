@@ -31,6 +31,7 @@
 	if major_sysver == major_distver and minor_sysver == minor_distver and patch_sysver == patch_distver then
 	   blockcolor = "<div class='data-block data-system system-uptodate'>"
 	   chkres = "<span id='alpine-version-link' class='version-link version-ok'><span class='version-check'>Up To Date <span class='version-number-uptodate'> ● </span> Alpine <a class='version-number-uptodate' href='https://www.alpinelinux.org/releases/#content' title='🟩 Up to Date' target='_blank'>" .. check_sysver .. "</a></span></span>"
+	   kernres = ""
 	else
 		blockcolor = "<div class='data-block data-system system-update'>"
 		chkres = "<span id='alpine-version-link' class='version-link version-update'><span class='version-check'>Update Needed <span class='version-number-update'> ● </span> Alpine <a class='version-number-update' href='https://www.alpinelinux.org/releases/#content' title='🟧 Update Needed' target='_blank'>" .. check_sysver .. "</a></span></span>"
@@ -97,7 +98,177 @@
 		end
 		return string.format("%d %s", octets, units[1])
 	end
--- GET DISKS & PARTITIONS
+-- UPTIME LIKE GIT MONITORING
+-- Function to calculate the last reboot date and time based on uptime
+local function calculate_last_reboot(uptime_seconds)
+    local current_time = os.time()
+    local reboot_time = current_time - math.floor(uptime_seconds)
+    local reboot_date_time = os.date("%Y-%m-%d %H:%M", reboot_time) -- Exclude seconds
+    return reboot_date_time, reboot_time
+end
+-- Function to parse dmesg and extract reboot times based on log timestamps
+local function parse_dmesg()
+    local reboots = {}
+    local handle = io.popen("dmesg | grep -i 'Command line:'")
+    local result = handle:read("*a")
+    handle:close()
+
+    if result and result ~= "" then
+        for line in result:gmatch("[^\r\n]+") do
+            local dmesg_time = line:match("%[(%d+%.%d+)]")
+            if dmesg_time then
+                local reboot_time = os.time() - tonumber(dmesg_time)
+                table.insert(reboots, reboot_time)
+            end
+        end
+    end
+
+    return reboots
+end
+-- Function to retrieve the current system uptime from the system
+local function get_current_uptime()
+    local uptime_output = sys.value.uptime.value
+    local uptime_seconds = string.match(uptime_output, "[%d]+%.?[%d]*")
+    return tonumber(uptime_seconds)
+end
+-- Function to read reboot data from the last_reboot file, handling the specific format
+local function parse_last_reboot_file(filename)
+    local reboots = {}
+    local file = io.open(filename, "r")
+    if not file then return reboots end
+    for line in file:lines() do
+        -- Look for the line that contains "Last Reboot from uptime:"
+        local reboot_date = line:match("Last Reboot from uptime: (%d%d%d%d%-%d%d%-%d%d %d%d:%d%d)")
+        if reboot_date then
+            -- Extract year, month, day, hour, and minute from the matched date
+            local year, month, day, hour, min = reboot_date:match("(%d%d%d%d)%-(%d%d)%-(%d%d) (%d%d):(%d%d)")
+
+            -- Convert extracted values to a timestamp
+            local reboot_time = os.time({
+                year = tonumber(year),
+                month = tonumber(month),
+                day = tonumber(day),
+                hour = tonumber(hour),
+                min = tonumber(min),
+                sec = 0 -- Assuming no seconds in the file
+            })
+
+            -- Add the reboot time to the list
+            if reboot_time then
+                table.insert(reboots, reboot_time)
+            end
+        end
+    end
+    file:close()
+    return reboots
+end
+-- Function to analyze both dmesg reboots, last_reboot file, and the current system uptime
+local function analyze_reboots_and_uptime(last_reboot_filename)
+    local dmesg_reboots = parse_dmesg()
+    local last_reboot_file_reboots = parse_last_reboot_file(last_reboot_filename)
+    local uptime_seconds = get_current_uptime()
+    local last_reboot_from_uptime, last_reboot_time = calculate_last_reboot(uptime_seconds)
+    local reboot_data = "Reboots from dmesg and last_reboot file:\n"
+    -- Combine reboots from dmesg and last_reboot file
+    local combined_reboots = {}
+    for _, reboot_time in ipairs(dmesg_reboots) do
+        table.insert(combined_reboots, reboot_time)
+    end
+    for _, reboot_time in ipairs(last_reboot_file_reboots) do
+        table.insert(combined_reboots, reboot_time)
+    end
+    if #combined_reboots > 0 then
+        for i, reboot_time in ipairs(combined_reboots) do
+            local reboot_date_time = os.date("%Y-%m-%d %H:%M", reboot_time)
+            reboot_data = reboot_data .. "Reboot " .. i .. ": " .. reboot_date_time .. "\n"
+        end
+    else
+        reboot_data = reboot_data .. "No reboots found.\n"
+    end
+    reboot_data = reboot_data .. "\nLast Reboot from uptime: " .. last_reboot_from_uptime .. "\n"
+    return reboot_data, last_reboot_time, combined_reboots
+end
+-- Function to generate the SVG calendar
+local function generate_calendar(uptime_data)
+    local box_size = 15
+    local margin = 1 -- Spacing between boxes
+    local cols = 52 -- 52 weeks
+    local width = cols * (box_size + margin)
+    local height = 7 * (box_size + margin) -- 7 days per week
+    local svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' .. width .. '" height="' .. height .. '">\n'
+    -- Get the current day of the year
+    local current_day_of_year = os.date("*t").yday
+    local current_time = os.time()
+    for i = 1, 365 do
+        local x = math.floor((i-1) / 7) * (box_size + margin) -- X position (week)
+        local y = ((i-1) % 7) * (box_size + margin) -- Y position (day of the week)
+
+        -- Calculate the date and time corresponding to day i
+        local time = os.time({year = os.date("*t").year, month = 1, day = 1}) + (i - 1) * 24 * 3600
+        local date_str = os.date("%Y-%m-%d %H:%M", time)
+
+        local color
+
+        if i > current_day_of_year then
+            color = "#373737" -- Gray for future days
+        else
+            local reboots = uptime_data[i].reboots
+            if reboots == 0 then
+                color = "#00EF5C" -- green for no reboots
+            elseif reboots == 1 then
+                color = "#d4e600" -- yellow for 1 reboot
+            elseif reboots > 1 then
+                color = "#ffcc00" -- orange for more than 1 reboot
+            else
+                color = "#373737" -- Default for unknown days
+            end
+        end
+        svg = svg .. string.format(
+            '<rect x="%d" y="%d" width="%d" height="%d" fill="%s" rx="1" stroke="#00000000" stroke-width="0.5" data-day-index="%d" title="%s"/>\n',
+            x, y, box_size, box_size, color, i, date_str
+        )
+    end
+    svg = svg .. '</svg>'
+    return svg
+end
+-- Function to save the SVG calendar to a file
+local function save_svg_file(svg_content, filename)
+    local file = io.open(filename, "w")
+    file:write(svg_content)
+    file:close()
+end
+-- Function to analyze uptimes and generate uptime data including reboots count
+local function analyze_uptimes(reboots, last_reboot_time)
+    local uptime_data = {}
+    local current_time = os.time()
+    local current_day_of_year = os.date("*t", current_time).yday
+    -- Initialize the 365 days with unknown data and 0 reboots
+    for i = 1, 365 do
+        uptime_data[i] = {uptime = -1, reboots = 0}
+    end
+    -- Fill uptime data based on reboots and last reboot time
+    if last_reboot_time then
+        local days_since_last_reboot = math.floor((current_time - last_reboot_time) / (24 * 3600))
+        for i = 0, days_since_last_reboot - 1 do
+            local day_position = (current_day_of_year - i) % 365
+            if day_position == 0 then day_position = 365 end
+            uptime_data[day_position].uptime = 24
+        end
+    end
+    for _, reboot_time in ipairs(reboots) do
+        local day_of_year = os.date("*t", reboot_time).yday
+        uptime_data[day_of_year].reboots = uptime_data[day_of_year].reboots + 1
+    end
+    return uptime_data
+end
+-- Start the process
+local last_reboot_filename = "../../www/skins/dashboard/logs/reboot/last_reboot.txt"
+local reboot_data, last_reboot_time, combined_reboots = analyze_reboots_and_uptime(last_reboot_filename)
+-- Analyze uptimes and generate uptime data
+local uptime_data = analyze_uptimes(combined_reboots, last_reboot_time)
+-- Generate the SVG calendar
+local svg_content = generate_calendar(uptime_data)
+save_svg_file(svg_content, "../../www/skins/dashboard/img/reboot/uptime_calendar.svg")
 %>
 <% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Dashboard"}), page_info) %>
 <!-- Dashboard App Block - LINE 1 -->
@@ -112,7 +283,7 @@
 					<span class="check-version">
 						<a class="version-link version-external-link" href="https://www.alpinelinux.org/posts/Alpine<%= get_verchanges %>released.html#content" title="🔗 https://www.alpinelinux.org/posts/Alpine<%= get_verchanges %>released.html#content" target="_blank">Last Release : <%= actual_distver %></a><br>
 					</span>
-					<span class="kernel-ver">Kernel @ <%= sys.value.kernel.value %> <span class='hdivider'>|</span> ACF - <%= sys.value.luaver.value %>
+					<span class="kernel-ver">Kernel @ <%= sys.value.kernel.value .. kernres %> <span class='hdivider'>|</span> ACF - <%= sys.value.luaver.value %>
 					</span>
 				</p>
 	</div>
@@ -237,7 +408,36 @@
 	</div>
 <!-- END Dashboard App Block - LINE 1 -->
 </div>
+<p class="dashboard-title uptime-heatmap-title"><i class="fa-solid fa-square"></i> Uptime Heatmap</p>
+<p class="months-list">
+    <span class="month january">January</span>
+    <span class="month february">February</span>
+    <span class="month march">March</span>
+    <span class="month april">April</span>
+    <span class="month may">May</span>
+    <span class="month june">June</span>
+    <span class="month july">July</span>
+    <span class="month august">August</span>
+    <span class="month september">September</span>
+    <span class="month october">October</span>
+    <span class="month november">November</span>
+    <span class="month december">December</span>
+</p>
+<img id="uptime-calendar" src="/skins/dashboard/img/reboot/uptime_calendar.svg" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" />
+<div id="tooltip" style="position: absolute; display: none; background-color: #fff; border: 1px solid #000; padding: 5px;"></div>
+<div class="chart-bar chart-legend chart-heatmap" style="margin:0px;padding:0px;border:0px;margin-top:5px">
+		<p id="legend" width="100px"><b>Legend</b> :</p>
+		<p id="legend-uptime-0reboot"></p>
+		<p width="35px"><b> No Reboot</b></p>
+		<p id="legend-uptime-1reboot"></p>
+		<p width="35px"><b> Reboot 1 Time</b></p>
+		<p id="legend-uptime-2reboot"></p>
+		<p width="35px"><b> More 1 Reboot</b></p>
+</div>
+<script>
+</script>
 <!-- Dashboard App Block - LINE 2 -->
+<p class="dashboard-title uptime-heatmap-title"><i class="fa-solid fa-square"></i> System Health Charts</p>
 <div class="dashboard-main main-block">
 <!-- Dashboard CPU Block - 1 -->
 	<div class="data-block data-cpu">
