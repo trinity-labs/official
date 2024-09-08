@@ -2,8 +2,20 @@
  * MEDIA QUERIES
  *----------------------------------------------------------------------------------
  */
+ 
+@media only screen and (min-device-width : 0px) and (max-device-width : 779px) {
 
-@media only screen and (min-device-width : 0px) and (max-device-width : 1400px) {
+	#user-logon {
+    display: none !important;
+	}
+
+}
+
+@media only screen and (min-device-width : 0px) and (max-device-width : 1279px) {
+	
+	.mobile {
+	display: none !important;
+	}
 
 	html, body {
 	position: relative;
@@ -27,7 +39,6 @@
         padding: 0 !important;
         position: absolute !important;
         display: flex;
-        background: white !important;
         flex-direction: row;
         flex-wrap: nowrap;
         background-position: 2rem center !important;
@@ -35,9 +46,32 @@
         width: 100%;
     }
 	
+	#header-links {
+    display: flex;
+    flex-direction: row;
+    align-content: stretch;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    width: -webkit-fill-available;
+	}
+	
+	.dark-theme header {
+    background: transparent !important;
+	}
+
 	.header-logo {
-	width: 8rem !important;
-    height: 3rem !important;
+	background-image: url(../../img/logos/logo-trinity-dashboard-mobile.png) !important;
+	width: 2.5rem !important;
+    height: 2.5rem !important;
+	}
+	
+	.logon #about-link {
+    display: inherit !important;
+	}
+	
+	#home-link, #about-link {
+    display: none !important;
 	}
 	
 	#content p,
@@ -146,7 +180,7 @@
 	}
 	
 	.logon-logon #header {
-    background-image: url(../../img/logos/logo-trinity-full-acf-white.png) !important;
+    background-image: url(../../img/logos/logo-trinity-dashboard.png) !important;
     position: relative !important;
     border-radius: 10px 10px 0 0 !important;
     background-position: 1.25rem center !important;
@@ -157,7 +191,7 @@
     width: 138.5vw;
     height: 5.5rem !important;
     background-repeat: no-repeat !important;
-	}
+}
 	
 	#userid {
     margin-top: 0rem !important;

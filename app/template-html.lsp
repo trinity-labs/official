@@ -124,7 +124,7 @@ end
 						print("<div id='header-left'><a href='javascript:void(0);' class='icon' id='toggle-menu' title='Menu' onclick='toggleMenu()'><i class='fa-solid fa-bars'></i></a>")
 						print("<a class='header-logo home-logo' href=".. html.html_escape(pageinfo.wwwprefix) .. "/cgi-bin/acf/acf-util/welcome/read".."/></a></div>")
 						print("<div id='header-links'>")
-						print("<span class='last-logon'><i class='fa-solid fa-key'></i> &nbsp; Last Logon <span class='hdivider'>|</span> ")
+						print("<span class='last-logon'><i class='fa-solid fa-key'></i> &nbsp; <span class='mobile'>Last Logon <span class='hdivider'>|</span></span> ")
 						if username and ip and time then
 							print("<span class='logon-data'><span class='username'>".. username .."</span> <span class='hdivider'>@</span> ")
 							print("<span class='ip'>".. ip .."</span> <span class='hdivider'>|</span> ") 
@@ -215,7 +215,7 @@ end
 		</div> <!-- page -->
 <% end --pageinfo.skinned%>
 		<footer id="footer" style="cursor: pointer;" onclick="window.open('https://www.alpinelinux.org/about/', '_blank')">
-				<a href="https://www.alpinelinux.org/about/" target="_blank">
+				<a href="https://github.com/trinity-labs/official" target="_blank">
 				© TRIИITY | 2022 - <%= (os.date("%Y")) %>
 				</a>
 		</footer> <!-- footer -->

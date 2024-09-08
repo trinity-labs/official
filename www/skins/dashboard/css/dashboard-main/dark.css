@@ -24,13 +24,13 @@
 }
 
 .dark-theme header {
-    background: linear-gradient(90deg, #1a1a1a, #1a1a1a, #0a000a) !important;
+    background: linear-gradient(90deg, #1a1a1a, #1a1a1a, #0a000a) no-repeat;
     box-shadow: none !important;
 }
 
 .dark-theme .header-logo,
 .dark-theme .logon-logon #header {
-	background-image: url(../../img/logos/logo-trinity-dashboard.png) !important;
+	background-image: url(../../img/logos/logo-trinity-dashboard.png);
 }
 
 .dark-theme tbody {
@@ -230,7 +230,7 @@
     color: #b3b3b3;
 }
 
-.last-logon i,
-.last-logon .time {
+.dark-theme .last-logon i,
+.dark-theme .last-logon .time {
     color: #545454;
 }

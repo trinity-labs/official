@@ -79,7 +79,7 @@ span.dashboard-infos {
     background: none !important;
     font-weight: 600;
     text-transform: uppercase;
-    margin: 0.5rem 0 1.75rem;
+    margin: 0.5rem 0 1rem;
     font-family: Arial Black;
     color: #b7b7b7;
     font-size: 0.75rem;
@@ -917,14 +917,22 @@ input:checked + .slider:before {
 
 .value-title.value-net-local {
     text-transform: lowercase;
+    color: #00bac9;
 }
 
 .disk-list {
     white-space: pre;
-    display: block;
-	width: -moz-available !important;
+    display: flex;
+    width: -moz-available !important;
     width: -webkit-fill-available !important;
     width: fill-available !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#disk-listing {
+    width: 45%;
 }
 
 #content .chart-storage {
@@ -1063,35 +1071,53 @@ input:checked + .slider:before {
 
 #legend-uptime-0reboot {
     padding: 0.55rem 0.01rem;
-    width: 5rem !important;
+    width: 1rem !important;
     margin: 0 0.5rem;
     border-radius: 2px;
 	color: green;
-	background: #00EF5C;
+	background: #00ef5c;
+    display: inline-block;
+    position: relative;
+    top: 0.25rem;
 }
 
 #legend-uptime-1reboot {
     padding: 0.55rem 0.01rem;
-    width: 5rem !important;
+    width: 1rem !important;
     margin: 0 0.5rem;
     border-radius: 2px;
-	background: #d4e600;
+	background: #e5fa00;
+	display: inline-block;
+    position: relative;
+    top: 0.25rem;
 }
 
 #legend-uptime-2reboot {
     padding: 0.55rem 0.01rem;
-    width: 5rem !important;
+    width: 1rem !important;
     margin: 0 0.5rem;
     border-radius: 2px;
-    background: #ffcc00;
-}
-
-.chart-bar.chart-legend.chart-heatmap {
-    margin: 0 0 3rem !important;
+    background: #ffb700;
+    display: inline-block;
+    position: relative;
+    top: 0.25rem;
 }
 
 .month:hover {
     color: #b1b1b1;
     cursor: pointer;
     font-weight: 400;
+}
+
+.month.active {
+    font-weight: bold;
+    color: #b1b1b1;
+}
+
+.chart-heatmap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+	margin: 0 0 3rem !important;
 }

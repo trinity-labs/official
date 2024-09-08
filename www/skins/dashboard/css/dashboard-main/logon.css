@@ -34,7 +34,7 @@ html.app-logon {
 
 .logon-logon #header {
     background-size: 7rem !important;
-    background-image: url(../../img/logos/logo-trinity-full-acf.png) !important;
+    background-image: url(../../img/logos/logo-trinity-full-acf.png);
     position: relative !important;
     border-radius: 10px 10px 0 0 !important;
     background-position: 3.5rem center !important;
@@ -231,10 +231,10 @@ input#password::-webkit-input-placeholder::before {
     top: 0.5rem;
     width: 21% !important;
     padding: 0.15rem 1.25rem !important;
-    left: 7.5%;
     border: 2px solid rgb(255 43 43);
     text-align: center !important;
     background: none;
+    font-weight: normal !important;
 }
 
 .logon .icon-header {
