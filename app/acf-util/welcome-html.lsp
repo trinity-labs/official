@@ -431,15 +431,21 @@ local cache_time = os.date("%Y%m%d%H%M%S")
 <img id="uptime-calendar" src="/skins/dashboard/img/reboot/uptime_calendar.svg?<%= cache_time %>" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" />
 <div id="tooltip" style="position: absolute; display: none; background-color: #fff; border: 1px solid #000; padding: 5px;"></div>
 <div class="chart-bar chart-legend chart-heatmap">
-		<span><p id="legend-uptime-0reboot"></p><span class="legend-title">No Reboot</span></span>
-		<span><p id="legend-uptime-1reboot"></p><span class="legend-title">Reboot 1 Time</span></span>
-		<span><p id="legend-uptime-2reboot"></p><span class="legend-title">More 1 Reboot</span></span>
+	<span><i class="fa-solid fa-square" id="legend-uptime-0reboot"></i><span class="legend-title">No Reboot</span></span>
+	<span><i class="fa-solid fa-square" id="legend-uptime-1reboot"></i><span class="legend-title">Reboot 1 Time</span></span>
+	<span><i class="fa-solid fa-square" id="legend-uptime-2reboot"></i><span class="legend-title">More 1 Reboot</span></span>
 </div>
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     var currentMonth = new Date().getMonth();
     var months = document.querySelectorAll('.months-list .month');
     months[currentMonth].classList.add('active');
+	if (window.matchMedia("(max-width: 1080px)").matches) {
+        const months = document.querySelectorAll('.month');
+        months.forEach(function(month) {
+            month.textContent = month.textContent.slice(0, 3);
+        });
+    }
 });
 </script>
 <!-- Dashboard App Block - LINE 2 -->

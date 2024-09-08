@@ -296,7 +296,12 @@
     padding: 0rem 0.1rem !important;
 	}
 	
+	.legend-title {
+    font-size: 0.65rem;
+	}
+	
 	#disk-listing {
+	width: 100% !important;
     height: 9rem !important;
 	}
 	

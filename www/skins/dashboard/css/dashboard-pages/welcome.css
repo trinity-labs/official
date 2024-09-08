@@ -1074,11 +1074,8 @@ input:checked + .slider:before {
     width: 1rem !important;
     margin: 0 0.5rem;
     border-radius: 2px;
-	color: green;
-	background: #00ef5c;
+	color: #00ef5c;
     display: inline-block;
-    position: relative;
-    top: 0.25rem;
 }
 
 #legend-uptime-1reboot {
@@ -1086,10 +1083,8 @@ input:checked + .slider:before {
     width: 1rem !important;
     margin: 0 0.5rem;
     border-radius: 2px;
-	background: #e5fa00;
+	color: #e5fa00;
 	display: inline-block;
-    position: relative;
-    top: 0.25rem;
 }
 
 #legend-uptime-2reboot {
@@ -1097,10 +1092,8 @@ input:checked + .slider:before {
     width: 1rem !important;
     margin: 0 0.5rem;
     border-radius: 2px;
-    background: #ffb700;
+    color: #ffb700;
     display: inline-block;
-    position: relative;
-    top: 0.25rem;
 }
 
 .month:hover {

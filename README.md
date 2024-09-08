@@ -28,8 +28,14 @@
 This project cover **ONLY** Alpine Linux ACF Core Modules. Just the base framework (`acf-lib` / `acf-core` / `acf-alpine-baselayout`). Other app not covered for now eg: `acf-openssl` `acf-docker` `acf-etc...` It's part of a future project, maybe...
 <br>
 
+🟥 Stay Hired on 
+
+- [Reddit](https://www.reddit.com/r/PocketMainframe/)
+- [Mastodon](https://defcon.social/@trinity)
+
 <br>
 
-**New TRIИITY Dashboard**
+⬛ **New TRIИITY Dashboard**
 
-<img src="https://github.com/trinity-labs/official/assets/45216746/60e2f331-0914-4658-82fa-117507ff06f5">
+<br>
+<img src="https://github.com/user-attachments/assets/c32ebc55-6824-4ef2-9919-3b033b1c440e">
