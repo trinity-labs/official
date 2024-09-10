@@ -105,108 +105,166 @@ $(function() {
         window.localStorage.setItem('toggle-degree', degreeState);
     }
 });
-// ChartJS API		
-	if(window.location.href.indexOf("/acf/acf-util/welcome/read") > -1){			
-	$(function() {async function api() {
-		const url = `${document.location.hostname}/alpine-baselayout/health/api?viewtype=json`;
-		const obj = await (await fetch(url)).json();
-		const $cpuTemp = $("#cpuTemp");
-		const toggleDegree = localStorage.getItem('toggle-degree');
-		const boardTempC = Math.ceil(obj.value.boardTemp.value / 1000);
-		const cpuTempC = Math.floor(obj.value.cpuTemp.value / 1000);
-		const tempClass = cpuTempC < 50 ? 'normal' : cpuTempC >= 75 ? 'hot' : 'medium';
-		const boardTemp = toggleDegree === 'fahrenheit' ? Math.ceil(boardTempC * 9 / 5 + 32) : boardTempC;
-		const cpuTemp = toggleDegree === 'fahrenheit' ? Math.floor(cpuTempC * 9 / 5 + 32) : cpuTempC;
-		const unit = toggleDegree === 'fahrenheit' ? '°F' : '°C';
-		$cpuTemp.html(`${boardTemp} ${unit}  &nbsp; <span class='hdivider'>|</span> <span class='${tempClass}'>${cpuTemp} ${unit}</span>`);
-		localStorage.setItem('CTemp', cpuTempC);
-		localStorage.setItem('MemoryUse', obj.value.memUsed);
-		localStorage.setItem('MemoryTotal', obj.value.memTotal);
-	}
-// Common chart setup
-  function createChart(elementId, label, borderColor, backgroundColor, dataKey, yMinDelta, yMax, yStepSize) {
-    const data = {
-    labels: [],
-    datasets: [{
-	label: label,
-	borderColor: borderColor,
-	backgroundColor: backgroundColor,
-	data: [],
-	tension: 0.25,
-	fill: true,
-	pointRadius: 0
-      }],
-    };
-    const config = {
-      type: 'line',
-      data,
-      options: {
-        scales: {
-          x: {
-            type: 'realtime',
-            realtime: {
-              duration: 30000,
-              refresh: 1000,
-              delay: 0,
-              onRefresh: chart => {
-                const newValue = Number(localStorage.getItem(dataKey));
-                chart.data.datasets.forEach(dataset => {
-                  dataset.data.push({
-                    x: Date.now(),
-                    y: newValue
-                  });
-                });
-                // For CPU, adjust suggested min/max based on current value
-                if (dataKey === 'CTemp') {
-                  chart.options.scales.y.suggestedMin = newValue - yMinDelta;
-                  chart.options.scales.y.suggestedMax = newValue + yMinDelta;
-                }
-              }
-            }
-          },
-          y: {
-            suggestedMin: 0,
-            suggestedMax: yMax, // Correctly setting suggested max for memory
-            ticks: {
-              stepSize: yStepSize // Ensure this is set appropriately
-            }
-          }
-        },
-        plugins: {
-          legend: {
-            display: false
-          }
-        }
-      }
-    };
-    new Chart(document.getElementById(elementId), config);
-  }
-  // Create CPU Temperature Chart
-  createChart(
-    'chartCpuTemp',
-    'CPU Temp',
-    'rgba(255, 105, 180)',
-    'rgba(255, 105, 180, 0.5)',
-    'CTemp',
-    1,  // Min delta for CPU temperature
-    null, // CPU chart does not use a fixed max
-    1   // Step Size
-  );
+// ChartJS API
+if (window.location.href.indexOf("/acf/acf-util/welcome/read") > -1) {			
+	$(function() {
+		async function api() {
+			const url = `${document.location.hostname}/alpine-baselayout/health/api?viewtype=json`;
+			const obj = await (await fetch(url)).json();
+			const $cpuTemp = $("#cpuTemp");
+			const toggleDegree = localStorage.getItem('toggle-degree');
+			const boardTempC = Math.ceil(obj.value.boardTemp.value / 1000);
+			const cpuTempC = Math.floor(obj.value.cpuTemp.value / 1000);
+			const tempClass = cpuTempC < 50 ? 'normal' : cpuTempC >= 75 ? 'hot' : 'medium';
+			const boardTemp = toggleDegree === 'fahrenheit' ? Math.ceil(boardTempC * 9 / 5 + 32) : boardTempC;
+			const cpuTemp = toggleDegree === 'fahrenheit' ? Math.floor(cpuTempC * 9 / 5 + 32) : cpuTempC;
+			const unit = toggleDegree === 'fahrenheit' ? '°F' : '°C';
+			$cpuTemp.html(`${boardTemp} ${unit}  &nbsp; <span class='hdivider'>|</span> <span class='${tempClass}'>${cpuTemp} ${unit}</span>`);
+			
+			// Store values
+			localStorage.setItem('CTemp', cpuTempC);
+			localStorage.setItem('MemoryUse', obj.value.memUsed);
+			localStorage.setItem('MemoryTotal', obj.value.memTotal);
 
-  // Create Memory Usage Chart
-  const memoryTotal = Math.floor(Number(localStorage.getItem('MemoryTotal')));
-  const memoryStepSize = Math.max(1, Math.ceil(memoryTotal / 4)); // Ensure at least 1 and is an integer
-  createChart(
-    'chartMemUsed',
-    'Memory Usage',
-    'rgba(255, 120, 0)',
-    'rgba(255, 120, 0, 0.5)',
-    'MemoryUse',
-    0,  // Min delta (not used for memory)
-    memoryTotal, // Use memory total from localStorage
-    memoryStepSize // Integer Step Size
-  );
-refresh = setInterval(api, 1000);
+			// Extract CPU frequencies
+			const cpuText = obj.value.cpu.value;
+			const cpuFrequencies = [];
+			const cpuLines = cpuText.split("\n");
+
+			// Get "cpu MHz" values
+			cpuLines.forEach(line => {
+				if (line.includes("cpu MHz")) {
+					const frequency = parseFloat(line.split(":")[1].trim());
+					cpuFrequencies.push(frequency);
+				}
+			});
+			
+			// Calculate average CPU frequency
+			if (cpuFrequencies.length > 0) {
+				const avgCpuFreq = cpuFrequencies.reduce((a, b) => a + b, 0) / cpuFrequencies.length;
+				localStorage.setItem('CPUFreq', avgCpuFreq);
+			} else {
+				console.error("Unable to extract CPU frequencies.");
+			}
+		}
+
+		// Create chart with units in Y axis and temperature conversion
+		function createChart(elementId, label, borderColor, backgroundColor, dataKey, yMinDelta, yMax, yStepSize, yUnit) {
+			const data = {
+				labels: [],
+				datasets: [{
+					label: label,
+					borderColor: borderColor,
+					backgroundColor: backgroundColor,
+					data: [],
+					tension: 0,
+					fill: true,
+					pointRadius: 0
+				}],
+			};
+			const config = {
+				type: 'line',
+				data,
+				options: {
+					scales: {
+						x: {
+							type: 'realtime',
+							realtime: {
+								duration: 30000,
+								refresh: 1000,
+								delay: 0,
+								onRefresh: chart => {
+									let newValue = Number(localStorage.getItem(dataKey));
+									
+									// Convert CPU Temp to °F if toggle-degree is set to 'fahrenheit'
+									const toggleDegree = localStorage.getItem('toggle-degree');
+									if (dataKey === 'CTemp' && toggleDegree === 'fahrenheit') {
+										newValue = newValue * 9 / 5 + 32;
+									}
+
+									chart.data.datasets.forEach(dataset => {
+										dataset.data.push({
+											x: Date.now(),
+											y: newValue
+										});
+									});
+									
+									if (dataKey === 'CTemp' || dataKey === 'CPUFreq') {
+										chart.options.scales.y.suggestedMin = newValue - yMinDelta;
+										chart.options.scales.y.suggestedMax = newValue + yMinDelta;
+									}
+								}
+							}
+						},
+						y: {
+							suggestedMin: 0,
+							suggestedMax: yMax,
+							ticks: {
+								stepSize: yStepSize,
+								callback: function(value) {
+									if (dataKey === 'CTemp') {
+										// Display °F if toggle-degree is set, else °C
+										const toggleDegree = localStorage.getItem('toggle-degree');
+										return toggleDegree === 'fahrenheit' ? value + ' °F' : value + ' °C';
+									} else if (dataKey === 'CPUFreq') {
+										// Convert MHz to GHz if above 1000 MHz
+										return value >= 1000 ? (value / 1000).toFixed(2) + ' GHz' : value + ' MHz';
+									}
+									return value;
+								}
+							}
+						}
+					},
+					plugins: {
+						legend: {
+							display: false
+						}
+					}
+				}
+			};
+			new Chart(document.getElementById(elementId), config);
+		}
+
+		// Create charts
+		createChart(
+			'chartCpuTemp',
+			'CPU Temp',
+			'rgba(255, 105, 180)',
+			'rgba(255, 105, 180, 0.5)',
+			'CTemp',
+			1,
+			null,
+			1,
+			'°C' // Will change dynamically based on toggle-degree
+		);
+
+		const memoryTotal = Math.floor(Number(localStorage.getItem('MemoryTotal')));
+		const memoryStepSize = Math.max(1, Math.ceil(memoryTotal / 4));
+		createChart(
+			'chartMemUsed',
+			'Memory Usage',
+			'rgba(255, 120, 0)',
+			'rgba(255, 120, 0, 0.5)',
+			'MemoryUse',
+			0,
+			memoryTotal,
+			memoryStepSize
+		);
+
+		createChart(
+			'chartCpuFreq',
+			'CPU Frequency',
+			'rgba(141, 114, 207)',
+			'rgba(141, 114, 207, 0.5)',
+			'CPUFreq',
+			100,
+			5000,
+			500,
+			'GHz'
+		);
+
+		// Update every second
+		setInterval(api, 1000);
 		});
 	};
 });

@@ -242,6 +242,7 @@ mymodule.get_api = function (self)
 	api.memFree = string.format("%.2f", (meminfo["MemFree"]) / 1073741824)
 	api.memUsed = string.format("%.2f", (meminfo["MemTotal"] - meminfo["MemAvailable"]) / 1073741824)
 	api.disk = cfe({ value=querycmd("fdisk -l"), label="Disk List" })
+	api.cpu = cfe({ value=querycmd("cat /proc/cpuinfo"), label="CPU List" })
 	return cfe({ type="group", value=api, label="Hardware API" })
 end
 

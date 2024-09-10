@@ -99,42 +99,33 @@
 		return string.format("%d %s", octets, units[1])
 	end
 -- UPTIME LIKE GIT MONITORING
--- Function to calculate the last reboot date and time based on uptime
 local function calculate_last_reboot(uptime_seconds)
     local current_time = os.time()
     local reboot_time = current_time - math.floor(uptime_seconds)
-    local reboot_date_time = os.date("%Y-%m-%d %H:%M", reboot_time) -- Exclude seconds
+    local reboot_date_time = os.date("%Y-%m-%d %H:%M", reboot_time)
     return reboot_date_time, reboot_time
 end
--- Function to retrieve the current system uptime from the system
 local function get_current_uptime()
     local uptime_output = sys.value.uptime.value
     local uptime_seconds = string.match(uptime_output, "[%d]+%.?[%d]*")
     return tonumber(uptime_seconds)
 end
--- Function to read reboot data from the last_reboot file, handling the specific format
 local function parse_last_reboot_file(filename)
     local reboots = {}
     local file = io.open(filename, "r")
     if not file then return reboots end
     for line in file:lines() do
-        -- Look for the line that contains "Last Reboot from uptime:"
         local reboot_date = line:match("Last Reboot from uptime: (%d%d%d%d%-%d%d%-%d%d %d%d:%d%d)")
         if reboot_date then
-            -- Extract year, month, day, hour, and minute from the matched date
             local year, month, day, hour, min = reboot_date:match("(%d%d%d%d)%-(%d%d)%-(%d%d) (%d%d):(%d%d)")
-
-            -- Convert extracted values to a timestamp
             local reboot_time = os.time({
                 year = tonumber(year),
                 month = tonumber(month),
                 day = tonumber(day),
                 hour = tonumber(hour),
                 min = tonumber(min),
-                sec = 0 -- Assuming no seconds in the file
+                sec = 0
             })
-
-            -- Add the reboot time to the list
             if reboot_time then
                 table.insert(reboots, reboot_time)
             end
@@ -143,49 +134,49 @@ local function parse_last_reboot_file(filename)
     file:close()
     return reboots
 end
--- Function to analyze reboots from the last_reboot file and the current system uptime
 local function analyze_reboots_and_uptime(last_reboot_filename)
     local last_reboot_file_reboots = parse_last_reboot_file(last_reboot_filename)
     local uptime_seconds = get_current_uptime()
     local last_reboot_from_uptime, last_reboot_time = calculate_last_reboot(uptime_seconds)
-    local reboot_data = "Reboots from last_reboot file:\n" 
-    -- Combine reboots from last_reboot file
-    local combined_reboots = {}
-    for _, reboot_time in ipairs(last_reboot_file_reboots) do
-        table.insert(combined_reboots, reboot_time)
-    end
-    if #combined_reboots > 0 then
-        for i, reboot_time in ipairs(combined_reboots) do
-            local reboot_date_time = os.date("%Y-%m-%d %H:%M", reboot_time)
-            reboot_data = reboot_data .. "Reboot " .. i .. ": " .. reboot_date_time .. "\n"
-        end
-    else
-        reboot_data = reboot_data .. "No reboots found.\n"
-    end
-    reboot_data = reboot_data .. "\nLast Reboot from uptime: " .. last_reboot_from_uptime .. "\n"
-    return reboot_data, last_reboot_time, combined_reboots
+    local reboot_data = "Last Reboot from uptime: " .. last_reboot_from_uptime .. "\n"
+    return reboot_data, last_reboot_time, last_reboot_file_reboots
 end
--- Function to check if the reboot data already exists in the file without seconds
 local function check_if_reboot_exists(reboot_data, filename)
     local file = io.open(filename, "r")
-    if not file then return false end
-
-    local reboot_data_without_seconds = reboot_data:match("%Y%-m%-d %H:%M") -- Match format without seconds
-
+    if not file then 
+        return false
+    end
+    local reboot_year, reboot_month, reboot_day, reboot_hour, reboot_min = reboot_data:match("(%d%d%d%d)%-(%d%d)%-(%d%d) (%d%d):(%d%d)")
+    local reboot_time = os.time({
+        year = tonumber(reboot_year),
+        month = tonumber(reboot_month),
+        day = tonumber(reboot_day),
+        hour = tonumber(reboot_hour),
+        min = tonumber(reboot_min),
+        sec = 0
+    })
     for line in file:lines() do
-        local line_without_seconds = line:match("%Y%-m%-d %H:%M")
-        if line_without_seconds == reboot_data_without_seconds then
-            file:close()
-            return true -- Reboot data already exists
+        local year, month, day, hour, min = line:match("Last Reboot from uptime: (%d%d%d%d)%-(%d%d)%-(%d%d) (%d%d):(%d%d)")
+        if year and month and day and hour and min then
+            local existing_reboot_time = os.time({
+                year = tonumber(year),
+                month = tonumber(month),
+                day = tonumber(day),
+                hour = tonumber(hour),
+                min = tonumber(min),
+                sec = 0
+            })
+            if math.abs(reboot_time - existing_reboot_time) <= 60 then
+                file:close()
+                return true
+            end
         end
     end
 
     file:close()
     return false
 end
--- Function to save the reboot data to a file only if it's different (ignoring seconds)
 local function save_reboot_data(reboot_data, filename)
-    -- Check if the reboot data already exists
     if not check_if_reboot_exists(reboot_data, filename) then
         local file = io.open(filename, "a")
         if file then
@@ -194,36 +185,33 @@ local function save_reboot_data(reboot_data, filename)
         end
     end
 end
--- Function to generate the SVG calendar
 local function generate_calendar(uptime_data)
     local box_size = 7
-    local margin = 2 -- Spacing between boxes
-    local cols = 52 -- 52 weeks
+    local margin = 2
+    local cols = 52
     local width = cols * (box_size + margin)
-    local height = 7 * (box_size + margin) -- 7 days per week
+    local height = 7 * (box_size + margin)
     local svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' .. width .. '" height="' .. height .. '">\n'
-    -- Get the current day of the year
     local current_day_of_year = os.date("*t").yday
     local current_time = os.time()
     for i = 1, 365 do
-        local x = math.floor((i-1) / 7) * (box_size + margin) -- X position (week)
-        local y = ((i-1) % 7) * (box_size + margin) -- Y position (day of the week)
-        -- Calculate the date corresponding to day i
+        local x = math.floor((i-1) / 7) * (box_size + margin)
+        local y = ((i-1) % 7) * (box_size + margin)
         local time = os.time({year = os.date("*t").year, month = 1, day = 1}) + (i - 1) * 24 * 3600
         local date_str = os.date("%Y-%m-%d", time)
         local color
         if i > current_day_of_year then
-            color = "#7676761f" -- future days
+            color = "#7676761f"
         else
             local reboots = uptime_data[i].reboots
             if reboots == 0 then
-                color = "#3CDD4F" -- green for no reboots
+                color = "#00EF5C"
             elseif reboots == 1 then
-                color = "#E5FA00" -- yellow for 1 reboot
+                color = "#E5FA00"
             elseif reboots > 1 then
-                color = "#FFB700" -- orange for more than 1 reboot
+                color = "#FFB700"
             else
-                color = "#7676761f" -- Default for unknown days
+                color = "#7676761f"
             end
         end
         svg = svg .. string.format(
@@ -234,22 +222,18 @@ local function generate_calendar(uptime_data)
     svg = svg .. '</svg>'
     return svg
 end
--- Function to save the SVG calendar to a file
 local function save_svg_file(svg_content, filename)
     local file = io.open(filename, "w")
     file:write(svg_content)
     file:close()
 end
--- Function to analyze uptimes and generate uptime data including reboots count
 local function analyze_uptimes(reboots, last_reboot_time)
     local uptime_data = {}
     local current_time = os.time()
     local current_day_of_year = os.date("*t", current_time).yday
-    -- Initialize the 365 days with unknown data and 0 reboots
     for i = 1, 365 do
         uptime_data[i] = {uptime = -1, reboots = 0}
     end
-    -- Fill uptime data based on reboots and last reboot time
     if last_reboot_time then
         local days_since_last_reboot = math.floor((current_time - last_reboot_time) / (24 * 3600))
         for i = 0, days_since_last_reboot - 1 do
@@ -264,18 +248,15 @@ local function analyze_uptimes(reboots, last_reboot_time)
     end
     return uptime_data
 end
--- Start the process
 local last_reboot_filename = "../../www/skins/dashboard/logs/reboot/last_reboot.txt"
 local reboot_data, last_reboot_time, combined_reboots = analyze_reboots_and_uptime(last_reboot_filename)
 save_reboot_data(reboot_data, last_reboot_filename)
--- Analyze uptimes and generate uptime data
 local uptime_data = analyze_uptimes(combined_reboots, last_reboot_time)
--- Generate the SVG calendar
 local svg_content = generate_calendar(uptime_data)
-save_svg_file(svg_content, "../../www/skins/dashboard/img/reboot/uptime_calendar.svg")
+save_svg_file(svg_content, "../../www/skins/dashboard/logs/reboot/uptime_calendar.svg")
 local cache_time = os.date("%Y%m%d%H%M%S")
-%>
-<% local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Dashboard"}), page_info) %>
+local header_level = htmlviewfunctions.displaysectionstart(cfe({label="Dashboard"}), page_info)
+ %>
 <!-- Dashboard App Block - LINE 1 -->
 <div class="dashboard-main main-block">
 	<!-- Dashboard Version Block - BLOCK 1 -->
@@ -428,7 +409,7 @@ local cache_time = os.date("%Y%m%d%H%M%S")
     <span class="month november">November</span>
     <span class="month december">December</span>
 </p>
-<img id="uptime-calendar" src="/skins/dashboard/img/reboot/uptime_calendar.svg?<%= cache_time %>" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" />
+<img id="uptime-calendar" src="/skins/dashboard/logs/reboot/uptime_calendar.svg?<%= cache_time %>" width="100%" height="auto" xmlns="http://www.w3.org/2000/svg" />
 <div id="tooltip" style="position: absolute; display: none; background-color: #fff; border: 1px solid #000; padding: 5px;"></div>
 <div class="chart-bar chart-legend chart-heatmap">
 	<span><i class="fa-solid fa-square" id="legend-uptime-0reboot"></i><span class="legend-title">No Reboot</span></span>
@@ -459,9 +440,9 @@ document.addEventListener('DOMContentLoaded', function() {
 	</div>		
 <!-- Dashboard Memory Block - 2 -->		
 	<div class="data-block data-memory">
-		<h4 class="dashboard-block-title dashboard-title-memory-stats">Memory Usage</h4>
+		<h4 class="dashboard-block-title dashboard-title-memory-stats">CPU Freq</h4>
 		<!-- Dashboard Main Block - NETWORK CHART.JS -->	
-		<canvas id="chartMemUsed" class="data-chart block-chart"></canvas>
+		<canvas id="chartCpuFreq" class="data-chart block-chart"></canvas>
 	</div>
 <!-- Dashboard App Block - LINE 2 -->
 </div>

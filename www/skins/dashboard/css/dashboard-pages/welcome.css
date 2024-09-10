@@ -979,7 +979,7 @@ input:checked + .slider:before {
     font-weight: 900 !important;
     margin: 0 !important;
     padding: 0 0.75rem !important;
-    font-size: 0.75rem !important;
+    font-size: 0.7rem !important;
     letter-spacing: -0.05rem !important;
     text-transform: uppercase;
     color: #898989c4 !important;
@@ -1044,6 +1044,12 @@ input:checked + .slider:before {
 .brand-name, .disk-used {
     font-weight: 900;
     font-size: 0.65rem;
+}
+
+#map {
+    margin: 2rem auto;
+    width: 80% !important;
+    vertical-align: middle;
 }
 
 .hdivider {
