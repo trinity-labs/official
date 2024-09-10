@@ -114,15 +114,6 @@
     color: rgb(99 0 210) !important;
 }
 
-.dark-theme #disk-listing {
-    background: inherit !important;
-}
-
-.dark-theme .page-welcome #capacity-free {
-    color: #c9c9c9 !important;
-    background: #404040 !important;
-}
-
 .dark-theme .welcome .dashboard-title {
     border-top: 1px solid #505050 !important;
 }
@@ -173,7 +164,6 @@
     width: 100%;
     border: none !important;
     font-size: 0.75rem;
-    background: #222222 !important;
     padding: 0.25rem 0;
 }
 

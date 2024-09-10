@@ -33,10 +33,11 @@ function toggleTheme() {
 		const setAttrs = (el, ph) => el.attr({
 		required: true,
 		placeholder: ph,
-		style: "font-family: system-ui, 'Font Awesome 6 Free'; font-weight: 600"
+		style: "font-family: system-ui, 'Bootstrap-icons', 'Font Awesome 6 Free', 'Material Icons Outlined'; font-variation-settings: 'OPSZ' 48 !important;"
+
 		});
 		setAttrs($('#userid input'), '\uf007    User ID');
-		setAttrs($('#password input'), '\uf023    Password').attr('autocomplete', 'current-password');
+		setAttrs($('#password input'), '\ue897    Password').attr('autocomplete', 'current-password');
 		$('#login').attr('autocomplete', 'on');
 		$('.hidden').attr('hidden', true);
 		$("#password .right").append("<button id='showPass' type='button'><i class='fa-regular fa-eye-slash'></i></button>");

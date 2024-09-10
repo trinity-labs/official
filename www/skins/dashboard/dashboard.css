@@ -5,18 +5,19 @@
  *--------------------------------------------------------------------------------*/
 
 /*----------------------------------------------------------------------------------
- * FONTAWESOME LATEST FREE from UNPKG.COM - OPENSOURCE CDN
+ * ICONS FREE CDN
  *--------------------------------------------------------------------------------*/
 @import url('https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css');
-
-/*----------------------------------------------------------------------------------
- * HIGHLIGHT.JS LATEST from UNPKG.COM - OPENSOURCE CDN
- *--------------------------------------------------------------------------------*/
+@import url('https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.min.css');
+@import url('https://cdn.jsdelivr.net/npm/material-icons/iconfont/material-icons.min.css');
 @import url('https://cdn.jsdelivr.net/npm/highlight.js/styles/color-brewer.min.css');
+/*----------------------------------------------------------------------------------
+ * HIGHLIGHT.JS LATEST CDN
+ *--------------------------------------------------------------------------------*/
 @import "css/dashboard-main/highlightjs.css";
 
 /*----------------------------------------------------------------------------------
- * CHART.JS LATEST from UNPKG.COM - OPENSOURCE CDN
+ * CHART.JS
  *--------------------------------------------------------------------------------*/
 @import "css/dashboard-main/chartjs.css";
 

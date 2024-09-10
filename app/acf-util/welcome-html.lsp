@@ -217,7 +217,7 @@ local function generate_calendar(uptime_data)
         else
             local reboots = uptime_data[i].reboots
             if reboots == 0 then
-                color = "#00EF5C" -- green for no reboots
+                color = "#3CDD4F" -- green for no reboots
             elseif reboots == 1 then
                 color = "#E5FA00" -- yellow for 1 reboot
             elseif reboots > 1 then
@@ -466,83 +466,80 @@ document.addEventListener('DOMContentLoaded', function() {
 <!-- Dashboard App Block - LINE 2 -->
 </div>
 <!-- Dashboard App Block - LINE 3 -->
-<div class="dashboard-main main-block">
+<div class="dashboard-main main-block data-disk">
 <!-- Dashboard Main Block - SYSTEM - BLOCK 1 -->
 <div class="disk-list">
 <p class="dashboard-title"><i class="fa-solid fa-square"></i> Disk List</p>
 <%
--- Random Colors in Range Function without Duplicate Colors 
 local used_colors = {}
-
 local function get_random_number(min, max)
     return math.floor(math.random() * (max - min + 1)) + min
 end
-
 local function table_size(tbl)
     local count = 0
     for _ in pairs(tbl) do count = count + 1 end
     return count
 end
-
-local function get_complementary_color(hue)
-    local complementary_hue = (hue + 180) % 360
-    return string.format("hsl(%d, 60%%, 60%%)", complementary_hue)
+local function is_color_too_close(hue, min_distance)
+    for used_hue, _ in pairs(used_colors) do
+        if math.abs(used_hue - hue) < min_distance then
+            return true
+        end
+    end
+    return false
 end
-
 local function get_random_color()
-    if table_size(used_colors) >= 25 then
+    local min_hue_distance = 30
+    if table_size(used_colors) >= 50 then
         used_colors = {}
     end
-
     local hue
     local color
-    local complementary_color
-
+    local replaced = false
     repeat
         hue = get_random_number(0, 360)
-        color = string.format("hsl(%d, 60%%, 60%%)", hue)
-        complementary_color = get_complementary_color(hue)
-    until not used_colors[color] and not used_colors[complementary_color]
-
-    used_colors[color] = true
-    used_colors[complementary_color] = true
-
-    return color, complementary_color
+    until not is_color_too_close(hue, min_hue_distance)
+    color = string.format("hsl(%d, %d%%, %d%%)", hue, get_random_number(40, 60), get_random_number(45, 65))
+    bgcolor = color:gsub("(%d+)%%", function(num) return tostring(tonumber(num) + 10) .. "%" end, 2)
+    used_colors[hue] = true
+    return color, bgcolor
 end
-%>
-<% displaydisk = function(disk, name)
-    local used_color = get_random_color()
-	io.write('<div id="disk-listing">\n')
-    io.write('<table id="legend-title">\n')
-    io.write("    <tr>\n")
-    io.write('        <td id="legend-object" width="100px"><b><span class="linux-name"><i class="fa-solid fa-database icon-disk">\n')
-	if (disk.model ~= nil) then
-	io.write('</i> Disk '..html.html_escape(name)..'</span> <span class="hdivider">   |   </span> <span class="brand-name" style="color:'..used_color..'">'..html.html_escape(disk.model)..'</span>')
-	io.write('<span class="disk-size"><span class="hdivider">|</span>    '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
-	else
-	io.write('</i> Disk '..html.html_escape(name)..'</span>')
-	io.write('<span class="disk-size"><span class="hdivider">|</span>    '.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span>\n')
-	end
-	io.write('<span class="disk-right-inf"><span class="mount-point"><i class="fa-solid fa-folder-closed icon-disk icon-disk-right"></i> '..html.html_escape(disk.mount_point)..'</span>')
-    io.write('<i class="fa-solid fa-chart-simple icon-disk icon-disk-right"></i> Used <span class="disk-used" style="color:'..used_color..'">'..html.html_escape(disk.used) .. "%" .. '</span></span></b></td>\n')
-	io.write("    </tr>\n")
-    io.write("</table>\n")
-    io.write('<table class="chart-bar chart-storage">\n')
-    io.write("    <tr>\n")
-    io.write("        <td>0%</td>\n")
-    io.write('        <td id="capacity-used" class="capacity-used" width="'..html.html_escape(disk.used)..'%" style="margin:0; border:none; background-color:'..used_color..'; transition: width 0.5s ease-in-out;">\n')
-    io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></td>\n')
-    if tonumber(disk.used) < 100 then
-        io.write('        <td id="capacity-free" class="capacity-free" width="'..(100-tonumber(disk.used))..'%" style="margin:0; border:none;">\n')
-        io.write('<center><b>'.. bytesToSize(tonumber(disk.available) * 1024) ..' <span class="free-chart-disk">(Free)</span></b></center></td>\n')
+displaydisk = function(disk, name)
+local used_color = get_random_color()
+io.write('<div id="disk-listing">\n')
+io.write('<div class="chart-bar chart-storage">\n')
+    if tonumber(disk.used) >= 0 and tonumber(disk.used) <= 25 then
+        io.write('<div id="capacity-used" class="capacity-used" style="width:25%; margin:0; border:none; background-color:'.. used_color ..'">\n')
+        io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></div>\n')
+	elseif tonumber(disk.used) > 25 then
+        io.write('<div id="capacity-used" class="capacity-used" style="width:'..html.html_escape(disk.used)..'%;margin:0; border:none; background-color:'..used_color..'; transition:width 0.5s ease-in-out, background-color 0.5s ease-in-out;">\n')
+        io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></div>\n')
     end
-	io.write('        <td>100%</td>\n')
-	io.write("    </tr>\n")
-	io.write("</table>\n")
-	io.write("</div>\n")
+if tonumber(disk.used) < 100 then
+    io.write('<div id="capacity-free" class="capacity-free" style="width:'..(100 - tonumber(disk.used))..'%; background-color:'..bgcolor..'">\n')
+    io.write('</div>\n')
 end
-%>
-<%
+io.write('</div>\n')
+io.write('<h2 id="disk-title"><i class="fa-solid fa-square" style="color:'..used_color..'"></i>  '.. html.html_escape(disk.model) ..'</h2>\n')
+io.write('<div id="legend-title">\n')
+io.write('<i class="bi bi-device-ssd-fill icon-disk-listing"></i>\n')
+io.write('<div id="legend-object">\n')
+if disk.model ~= nil then
+    io.write('<p class="dashboard-infos"><span class="data-title">Brand</span>'.. string.match(disk.model, "%S+") ..'</p>')
+else
+    io.write('<p class="dashboard-infos"><span class="data-title">Brand</span><span class="brand-name"> Unknow</span></p>')
+end
+io.write('<p class="dashboard-infos"><span class="data-title">Mount</span><span class="mount-point">'.. disk.mount_point:gsub("^(.{30}).*", "%1") ..'</span></p>')
+io.write('<p class="dashboard-infos"><span class="data-title">Size</span><span class="disk-size">'.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span></p>\n')
+io.write('</div>\n')
+io.write('<div id="legend-object">\n')
+io.write('<p class="dashboard-infos"><span class="data-title">Name</span><span class="linux-name">' .. html.html_escape(name) .. '</span></p>\n')
+io.write('<p class="dashboard-infos"><span class="data-title">Used</span>'.. html.html_escape(disk.used) .. "%" .. '</p>\n')
+io.write('<p class="dashboard-infos"><span class="data-title">Available</span>'.. bytesToSize(tonumber(disk.available) * 1024) .. '</p>\n')
+io.write('</div>\n')
+io.write('</div>\n')
+io.write('</div>\n')
+end
 if (volume.value.hd) then
     for name,hd in pairs(volume.value.hd.value) do
         displaydisk(hd, name)

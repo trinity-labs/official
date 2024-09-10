@@ -802,6 +802,7 @@ input:checked + .slider:before {
 
 .page-welcome .chart-bar.chart-storage b {
     font-size: 0.65rem !important;
+    padding: 0 0.25rem;
 }
 
 .page-welcome #content .chart-storage td:first-child,
@@ -909,10 +910,15 @@ input:checked + .slider:before {
 }
 
 .data-hardware .dashboard-infos,
+.data-disk .dashboard-infos,
 .data-monitoring .dashboard-infos {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+}
+
+.data-disk .dashboard-title {
+    margin: 3rem auto 2rem;
 }
 
 .value-title.value-net-local {
@@ -932,18 +938,66 @@ input:checked + .slider:before {
 }
 
 #disk-listing {
-    width: 45%;
+    width: 48%;
+    margin: 1rem auto;
+    border-radius: 4px;
+    background: #7676761f;
 }
 
-#content .chart-storage {
-    width: 100%;
-    border: none !important;
-    font-size: 0.75rem;
+.data-disk .dashboard-infos {
+    line-height: 1.25rem !important;
+}
+
+.data-disk .data-title {
+    color: #74747475 !important;
+    font-weight: 600 !important;
+    padding: 0 0.5rem 0 0;
+}
+
+#legend-title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.welcome #legend-object {
+    display: flex;
+    position: relative;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0;
+    align-items: flex-start;
+    padding: 0 2rem;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#disk-title {
+    font-weight: 900 !important;
+    margin: 0 !important;
+    padding: 0 0.75rem !important;
+    font-size: 0.75rem !important;
+    letter-spacing: -0.05rem !important;
+    text-transform: uppercase;
+    color: #898989c4 !important;
+}
+
+.icon-disk-listing {
+    font-size: 3.5rem;
+    margin: -0.5rem 0 0 0.5rem;
+    color: #8080801f !important;
 }
 
 .welcome #content .chart-storage {
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 2rem;
     width: 100%;
-    height: 5rem;
     border: none !important;
     font-size: 0.75rem;
     margin: -1.25rem auto 0 !important;
@@ -953,8 +1007,7 @@ input:checked + .slider:before {
     color: white !important;
     font-family: system-ui;
     font-size: 0.75rem;
-    border-right: none;
-    border-radius: 8px 0 0 8px;
+    border-radius: 4px 0 0 !important;
 }
 
 .welcome #capacity-free {
@@ -962,19 +1015,13 @@ input:checked + .slider:before {
     font-family: system-ui;
     font-size: 0.75rem;
     border-right: none;
-    border-radius: 0 8px 8px 0;
+    border-radius: 0 4px 0 0 !important;
 }
 
 .welcome #capacity-used center,
 .welcome #capacity-free center {
     position: relative;
-    top: -0.5rem;
-}
-
-.welcome .disk-right-inf {
-    float: right;
-    position: relative;
-    top: -0.75rem;
+    top: -0.55rem;
 }
 
 .welcome .disk-used {
@@ -985,11 +1032,6 @@ input:checked + .slider:before {
     border-radius: 2px;
 }
 
-.welcome .icon-disk-right {
-    opacity: 0.45;
-    margin: 0 0.25rem 0 3rem;
-}
-
 .welcome .dashboard-title {
     margin: 3rem auto 0;
     border-top: 1px solid #ebebeb;
@@ -997,11 +1039,6 @@ input:checked + .slider:before {
     color: #b1b1b1;
     text-transform: capitalize;
     font-size: 0.85rem;
-}
-
-.welcome #legend-object {
-    position: relative;
-    top: 0.75rem;
 }
 
 .brand-name, .disk-used {
