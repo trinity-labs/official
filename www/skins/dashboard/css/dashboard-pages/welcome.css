@@ -985,6 +985,10 @@ input:checked + .slider:before {
     color: #898989c4 !important;
 }
 
+#disk-title i {
+    padding: 0 0.25rem 0 0;
+}
+
 .icon-disk-listing {
     font-size: 3.5rem;
     margin: -0.5rem 0 0 0.5rem;

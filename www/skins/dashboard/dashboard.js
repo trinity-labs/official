@@ -72,6 +72,13 @@ $(function() {
         resetTimer();
     }
 });
+// Full Size Disk-Listing for Odd Position
+$(function() {
+    let diskListings = document.querySelectorAll('#disk-listing');
+    if (diskListings.length % 2 !== 0) {
+        diskListings[diskListings.length - 1].style.width = "98%";
+    }
+});
 // Assign Toggles
 $(function() {
     function setClassAndProp(selector, className, prop, value) {

@@ -485,6 +485,16 @@ local function get_random_color()
     used_colors[hue] = true
     return color, bgcolor
 end
+local function sort_disks(disks)
+    local disk_list = {}
+    for name, hd in pairs(disks) do
+        table.insert(disk_list, {name = name, hd = hd})
+    end
+    table.sort(disk_list, function(a, b)
+        return a.name < b.name
+    end)
+    return disk_list
+end
 displaydisk = function(disk, name)
 local used_color = get_random_color()
 io.write('<div id="disk-listing">\n')
@@ -497,24 +507,28 @@ io.write('<div class="chart-bar chart-storage">\n')
         io.write('<center><b>'.. bytesToSize(tonumber(disk.use) * 1024) ..'</b></center></div>\n')
     end
 if tonumber(disk.used) < 100 then
-    io.write('<div id="capacity-free" class="capacity-free" style="width:'..(100 - tonumber(disk.used))..'%; background-color:'..bgcolor..'">\n')
+    io.write('<div id="capacity-free" class="capacity-free" style="width:' .. (100 - tonumber(disk.used)) .. '%; background-color:' .. bgcolor ..'">\n')
     io.write('</div>\n')
 end
 io.write('</div>\n')
-io.write('<h2 id="disk-title"><i class="fa-solid fa-square" style="color:'..used_color..'"></i>  '.. html.html_escape(disk.model) ..'</h2>\n')
+if disk.model ~= nil and disk.model ~= "Unknow" then
+    io.write('<h2 id="disk-title"><i class="fa-solid fa-square" style="color:'.. used_color ..'"></i>  '.. html.html_escape(disk.model) ..'</h2>\n')
+else
+	io.write('<h2 id="disk-title"><i class="fa-solid fa-square" style="color:'.. used_color ..'"></i>  '.. html.html_escape(string.gsub(name, "%p+$", "")) ..'</h2>\n')
+end
 io.write('<div id="legend-title">\n')
 io.write('<i class="bi bi-device-ssd-fill icon-disk-listing"></i>\n')
 io.write('<div id="legend-object">\n')
-if disk.model ~= nil then
-    io.write('<p class="dashboard-infos"><span class="data-title">Brand</span>'.. string.match(disk.model, "%S+") ..'</p>')
+if disk.model ~= nil and disk.model ~= "Unknow" then
+    io.write('<p class="dashboard-infos"><span class="data-title">Brand</span>'.. html.html_escape(disk.model) ..'</p>')
 else
-    io.write('<p class="dashboard-infos"><span class="data-title">Brand</span><span class="brand-name"> Unknow</span></p>')
+	io.write('<p class="dashboard-infos"><span class="data-title">Brand</span><span class="brand-name">Unknow</span></p>')
 end
-io.write('<p class="dashboard-infos"><span class="data-title">Mount</span><span class="mount-point">'.. disk.mount_point:gsub("^(.{30}).*", "%1") ..'</span></p>')
+io.write('<p class="dashboard-infos"><span class="data-title">Mount</span><span class="mount-point">'.. disk.mount_point ..'</span></p>')
 io.write('<p class="dashboard-infos"><span class="data-title">Size</span><span class="disk-size">'.. string.gsub((math.floor(tonumber((bytesToSize(disk.size * 1024)):match("%d+%.?%d*"))) .. " " .. (bytesToSize(disk.size * 1024)):match("%a+")), "%D+%S%A+", " ") ..'</span></p>\n')
 io.write('</div>\n')
 io.write('<div id="legend-object">\n')
-io.write('<p class="dashboard-infos"><span class="data-title">Name</span><span class="linux-name">' .. html.html_escape(name) .. '</span></p>\n')
+io.write('<p class="dashboard-infos"><span class="data-title">Name</span><span class="linux-name">' .. html.html_escape(string.gsub(name, "%p+$", "")) .. '</span></p>\n')
 io.write('<p class="dashboard-infos"><span class="data-title">Used</span>'.. html.html_escape(disk.used) .. "%" .. '</p>\n')
 io.write('<p class="dashboard-infos"><span class="data-title">Available</span>'.. bytesToSize(tonumber(disk.available) * 1024) .. '</p>\n')
 io.write('</div>\n')
@@ -522,8 +536,9 @@ io.write('</div>\n')
 io.write('</div>\n')
 end
 if (volume.value.hd) then
-    for name,hd in pairs(volume.value.hd.value) do
-        displaydisk(hd, name)
+    local sorted_disks = sort_disks(volume.value.hd.value)
+    for _, disk in ipairs(sorted_disks) do
+        displaydisk(disk.hd, disk.name)
     end
 else
     io.write('<p class="error error-txt">No Hard Drive Mounted</p>\n')
