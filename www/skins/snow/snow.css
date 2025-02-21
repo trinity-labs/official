@@ -1,0 +1,365 @@
+/* "Snow" - a css for Alpine Configuration Framework - 
+ * N. Angelacos 2008 - GPL2 */
+
+/*----------------------------------------------------------------------------------
+ * JQUERY TABLESORTER
+ *--------------------------------------------------------------------------------*/
+
+@import "../static/tablesorter/theme.default.css";
+
+/* 
+ * -----------------------------------------------------------------------
+ * Debug Definitons
+ * -----------------------------------------------------------------------
+ */
+
+/* 
+ * -----------------------------------------------------------------------
+ * General Definitons
+ * -----------------------------------------------------------------------
+ */
+
+.hide	{
+	display:		none;
+	}
+
+a, a:visited {
+	text-decoration:	underline;
+	color:			#072966;
+	}
+
+a:hover	{
+	background-color:	#4871b3;
+	color:			#fff;
+	}
+
+
+body 	{
+
+	font-family:	Georgia, Arial, Geneva, Helvetica,  sans-serif;
+	font-size:	100%;
+	width:		100%;
+	margin:		0 0 0 0;
+	padding:	0 0 0 0;
+	}
+
+.error 	{
+	color:		#B00;
+	}
+
+/*--------------------------------------------------------------------------------*/
+#page 	{ 
+	position:	relative;
+	}
+
+/*--------------------------------------------------------------------------------*/
+#header {
+	width:		100%;
+	height:		100px;
+	font-family:	Arial, sans-serif;
+	background:	url("snow1.jpg") #fff no-repeat bottom right;
+	}
+
+#header p.links {
+	display:	inline;
+	float:		right;
+	font-size:      80%;
+	margin:		8px 32px 0 0;
+	padding:	5px;
+	font-weight:	normal;
+	background:	#ddb;
+	}
+
+/*--------------------------------------------------------------------------------*/
+
+#header h1 {
+ 	display:	none;
+	}
+
+#header p.hostname {
+ 	display:	none;
+	}
+
+/* The Nav bar */ 
+
+#nav {
+	float: left;
+	width:   20%;
+	margin-top:	2em;
+	margin-right:	1em;
+	
+	/* font-family:	Arial, sans-serif; */
+	}	
+
+#nav ul {
+	padding:	0 0 0em 1em;
+	margin:		37px 0em 1em 0em;
+	}
+
+#nav ul li {
+	background: 	url("lite-top.png") no-repeat #666;
+	margin-top:	0px;
+	padding-top:	0.3em;
+	color:		black;
+	font-weight:	bold;
+	}
+
+#nav li { /* all list items */
+	background: 	url("navtop.png") #eee left top no-repeat;
+	margin:		0em 0 1em 0em;
+	padding:	25px 0 0 1em;
+	}
+
+#nav  li ul { /* second-level lists - hidden */
+	background: 	url("navbottom.png") #eee  no-repeat left bottom;
+	padding:	0 0 10px 1em;
+	margin:    	0 0 0 -1em;	
+	}
+
+#nav .selected {
+	background: #fff;
+	color: #888;
+	}
+
+#nav li ul ul { /* third-and-above-level lists */
+		}
+
+#nav li ul li {
+	margin:		0;
+	padding:	0;
+	line-height:    1.5;
+	border:		none;
+	font-size:	85%;
+	padding-left:	1em;
+	background:	transparent;
+	font-weight:	normal;
+	}
+
+/*
+#nav li:hover ul ul {
+	}
+*/
+
+#nav a {
+	}	
+
+#nav .selected a {
+	color: #442;
+	text-decoration: none;
+	}
+
+/*--------------------------------------------------------------------------------*/
+#main 	{ 
+	width:		100%;
+	}
+
+/*--------------------------------------------------------------------------------*/
+#subnav {
+	width:	75%;	
+	float:	left;
+	margin-top:	1.5em;
+	padding:	0;
+	border-bottom:	1px #ccc solid; 
+	}
+
+#subnav ul {
+	display: inline;
+	}
+	
+#subnav a {
+	background:	url("litetab.png") top right no-repeat #eee;
+	display:	block;
+	padding:	4px 14px 4px 0px; 
+	}
+
+#subnav li {                         
+        display:        inline;                              
+        float:          left; 
+        background:     url("litetab.png") top left no-repeat #eee;
+        margin-left:	14px;
+	padding:	0px 0px 0px 14px; 
+	margin-bottom:  -1px;
+       }
+       
+          
+#subnav a:hover {
+	color:		#343434;
+	}
+
+#subnav a.selected {
+	background:		url("darktab.png") right top no-repeat #343434;
+	color:			#ffc;
+	text-decoration:	none;
+	}
+
+#subnav li.selected {
+	background:	url("darktab.png") left top no-repeat #343434;
+	padding-bottom:	2px;
+	margin-bottom:	-2px;
+	}
+
+/*--------------------------------------------------------------------------------*/
+
+#content {
+	float:		left;
+	line-height:	2;
+	padding:	0em;
+	margin:		0;
+	width:		70%;
+	}
+	
+#content p,pre {
+	background:	#eee;
+	clear:		both;
+	}
+
+#content h1,h2,h3 {
+	background: 	#666 url("ul.png") no-repeat top left;
+	font-size:	120%;
+	color:		#ffc;
+	float:		left;
+	width:		98%;
+	padding-left:	2%;
+	margin-top:	1em; 
+	clear:		both;
+	}
+
+#content h2,h3 {
+	background: 	#666 url("lite-top.png") no-repeat;
+	color:		black;
+	font-weight:	bold;
+	height:		26px;
+	font-size:	90%;
+	}
+
+#content h3 {
+	padding-left:	3%;
+	width:		97%;
+	height:		24px;
+	font-size:	80%;
+	}
+
+#content .section1 {
+	padding-bottom: 25px;
+	background:	url("lr.png") no-repeat bottom right;
+	}
+
+#content dl,
+#content .item {
+	background:	#eee;
+	margin:		0;
+	width:		100%;
+	display:	block;
+	clear:		both;
+	font-size: 	80%;
+	padding-bottom:	15px; 
+	}
+	
+#content dt,
+#content .item .left {
+	float:		left;
+	clear:		left;
+	width:		25%;
+	text-align:	left;
+	padding-top:	15px;
+	margin-left:	10px;
+
+	white-space:	normal;
+	} 
+
+#content dd,
+#content .item .right {
+	padding-top:	15px;
+	margin-left:	26%;
+	clear:		right;
+	border-bottom:	none;
+	}
+
+#content table form {
+	display:	inline-block;
+}
+
+#content .item p,input.text,select,textarea,input.password {
+	background:	#eee;
+	width:		97%;
+	}
+
+#footer {
+	clear: 		both;
+	border-top:	1px solid #d6d6d6;
+	position:	relative;
+	padding-top:	5px;
+	margin-top:	15px;
+	margin-bottom:	10px;
+	font-size:	10px;
+	text-align:	left;
+	color: 		#aaa;
+}
+
+/*---------------------------------------------------------------------------*/
+
+input, password, select, textarea {
+	font-family:	Georgia, Arial, Geneva, Helvetica,  sans-serif;
+	decoration:	none;
+	color:		#226;
+	padding:	2px;
+	background:	transparent;
+	border:		none;
+	}
+
+input.text, input.password {
+	border:	none;
+	border-bottom:		1px dashed #226;
+	}
+
+
+textarea {
+	border:		1px dotted #226;
+	font-family:	Courier-New, Courier, fixed;
+	font-size:	95%;
+	width:		95%;
+	margin:		2px;
+	height:		14em;
+	}
+
+input.submit {
+	border:		2px outset #226;
+	color:		#446;
+	}
+
+select:focus, input:focus, textarea:focus {
+	background:	#444;
+	color:		#ffc;
+	}
+	
+	
+pre {
+	line-height:	100%;
+	display: 	block;
+	font-size:	90%;
+	clear:		both;
+	font-family:	Courier-New, Courier, sans-serif;
+	}
+	
+	
+table { 
+	clear:		left;
+	width:		100%;
+	}
+	
+table td {
+	white-space:	nowrap;
+	padding-right:	20px;
+	}
+
+input.text[readonly], textarea[readonly] {
+	border:		none;
+	font-weight:	bold;
+	}
+
+.header {
+	background:	#ccc;
+	border-bottom:	3px double #999;
+	font-weight:	bold;
+	vertical-align:	bottom;
+	}

@@ -25,8 +25,8 @@ function toggleDegree() {
     window.localStorage.setItem('toggle-degree', isCelsius ? 'fahrenheit' : 'celsius');
 }
 function toggleTheme() {
-    const isDarkTheme = $("html").toggleClass("dark-theme light-theme").hasClass("dark-theme");
-    window.localStorage.setItem('html', isDarkTheme ? 'dark-theme' : 'light-theme');
+    const isLightTheme = $("html").toggleClass("light-theme dark-theme ").hasClass("light-theme");
+    window.localStorage.setItem('html', isLightTheme ? 'light-theme' : 'dark-theme');
 }
 // Show Password Toggle Functionality
 	if (location.href.includes("logon/logon")) {
@@ -91,10 +91,10 @@ $(function() {
     const menuWidth = menuState === 'active' ? '85%' : '100%';
     $("#nav").css('display', menuState === 'active' ? 'block' : 'none');
     $("#content, #subnav").css('width', menuWidth);
-    let themeState = window.localStorage.getItem('html') || 'dark-theme';
+    let themeState = window.localStorage.getItem('html') || 'light-theme';
     $("html").toggleClass(themeState);
-    const isDarkTheme = themeState === 'light-theme';
-    $("#toggle-theme").prop("checked", !isDarkTheme);
+    const isLightTheme = themeState === 'light-theme';
+    $("#toggle-theme").prop("checked", !isLightTheme);
     let degreeState = window.localStorage.getItem('toggle-degree') || 'celsius';
     const isCelsius = degreeState === 'celsius';
     $("#toggle-degree").prop("checked", !isCelsius);
@@ -271,7 +271,7 @@ if (window.location.href.indexOf("/acf/acf-util/welcome/read") > -1) {
 		);
 
 		// Update every second
-		setInterval(api, 1000);
+		const interval = setInterval(api, 1000), timeout = setTimeout(() => clearInterval(interval), 300000);
 		});
 	};
 });

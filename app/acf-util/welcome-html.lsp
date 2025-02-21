@@ -203,13 +203,13 @@ local function generate_calendar(uptime_data)
         if i > current_day_of_year then
             color = "#7676761f"
         else
-            local reboots = uptime_data[i].reboots
+         local reboots = uptime_data[i].reboots
             if reboots == 0 then
-                color = "#00EF5C"
+                color = "#AFC1D01f"
             elseif reboots == 1 then
-                color = "#E5FA00"
+                color = "#5a329f"
             elseif reboots > 1 then
-                color = "#FFB700"
+                color = "#EB6D82"
             else
                 color = "#7676761f"
             end
@@ -433,6 +433,7 @@ document.addEventListener('DOMContentLoaded', function() {
 <p class="dashboard-title uptime-heatmap-title"><i class="fa-solid fa-square"></i> System Health Charts</p>
 <div class="dashboard-main main-block">
 <!-- Dashboard CPU Block - 1 -->
+<div class="dashboard-main submain-block">
 	<div class="data-block data-cpu">
 		<h4 class="dashboard-block-title dashboard-title-cpu-stats">CPU Temp</h4>
 		<!-- Dashboard Main Block - NETWORK CHART.JS -->	
@@ -444,6 +445,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		<!-- Dashboard Main Block - NETWORK CHART.JS -->	
 		<canvas id="chartCpuFreq" class="data-chart block-chart"></canvas>
 	</div>
+</div>
 <!-- Dashboard App Block - LINE 2 -->
 </div>
 <!-- Dashboard App Block - LINE 3 -->

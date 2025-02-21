@@ -13,8 +13,10 @@
 }
 
 .dark-theme .logon-logon {
+    background: radial-gradient(#303030, #222222) !important;
     box-shadow: 0px 0px 8px 2.5px #ffffff14 !important;
 }
+
 .dark-theme .left {
     color: #545454;
 }

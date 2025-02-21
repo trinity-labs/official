@@ -213,7 +213,7 @@ end
 mymodule.get_network = function (self)
 	local network = {}
 	network.lanIP = cfe({ value=querycmd("ip route"), label="LAN IP" })
-	network.wanIP = cfe({ value=querycmd("wget -qO- https://ifconfig.me ; echo") or "Unknow", label="WAN IP" })
+	network.wanIP = cfe({ value=querycmd("wget -qO- https://ifconfig.me/ip ; echo") or "Unknow", label="WAN IP" })
 	network.interfaces = cfe({ value=querycmd("ip addr"), label="Interfaces" })
 	network.PhysicalIfaces = cfe({ value=querycmd("ip a"), label="Physical Interfaces" })
 	network.routes = cfe({ value=querycmd("ip route"), label="Routes" })
@@ -243,6 +243,7 @@ mymodule.get_api = function (self)
 	api.memUsed = string.format("%.2f", (meminfo["MemTotal"] - meminfo["MemAvailable"]) / 1073741824)
 	api.disk = cfe({ value=querycmd("fdisk -l"), label="Disk List" })
 	api.cpu = cfe({ value=querycmd("cat /proc/cpuinfo"), label="CPU List" })
+	api.network = cfe({ value=querycmd("cat /proc/net/dev"), label="Network Statistics" })
 	return cfe({ type="group", value=api, label="Hardware API" })
 end
 

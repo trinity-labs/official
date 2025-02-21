@@ -314,6 +314,10 @@
     top: 0 !important;
 	}
 	
+	.logon-logon i.fa-brands.fa-gitlab.fa-2x.about-icon {
+    border-left: 2px solid #434343 !important;
+}
+	
 	.data-system-up-time::before {
     display: none !important;
 	}
