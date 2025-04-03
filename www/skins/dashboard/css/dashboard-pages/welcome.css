@@ -236,14 +236,13 @@ span.dashboard-infos {
 
 .dashboard-main.main-block {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-wrap: nowrap;
     align-items: stretch;
-	justify-content: space-between;
+    justify-content: space-between;
     width: -webkit-fill-available;
-	width: -moz-available;
+    width: -moz-available;
     width: fill-available;
-	
 }
 
 .dashboard-main.sub-main-block {
@@ -1174,5 +1173,6 @@ input:checked + .slider:before {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
+    width: 100%;
     justify-content: space-between;
 }
