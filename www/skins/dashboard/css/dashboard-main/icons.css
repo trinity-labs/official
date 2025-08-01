@@ -40,7 +40,7 @@
  */
  
 .welcome-read #content h1::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F505' !important;
     display: inline-block;
@@ -57,7 +57,7 @@
  */
  
 #networking #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
 	content: '\F0E8';
     font-weight: bold;
     margin: 0 1rem 0 0;
@@ -71,7 +71,7 @@
 }
  
 #networking-title.category-title::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F0E8';
     margin: 0 0.5rem 0 0rem;
@@ -93,7 +93,7 @@
 }
 
 .interface-name::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F6FF' !important;
     margin: 0 0.5rem 0 0;
@@ -108,7 +108,7 @@
  */
  
 #applications-title.category-title::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F1B3';
     margin: 0 0.5rem 0 0rem;
@@ -118,7 +118,7 @@
 }
  
 #applications #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     margin: 0 1rem 0 0;
     color: white;
@@ -151,7 +151,7 @@
  */
  
 #system-title.category-title::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: 900;
     content: '\E163';
     margin: 0 0.5rem 0 0rem;
@@ -161,7 +161,7 @@
 }
 
 #system #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     content: '\F21E';
     font-weight: bold;
     margin: 0 1rem 0 0;
@@ -175,7 +175,7 @@
 }
 
 .health #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     content: '\F21E';
     font-weight: bold;
     margin: 0 1rem 0 0;
@@ -199,81 +199,81 @@
 }
 
 #section-hardware-information #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F2DB' !important;
 }
 
 #section-storage #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F0A0' !important;
 }
 
 #section-storage #legend-object b::before {
     opacity: 0.33;
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F1C0' !important;
     margin: 0 0.5rem 0 0;
 }
 
 .apk #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     padding: 1.5rem 1.4rem !important;
     content: '\F49E' !important;
 }
 
 .cron #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     padding: 1.4rem 1.5rem !important;
     content: '\F1DA' !important;
 }
 
 .syslog #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F06E' !important;
 }
 
 .logfiles #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     padding: 1.2rem 1.5rem !important;
     content: '\F15C' !important;
 }
 
 .password #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     padding: 1.33rem 1.5rem !important;
     content: '\F13E' !important;
 }
 
 .roles #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
 	padding: 1.5rem 1.35rem !important;
     content: '\E595' !important;
 }
 
 .rc #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     padding: 1.4rem 1.5rem !important;
     content: '\F469' !important;
 }
 
 .modules #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F1B3' !important;
 }
 
 .skins #subnav::before {
-	font-family: "Font Awesome 6 Free";
+	font-family: "Font Awesome 7 Free";
     font-weight: bold;
     padding: 1.2rem 1.5rem !important;
     content: '\F043' !important;
@@ -281,7 +281,7 @@
 
 .dispatcherror #subnav::before,
 .exception #subnav::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     content: '\E55D' !important;
     font-weight: bold;
     margin: 0 1rem 0 0;
@@ -295,13 +295,13 @@
 }
 
 .welcome .dashboard-title-memory::before {
-	font-family: "Font Awesome 6 Free";
+	font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F538' !important;
 }
 
 .welcome .system-uptodate .dashboard-title-system::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: 900;
     content: '\E163' !important;
     display: inline-block;
@@ -314,7 +314,7 @@
 }
 
 .welcome .system-update .dashboard-title-system::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: 900;
     content: '\E163' !important;
     display: inline-block;
@@ -327,7 +327,7 @@
 }
 
 .welcome .system-upgrade .dashboard-title-system::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: 900;
     content: '\E163' !important;
     display: inline-block;
@@ -339,7 +339,7 @@
 }
 
 .welcome .dashboard-title-hardware::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F2DB' !important;
     display: inline-block;
@@ -351,7 +351,7 @@
 }
 
 .welcome .dashboard-title-system-uptime::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\E518' !important;
 	display: inline-block;
@@ -361,7 +361,7 @@
 }
 
 .welcome .dashboard-title-network-stats::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F012' !important;
     display: inline-block;
@@ -372,7 +372,7 @@
 }
 
 .welcome .dashboard-title-ssh-gpg::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F084' !important;
     display: inline-block;
@@ -383,7 +383,7 @@
 }
 
 .welcome .dashboard-title-disk::before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F7C2' !important;
     display: inline-block;
@@ -394,7 +394,7 @@
 }
 
 .welcome .dashboard-block-title.dashboard-title-cpu-stats:before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F0C8' !important;
     display: inline-block;
@@ -405,7 +405,7 @@
 }
 
 .welcome .dashboard-block-title.dashboard-title-memory-stats:before {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F0C8' !important;
     display: inline-block;
@@ -428,7 +428,7 @@
 /*.version-number-uptodate:after,
 .version-number-update:after,
 .version-number-upgrade:after {
-    font-family: "Font Awesome 6 Free";
+    font-family: "Font Awesome 7 Free";
     font-weight: bold;
     content: '\F35D' !important;
     display: inline-block;

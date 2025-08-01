@@ -54,3 +54,8 @@
  * DASHBOARD USERS DESIGN
  *--------------------------------------------------------------------------------*/
 @import "css/dashboard-users/users.css";
+
+*::before,
+*::after {
+    font-family: "Font Awesome 7 Free", "Font Awesome 7 Brands"  !important;
+}
