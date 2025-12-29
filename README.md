@@ -1,6 +1,10 @@
+<div align="right" dir="auto">
+<img src="https://user-images.githubusercontent.com/45216746/226208297-32a0371b-83db-4a0e-ae33-70e74ca2b2e5.png" width="1.75%" style="max-width: 100%;">
+</div>
 <br>
-<div align="center">
- <img src="https://github.com/trinity-labs/official/assets/45216746/f561e963-6b22-4620-8f08-a6392be93b8d" width="30%">
+<br>
+<div align="center" dir="auto">
+<img src="https://github.com/user-attachments/assets/0fb9fb12-6116-42d4-bc38-4d3eb94a6af7" style="width: 33%;">
 </div>
 <br>
 <hr/>
